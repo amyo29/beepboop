@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		264B12B050DDA7D4F85FAF9C /* Pods_beepboop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */; };
 		9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F81F2602DB7A00D4711A /* AppDelegate.swift */; };
 		9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F8212602DB7A00D4711A /* SceneDelegate.swift */; };
 		9A53F8242602DB7A00D4711A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F8232602DB7A00D4711A /* ViewController.swift */; };
@@ -14,9 +15,13 @@
 		9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F8282602DB7A00D4711A /* beepboop.xcdatamodeld */; };
 		9A53F82C2602DB7C00D4711A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A53F82B2602DB7C00D4711A /* Assets.xcassets */; };
 		9A53F82F2602DB7C00D4711A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A53F82D2602DB7C00D4711A /* LaunchScreen.storyboard */; };
+		9A6F19BC260A7E77005D4E21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */; };
+		9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */; };
+		9A7F3C12260AA21A00EEFE41 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		51CFAD64B429924BF73E7DE7 /* Pods-beepboop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.release.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.release.xcconfig"; sourceTree = "<group>"; };
 		9A53F81C2602DB7A00D4711A /* beepboop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = beepboop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A53F81F2602DB7A00D4711A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A53F8212602DB7A00D4711A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +31,11 @@
 		9A53F82B2602DB7C00D4711A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A53F82E2602DB7C00D4711A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A53F8302602DB7C00D4711A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_beepboop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA94AD74AC08B7183755A893 /* Pods-beepboop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.debug.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +43,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				264B12B050DDA7D4F85FAF9C /* Pods_beepboop.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33B4360B4523014955A534B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9A53F8132602DB7A00D4711A = {
 			isa = PBXGroup;
 			children = (
 				9A53F81E2602DB7A00D4711A /* beepboop */,
 				9A53F81D2602DB7A00D4711A /* Products */,
+				CE7B23F8AB62B8043D4E7C67 /* Pods */,
+				33B4360B4523014955A534B0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,14 +81,26 @@
 			children = (
 				9A53F81F2602DB7A00D4711A /* AppDelegate.swift */,
 				9A53F8212602DB7A00D4711A /* SceneDelegate.swift */,
+				9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */,
+				9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */,
 				9A53F8232602DB7A00D4711A /* ViewController.swift */,
 				9A53F8252602DB7A00D4711A /* Main.storyboard */,
 				9A53F82B2602DB7C00D4711A /* Assets.xcassets */,
 				9A53F82D2602DB7C00D4711A /* LaunchScreen.storyboard */,
 				9A53F8302602DB7C00D4711A /* Info.plist */,
 				9A53F8282602DB7A00D4711A /* beepboop.xcdatamodeld */,
+				9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */,
 			);
 			path = beepboop;
+			sourceTree = "<group>";
+		};
+		CE7B23F8AB62B8043D4E7C67 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FA94AD74AC08B7183755A893 /* Pods-beepboop.debug.xcconfig */,
+				51CFAD64B429924BF73E7DE7 /* Pods-beepboop.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +110,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9A53F8332602DB7C00D4711A /* Build configuration list for PBXNativeTarget "beepboop" */;
 			buildPhases = (
+				65B92B9E916AFD04A4E5D0B7 /* [CP] Check Pods Manifest.lock */,
 				9A53F8182602DB7A00D4711A /* Sources */,
 				9A53F8192602DB7A00D4711A /* Frameworks */,
 				9A53F81A2602DB7A00D4711A /* Resources */,
+				2C9DC740A00A071137678349 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,19 +165,64 @@
 				9A53F82F2602DB7C00D4711A /* LaunchScreen.storyboard in Resources */,
 				9A53F82C2602DB7C00D4711A /* Assets.xcassets in Resources */,
 				9A53F8272602DB7A00D4711A /* Main.storyboard in Resources */,
+				9A6F19BC260A7E77005D4E21 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2C9DC740A00A071137678349 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-beepboop/Pods-beepboop-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-beepboop/Pods-beepboop-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-beepboop/Pods-beepboop-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65B92B9E916AFD04A4E5D0B7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-beepboop-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9A53F8182602DB7A00D4711A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A7F3C12260AA21A00EEFE41 /* SignUpViewController.swift in Sources */,
 				9A53F8242602DB7A00D4711A /* ViewController.swift in Sources */,
 				9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */,
 				9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */,
+				9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */,
 				9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +367,7 @@
 		};
 		9A53F8342602DB7C00D4711A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA94AD74AC08B7183755A893 /* Pods-beepboop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -306,6 +387,7 @@
 		};
 		9A53F8352602DB7C00D4711A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51CFAD64B429924BF73E7DE7 /* Pods-beepboop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

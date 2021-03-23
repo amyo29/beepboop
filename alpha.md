@@ -16,10 +16,10 @@
 ## TODO Breakdown by Screen
 
 ### Login/Sign-up Screens
-- [ ] Sign in using email
-- [ ] Sign up using email
+- [x] Sign in using email
+- [x] Sign up using email
 - [ ] Sign up using FB/Google
-- [ ] Set up Firebase authentication
+- [x] Set up Firebase authentication
 
 ### Home Screen
 - [ ] Set up table view for all alarms
