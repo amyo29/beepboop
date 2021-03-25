@@ -18,6 +18,8 @@
 		9A6F19BC260A7E77005D4E21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */; };
 		9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */; };
 		9A7F3C12260AA21A00EEFE41 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */; };
+		9A8AE649260C5E4400181515 /* beepbooptitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE647260C5E4400181515 /* beepbooptitle.png */; };
+		9A8AE64A260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE648260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		9A8AE647260C5E4400181515 /* beepbooptitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beepbooptitle.png; sourceTree = "<group>"; };
+		9A8AE648260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoadingScreenRobotLoadingScreenRobot.png; sourceTree = "<group>"; };
 		C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_beepboop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA94AD74AC08B7183755A893 /* Pods-beepboop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.debug.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,19 +83,61 @@
 		9A53F81E2602DB7A00D4711A /* beepboop */ = {
 			isa = PBXGroup;
 			children = (
+				9A8AE64C260C5E5F00181515 /* Controllers */,
+				9A8AE646260C5E1800181515 /* Resources */,
+				9A8AE64D260C5E8800181515 /* Views */,
+				9A8AE64F260C5EFE00181515 /* SupportingFiles */,
 				9A53F81F2602DB7A00D4711A /* AppDelegate.swift */,
 				9A53F8212602DB7A00D4711A /* SceneDelegate.swift */,
+				9A53F8282602DB7A00D4711A /* beepboop.xcdatamodeld */,
+			);
+			path = beepboop;
+			sourceTree = "<group>";
+		};
+		9A8AE646260C5E1800181515 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9A53F82B2602DB7C00D4711A /* Assets.xcassets */,
+				9A8AE64E260C5ED000181515 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9A8AE64C260C5E5F00181515 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */,
 				9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */,
 				9A53F8232602DB7A00D4711A /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9A8AE64D260C5E8800181515 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				9A53F8252602DB7A00D4711A /* Main.storyboard */,
-				9A53F82B2602DB7C00D4711A /* Assets.xcassets */,
 				9A53F82D2602DB7C00D4711A /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9A8AE64E260C5ED000181515 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9A8AE647260C5E4400181515 /* beepbooptitle.png */,
+				9A8AE648260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		9A8AE64F260C5EFE00181515 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
 				9A53F8302602DB7C00D4711A /* Info.plist */,
-				9A53F8282602DB7A00D4711A /* beepboop.xcdatamodeld */,
 				9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */,
 			);
-			path = beepboop;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		CE7B23F8AB62B8043D4E7C67 /* Pods */ = {
@@ -163,9 +209,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A53F82F2602DB7C00D4711A /* LaunchScreen.storyboard in Resources */,
+				9A8AE649260C5E4400181515 /* beepbooptitle.png in Resources */,
 				9A53F82C2602DB7C00D4711A /* Assets.xcassets in Resources */,
 				9A53F8272602DB7A00D4711A /* Main.storyboard in Resources */,
 				9A6F19BC260A7E77005D4E21 /* GoogleService-Info.plist in Resources */,
+				9A8AE64A260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

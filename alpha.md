@@ -5,7 +5,7 @@
 ### Turn-in: code, readme
 
 ### Screens
-- [ ] Loading (UI and functionality)
+- [x] Loading (UI and functionality)
 - [ ] Login (UI and functionality)
     - Redesign Login screen to have Create Account (small text) (remove Sign up screen)
 - [ ] Home w/ Navigation bar - UI + functionality (nav bar leads to empty screens)
