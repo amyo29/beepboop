@@ -15,6 +15,9 @@
 
 ## TODO Breakdown by Screen
 
+### Loading Screen
+- [ ] Add drop shadow to logo
+
 ### Login/Sign-up Screens
 - [x] Sign in using email
 - [x] Sign up using email

@@ -18,8 +18,10 @@
 		9A6F19BC260A7E77005D4E21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */; };
 		9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */; };
 		9A7F3C12260AA21A00EEFE41 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */; };
-		9A8AE649260C5E4400181515 /* beepbooptitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE647260C5E4400181515 /* beepbooptitle.png */; };
+		9A8AE649260C5E4400181515 /* BeepBoopTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE647260C5E4400181515 /* BeepBoopTitle.png */; };
 		9A8AE64A260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE648260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png */; };
+		9A8AE653260C649200181515 /* LoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE652260C649200181515 /* LoginButton.png */; };
+		9A8AE656260C660600181515 /* SignUpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE655260C660600181515 /* SignUpButton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +38,10 @@
 		9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		9A8AE647260C5E4400181515 /* beepbooptitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beepbooptitle.png; sourceTree = "<group>"; };
+		9A8AE647260C5E4400181515 /* BeepBoopTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BeepBoopTitle.png; sourceTree = "<group>"; };
 		9A8AE648260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoadingScreenRobotLoadingScreenRobot.png; sourceTree = "<group>"; };
+		9A8AE652260C649200181515 /* LoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButton.png; sourceTree = "<group>"; };
+		9A8AE655260C660600181515 /* SignUpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignUpButton.png; sourceTree = "<group>"; };
 		C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_beepboop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA94AD74AC08B7183755A893 /* Pods-beepboop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.debug.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,7 +129,9 @@
 		9A8AE64E260C5ED000181515 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				9A8AE647260C5E4400181515 /* beepbooptitle.png */,
+				9A8AE655260C660600181515 /* SignUpButton.png */,
+				9A8AE652260C649200181515 /* LoginButton.png */,
+				9A8AE647260C5E4400181515 /* BeepBoopTitle.png */,
 				9A8AE648260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png */,
 			);
 			path = Images;
@@ -209,9 +215,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A53F82F2602DB7C00D4711A /* LaunchScreen.storyboard in Resources */,
-				9A8AE649260C5E4400181515 /* beepbooptitle.png in Resources */,
+				9A8AE653260C649200181515 /* LoginButton.png in Resources */,
+				9A8AE649260C5E4400181515 /* BeepBoopTitle.png in Resources */,
 				9A53F82C2602DB7C00D4711A /* Assets.xcassets in Resources */,
 				9A53F8272602DB7A00D4711A /* Main.storyboard in Resources */,
+				9A8AE656260C660600181515 /* SignUpButton.png in Resources */,
 				9A6F19BC260A7E77005D4E21 /* GoogleService-Info.plist in Resources */,
 				9A8AE64A260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png in Resources */,
 			);
