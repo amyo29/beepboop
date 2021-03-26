@@ -24,12 +24,11 @@
                                 <rect key="frame" x="275" y="685" width="129" height="108"/>
                                 <state key="normal" title="Button" image="AddButton"/>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tz5-dh-ZWb">
-                                <rect key="frame" x="0.0" y="135" width="414" height="678"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tz5-dh-ZWb">
+                                <rect key="frame" x="0.0" y="133.5" width="414" height="679.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Qhy-96-1pY">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmTableViewCell" id="Qhy-96-1pY" customClass="AlarmTableViewCell" customModule="beepboop" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qhy-96-1pY" id="AdG-mN-03r">
@@ -80,8 +79,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJh-8C-39w">
-                                <rect key="frame" x="0.0" y="84" width="414" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJh-8C-39w">
+                                <rect key="frame" x="147.5" y="64" width="119.5" height="29.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Scheduled">
                                         <attributes>
@@ -98,14 +97,23 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sZo-i5-xca" secondAttribute="bottom" constant="20" id="3N7-at-mxe"/>
                             <constraint firstItem="nJh-8C-39w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9ch-za-pLU"/>
+                            <constraint firstItem="tz5-dh-ZWb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NTB-h7-7hv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sZo-i5-xca" secondAttribute="trailing" constant="10" id="Npn-0V-AHo"/>
-                            <constraint firstItem="nJh-8C-39w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RR0-LP-dB3"/>
+                            <constraint firstItem="nJh-8C-39w" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Svz-uB-IbR"/>
+                            <constraint firstItem="tz5-dh-ZWb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WZD-VN-BHD"/>
+                            <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="nJh-8C-39w" secondAttribute="bottom" constant="40" id="YdG-2f-gjw"/>
+                            <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="89.5" id="lJb-uD-pPR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tz5-dh-ZWb" secondAttribute="bottom" id="mLE-RJ-jyQ"/>
                             <constraint firstItem="bM2-3v-Evb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="wJg-SI-4Tj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bM2-3v-Evb" secondAttribute="bottom" constant="35" id="wKL-Mv-AXR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tz5-dh-ZWb" secondAttribute="trailing" id="wTq-Fr-Rn2"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="HomeTabIcon" selectedImage="HomeTabIcon" id="iLM-My-QI9"/>
                     <navigationItem key="navigationItem" id="vQI-oQ-bG1"/>
+                    <connections>
+                        <outlet property="alarmTableView" destination="tz5-dh-ZWb" id="Eyn-i1-5Df"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -265,10 +273,11 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="2zh-zB-mME" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DjP-4H-Arv">
+                    <tabBar key="tabBar" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backgroundImage="NavBarBackground" id="DjP-4H-Arv">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.1176470588" green="0.1647058824" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" systemColor="labelColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="aFc-MF-gin"/>
@@ -334,7 +343,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vSh-1G-Le3"/>
+        <segue reference="S7Q-Ua-MLD"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AddButton" width="75" height="108"/>
@@ -342,10 +351,14 @@
         <image name="GroupTabIcon" width="55" height="46"/>
         <image name="HomeTabIcon" width="58" height="61"/>
         <image name="LoginButton" width="268" height="118"/>
+        <image name="NavBarBackground" width="414" height="64"/>
         <image name="NotificationAlert" width="70" height="70"/>
         <image name="ProfileTabIcon" width="42" height="42"/>
         <image name="SignUpButton" width="268" height="119"/>
         <image name="Title" width="361" height="106"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
