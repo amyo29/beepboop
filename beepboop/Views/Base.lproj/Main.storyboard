@@ -398,6 +398,9 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-U9-jqs">
                                 <rect key="frame" x="20" y="546" width="374" height="54"/>
                                 <state key="normal" title="FacebookLogin" image="LoginFacebookButton"/>
+                                <connections>
+                                    <action selector="facebookLoginButtonPressed:" destination="jZp-6H-UMW" eventType="touchUpInside" id="bvm-8q-Zfc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xG3-DV-hrX">
                                 <rect key="frame" x="20" y="623" width="374" height="54"/>
