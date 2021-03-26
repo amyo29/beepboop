@@ -7,11 +7,11 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 class LoginViewController: UIViewController  {
 
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
     
     private let loginToMainSegueIdentifier = "LoginToMain"
@@ -19,9 +19,10 @@ class LoginViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+
 //        do {
 //            try Auth.auth().signOut()
-//
 //        } catch {
 //            print("oopsie")
 //        }
@@ -78,6 +79,10 @@ class LoginViewController: UIViewController  {
         }
     }
     
+    @IBAction func googleLoginButtonPressed(_ sender: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == self.loginToMainSegueIdentifier,
 //           let tabBarController = segue.destination as? UITabBarController,
@@ -85,6 +90,16 @@ class LoginViewController: UIViewController  {
 //            destination.userEmail = self.userEmail
 //        }
 //    }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
     
     // MARK: - Hide Keyboard
     
