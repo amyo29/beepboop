@@ -7,10 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0633D49E260D902C004B50FB /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D49D260D902C004B50FB /* GroupViewController.swift */; };
+		0633D4A3260D9088004B50FB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D4A2260D9088004B50FB /* ProfileViewController.swift */; };
+		0633D4A6260D9612004B50FB /* ProfileTabIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4A5260D9612004B50FB /* ProfileTabIcon.png */; };
+		0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4A8260D961F004B50FB /* HomeTabIcon.png */; };
+		0633D4AB260D9622004B50FB /* GroupTabIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4A9260D9622004B50FB /* GroupTabIcon.png */; };
+		0633D4AF260D9E37004B50FB /* NotificationAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4AE260D9E37004B50FB /* NotificationAlert.png */; };
+		0633D4B2260D9E43004B50FB /* AddButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4B1260D9E43004B50FB /* AddButton.png */; };
+		0633D4B6260DA2CB004B50FB /* CustomFont-JosefinSansLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4B5260DA2A8004B50FB /* CustomFont-JosefinSansLight.ttf */; };
 		264B12B050DDA7D4F85FAF9C /* Pods_beepboop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */; };
 		9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F81F2602DB7A00D4711A /* AppDelegate.swift */; };
 		9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F8212602DB7A00D4711A /* SceneDelegate.swift */; };
-		9A53F8242602DB7A00D4711A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F8232602DB7A00D4711A /* ViewController.swift */; };
+		9A53F8242602DB7A00D4711A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F8232602DB7A00D4711A /* HomeViewController.swift */; };
 		9A53F8272602DB7A00D4711A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A53F8252602DB7A00D4711A /* Main.storyboard */; };
 		9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F8282602DB7A00D4711A /* beepboop.xcdatamodeld */; };
 		9A53F82C2602DB7C00D4711A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A53F82B2602DB7C00D4711A /* Assets.xcassets */; };
@@ -25,11 +33,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0633D49D260D902C004B50FB /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		0633D4A2260D9088004B50FB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0633D4A5260D9612004B50FB /* ProfileTabIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileTabIcon.png; sourceTree = "<group>"; };
+		0633D4A8260D961F004B50FB /* HomeTabIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeTabIcon.png; sourceTree = "<group>"; };
+		0633D4A9260D9622004B50FB /* GroupTabIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GroupTabIcon.png; sourceTree = "<group>"; };
+		0633D4AE260D9E37004B50FB /* NotificationAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationAlert.png; sourceTree = "<group>"; };
+		0633D4B1260D9E43004B50FB /* AddButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddButton.png; sourceTree = "<group>"; };
+		0633D4B5260DA2A8004B50FB /* CustomFont-JosefinSansLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CustomFont-JosefinSansLight.ttf"; sourceTree = "<group>"; };
 		51CFAD64B429924BF73E7DE7 /* Pods-beepboop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.release.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.release.xcconfig"; sourceTree = "<group>"; };
 		9A53F81C2602DB7A00D4711A /* beepboop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = beepboop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A53F81F2602DB7A00D4711A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A53F8212602DB7A00D4711A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9A53F8232602DB7A00D4711A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9A53F8232602DB7A00D4711A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9A53F8262602DB7A00D4711A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A53F8292602DB7A00D4711A /* beepboop.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = beepboop.xcdatamodel; sourceTree = "<group>"; };
 		9A53F82B2602DB7C00D4711A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0633D4B8260DA464004B50FB /* CustomFont */ = {
+			isa = PBXGroup;
+			children = (
+				0633D4B5260DA2A8004B50FB /* CustomFont-JosefinSansLight.ttf */,
+			);
+			path = CustomFont;
+			sourceTree = "<group>";
+		};
 		33B4360B4523014955A534B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +111,7 @@
 		9A53F81E2602DB7A00D4711A /* beepboop */ = {
 			isa = PBXGroup;
 			children = (
+				0633D4B8260DA464004B50FB /* CustomFont */,
 				9A8AE64C260C5E5F00181515 /* Controllers */,
 				9A8AE646260C5E1800181515 /* Resources */,
 				9A8AE64D260C5E8800181515 /* Views */,
@@ -110,9 +135,11 @@
 		9A8AE64C260C5E5F00181515 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0633D49D260D902C004B50FB /* GroupViewController.swift */,
 				9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */,
 				9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */,
-				9A53F8232602DB7A00D4711A /* ViewController.swift */,
+				9A53F8232602DB7A00D4711A /* HomeViewController.swift */,
+				0633D4A2260D9088004B50FB /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -129,6 +156,11 @@
 		9A8AE64E260C5ED000181515 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0633D4B1260D9E43004B50FB /* AddButton.png */,
+				0633D4AE260D9E37004B50FB /* NotificationAlert.png */,
+				0633D4A9260D9622004B50FB /* GroupTabIcon.png */,
+				0633D4A8260D961F004B50FB /* HomeTabIcon.png */,
+				0633D4A5260D9612004B50FB /* ProfileTabIcon.png */,
 				9A8AE655260C660600181515 /* SignUpButton.png */,
 				9A8AE652260C649200181515 /* LoginButton.png */,
 				9A8AE647260C5E4400181515 /* BeepBoopTitle.png */,
@@ -217,9 +249,15 @@
 				9A53F82F2602DB7C00D4711A /* LaunchScreen.storyboard in Resources */,
 				9A8AE653260C649200181515 /* LoginButton.png in Resources */,
 				9A8AE649260C5E4400181515 /* BeepBoopTitle.png in Resources */,
+				0633D4A6260D9612004B50FB /* ProfileTabIcon.png in Resources */,
+				0633D4B2260D9E43004B50FB /* AddButton.png in Resources */,
+				0633D4AF260D9E37004B50FB /* NotificationAlert.png in Resources */,
+				0633D4AB260D9622004B50FB /* GroupTabIcon.png in Resources */,
 				9A53F82C2602DB7C00D4711A /* Assets.xcassets in Resources */,
+				0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */,
 				9A53F8272602DB7A00D4711A /* Main.storyboard in Resources */,
 				9A8AE656260C660600181515 /* SignUpButton.png in Resources */,
+				0633D4B6260DA2CB004B50FB /* CustomFont-JosefinSansLight.ttf in Resources */,
 				9A6F19BC260A7E77005D4E21 /* GoogleService-Info.plist in Resources */,
 				9A8AE64A260C5E4400181515 /* LoadingScreenRobotLoadingScreenRobot.png in Resources */,
 			);
@@ -275,11 +313,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A7F3C12260AA21A00EEFE41 /* SignUpViewController.swift in Sources */,
-				9A53F8242602DB7A00D4711A /* ViewController.swift in Sources */,
+				9A53F8242602DB7A00D4711A /* HomeViewController.swift in Sources */,
 				9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */,
 				9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */,
 				9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */,
 				9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */,
+				0633D4A3260D9088004B50FB /* ProfileViewController.swift in Sources */,
+				0633D49E260D902C004B50FB /* GroupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
