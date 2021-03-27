@@ -43,7 +43,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,9 +54,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: self.alarmTableViewCellIdentifier, for: indexPath as IndexPath) as! AlarmTableViewCell
         
-        cell.alarmNameLabel?.text = self.alarms[row].name
-        cell.alarmTimeLabel?.text = self.alarms[row].time
+//        cell.alarmNameLabel?.text = self.alarms[row].name
+//        cell.alarmTimeLabel?.text = self.alarms[row].time
         cell.alarmImageView?.image = UIImage(named: "../Resources/Images/EventPic.png")
+        cell.alarmNameLabel?.text = "Exam"
+        cell.alarmTimeLabel?.text = "9:30AM"
 //        let imageName = UIImage(named: transportItems[indexPath.row])
 //        cell.imageView?.image = imageName
         
