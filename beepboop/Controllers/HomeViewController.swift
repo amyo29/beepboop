@@ -10,16 +10,19 @@ import UIKit
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    // MARK: - Properties
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var alarmTableView: UITableView!
     @IBOutlet weak var alarmsTabBarItem: UITabBarItem!
     
+    // data source of stored alarms per user
     private var alarms: [Alarm] = []
     
     private let alarmTableViewCellIdentifier = "AlarmTableViewCell"
     
     var userEmail: String?
 
+    // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -31,7 +34,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appearance = UITabBarItem.appearance()
         let attributes = [NSAttributedString.Key.font:UIFont(name: "JosefinSans-Regular", size: 20)]
         appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: [])
-        
+        // load system supported fonts to determine system font labels
         let fontFamilyNames = UIFont.familyNames
             for familyName in fontFamilyNames {
                 print("Font Family Name = [\(familyName)]")
@@ -45,6 +48,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.sendSubviewToBack(self.alarmTableView)
     }
     
+    // MARK: - Table View functions
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -97,7 +101,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
         cell.contentView.layer.shadowColor = UIColor.black.cgColor
 
-            // add corner radius on `contentView`
+        // add corner radius on `contentView`
         cell.contentView.backgroundColor = .white
         cell.contentView.layer.cornerRadius = 8
         
