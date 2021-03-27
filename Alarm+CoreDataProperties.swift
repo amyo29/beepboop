@@ -21,7 +21,7 @@ extension Alarm {
     @NSManaged public var recurring: String?
     @NSManaged public var date: Date?
     @NSManaged public var uuid: UUID?
-    @NSManaged public var enabled: Bool
-    @NSManaged public var snoozeEnabled: Bool
+//    @NSManaged public var enabled: Bool
+//    @NSManaged public var snoozeEnabled: Bool
 
 }

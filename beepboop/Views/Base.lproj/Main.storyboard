@@ -226,17 +226,10 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bqR-sc-c73" userLabel="ShareButton">
-                                <rect key="frame" x="176" y="517" width="62" height="41"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="share">
-                                            <attributes>
-                                                <font key="NSFont" size="25" name="SFMono-Medium"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqR-sc-c73" userLabel="ShareButton">
+                                <rect key="frame" x="176" y="516" width="62" height="42"/>
+                                <fontDescription key="fontDescription" name="SFMono-Medium" family="SF Mono" pointSize="25"/>
+                                <state key="normal" title="share"/>
                                 <connections>
                                     <action selector="shareButtonPressed:" destination="i0J-ZC-Eri" eventType="touchUpInside" id="f3p-Pl-vfb"/>
                                 </connections>
@@ -270,7 +263,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PgA-3P-YD3">
-                                <rect key="frame" x="194" y="377" width="200" height="110"/>
+                                <rect key="frame" x="194" y="376" width="200" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="DWc-H5-9WM"/>
                                     <constraint firstAttribute="height" constant="110" id="geO-7I-Is3"/>
@@ -279,17 +272,10 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="Sunnyvalue" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-7D-KGI">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-7D-KGI">
                                 <rect key="frame" x="214" y="328" width="45" height="30"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="repeat">
-                                            <attributes>
-                                                <font key="NSFont" size="24" name="SFMono-Medium"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
+                                <fontDescription key="fontDescription" name="SFMono-Medium" family="SF Mono" pointSize="24"/>
+                                <state key="normal" title="repeat"/>
                                 <connections>
                                     <action selector="repeatButtonPressed:" destination="i0J-ZC-Eri" eventType="touchUpInside" id="VZm-h4-SxB"/>
                                 </connections>
@@ -346,7 +332,7 @@
                     <connections>
                         <outlet property="dateLabel" destination="ssz-fS-gY1" id="vWS-Gl-Jmy"/>
                         <outlet property="datePicker" destination="5Ya-3y-xdD" id="nBs-he-qZd"/>
-                        <outlet property="repeatButton" destination="9jW-7D-KGI" id="TLU-ys-iWm"/>
+                        <outlet property="repeatButton" destination="9jW-7D-KGI" id="9a7-9t-B9Y"/>
                         <outlet property="repeatLabel" destination="VgO-Ev-KoI" id="R4r-1a-jEP"/>
                         <outlet property="saveButton" destination="8YA-Fe-WpR" id="hQ2-lX-I7g"/>
                         <outlet property="screenTitleLabel" destination="8k6-0A-EX8" id="q64-s8-c36"/>

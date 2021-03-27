@@ -20,9 +20,9 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var soundPickerView: UIPickerView!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var repeatButton: UIButton!
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var repeatButton: UIButton!
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
     private var recurrence:String? = nil
@@ -63,7 +63,11 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     // set repeat occurrences in the form of an Alert Action Sheet
-    @IBAction func repeatButtonPressed(_ sender: Any) {
+    @IBAction func repeatButtonPressed(_ sender: UIButton) {
+        repeatButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        let attributedTitle = sender.attributedTitle(for: .normal)
+            
+        
         let alertController = UIAlertController(
             title: "Repeat",
             message: "Select repeating times for this alarm",
@@ -73,6 +77,9 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                     title: "Hourly",
                                     style: .default,
                                     handler: { (action) -> Void in
+                                        attributedTitle?.setValue("Hourly", forKey: "string")
+                                        sender.setAttributedTitle(attributedTitle, for: .normal)
+                                        self.repeatButton.setTitle("Hourly", for: .normal)
                                         self.recurrence = "Hourly"
                                         print( "Hourly")
                                     }))
@@ -81,6 +88,9 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                     title: "Daily",
                                     style: .default,
                                     handler: { (action) -> Void in
+                                        attributedTitle?.setValue("Daily", forKey: "string")
+                                        sender.setAttributedTitle(attributedTitle, for: .normal)
+                                        self.repeatButton.setTitle( "Daily" , for: .normal )
                                         self.recurrence = "Daily"
                                         print( "Daily")
                                     }))
@@ -89,6 +99,9 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                     title: "Weekly - select days",
                                     style: .default,
                                     handler: { (action) -> Void in
+                                        attributedTitle?.setValue("Weekly", forKey: "string")
+                                        sender.setAttributedTitle(attributedTitle, for: .normal)
+                                        self.repeatButton.setTitle( "Weekly" , for: .normal )
                                         self.recurrence = "Weekly"
                                         print( "Weekly")
                                     }))
@@ -97,6 +110,9 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                     title: "Monthly",
                                     style: .default,
                                     handler: { (action) -> Void in
+                                        attributedTitle?.setValue("Monthly", forKey: "string")
+                                        sender.setAttributedTitle(attributedTitle, for: .normal)
+                                        self.repeatButton.setTitle( "Monthly" , for: .normal )
                                         self.recurrence = "Monthly"
                                         print( "Monthly")
                                     }))
@@ -105,10 +121,14 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                     title: "Yearly",
                                     style: .default,
                                     handler: { (action) -> Void in
+                                        attributedTitle?.setValue("Yearly", forKey: "string")
+                                        sender.setAttributedTitle(attributedTitle, for: .normal)
+                                        self.repeatButton.setTitle( "Yearly" , for: .normal )
+
                                         self.recurrence = "Yearly"
                                         print( "Yearly")
                                     }))
-        
+       
         self.present(alertController, animated: true, completion: nil)
     }
     
