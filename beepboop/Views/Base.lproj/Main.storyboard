@@ -16,12 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bM2-3v-Evb" userLabel="NotificationButton">
-                                <rect key="frame" x="50" y="659" width="124" height="70"/>
-                                <state key="normal" title="Button" image="NotificationAlert"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZo-i5-xca" userLabel="AddButton">
-                                <rect key="frame" x="300" y="694" width="104" height="50"/>
+                                <rect key="frame" x="294.5" y="666.5" width="116.5" height="62.5"/>
                                 <state key="normal" title="Button" image="AddButton"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tz5-dh-ZWb">
@@ -95,17 +91,15 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sZo-i5-xca" secondAttribute="bottom" constant="20" id="3N7-at-mxe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sZo-i5-xca" secondAttribute="bottom" constant="35" id="3N7-at-mxe"/>
                             <constraint firstItem="nJh-8C-39w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9ch-za-pLU"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NTB-h7-7hv"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sZo-i5-xca" secondAttribute="trailing" constant="10" id="Npn-0V-AHo"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sZo-i5-xca" secondAttribute="trailing" constant="3" id="Npn-0V-AHo"/>
                             <constraint firstItem="nJh-8C-39w" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Svz-uB-IbR"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WZD-VN-BHD"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="nJh-8C-39w" secondAttribute="bottom" constant="20" id="YdG-2f-gjw"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="89.5" id="lJb-uD-pPR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tz5-dh-ZWb" secondAttribute="bottom" id="mLE-RJ-jyQ"/>
-                            <constraint firstItem="bM2-3v-Evb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="wJg-SI-4Tj"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bM2-3v-Evb" secondAttribute="bottom" constant="35" id="wKL-Mv-AXR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tz5-dh-ZWb" secondAttribute="trailing" id="wTq-Fr-Rn2"/>
                         </constraints>
                     </view>
@@ -356,13 +350,12 @@
         <segue reference="S7Q-Ua-MLD"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="AddButton" width="50" height="50"/>
+        <image name="AddButton" width="62.5" height="62.5"/>
         <image name="AlarmsTabIcon" width="25" height="25"/>
         <image name="EventPic" width="50" height="49"/>
         <image name="GroupsTabIcon" width="25" height="25"/>
         <image name="LoginButton" width="268" height="118"/>
         <image name="NavBarBackground" width="414" height="64"/>
-        <image name="NotificationAlert" width="70" height="70"/>
         <image name="SettingsTabIcon" width="25" height="25"/>
         <image name="SignUpButton" width="268" height="119"/>
         <image name="Title" width="361" height="106"/>
