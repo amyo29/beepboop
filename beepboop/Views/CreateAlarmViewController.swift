@@ -21,6 +21,8 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var repeatButton: UIButton!
+    @IBOutlet weak var timePicker: UIDatePicker!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
     private var recurrence:String? = nil
@@ -127,6 +129,11 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBAction func saveButtonPressed(_ sender: Any) {
         // add new alarm to core data
         // storeAlarmEntity()
+        let date = datePicker.date
+        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+        let hour = components.hour!
+        let minute = components.minute!
+        
         if let time = self.timeSelected,
            let date = self.dateSelected,
            let title = self.titleSelected,

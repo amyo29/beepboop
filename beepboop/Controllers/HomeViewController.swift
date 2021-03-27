@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 protocol AlarmAdder {
-    func addAlarm(alarm: Alarm)
+    func addAlarm(time: String, date: Date, name: String, recurrence: String)
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -118,7 +118,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: - Delegate functions
     
     func addAlarm(time: String, date: Date, name: String, recurrence: String) {
-        self.addAlarmToCoreData(time: time, date: date, name: String, recurrence: recurrence)
+        self.addAlarmToCoreData(time: time, date: date, name: name, recurrence: recurrence)
         self.updateAlarmList()
     }
     
