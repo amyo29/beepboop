@@ -170,5 +170,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.alarms = fetchedResults ?? self.alarms
         // self.tableView?.reloadData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if let _ = segue.destination as? CreateAlarmViewController{
+                let trans = CATransition()
+                trans.type = CATransitionType.moveIn
+                trans.subtype = CATransitionSubtype.fromLeft
+                trans.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+                trans.duration = 0.35
+                self.navigationController?.view.layer.add(trans, forKey: nil)
+            }
+        }
 }
 

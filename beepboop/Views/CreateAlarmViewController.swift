@@ -33,6 +33,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     var delegate: UIViewController!
     
+    
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -190,6 +191,29 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     */
 
+}
+
+extension UIViewController {
+
+    func presentDetail(_ createAlarmViewController: UIViewController) {
+        let transition = CATransition()
+        transition.duration = 0.25
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+
+        present(createAlarmViewController, animated: false)
+    }
+
+    func dismissDetail() {
+        let transition = CATransition()
+        transition.duration = 0.25
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+
+        dismiss(animated: false)
+    }
 }
 
 extension UIColor {

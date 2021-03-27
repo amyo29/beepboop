@@ -20,7 +20,7 @@
                                 <rect key="frame" x="294.5" y="661.5" width="116.5" height="62.5"/>
                                 <state key="normal" title="Button" image="AddButton"/>
                                 <connections>
-                                    <segue destination="i0J-ZC-Eri" kind="popoverPresentation" popoverAnchorView="sZo-i5-xca" id="Pex-yV-eTb">
+                                    <segue destination="i0J-ZC-Eri" kind="popoverPresentation" identifier="addAlarmSegueIdentifier" popoverAnchorView="sZo-i5-xca" id="Pex-yV-eTb">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>
