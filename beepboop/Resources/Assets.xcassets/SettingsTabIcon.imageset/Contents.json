@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "AddButton-1x.png",
+      "filename" : "SettingsTabIcon-1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "AddButton-2x.png",
+      "filename" : "SettingsTabIcon-2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "AddButton-3x.png",
+      "filename" : "SettingsTabIcon-3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

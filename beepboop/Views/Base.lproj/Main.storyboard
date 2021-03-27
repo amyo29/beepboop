@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,16 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bM2-3v-Evb">
-                                <rect key="frame" x="50" y="708" width="124" height="70"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bM2-3v-Evb" userLabel="NotificationButton">
+                                <rect key="frame" x="50" y="659" width="124" height="70"/>
                                 <state key="normal" title="Button" image="NotificationAlert"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZo-i5-xca">
-                                <rect key="frame" x="275" y="685" width="129" height="108"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZo-i5-xca" userLabel="AddButton">
+                                <rect key="frame" x="300" y="694" width="104" height="50"/>
                                 <state key="normal" title="Button" image="AddButton"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tz5-dh-ZWb">
-                                <rect key="frame" x="0.0" y="133.5" width="414" height="679.5"/>
+                                <rect key="frame" x="0.0" y="133.5" width="414" height="630.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmTableViewCell" id="Qhy-96-1pY" customClass="AlarmTableViewCell" customModule="beepboop" customModuleProvider="target">
@@ -80,12 +80,12 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJh-8C-39w">
-                                <rect key="frame" x="147.5" y="64" width="119.5" height="29.5"/>
+                                <rect key="frame" x="180.5" y="64" width="53" height="49.5"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Scheduled">
+                                    <fragment content="Alarms">
                                         <attributes>
                                             <color key="NSColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="25" name="SFMono-Medium"/>
+                                            <font key="NSFont" metaFont="system" size="17"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -101,7 +101,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sZo-i5-xca" secondAttribute="trailing" constant="10" id="Npn-0V-AHo"/>
                             <constraint firstItem="nJh-8C-39w" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Svz-uB-IbR"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WZD-VN-BHD"/>
-                            <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="nJh-8C-39w" secondAttribute="bottom" constant="40" id="YdG-2f-gjw"/>
+                            <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="nJh-8C-39w" secondAttribute="bottom" constant="20" id="YdG-2f-gjw"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="89.5" id="lJb-uD-pPR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tz5-dh-ZWb" secondAttribute="bottom" id="mLE-RJ-jyQ"/>
                             <constraint firstItem="bM2-3v-Evb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="wJg-SI-4Tj"/>
@@ -109,10 +109,15 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tz5-dh-ZWb" secondAttribute="trailing" id="wTq-Fr-Rn2"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="HomeTabIcon" selectedImage="HomeTabIcon" id="iLM-My-QI9"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="AlarmsTabIcon" selectedImage="AlarmsTabIcon" id="iLM-My-QI9">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="vQI-oQ-bG1"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="alarmTableView" destination="tz5-dh-ZWb" id="Eyn-i1-5Df"/>
+                        <outlet property="titleLabel" destination="nJh-8C-39w" id="exA-rA-G9H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -278,6 +283,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" systemColor="labelColor"/>
+                        <color key="barTintColor" systemColor="labelColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="aFc-MF-gin"/>
@@ -289,7 +295,7 @@
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="77.678571428571431"/>
         </scene>
-        <!--Group View Controller-->
+        <!--Groups-->
         <scene sceneID="tMc-cW-LXY">
             <objects>
                 <viewController id="T9O-Aj-NH4" customClass="GroupViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
@@ -308,14 +314,16 @@
                         <viewLayoutGuide key="safeArea" id="oOm-ae-PLu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="GroupTabIcon" selectedImage="GroupTabIcon" id="hIU-Ha-dyc"/>
+                    <tabBarItem key="tabBarItem" title="Groups" image="GroupsTabIcon" selectedImage="GroupsTabIcon" id="hIU-Ha-dyc">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="XEa-xm-Jxs"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L4e-Uv-NrB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-22" y="869"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Settings-->
         <scene sceneID="b94-Nb-NrG">
             <objects>
                 <viewController id="X2Q-dW-nb0" customClass="ProfileViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
@@ -334,7 +342,9 @@
                         <viewLayoutGuide key="safeArea" id="25I-6c-nQS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="ProfileTabIcon" selectedImage="ProfileTabIcon" id="fEz-ed-ftO"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsTabIcon" selectedImage="SettingsTabIcon" id="fEz-ed-ftO">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="SHq-zr-tv3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dQ-1G-vo2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -346,14 +356,14 @@
         <segue reference="S7Q-Ua-MLD"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="AddButton" width="75" height="108"/>
+        <image name="AddButton" width="50" height="50"/>
+        <image name="AlarmsTabIcon" width="25" height="25"/>
         <image name="EventPic" width="50" height="49"/>
-        <image name="GroupTabIcon" width="55" height="46"/>
-        <image name="HomeTabIcon" width="58" height="61"/>
+        <image name="GroupsTabIcon" width="25" height="25"/>
         <image name="LoginButton" width="268" height="118"/>
         <image name="NavBarBackground" width="414" height="64"/>
         <image name="NotificationAlert" width="70" height="70"/>
-        <image name="ProfileTabIcon" width="42" height="42"/>
+        <image name="SettingsTabIcon" width="25" height="25"/>
         <image name="SignUpButton" width="268" height="119"/>
         <image name="Title" width="361" height="106"/>
         <systemColor name="labelColor">

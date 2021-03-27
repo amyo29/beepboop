@@ -7,8 +7,10 @@
 
 import UIKit
 
+
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var alarmTableView: UITableView!
     
     private var alarms: [Alarm] = []
@@ -20,6 +22,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.navigationController?.isNavigationBarHidden = false
+        titleLabel.font = UIFont(name: "JosefinSans-Light", size: 40.0)
+        
+        let fontFamilyNames = UIFont.familyNames
+            for familyName in fontFamilyNames {
+                print("Font Family Name = [\(familyName)]")
+                let names = UIFont.fontNames(forFamilyName: familyName as String)
+                print("Font Names = [\(names)]")
+            }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

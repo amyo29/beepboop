@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "GroupTabIcon.png",
+      "filename" : "AlarmTabIcon-1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "AlarmsTabIcon-2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "AlarmsTabIcon-3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

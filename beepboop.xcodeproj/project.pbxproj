@@ -11,14 +11,34 @@
 		0633D4A3260D9088004B50FB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D4A2260D9088004B50FB /* ProfileViewController.swift */; };
 		0633D4A6260D9612004B50FB /* ProfileTabIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4A5260D9612004B50FB /* ProfileTabIcon.png */; };
 		0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4A8260D961F004B50FB /* HomeTabIcon.png */; };
-		0633D4AB260D9622004B50FB /* GroupTabIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4A9260D9622004B50FB /* GroupTabIcon.png */; };
 		0633D4AF260D9E37004B50FB /* NotificationAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4AE260D9E37004B50FB /* NotificationAlert.png */; };
-		0633D4B2260D9E43004B50FB /* AddButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4B1260D9E43004B50FB /* AddButton.png */; };
 		0633D4B6260DA2CB004B50FB /* CustomFont-JosefinSansLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4B5260DA2A8004B50FB /* CustomFont-JosefinSansLight.ttf */; };
 		0633D4BE260E674D004B50FB /* JosefinSans-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4BA260DB4AE004B50FB /* JosefinSans-VariableFont_wght.ttf */; };
 		0633D4C0260E6752004B50FB /* JosefinSans-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4BB260DB4B0004B50FB /* JosefinSans-Italic-VariableFont_wght.ttf */; };
 		0633D4D8260E7864004B50FB /* EventPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4D7260E7864004B50FB /* EventPic.png */; };
 		0633D4E0260E7F7B004B50FB /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D4DF260E7F7B004B50FB /* AlarmTableViewCell.swift */; };
+		0633D500260ED9CA004B50FB /* JosefinSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4FA260ED934004B50FB /* JosefinSans-Light.ttf */; };
+		0633D502260ED9CF004B50FB /* JosefinSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4FE260ED935004B50FB /* JosefinSans-Regular.ttf */; };
+		0633D504260ED9DE004B50FB /* JosefinSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4F3260ED931004B50FB /* JosefinSans-LightItalic.ttf */; };
+		0633D506260ED9E2004B50FB /* JosefinSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4F6260ED932004B50FB /* JosefinSans-Bold.ttf */; };
+		0633D508260ED9E4004B50FB /* JosefinSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4F8260ED933004B50FB /* JosefinSans-BoldItalic.ttf */; };
+		0633D50A260ED9E6004B50FB /* JosefinSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4FD260ED935004B50FB /* JosefinSans-ExtraLight.ttf */; };
+		0633D50C260ED9E9004B50FB /* JosefinSans-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4FF260ED936004B50FB /* JosefinSans-ExtraLightItalic.ttf */; };
+		0633D50E260ED9EB004B50FB /* JosefinSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4F5260ED932004B50FB /* JosefinSans-Italic.ttf */; };
+		0633D510260ED9F0004B50FB /* JosefinSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4F9260ED933004B50FB /* JosefinSans-Medium.ttf */; };
+		0633D512260ED9F2004B50FB /* JosefinSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4FC260ED934004B50FB /* JosefinSans-MediumItalic.ttf */; };
+		0633D531260EF714004B50FB /* SettingsTabIcon-2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D528260EF70F004B50FB /* SettingsTabIcon-2x.png */; };
+		0633D532260EF715004B50FB /* SettingsTabIcon-3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D529260EF70F004B50FB /* SettingsTabIcon-3x.png */; };
+		0633D533260EF715004B50FB /* AlarmTabIcon-1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D52A260EF710004B50FB /* AlarmTabIcon-1x.png */; };
+		0633D534260EF715004B50FB /* AlarmsTabIcon-3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D52B260EF710004B50FB /* AlarmsTabIcon-3x.png */; };
+		0633D535260EF715004B50FB /* GroupsTabIcon-3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D52C260EF711004B50FB /* GroupsTabIcon-3x.png */; };
+		0633D536260EF715004B50FB /* GroupsTabIcon-1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D52D260EF712004B50FB /* GroupsTabIcon-1x.png */; };
+		0633D537260EF715004B50FB /* SettingsTabIcon-1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D52E260EF713004B50FB /* SettingsTabIcon-1x.png */; };
+		0633D538260EF715004B50FB /* GroupsTabIcon-2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D52F260EF714004B50FB /* GroupsTabIcon-2x.png */; };
+		0633D539260EF715004B50FB /* AlarmsTabIcon-2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D530260EF714004B50FB /* AlarmsTabIcon-2x.png */; };
+		0633D547260F0115004B50FB /* AddButton-1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D544260F0114004B50FB /* AddButton-1x.png */; };
+		0633D548260F0115004B50FB /* AddButton-2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D545260F0115004B50FB /* AddButton-2x.png */; };
+		0633D549260F0115004B50FB /* AddButton-3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D546260F0115004B50FB /* AddButton-3x.png */; };
 		264B12B050DDA7D4F85FAF9C /* Pods_beepboop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */; };
 		9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F81F2602DB7A00D4711A /* AppDelegate.swift */; };
 		9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F8212602DB7A00D4711A /* SceneDelegate.swift */; };
@@ -44,14 +64,38 @@
 		0633D4A2260D9088004B50FB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0633D4A5260D9612004B50FB /* ProfileTabIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileTabIcon.png; sourceTree = "<group>"; };
 		0633D4A8260D961F004B50FB /* HomeTabIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeTabIcon.png; sourceTree = "<group>"; };
-		0633D4A9260D9622004B50FB /* GroupTabIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GroupTabIcon.png; sourceTree = "<group>"; };
 		0633D4AE260D9E37004B50FB /* NotificationAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationAlert.png; sourceTree = "<group>"; };
-		0633D4B1260D9E43004B50FB /* AddButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddButton.png; sourceTree = "<group>"; };
 		0633D4B5260DA2A8004B50FB /* CustomFont-JosefinSansLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CustomFont-JosefinSansLight.ttf"; sourceTree = "<group>"; };
 		0633D4BA260DB4AE004B50FB /* JosefinSans-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		0633D4BB260DB4B0004B50FB /* JosefinSans-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		0633D4D7260E7864004B50FB /* EventPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EventPic.png; sourceTree = "<group>"; };
 		0633D4DF260E7F7B004B50FB /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlarmTableViewCell.swift; path = beepboop/Controllers/AlarmTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		0633D4F2260ED931004B50FB /* JosefinSans-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Thin.ttf"; sourceTree = "<group>"; };
+		0633D4F3260ED931004B50FB /* JosefinSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		0633D4F4260ED931004B50FB /* JosefinSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		0633D4F5260ED932004B50FB /* JosefinSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Italic.ttf"; sourceTree = "<group>"; };
+		0633D4F6260ED932004B50FB /* JosefinSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Bold.ttf"; sourceTree = "<group>"; };
+		0633D4F7260ED932004B50FB /* JosefinSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		0633D4F8260ED933004B50FB /* JosefinSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		0633D4F9260ED933004B50FB /* JosefinSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Medium.ttf"; sourceTree = "<group>"; };
+		0633D4FA260ED934004B50FB /* JosefinSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Light.ttf"; sourceTree = "<group>"; };
+		0633D4FB260ED934004B50FB /* JosefinSans-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-ThinItalic.ttf"; sourceTree = "<group>"; };
+		0633D4FC260ED934004B50FB /* JosefinSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		0633D4FD260ED935004B50FB /* JosefinSans-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-ExtraLight.ttf"; sourceTree = "<group>"; };
+		0633D4FE260ED935004B50FB /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
+		0633D4FF260ED936004B50FB /* JosefinSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		0633D528260EF70F004B50FB /* SettingsTabIcon-2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingsTabIcon-2x.png"; sourceTree = "<group>"; };
+		0633D529260EF70F004B50FB /* SettingsTabIcon-3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingsTabIcon-3x.png"; sourceTree = "<group>"; };
+		0633D52A260EF710004B50FB /* AlarmTabIcon-1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlarmTabIcon-1x.png"; sourceTree = "<group>"; };
+		0633D52B260EF710004B50FB /* AlarmsTabIcon-3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlarmsTabIcon-3x.png"; sourceTree = "<group>"; };
+		0633D52C260EF711004B50FB /* GroupsTabIcon-3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GroupsTabIcon-3x.png"; sourceTree = "<group>"; };
+		0633D52D260EF712004B50FB /* GroupsTabIcon-1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GroupsTabIcon-1x.png"; sourceTree = "<group>"; };
+		0633D52E260EF713004B50FB /* SettingsTabIcon-1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingsTabIcon-1x.png"; sourceTree = "<group>"; };
+		0633D52F260EF714004B50FB /* GroupsTabIcon-2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GroupsTabIcon-2x.png"; sourceTree = "<group>"; };
+		0633D530260EF714004B50FB /* AlarmsTabIcon-2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlarmsTabIcon-2x.png"; sourceTree = "<group>"; };
+		0633D544260F0114004B50FB /* AddButton-1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton-1x.png"; sourceTree = "<group>"; };
+		0633D545260F0115004B50FB /* AddButton-2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton-2x.png"; sourceTree = "<group>"; };
+		0633D546260F0115004B50FB /* AddButton-3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton-3x.png"; sourceTree = "<group>"; };
 		51CFAD64B429924BF73E7DE7 /* Pods-beepboop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.release.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.release.xcconfig"; sourceTree = "<group>"; };
 		9A53F81C2602DB7A00D4711A /* beepboop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = beepboop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A53F81F2602DB7A00D4711A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +135,20 @@
 		0633D4B8260DA464004B50FB /* CustomFont */ = {
 			isa = PBXGroup;
 			children = (
+				0633D4F6260ED932004B50FB /* JosefinSans-Bold.ttf */,
+				0633D4F8260ED933004B50FB /* JosefinSans-BoldItalic.ttf */,
+				0633D4FD260ED935004B50FB /* JosefinSans-ExtraLight.ttf */,
+				0633D4FF260ED936004B50FB /* JosefinSans-ExtraLightItalic.ttf */,
+				0633D4F5260ED932004B50FB /* JosefinSans-Italic.ttf */,
+				0633D4FA260ED934004B50FB /* JosefinSans-Light.ttf */,
+				0633D4F3260ED931004B50FB /* JosefinSans-LightItalic.ttf */,
+				0633D4F9260ED933004B50FB /* JosefinSans-Medium.ttf */,
+				0633D4FC260ED934004B50FB /* JosefinSans-MediumItalic.ttf */,
+				0633D4FE260ED935004B50FB /* JosefinSans-Regular.ttf */,
+				0633D4F7260ED932004B50FB /* JosefinSans-SemiBold.ttf */,
+				0633D4F4260ED931004B50FB /* JosefinSans-SemiBoldItalic.ttf */,
+				0633D4F2260ED931004B50FB /* JosefinSans-Thin.ttf */,
+				0633D4FB260ED934004B50FB /* JosefinSans-ThinItalic.ttf */,
 				0633D4BB260DB4B0004B50FB /* JosefinSans-Italic-VariableFont_wght.ttf */,
 				0633D4BA260DB4AE004B50FB /* JosefinSans-VariableFont_wght.ttf */,
 				0633D4B5260DA2A8004B50FB /* CustomFont-JosefinSansLight.ttf */,
@@ -174,11 +232,21 @@
 		9A8AE64E260C5ED000181515 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				0633D4B1260D9E43004B50FB /* AddButton.png */,
+				0633D530260EF714004B50FB /* AlarmsTabIcon-2x.png */,
+				0633D544260F0114004B50FB /* AddButton-1x.png */,
+				0633D545260F0115004B50FB /* AddButton-2x.png */,
+				0633D546260F0115004B50FB /* AddButton-3x.png */,
+				0633D52B260EF710004B50FB /* AlarmsTabIcon-3x.png */,
+				0633D52A260EF710004B50FB /* AlarmTabIcon-1x.png */,
+				0633D52D260EF712004B50FB /* GroupsTabIcon-1x.png */,
+				0633D52F260EF714004B50FB /* GroupsTabIcon-2x.png */,
+				0633D52C260EF711004B50FB /* GroupsTabIcon-3x.png */,
+				0633D52E260EF713004B50FB /* SettingsTabIcon-1x.png */,
+				0633D528260EF70F004B50FB /* SettingsTabIcon-2x.png */,
+				0633D529260EF70F004B50FB /* SettingsTabIcon-3x.png */,
 				9ADC0E10260E8D80009AD333 /* NavBarBackground.png */,
 				0633D4D7260E7864004B50FB /* EventPic.png */,
 				0633D4AE260D9E37004B50FB /* NotificationAlert.png */,
-				0633D4A9260D9622004B50FB /* GroupTabIcon.png */,
 				0633D4A8260D961F004B50FB /* HomeTabIcon.png */,
 				0633D4A5260D9612004B50FB /* ProfileTabIcon.png */,
 				9A8AE655260C660600181515 /* SignUpButton.png */,
@@ -276,23 +344,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A53F82F2602DB7C00D4711A /* LaunchScreen.storyboard in Resources */,
+				0633D538260EF715004B50FB /* GroupsTabIcon-2x.png in Resources */,
+				0633D547260F0115004B50FB /* AddButton-1x.png in Resources */,
+				0633D534260EF715004B50FB /* AlarmsTabIcon-3x.png in Resources */,
+				0633D549260F0115004B50FB /* AddButton-3x.png in Resources */,
+				0633D506260ED9E2004B50FB /* JosefinSans-Bold.ttf in Resources */,
+				0633D50E260ED9EB004B50FB /* JosefinSans-Italic.ttf in Resources */,
 				9A8AE653260C649200181515 /* LoginButton.png in Resources */,
 				9A8AE649260C5E4400181515 /* BeepBoopTitle.png in Resources */,
+				0633D548260F0115004B50FB /* AddButton-2x.png in Resources */,
+				0633D537260EF715004B50FB /* SettingsTabIcon-1x.png in Resources */,
 				0633D4A6260D9612004B50FB /* ProfileTabIcon.png in Resources */,
-				0633D4B2260D9E43004B50FB /* AddButton.png in Resources */,
 				0633D4AF260D9E37004B50FB /* NotificationAlert.png in Resources */,
-				0633D4AB260D9622004B50FB /* GroupTabIcon.png in Resources */,
 				9A53F82C2602DB7C00D4711A /* Assets.xcassets in Resources */,
 				0633D4C0260E6752004B50FB /* JosefinSans-Italic-VariableFont_wght.ttf in Resources */,
+				0633D512260ED9F2004B50FB /* JosefinSans-MediumItalic.ttf in Resources */,
+				0633D50A260ED9E6004B50FB /* JosefinSans-ExtraLight.ttf in Resources */,
 				9ADC0E11260E8D80009AD333 /* NavBarBackground.png in Resources */,
 				0633D4BE260E674D004B50FB /* JosefinSans-VariableFont_wght.ttf in Resources */,
+				0633D500260ED9CA004B50FB /* JosefinSans-Light.ttf in Resources */,
 				0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */,
+				0633D50C260ED9E9004B50FB /* JosefinSans-ExtraLightItalic.ttf in Resources */,
+				0633D510260ED9F0004B50FB /* JosefinSans-Medium.ttf in Resources */,
+				0633D502260ED9CF004B50FB /* JosefinSans-Regular.ttf in Resources */,
+				0633D508260ED9E4004B50FB /* JosefinSans-BoldItalic.ttf in Resources */,
 				9A53F8272602DB7A00D4711A /* Main.storyboard in Resources */,
+				0633D531260EF714004B50FB /* SettingsTabIcon-2x.png in Resources */,
 				9A8AE656260C660600181515 /* SignUpButton.png in Resources */,
+				0633D504260ED9DE004B50FB /* JosefinSans-LightItalic.ttf in Resources */,
+				0633D536260EF715004B50FB /* GroupsTabIcon-1x.png in Resources */,
+				0633D532260EF715004B50FB /* SettingsTabIcon-3x.png in Resources */,
 				0633D4D8260E7864004B50FB /* EventPic.png in Resources */,
+				0633D539260EF715004B50FB /* AlarmsTabIcon-2x.png in Resources */,
 				0633D4B6260DA2CB004B50FB /* CustomFont-JosefinSansLight.ttf in Resources */,
 				9A6F19BC260A7E77005D4E21 /* GoogleService-Info.plist in Resources */,
 				9A8AE64A260C5E4400181515 /* LoadingScreenRobot.png in Resources */,
+				0633D533260EF715004B50FB /* AlarmTabIcon-1x.png in Resources */,
+				0633D535260EF715004B50FB /* GroupsTabIcon-3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,13 +592,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VF8K5L5FZJ;
+				DEVELOPMENT_TEAM = FUTTDQCH3J;
 				INFOPLIST_FILE = beepboop/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop;
+				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -524,13 +612,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VF8K5L5FZJ;
+				DEVELOPMENT_TEAM = FUTTDQCH3J;
 				INFOPLIST_FILE = beepboop/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop;
+				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
