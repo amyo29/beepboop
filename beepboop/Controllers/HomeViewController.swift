@@ -23,8 +23,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.navigationController?.isNavigationBarHidden = false
+        
+//        self.navigationController?.isNavigationBarHidden = false
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+        
+        // customize tab bar items
         let appearance = UITabBarItem.appearance()
         let attributes = [NSAttributedString.Key.font:UIFont(name: "JosefinSans-Regular", size: 20)]
         appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: [])

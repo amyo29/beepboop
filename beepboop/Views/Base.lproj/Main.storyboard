@@ -237,7 +237,7 @@
                                 <rect key="frame" x="125" y="223" width="286" height="101"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </datePicker>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="suQ-kN-82r">
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="suQ-kN-82r" userLabel="Time Picker">
                                 <rect key="frame" x="114" y="160" width="280" height="63"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </datePicker>
@@ -255,6 +255,9 @@
                                 <rect key="frame" x="81" y="684" width="305" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="save" image="SaveButton"/>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="i0J-ZC-Eri" eventType="touchUpInside" id="44m-zH-8Xg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Mky-D0-7lJ"/>
@@ -267,6 +270,18 @@
                             <constraint firstItem="8k6-0A-EX8" firstAttribute="top" secondItem="Mky-D0-7lJ" secondAttribute="top" constant="30" id="Wqf-Q9-yRJ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="ssz-fS-gY1" id="vWS-Gl-Jmy"/>
+                        <outlet property="repeatLabel" destination="VgO-Ev-KoI" id="R4r-1a-jEP"/>
+                        <outlet property="saveButton" destination="8YA-Fe-WpR" id="hQ2-lX-I7g"/>
+                        <outlet property="screenTitleLabel" destination="8k6-0A-EX8" id="q64-s8-c36"/>
+                        <outlet property="shareButton" destination="bqR-sc-c73" id="pK0-OE-2FA"/>
+                        <outlet property="soundLabel" destination="RM6-go-ZSU" id="H4a-Hz-rnu"/>
+                        <outlet property="soundPickerView" destination="PgA-3P-YD3" id="KvA-US-ppH"/>
+                        <outlet property="timeLabel" destination="xXc-vl-7Hv" id="ELm-bx-gJe"/>
+                        <outlet property="titleLabel" destination="4fy-L1-Yvd" id="0x7-uW-Z0d"/>
+                        <outlet property="titleTextField" destination="Yhl-iR-V2h" id="0KL-mn-3ae"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Spe-Q3-Pvd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
