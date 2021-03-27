@@ -27,11 +27,11 @@ class CreateAlarmViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
-        timeLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
-        dateLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
-        titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
-        repeatLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
-        soundLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
+        timeLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        dateLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        repeatLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        soundLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         
         // set title of alarm to user entered text
         let alarmTitle = titleTextField.text
