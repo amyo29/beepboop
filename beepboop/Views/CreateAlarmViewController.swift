@@ -43,6 +43,11 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         // Do any additional setup after loading the view.
         screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
         timeLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        titleTextField.font = UIFont(name: "JosefinSans-Regular", size: 25.0)
+        let aquablue = UIColor(hex: "#00ffff")
+//        titleTextField.textColor = UIColor(red:0/255, green:128/255, blue:255/255, alpha:1.0) // aqua
+//        titleTextField.textColor = UIColor(red:0/255, green:255/255, blue:255/255, alpha:1.0) // turquoise
+        titleTextField.textColor = UIColor(red:31/255, green:207/255, blue:245/255, alpha:1.0) // figma blue colour title
         dateLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         repeatLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
@@ -185,4 +190,32 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     */
 
+}
+
+extension UIColor {
+    public convenience init?(hex: String) {
+        let r, g, b, a: CGFloat
+
+        if hex.hasPrefix("#") {
+            let start = hex.index(hex.startIndex, offsetBy: 1)
+            let hexColor = String(hex[start...])
+
+            if hexColor.count == 8 {
+                let scanner = Scanner(string: hexColor)
+                var hexNumber: UInt64 = 0
+
+                if scanner.scanHexInt64(&hexNumber) {
+                    r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
+                    g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
+                    b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
+                    a = CGFloat(hexNumber & 0x000000ff) / 255
+
+                    self.init(red: r, green: g, blue: b, alpha: a)
+                    return
+                }
+            }
+        }
+
+        return nil
+    }
 }
