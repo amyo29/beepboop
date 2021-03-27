@@ -232,6 +232,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="shareButtonPressed:" destination="i0J-ZC-Eri" eventType="touchUpInside" id="f3p-Pl-vfb"/>
+                                </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="5Ya-3y-xdD">
                                 <rect key="frame" x="125" y="223" width="286" height="101"/>

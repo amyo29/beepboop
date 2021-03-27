@@ -8,7 +8,8 @@
 import UIKit
 
 class CreateAlarmViewController: UIViewController {
-
+    
+    // MARK: - Properties
     @IBOutlet weak var screenTitleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -20,6 +21,7 @@ class CreateAlarmViewController: UIViewController {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     
+    // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,10 +38,20 @@ class CreateAlarmViewController: UIViewController {
         
     }
     
-
+    // MARK: Button actions
     @IBAction func saveButtonPressed(_ sender: Any) {
         // add new alarm to core data
         // storeAlarmEntity()
+    }
+    
+    @IBAction func shareButtonPressed(_ sender: Any) {
+        // transition to share to contacts popover/screen
+    }
+    
+    // MARK: Hide keyboard
+    // code to enable tapping on the background to remove software keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     /*
