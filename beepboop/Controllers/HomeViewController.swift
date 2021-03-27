@@ -6,7 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
+protocol AlarmAdder {
+    func addAlarm(alarm: Alarm)
+}
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -109,6 +113,62 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // add this in `willDisplay` method
         let radius = cell.contentView.layer.cornerRadius
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
+    }
+    
+    // MARK: - Delegate functions
+    
+    func addAlarm(time: String, date: Date, name: String, recurrence: String) {
+        self.addAlarmToCoreData(time: time, date: date, name: String, recurrence: recurrence)
+        self.updateAlarmList()
+    }
+    
+    // MARK: - CoreData functions
+    
+    func addAlarmToCoreData(time: String, date: Date, name: String, recurrence: String) {
+        // store new Alarm in CoreData
+        // Alarm is user-specific
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let alarm = NSEntityDescription.insertNewObject(forEntityName: "Alarm", into: context)
+        
+        alarm.setValue(self.userEmail, forKey: "userEmail")
+        alarm.setValue(UUID(), forKey: "uuid")
+        alarm.setValue(time, forKey: "time")
+        alarm.setValue(date, forKey: "date")
+        alarm.setValue(name, forKey: "name")
+        alarm.setValue(recurrence, forKey: "recurrence")
+        
+        do {
+            try context.save()
+        } catch {
+            let nsError = error as NSError
+            NSLog("Unresolved error \(nsError), \(nsError.userInfo)")
+            abort()
+        }
+    }
+    
+    func updateAlarmList() {
+        // update data source
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Alarm")
+        var fetchedResults: [Alarm]? = [Alarm]()
+        
+        request.predicate = NSPredicate(format: "userEmail == %@", self.userEmail! as NSString)
+        
+        do {
+            try fetchedResults = context.fetch(request) as? [Alarm]
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        self.alarms = fetchedResults ?? self.alarms
+        // self.tableView?.reloadData()
     }
 }
 

@@ -23,7 +23,13 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var repeatButton: UIButton!
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
-    private var repeatTimes:String? = nil
+    private var recurrence:String? = nil
+    private var timeSelected:String? = nil
+    private var titleSelected:String? = nil
+    private var dateSelected:Date? = nil
+    private var soundSelected:String? = nil
+    
+    var delegate: UIViewController!
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -65,7 +71,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                     title: "Hourly",
                                     style: .default,
                                     handler: { (action) -> Void in
-                                        self.repeatTimes = "Hourly"
+                                        self.recurrence = "Hourly"
                                         print( "Hourly")
                                     }))
         
@@ -73,7 +79,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                     title: "Daily",
                                     style: .default,
                                     handler: { (action) -> Void in
-                                        self.repeatTimes = "Daily"
+                                        self.recurrence = "Daily"
                                         print( "Daily")
                                     }))
         
@@ -81,7 +87,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                     title: "Weekly - select days",
                                     style: .default,
                                     handler: { (action) -> Void in
-                                        self.repeatTimes = "Weekly"
+                                        self.recurrence = "Weekly"
                                         print( "Weekly")
                                     }))
         
@@ -89,7 +95,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                     title: "Monthly",
                                     style: .default,
                                     handler: { (action) -> Void in
-                                        self.repeatTimes = "Monthly"
+                                        self.recurrence = "Monthly"
                                         print( "Monthly")
                                     }))
         
@@ -97,7 +103,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                     title: "Yearly",
                                     style: .default,
                                     handler: { (action) -> Void in
-                                        self.repeatTimes = "Yearly"
+                                        self.recurrence = "Yearly"
                                         print( "Yearly")
                                     }))
         
@@ -121,6 +127,15 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBAction func saveButtonPressed(_ sender: Any) {
         // add new alarm to core data
         // storeAlarmEntity()
+        if let time = self.timeSelected,
+           let date = self.dateSelected,
+           let title = self.titleSelected,
+           let recurrence = self.recurrence,
+           
+           let _ = self.delegate as? HomeViewController {
+            let homeViewController = self.delegate as! AlarmAdder
+            homeViewController.addAlarm(time: time, date: date, name: title, recurrence: recurrence)
+        }
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {
