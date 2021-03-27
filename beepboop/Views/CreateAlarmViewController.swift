@@ -23,6 +23,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var repeatButton: UIButton!
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
+    private var repeatTimes:String? = nil
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -51,6 +52,56 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         // set title of alarm to user entered text
         let alarmTitle = titleTextField.text
         
+    }
+    
+    // set repeat occurrences in the form of an Alert Action Sheet
+    @IBAction func repeatButtonPressed(_ sender: Any) {
+        let alertController = UIAlertController(
+            title: "Repeat",
+            message: "Select repeating times for this alarm",
+            preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(
+                                    title: "Hourly",
+                                    style: .default,
+                                    handler: { (action) -> Void in
+                                        self.repeatTimes = "Hourly"
+                                        print( "Hourly")
+                                    }))
+        
+        alertController.addAction(UIAlertAction(
+                                    title: "Daily",
+                                    style: .default,
+                                    handler: { (action) -> Void in
+                                        self.repeatTimes = "Daily"
+                                        print( "Daily")
+                                    }))
+        
+        alertController.addAction(UIAlertAction(
+                                    title: "Weekly - select days",
+                                    style: .default,
+                                    handler: { (action) -> Void in
+                                        self.repeatTimes = "Weekly"
+                                        print( "Weekly")
+                                    }))
+        
+        alertController.addAction(UIAlertAction(
+                                    title: "Monthly",
+                                    style: .default,
+                                    handler: { (action) -> Void in
+                                        self.repeatTimes = "Monthly"
+                                        print( "Monthly")
+                                    }))
+        
+        alertController.addAction(UIAlertAction(
+                                    title: "Yearly",
+                                    style: .default,
+                                    handler: { (action) -> Void in
+                                        self.repeatTimes = "Yearly"
+                                        print( "Yearly")
+                                    }))
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Picker View functions

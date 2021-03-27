@@ -289,6 +289,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="repeatButtonPressed:" destination="i0J-ZC-Eri" eventType="touchUpInside" id="VZm-h4-SxB"/>
+                                </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="5Ya-3y-xdD">
                                 <rect key="frame" x="194" y="170" width="200" height="85"/>
