@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateAlarmViewController: UIViewController {
+class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // MARK: - Properties
     @IBOutlet weak var screenTitleLabel: UILabel!
@@ -22,9 +22,14 @@ class CreateAlarmViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var repeatButton: UIButton!
     
+    private let sounds = ["beep", "boop", "chirp", "wake up"]
+    
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        soundPickerView.delegate = self
+        soundPickerView.dataSource = self
 
         // Do any additional setup after loading the view.
         screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
@@ -48,7 +53,20 @@ class CreateAlarmViewController: UIViewController {
         
     }
     
-    // MARK: Button actions
+    // MARK: - Picker View functions
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return sounds.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return sounds[row]
+    }
+    
+    // MARK: - Button actions
     @IBAction func saveButtonPressed(_ sender: Any) {
         // add new alarm to core data
         // storeAlarmEntity()
@@ -58,7 +76,7 @@ class CreateAlarmViewController: UIViewController {
         // transition to share to contacts popover/screen
     }
     
-    // MARK: Hide keyboard
+    // MARK: - Hide keyboard
     // code to enable tapping on the background to remove software keyboard
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
