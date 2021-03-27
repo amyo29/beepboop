@@ -150,7 +150,7 @@
             <objects>
                 <viewController id="i0J-ZC-Eri" customClass="CreateAlarmViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iae-B6-fkC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8k6-0A-EX8">
@@ -203,7 +203,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgO-Ev-KoI">
-                                <rect key="frame" x="60" y="328" width="71" height="40"/>
+                                <rect key="frame" x="60" y="307" width="71" height="45"/>
                                 <attributedString key="attributedText">
                                     <fragment content="repeat">
                                         <attributes>
@@ -215,7 +215,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RM6-go-ZSU">
-                                <rect key="frame" x="60" y="398" width="119" height="47"/>
+                                <rect key="frame" x="60" y="392" width="119" height="45"/>
                                 <attributedString key="attributedText">
                                     <fragment content="sound">
                                         <attributes>
@@ -227,7 +227,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bqR-sc-c73" userLabel="ShareButton">
-                                <rect key="frame" x="176" y="515" width="62" height="43"/>
+                                <rect key="frame" x="176" y="517" width="62" height="41"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="share">
@@ -269,7 +269,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PgA-3P-YD3">
-                                <rect key="frame" x="194" y="375" width="200" height="110"/>
+                                <rect key="frame" x="194" y="377" width="200" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="DWc-H5-9WM"/>
                                     <constraint firstAttribute="height" constant="110" id="geO-7I-Is3"/>
@@ -278,9 +278,17 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="Sunnyvalue" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-7D-KGI">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-7D-KGI">
                                 <rect key="frame" x="214" y="328" width="45" height="30"/>
-                                <state key="normal" title="repeat"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="repeat">
+                                            <attributes>
+                                                <font key="NSFont" size="24" name="SFMono-Medium"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="5Ya-3y-xdD">
                                 <rect key="frame" x="194" y="170" width="200" height="85"/>
@@ -297,7 +305,7 @@
                             <constraint firstItem="8YA-Fe-WpR" firstAttribute="centerX" secondItem="Iae-B6-fkC" secondAttribute="centerX" id="22g-oD-nQW"/>
                             <constraint firstItem="bqR-sc-c73" firstAttribute="top" secondItem="PgA-3P-YD3" secondAttribute="bottom" constant="30" id="4cI-JY-iEl"/>
                             <constraint firstItem="8k6-0A-EX8" firstAttribute="centerX" secondItem="Iae-B6-fkC" secondAttribute="centerX" id="6Ha-5H-MVg"/>
-                            <constraint firstItem="Mky-D0-7lJ" firstAttribute="trailing" secondItem="9jW-7D-KGI" secondAttribute="trailing" constant="80" id="7yy-H8-iOr"/>
+                            <constraint firstItem="Mky-D0-7lJ" firstAttribute="trailing" secondItem="9jW-7D-KGI" secondAttribute="trailing" constant="40" id="7yy-H8-iOr"/>
                             <constraint firstItem="Mky-D0-7lJ" firstAttribute="bottom" secondItem="8YA-Fe-WpR" secondAttribute="bottom" constant="100" id="9I2-ER-qvV"/>
                             <constraint firstItem="RM6-go-ZSU" firstAttribute="top" secondItem="VgO-Ev-KoI" secondAttribute="bottom" constant="40" id="AN2-Sf-W40"/>
                             <constraint firstItem="9jW-7D-KGI" firstAttribute="leading" secondItem="VgO-Ev-KoI" secondAttribute="trailing" constant="15" id="BfM-Jz-zOC"/>
@@ -314,7 +322,7 @@
                             <constraint firstItem="Mky-D0-7lJ" firstAttribute="trailing" secondItem="Yhl-iR-V2h" secondAttribute="trailing" constant="30" id="TZM-bN-Rp9"/>
                             <constraint firstItem="ssz-fS-gY1" firstAttribute="top" secondItem="xXc-vl-7Hv" secondAttribute="bottom" constant="40" id="WnE-ek-LiB"/>
                             <constraint firstItem="8k6-0A-EX8" firstAttribute="top" secondItem="Mky-D0-7lJ" secondAttribute="top" constant="30" id="Wqf-Q9-yRJ"/>
-                            <constraint firstItem="PgA-3P-YD3" firstAttribute="top" secondItem="9jW-7D-KGI" secondAttribute="bottom" constant="10" id="XNd-Xh-i96"/>
+                            <constraint firstItem="PgA-3P-YD3" firstAttribute="top" secondItem="9jW-7D-KGI" secondAttribute="bottom" constant="5" id="XNd-Xh-i96"/>
                             <constraint firstItem="PgA-3P-YD3" firstAttribute="leading" secondItem="RM6-go-ZSU" secondAttribute="trailing" constant="15" id="XeU-6G-oUz"/>
                             <constraint firstItem="Mky-D0-7lJ" firstAttribute="trailing" secondItem="suQ-kN-82r" secondAttribute="trailing" constant="20" id="Xzp-K6-ZdB"/>
                             <constraint firstItem="8YA-Fe-WpR" firstAttribute="top" secondItem="bqR-sc-c73" secondAttribute="bottom" constant="80" id="ZFI-XA-tWc"/>
@@ -333,6 +341,7 @@
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="ssz-fS-gY1" id="vWS-Gl-Jmy"/>
+                        <outlet property="repeatButton" destination="9jW-7D-KGI" id="TLU-ys-iWm"/>
                         <outlet property="repeatLabel" destination="VgO-Ev-KoI" id="R4r-1a-jEP"/>
                         <outlet property="saveButton" destination="8YA-Fe-WpR" id="hQ2-lX-I7g"/>
                         <outlet property="screenTitleLabel" destination="8k6-0A-EX8" id="q64-s8-c36"/>

@@ -20,6 +20,7 @@ class CreateAlarmViewController: UIViewController {
     @IBOutlet weak var soundPickerView: UIPickerView!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var repeatButton: UIButton!
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -32,6 +33,9 @@ class CreateAlarmViewController: UIViewController {
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         repeatLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         soundLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        repeatButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
+        repeatButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        shareButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(origin: CGPoint(x: 0, y:titleTextField.frame.height - 1), size: CGSize(width: titleTextField.frame.width, height:  1))
