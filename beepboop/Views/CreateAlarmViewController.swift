@@ -33,6 +33,12 @@ class CreateAlarmViewController: UIViewController {
         repeatLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         soundLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(origin: CGPoint(x: 0, y:titleTextField.frame.height - 1), size: CGSize(width: titleTextField.frame.width, height:  1))
+        bottomLine.backgroundColor = UIColor.black.cgColor
+        titleTextField.borderStyle = UITextField.BorderStyle.none
+        titleTextField.layer.addSublayer(bottomLine)
+        
         // set title of alarm to user entered text
         let alarmTitle = titleTextField.text
         
