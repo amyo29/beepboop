@@ -24,47 +24,67 @@
                                 <rect key="frame" x="0.0" y="133.5" width="414" height="630.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmTableViewCell" id="Qhy-96-1pY" customClass="AlarmTableViewCell" customModule="beepboop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmTableViewCell" rowHeight="85" id="Qhy-96-1pY" customClass="AlarmTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qhy-96-1pY" id="AdG-mN-03r">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="62" translatesAutoresizingMaskIntoConstraints="NO" id="42G-xA-mBd">
-                                                    <rect key="frame" x="13" y="6" width="387" height="31"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="keZ-Ah-4p3">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="31"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEX-qU-6HH">
-                                                            <rect key="frame" x="112" y="0.0" width="43" height="31"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Exam">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="17" name="SFMono-Regular"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9sT-sN-V89">
-                                                            <rect key="frame" x="217" y="0.0" width="59" height="31"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="9:30AM">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="17" name="SFMono-Regular"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zy7-2F-XHB">
-                                                            <rect key="frame" x="338" y="0.0" width="51" height="31"/>
-                                                        </switch>
-                                                    </subviews>
-                                                </stackView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="keZ-Ah-4p3">
+                                                    <rect key="frame" x="20" y="18" width="50" height="49"/>
+                                                </imageView>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zy7-2F-XHB">
+                                                    <rect key="frame" x="345" y="27" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEX-qU-6HH">
+                                                    <rect key="frame" x="80" y="-1" width="51" height="24"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Exam">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Medium"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9sT-sN-V89">
+                                                    <rect key="frame" x="80" y="25" width="104" height="35"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="9:30AM">
+                                                            <attributes>
+                                                                <font key="NSFont" size="30" name="SFMono-Regular"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utC-5g-DPo">
+                                                    <rect key="frame" x="204" y="30.5" width="97" height="24"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Fri, Mar 26">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Medium"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JEX-qU-6HH" firstAttribute="leading" secondItem="keZ-Ah-4p3" secondAttribute="trailing" constant="10" id="5o6-98-gz3"/>
+                                                <constraint firstAttribute="trailing" secondItem="Zy7-2F-XHB" secondAttribute="trailing" constant="20" id="9nD-ha-A8e"/>
+                                                <constraint firstItem="Zy7-2F-XHB" firstAttribute="centerY" secondItem="AdG-mN-03r" secondAttribute="centerY" id="FBU-aU-g6e"/>
+                                                <constraint firstItem="9sT-sN-V89" firstAttribute="top" secondItem="JEX-qU-6HH" secondAttribute="bottom" constant="2" id="JPb-2e-Kut"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="keZ-Ah-4p3" secondAttribute="bottom" constant="7" id="XP7-Hz-cjy"/>
+                                                <constraint firstItem="keZ-Ah-4p3" firstAttribute="leading" secondItem="AdG-mN-03r" secondAttribute="leadingMargin" id="lmm-eS-134"/>
+                                                <constraint firstItem="utC-5g-DPo" firstAttribute="centerY" secondItem="AdG-mN-03r" secondAttribute="centerY" id="m9B-Qw-rpG"/>
+                                                <constraint firstItem="keZ-Ah-4p3" firstAttribute="centerY" secondItem="AdG-mN-03r" secondAttribute="centerY" id="mo5-uh-6K9"/>
+                                                <constraint firstItem="utC-5g-DPo" firstAttribute="leading" secondItem="9sT-sN-V89" secondAttribute="trailing" constant="20" id="oGK-Qe-1Wq"/>
+                                                <constraint firstItem="keZ-Ah-4p3" firstAttribute="top" secondItem="AdG-mN-03r" secondAttribute="topMargin" constant="7" id="rXC-dJ-GaM"/>
+                                                <constraint firstItem="9sT-sN-V89" firstAttribute="leading" secondItem="keZ-Ah-4p3" secondAttribute="trailing" constant="10" id="tKY-W8-SvL"/>
+                                                <constraint firstItem="9sT-sN-V89" firstAttribute="centerY" secondItem="AdG-mN-03r" secondAttribute="centerY" id="yv5-qF-hnI"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="alarmImageView" destination="keZ-Ah-4p3" id="uce-R8-HbV"/>
@@ -74,6 +94,7 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJh-8C-39w">
                                 <rect key="frame" x="180.5" y="64" width="53" height="49.5"/>
@@ -110,6 +131,7 @@
                     <navigationItem key="navigationItem" id="vQI-oQ-bG1"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="AlarmsTabBarItem" destination="iLM-My-QI9" id="wvp-Yu-QdJ"/>
                         <outlet property="alarmTableView" destination="tz5-dh-ZWb" id="Eyn-i1-5Df"/>
                         <outlet property="titleLabel" destination="nJh-8C-39w" id="exA-rA-G9H"/>
                     </connections>
@@ -344,6 +366,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dQ-1G-vo2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="961" y="869"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Sca-JS-pBW">
+            <objects>
+                <viewController id="VVC-Hw-yMs" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FUO-q7-4ty">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="623-qG-jR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-522" y="56"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
