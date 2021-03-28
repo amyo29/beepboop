@@ -19,12 +19,12 @@ class LoginViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        do {
-            try Auth.auth().signOut()
-
-        } catch {
-            print("oopsie")
-        }
+//        do {
+//            try Auth.auth().signOut()
+//
+//        } catch {
+//            print("oopsie")
+//        }
 
         // Do any additional setup after loading the view.
         Auth.auth().addStateDidChangeListener() {

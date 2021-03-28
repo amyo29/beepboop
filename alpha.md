@@ -26,12 +26,18 @@
 
 ### Home Screen
 - [ ] Set up table view for all alarms
-- [ ] Set up tab view visually
+    - Fix issues with Image, Alarm title
+    - Properly populate each cell with data from CoreData
+    - Set up swipe-to-delete on alarm table cells
+- [x] Set up tab view visually
 - [ ] Click on the toggle by each alarm to turn on/off an alarm
-- [ ] Click on the plus sign to create a new alarm on the Create/Edit Alarm screen
+    - Implement toggle functionality
+- [x] Click on the plus sign to create a new alarm on the Create/Edit Alarm screen
 
 ### Alarm Creation Screen
 - [ ] Create Alarm entity in CoreData
-- [ ] Options to specify time, date, sound, and recurring
-- [ ] Click on the “save” button to finalize the newly created alarm and navigate back to the Home Screen
-- [ ] Click on the “Back” button to go back to the previous screen
+    - Confirm entity attributes
+- [x] Options to specify time, date, sound, and recurring
+    - [ ] Confirm correct functionality
+- [x] Click on the “save” button to finalize the newly created alarm and navigate back to the Home Screen
+- [x] ~~Click on the “Back” button to go back to the previous screen~~ Swipe down to go back to Home Screen

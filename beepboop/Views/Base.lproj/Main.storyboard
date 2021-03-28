@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Alarms-->
+        <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="Home View Controller" customClass="HomeViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -102,7 +102,7 @@
                                 <sections/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJh-8C-39w">
-                                <rect key="frame" x="158.5" y="20" width="97.5" height="49.5"/>
+                                <rect key="frame" x="157.5" y="20" width="99" height="49.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Alarms">
                                         <attributes>
@@ -136,7 +136,6 @@
                     <navigationItem key="navigationItem" id="vQI-oQ-bG1"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="AlarmsTabBarItem" destination="iLM-My-QI9" id="wvp-Yu-QdJ"/>
                         <outlet property="alarmTableView" destination="tz5-dh-ZWb" id="Eyn-i1-5Df"/>
                         <outlet property="titleLabel" destination="nJh-8C-39w" id="exA-rA-G9H"/>
                     </connections>
@@ -194,18 +193,6 @@
                                 <rect key="frame" x="70" y="258" width="99" height="30"/>
                                 <attributedString key="attributedText">
                                     <fragment content="title">
-                                        <attributes>
-                                            <font key="NSFont" size="25" name="SFMono-Medium"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgO-Ev-KoI">
-                                <rect key="frame" x="60" y="307" width="71" height="45"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="repeat">
                                         <attributes>
                                             <font key="NSFont" size="25" name="SFMono-Medium"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -272,8 +259,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="Sunnyvalue" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-7D-KGI">
-                                <rect key="frame" x="214" y="328" width="45" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-7D-KGI">
+                                <rect key="frame" x="146" y="335" width="228" height="36"/>
                                 <fontDescription key="fontDescription" name="SFMono-Medium" family="SF Mono" pointSize="24"/>
                                 <state key="normal" title="repeat"/>
                                 <connections>
@@ -287,6 +274,18 @@
                                     <constraint firstAttribute="width" constant="200" id="mKH-pS-qCs"/>
                                 </constraints>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgO-Ev-KoI">
+                                <rect key="frame" x="60" y="326" width="71" height="45"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="repeat">
+                                        <attributes>
+                                            <font key="NSFont" size="25" name="SFMono-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Mky-D0-7lJ"/>
                         <color key="backgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
@@ -347,7 +346,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Spe-Q3-Pvd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1782.608695652174" y="77.678571428571431"/>
+            <point key="canvasLocation" x="2164" y="68"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="xTa-ah-mNS">

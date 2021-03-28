@@ -26,13 +26,12 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
     private var recurrence:String? = nil
-    private var timeSelected:String? = nil
+    private var timeSelected:Date? = nil
     private var titleSelected:String? = nil
     private var dateSelected:Date? = nil
     private var soundSelected:String? = nil
     
     var delegate: UIViewController!
-    
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -62,10 +61,29 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         bottomLine.backgroundColor = UIColor.black.cgColor
         titleTextField.borderStyle = UITextField.BorderStyle.none
         titleTextField.layer.addSublayer(bottomLine)
+                
+        // set listener for datePicker
+        self.datePicker.addTarget(self, action: #selector(self.datePickerChanged(picker:)), for: .valueChanged)
+        self.dateSelected = self.datePicker.date
         
-        // set title of alarm to user entered text
-        let alarmTitle = titleTextField.text
+        // set listener for timePicker
+        self.timePicker.addTarget(self, action: #selector(self.timePickerChanged(picker:)), for: .valueChanged)
+        self.timeSelected = self.timePicker.date
         
+        self.recurrence = "Never"
+        
+        self.titleSelected = "Alarm"
+
+    }
+    
+    @objc func datePickerChanged(picker: UIDatePicker) {
+        print("In datePickerChanged: date: ", picker.date)
+        self.dateSelected = picker.date
+    }
+    
+    @objc func timePickerChanged(picker: UIDatePicker) {
+        print("In timePickerChanged: date: ", picker.date)
+        self.timePicker = picker
     }
     
     // set repeat occurrences in the form of an Alert Action Sheet
@@ -134,6 +152,17 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                         self.recurrence = "Yearly"
                                         print( "Yearly")
                                     }))
+        
+        alertController.addAction(UIAlertAction(
+                                    title: "Never",
+                                    style: .default,
+                                    handler: { (action) -> Void in
+                                        attributedTitle?.setValue("Never", forKey: "string")
+                                        sender.setAttributedTitle(attributedTitle, for: .normal)
+                                        self.repeatButton.setTitle( "Never" , for: .normal )
+                                        self.recurrence = "Never"
+                                        print( "Never")
+                                    }))
        
         self.present(alertController, animated: true, completion: nil)
     }
@@ -155,10 +184,10 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBAction func saveButtonPressed(_ sender: Any) {
         // add new alarm to core data
         // storeAlarmEntity()
-        let date = datePicker.date
-        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
-        let hour = components.hour!
-        let minute = components.minute!
+//        let date = datePicker.date
+//        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+//        let hour = components.hour!
+//        let minute = components.minute!
         
         if let time = self.timeSelected,
            let date = self.dateSelected,
@@ -173,6 +202,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     @IBAction func shareButtonPressed(_ sender: Any) {
         // transition to share to contacts popover/screen
+        print("shareButtonPressed")
     }
     
     // MARK: - Hide keyboard
@@ -180,17 +210,6 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension UIViewController {

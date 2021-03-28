@@ -9,15 +9,14 @@ import UIKit
 import CoreData
 
 protocol AlarmAdder {
-    func addAlarm(time: String, date: Date, name: String, recurrence: String)
+    func addAlarm(time: Date, date: Date, name: String, recurrence: String)
 }
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlarmAdder{
 
     // MARK: - Properties
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var alarmTableView: UITableView!
-    @IBOutlet weak var alarmsTabBarItem: UITabBarItem!
     
     // data source of stored alarms per user
     private var alarms: [Alarm] = []
@@ -30,6 +29,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.alarmTableView.delegate = self
+        self.alarmTableView.dataSource = self
         
 //        self.navigationController?.isNavigationBarHidden = false
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
@@ -40,11 +41,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: [])
         // load system supported fonts to determine system font labels
         let fontFamilyNames = UIFont.familyNames
-            for familyName in fontFamilyNames {
-                print("Font Family Name = [\(familyName)]")
-                let names = UIFont.fontNames(forFamilyName: familyName as String)
-                print("Font Names = [\(names)]")
-            }
+        for familyName in fontFamilyNames {
+//                print("Font Family Name = [\(familyName)]")
+            let names = UIFont.fontNames(forFamilyName: familyName as String)
+//                print("Font Names = [\(names)]")
+        }
+        self.updateAlarmList()
+        print("alarms count: ", self.alarms.count)
         
     }
     
@@ -54,14 +57,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Table View functions
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return alarms.count
+        print("In tableView count method, count: ", self.alarms.count)
+        return self.alarms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("In tableView cell render method, count: ", self.alarms.count)
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: self.alarmTableViewCellIdentifier, for: indexPath as IndexPath) as! AlarmTableViewCell
         
@@ -70,6 +75,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.alarmImageView?.image = UIImage(named: "../Resources/Images/EventPic.png")
         cell.alarmNameLabel?.text = "Exam"
         cell.alarmTimeLabel?.text = "9:30AM"
+
 //        let imageName = UIImage(named: transportItems[indexPath.row])
 //        cell.imageView?.image = imageName
         
@@ -117,27 +123,28 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Delegate functions
     
-    func addAlarm(time: String, date: Date, name: String, recurrence: String) {
+    func addAlarm(time: Date, date: Date, name: String, recurrence: String) {
         self.addAlarmToCoreData(time: time, date: date, name: name, recurrence: recurrence)
         self.updateAlarmList()
     }
     
     // MARK: - CoreData functions
     
-    func addAlarmToCoreData(time: String, date: Date, name: String, recurrence: String) {
+    func addAlarmToCoreData(time: Date, date: Date, name: String, recurrence: String) {
         // store new Alarm in CoreData
         // Alarm is user-specific
+        print("adding alarm to coredata")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
         let alarm = NSEntityDescription.insertNewObject(forEntityName: "Alarm", into: context)
         
-        alarm.setValue(self.userEmail, forKey: "userEmail")
+//        alarm.setValue(self.userEmail, forKey: "userEmail")
         alarm.setValue(UUID(), forKey: "uuid")
-        alarm.setValue(time, forKey: "time")
+        alarm.setValue("Testing", forKey: "time")
         alarm.setValue(date, forKey: "date")
         alarm.setValue(name, forKey: "name")
-        alarm.setValue(recurrence, forKey: "recurrence")
+        alarm.setValue(recurrence, forKey: "recurring")
         
         do {
             try context.save()
@@ -150,13 +157,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func updateAlarmList() {
         // update data source
+        print("in update alarm list, number of alarms: ", self.alarms.count)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Alarm")
         var fetchedResults: [Alarm]? = [Alarm]()
         
-        request.predicate = NSPredicate(format: "userEmail == %@", self.userEmail! as NSString)
+//        request.predicate = NSPredicate(format: "userEmail == %@", self.userEmail! as NSString)
         
         do {
             try fetchedResults = context.fetch(request) as? [Alarm]
@@ -168,18 +176,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         self.alarms = fetchedResults ?? self.alarms
-        // self.tableView?.reloadData()
+        print("in update alarm list, number of alarms: ", self.alarms.count)
+        self.alarmTableView?.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if let _ = segue.destination as? CreateAlarmViewController{
-                let trans = CATransition()
-                trans.type = CATransitionType.moveIn
-                trans.subtype = CATransitionSubtype.fromLeft
-                trans.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-                trans.duration = 0.35
-                self.navigationController?.view.layer.add(trans, forKey: nil)
-            }
+        if let destination = segue.destination as? CreateAlarmViewController{
+//            let trans = CATransition()
+//            trans.type = CATransitionType.moveIn
+//            trans.subtype = CATransitionSubtype.fromLeft
+//            trans.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+//            trans.duration = 0.35
+//            self.navigationController?.view.layer.add(trans, forKey: nil)
+            destination.delegate = self
         }
+    }
 }
 
