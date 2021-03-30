@@ -7,21 +7,26 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
+import FBSDKLoginKit
 
-class LoginViewController: UIViewController  {
-
+class LoginViewController: UIViewController, LoginButtonDelegate  {
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
     
     private let loginToMainSegueIdentifier = "LoginToMain"
+    let facebookLoginButton = FBLoginButton(frame: .zero, permissions: [.publicProfile])
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        facebookLoginButton.delegate = self
+        facebookLoginButton.isHidden = true
+        
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+
 //        do {
 //            try Auth.auth().signOut()
-//
 //        } catch {
 //            print("oopsie")
 //        }
@@ -78,7 +83,41 @@ class LoginViewController: UIViewController  {
         }
     }
     
+    @IBAction func googleLoginButtonPressed(_ sender: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == self.loginToMainSegueIdentifier,
+//           let tabBarController = segue.destination as? UITabBarController,
+//           let destination = tabBarController as? MainViewController {
+//            destination.userEmail = self.userEmail
+//        }
+//    }
+
+    @IBAction func facebookLoginButtonPressed(_ sender: Any) {
+        facebookLoginButton.sendActions(for: .touchUpInside)
+    }
+    
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        if let error = error {
+           print(error.localizedDescription)
+           return
+         }
+        let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+          if let error = error {
+            print("authentication error \(error.localizedDescription)")
+            return
+          }
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        return
+    }
+    
+//      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == self.loginToMainSegueIdentifier,
 //           let tabBarController = segue.destination as? UITabBarController,
 //           let destination = tabBarController as? MainViewController {

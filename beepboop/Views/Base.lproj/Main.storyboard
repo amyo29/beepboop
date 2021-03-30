@@ -382,8 +382,9 @@
                                     <action selector="loginButtonPressed:" destination="jZp-6H-UMW" eventType="touchUpInside" id="SP6-R6-3AE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxX-Ut-hEo">
-                                <rect key="frame" x="144.5" y="522" width="125" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxX-Ut-hEo">
+                                <rect key="frame" x="123" y="760" width="168" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Sign up with email">
                                     <color key="titleColor" red="0.97254901960784312" green="0.16470588235294117" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -394,21 +395,43 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="cA0-rE-aAc">
                                 <rect key="frame" x="26.5" y="104" width="361" height="106"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-U9-jqs">
+                                <rect key="frame" x="20" y="546" width="374" height="54"/>
+                                <state key="normal" title="FacebookLogin" image="LoginFacebookButton"/>
+                                <connections>
+                                    <action selector="facebookLoginButtonPressed:" destination="jZp-6H-UMW" eventType="touchUpInside" id="bvm-8q-Zfc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xG3-DV-hrX">
+                                <rect key="frame" x="20" y="623" width="374" height="54"/>
+                                <state key="normal" title="GoogleLogin" image="LoginGoogleButton"/>
+                                <connections>
+                                    <action selector="googleLoginButtonPressed:" destination="jZp-6H-UMW" eventType="touchUpInside" id="D37-ph-jkM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="t5Q-c8-yvP"/>
                         <color key="backgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="t5Q-c8-yvP" firstAttribute="trailing" secondItem="J57-JS-J9U" secondAttribute="trailing" constant="20" id="6Ol-MX-on2"/>
-                            <constraint firstItem="jxX-Ut-hEo" firstAttribute="top" secondItem="0BF-if-pIW" secondAttribute="bottom" constant="10" id="IyS-mv-Vok"/>
+                            <constraint firstItem="pVv-U9-jqs" firstAttribute="top" secondItem="0BF-if-pIW" secondAttribute="bottom" constant="35" id="81e-KB-t4J"/>
+                            <constraint firstItem="jxX-Ut-hEo" firstAttribute="top" secondItem="xG3-DV-hrX" secondAttribute="bottom" constant="83" id="GvL-Dz-5zn"/>
                             <constraint firstItem="cA0-rE-aAc" firstAttribute="top" secondItem="t5Q-c8-yvP" secondAttribute="top" constant="60" id="Lcd-Kk-QUq"/>
+                            <constraint firstItem="t5Q-c8-yvP" firstAttribute="trailing" secondItem="xG3-DV-hrX" secondAttribute="trailing" constant="20" id="Mmc-Yy-UAZ"/>
+                            <constraint firstItem="pVv-U9-jqs" firstAttribute="centerX" secondItem="t5Q-c8-yvP" secondAttribute="centerX" id="bfw-tJ-JfL"/>
                             <constraint firstItem="t5Q-c8-yvP" firstAttribute="trailing" secondItem="hrS-p8-2Hi" secondAttribute="trailing" constant="20" id="edv-Ku-16F"/>
                             <constraint firstItem="cA0-rE-aAc" firstAttribute="centerX" secondItem="t5Q-c8-yvP" secondAttribute="centerX" id="faq-Dx-d4l"/>
                             <constraint firstItem="jxX-Ut-hEo" firstAttribute="centerX" secondItem="t5Q-c8-yvP" secondAttribute="centerX" id="gHJ-0s-9TM"/>
+                            <constraint firstItem="xG3-DV-hrX" firstAttribute="top" secondItem="pVv-U9-jqs" secondAttribute="bottom" constant="25" id="hTd-Vm-WH8"/>
                             <constraint firstItem="0BF-if-pIW" firstAttribute="centerX" secondItem="t5Q-c8-yvP" secondAttribute="centerX" id="jLr-AZ-6aH"/>
+                            <constraint firstItem="t5Q-c8-yvP" firstAttribute="trailing" secondItem="pVv-U9-jqs" secondAttribute="trailing" constant="20" id="mgQ-Lo-1mx"/>
+                            <constraint firstItem="xG3-DV-hrX" firstAttribute="centerX" secondItem="t5Q-c8-yvP" secondAttribute="centerX" id="nXL-OP-6Md"/>
                             <constraint firstItem="hrS-p8-2Hi" firstAttribute="top" secondItem="J57-JS-J9U" secondAttribute="bottom" constant="10" id="nfT-xJ-0mB"/>
+                            <constraint firstItem="pVv-U9-jqs" firstAttribute="leading" secondItem="t5Q-c8-yvP" secondAttribute="leading" constant="20" id="nyo-gZ-MA4"/>
                             <constraint firstItem="J57-JS-J9U" firstAttribute="top" secondItem="cA0-rE-aAc" secondAttribute="bottom" constant="40" id="q3V-z9-Oja"/>
                             <constraint firstItem="J57-JS-J9U" firstAttribute="leading" secondItem="t5Q-c8-yvP" secondAttribute="leading" constant="20" id="rW0-dS-xuw"/>
                             <constraint firstItem="hrS-p8-2Hi" firstAttribute="leading" secondItem="t5Q-c8-yvP" secondAttribute="leading" constant="20" id="rdL-Hv-bBS"/>
+                            <constraint firstItem="xG3-DV-hrX" firstAttribute="leading" secondItem="t5Q-c8-yvP" secondAttribute="leading" constant="20" id="u0d-pw-4Tv"/>
                             <constraint firstItem="0BF-if-pIW" firstAttribute="top" secondItem="hrS-p8-2Hi" secondAttribute="bottom" constant="50" id="vgL-i5-ZjK"/>
                         </constraints>
                     </view>
@@ -590,6 +613,11 @@
         <image name="NavBarBackground" width="414" height="64"/>
         <image name="SaveButton" width="268" height="71"/>
         <image name="SettingsTabIcon" width="25" height="25"/>
+        <image name="LoginFacebookButton" width="378" height="54"/>
+        <image name="LoginGoogleButton" width="378" height="54"/>
+        <image name="NavBarBackground" width="128" height="128"/>
+        <image name="NotificationAlert" width="70" height="70"/>
+        <image name="ProfileTabIcon" width="42" height="42"/>
         <image name="SignUpButton" width="268" height="119"/>
         <image name="Title" width="361" height="106"/>
         <systemColor name="labelColor">

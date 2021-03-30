@@ -8,5 +8,7 @@ target 'beepboop' do
   # Pods for beepboop
   pod 'Alamofire'
   pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+  pod 'FBSDKLoginKit'
   
 end
