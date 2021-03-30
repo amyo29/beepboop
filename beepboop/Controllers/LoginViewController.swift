@@ -27,7 +27,6 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
 
 //        do {
 //            try Auth.auth().signOut()
-//            AccessToken.setCurrent(nil)
 //        } catch {
 //            print("oopsie")
 //        }
@@ -118,15 +117,13 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
         return
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+//      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == self.loginToMainSegueIdentifier,
+//           let tabBarController = segue.destination as? UITabBarController,
+//           let destination = tabBarController as? MainViewController {
+//            destination.userEmail = self.userEmail
+//        }
+//    }
     
     // MARK: - Hide Keyboard
     

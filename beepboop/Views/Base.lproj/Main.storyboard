@@ -615,6 +615,7 @@
         <image name="SettingsTabIcon" width="25" height="25"/>
         <image name="LoginFacebookButton" width="378" height="54"/>
         <image name="LoginGoogleButton" width="378" height="54"/>
+        <image name="NavBarBackground" width="128" height="128"/>
         <image name="NotificationAlert" width="70" height="70"/>
         <image name="ProfileTabIcon" width="42" height="42"/>
         <image name="SignUpButton" width="268" height="119"/>
