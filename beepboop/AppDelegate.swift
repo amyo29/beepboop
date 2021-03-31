@@ -12,9 +12,13 @@ import GoogleSignIn
 import FBSDKCoreKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUserNotificationCenterDelegate{
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Firebase config
         FirebaseApp.configure()
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
@@ -24,6 +28,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             application,
             didFinishLaunchingWithOptions: launchOptions
         )
+        
+        // Set up notification handling
+        let center = UNUserNotificationCenter.current()
+            center.delegate = self
+
+        //To get permissions from user:
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge];
+        center.requestAuthorization(options: options) {
+            (granted, error) in
+            if !granted {
+                print("Something went wrong when requesting notification permission from user.")
+            }
+        }
         
         return true
     }

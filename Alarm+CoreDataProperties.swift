@@ -1,8 +1,8 @@
 //
 //  Alarm+CoreDataProperties.swift
-//  
+//  beepboop
 //
-//  Created by Alvin Lo on 3/26/21.
+//  Created by Amy Ouyang on 3/29/21.
 //
 //
 
@@ -16,12 +16,16 @@ extension Alarm {
         return NSFetchRequest<Alarm>(entityName: "Alarm")
     }
 
-    @NSManaged public var time: String?
+    @NSManaged public var date: Date?
+    @NSManaged public var enabled: Bool
     @NSManaged public var name: String?
     @NSManaged public var recurring: String?
-    @NSManaged public var date: Date?
+    @NSManaged public var snoozeEnabled: Bool
+    @NSManaged public var time: Date?
     @NSManaged public var uuid: UUID?
-//    @NSManaged public var enabled: Bool
-//    @NSManaged public var snoozeEnabled: Bool
+
+}
+
+extension Alarm : Identifiable {
 
 }

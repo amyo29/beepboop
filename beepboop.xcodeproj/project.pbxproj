@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		063208BE2612393400C22C0A /* ScheduleAlarmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063208BD2612393400C22C0A /* ScheduleAlarmDelegate.swift */; };
+		063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063208C026123A8F00C22C0A /* ScheduleAlarm.swift */; };
+		063209032612E4A400C22C0A /* Alarm+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063209012612E4A400C22C0A /* Alarm+CoreDataClass.swift */; };
+		063209042612E4A400C22C0A /* Alarm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063209022612E4A400C22C0A /* Alarm+CoreDataProperties.swift */; };
 		0633D49E260D902C004B50FB /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D49D260D902C004B50FB /* GroupViewController.swift */; };
 		0633D4A3260D9088004B50FB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D4A2260D9088004B50FB /* ProfileViewController.swift */; };
 		0633D4A6260D9612004B50FB /* ProfileTabIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4A5260D9612004B50FB /* ProfileTabIcon.png */; };
@@ -57,11 +61,13 @@
 		9A8AE653260C649200181515 /* LoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE652260C649200181515 /* LoginButton.png */; };
 		9A8AE656260C660600181515 /* SignUpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE655260C660600181515 /* SignUpButton.png */; };
 		9ADC0E11260E8D80009AD333 /* NavBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADC0E10260E8D80009AD333 /* NavBarBackground.png */; };
-		9ADC0E17260E9395009AD333 /* Alarm+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADC0E15260E9394009AD333 /* Alarm+CoreDataClass.swift */; };
-		9ADC0E18260E9395009AD333 /* Alarm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADC0E16260E9394009AD333 /* Alarm+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		063208BD2612393400C22C0A /* ScheduleAlarmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAlarmDelegate.swift; sourceTree = "<group>"; };
+		063208C026123A8F00C22C0A /* ScheduleAlarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAlarm.swift; sourceTree = "<group>"; };
+		063209012612E4A400C22C0A /* Alarm+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alarm+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		063209022612E4A400C22C0A /* Alarm+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alarm+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		0633D49D260D902C004B50FB /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		0633D4A2260D9088004B50FB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0633D4A5260D9612004B50FB /* ProfileTabIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileTabIcon.png; sourceTree = "<group>"; };
@@ -118,8 +124,6 @@
 		9A8AE652260C649200181515 /* LoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButton.png; sourceTree = "<group>"; };
 		9A8AE655260C660600181515 /* SignUpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignUpButton.png; sourceTree = "<group>"; };
 		9ADC0E10260E8D80009AD333 /* NavBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarBackground.png; sourceTree = "<group>"; };
-		9ADC0E15260E9394009AD333 /* Alarm+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alarm+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		9ADC0E16260E9394009AD333 /* Alarm+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alarm+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_beepboop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA94AD74AC08B7183755A893 /* Pods-beepboop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.debug.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +140,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		063208FD2612E3E300C22C0A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				063209012612E4A400C22C0A /* Alarm+CoreDataClass.swift */,
+				063209022612E4A400C22C0A /* Alarm+CoreDataProperties.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0633D4B8260DA464004B50FB /* CustomFont */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,13 +202,15 @@
 		9A53F81E2602DB7A00D4711A /* beepboop */ = {
 			isa = PBXGroup;
 			children = (
-				9ADC0E14260E9382009AD333 /* Models */,
+				063208FD2612E3E300C22C0A /* Models */,
 				0633D4B8260DA464004B50FB /* CustomFont */,
 				9A8AE64C260C5E5F00181515 /* Controllers */,
 				9A8AE646260C5E1800181515 /* Resources */,
 				9A8AE64D260C5E8800181515 /* Views */,
 				9A8AE64F260C5EFE00181515 /* SupportingFiles */,
 				9A53F81F2602DB7A00D4711A /* AppDelegate.swift */,
+				063208BD2612393400C22C0A /* ScheduleAlarmDelegate.swift */,
+				063208C026123A8F00C22C0A /* ScheduleAlarm.swift */,
 				9A53F8212602DB7A00D4711A /* SceneDelegate.swift */,
 				9A53F8282602DB7A00D4711A /* beepboop.xcdatamodeld */,
 			);
@@ -270,15 +285,6 @@
 				9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */,
 			);
 			path = SupportingFiles;
-			sourceTree = "<group>";
-		};
-		9ADC0E14260E9382009AD333 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				9ADC0E15260E9394009AD333 /* Alarm+CoreDataClass.swift */,
-				9ADC0E16260E9394009AD333 /* Alarm+CoreDataProperties.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		CE7B23F8AB62B8043D4E7C67 /* Pods */ = {
@@ -462,13 +468,15 @@
 				9A53F8242602DB7A00D4711A /* HomeViewController.swift in Sources */,
 				9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */,
 				9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */,
+				063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */,
 				9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */,
+				063209032612E4A400C22C0A /* Alarm+CoreDataClass.swift in Sources */,
+				063209042612E4A400C22C0A /* Alarm+CoreDataProperties.swift in Sources */,
 				9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */,
 				0633D54C260F181E004B50FB /* CreateAlarmViewController.swift in Sources */,
+				063208BE2612393400C22C0A /* ScheduleAlarmDelegate.swift in Sources */,
 				0633D4A3260D9088004B50FB /* ProfileViewController.swift in Sources */,
-				9ADC0E17260E9395009AD333 /* Alarm+CoreDataClass.swift in Sources */,
 				0633D49E260D902C004B50FB /* GroupViewController.swift in Sources */,
-				9ADC0E18260E9395009AD333 /* Alarm+CoreDataProperties.swift in Sources */,
 				0633D4E0260E7F7B004B50FB /* AlarmTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,13 +626,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VF8K5L5FZJ;
+				DEVELOPMENT_TEAM = FUTTDQCH3J;
 				INFOPLIST_FILE = beepboop/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop;
+				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -638,13 +646,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VF8K5L5FZJ;
+				DEVELOPMENT_TEAM = FUTTDQCH3J;
 				INFOPLIST_FILE = beepboop/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop;
+				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

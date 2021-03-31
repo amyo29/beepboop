@@ -9,6 +9,8 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
+    
+import CoreData
 
 class LoginViewController: UIViewController, LoginButtonDelegate  {
     @IBOutlet weak var emailTextField: UITextField!
@@ -22,13 +24,14 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
         
         facebookLoginButton.delegate = self
         facebookLoginButton.isHidden = true
-        
         GIDSignIn.sharedInstance()?.presentingViewController = self
-
+        
+//        clearCoreData()
 //        do {
 //            try Auth.auth().signOut()
+//
 //        } catch {
-//            print("oopsie")
+//            print("Error occurred signing out of this account.")
 //        }
 
         // Do any additional setup after loading the view.
@@ -129,6 +132,37 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    func clearCoreData() {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Alarm")
+        
+        var fetchedResults: [NSManagedObject]
+        
+        do {
+            try fetchedResults = context.fetch(request) as! [NSManagedObject]
+            
+            if fetchedResults.count > 0 {
+                
+                for result:AnyObject in fetchedResults {
+                    context.delete(result as! NSManagedObject)
+                    print("\(result.value(forKey:"name")!) has been deleted")
+                }
+            }
+            try context.save()
+            
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        
     }
 
 }

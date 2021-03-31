@@ -1,8 +1,8 @@
 //
 //  Alarm+CoreDataClass.swift
-//  
+//  beepboop
 //
-//  Created by Alvin Lo on 3/26/21.
+//  Created by Amy Ouyang on 3/29/21.
 //
 //
 

@@ -9,6 +9,8 @@ import UIKit
 
 class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
+    
     // MARK: - Properties
     @IBOutlet weak var screenTitleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -25,11 +27,8 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var repeatButton: UIButton!
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
-    private var recurrence:String? = nil
-    private var timeSelected:Date? = nil
-    private var titleSelected:String? = nil
-    private var dateSelected:Date? = nil
-    private var soundSelected:String? = nil
+    private var recurring:String = "Never"
+   
     
     var delegate: UIViewController!
     
@@ -62,29 +61,24 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         titleTextField.borderStyle = UITextField.BorderStyle.none
         titleTextField.layer.addSublayer(bottomLine)
                 
-        // set listener for datePicker
-        self.datePicker.addTarget(self, action: #selector(self.datePickerChanged(picker:)), for: .valueChanged)
-        self.dateSelected = self.datePicker.date
-        
-        // set listener for timePicker
-        self.timePicker.addTarget(self, action: #selector(self.timePickerChanged(picker:)), for: .valueChanged)
-        self.timeSelected = self.timePicker.date
-        
-        self.recurrence = "Never"
-        
-        self.titleSelected = "Alarm"
+//        // set listener for datePicker
+//        self.datePicker.addTarget(self, action: #selector(self.datePickerChanged(picker:)), for: .valueChanged)
+//
+//        // set listener for timePicker
+//        self.timePicker.addTarget(self, action: #selector(self.timePickerChanged(picker:)), for: .valueChanged)
+                
 
     }
     
-    @objc func datePickerChanged(picker: UIDatePicker) {
-        print("In datePickerChanged: date: ", picker.date)
-        self.dateSelected = picker.date
-    }
-    
-    @objc func timePickerChanged(picker: UIDatePicker) {
-        print("In timePickerChanged: date: ", picker.date)
-        self.timePicker = picker
-    }
+//    @objc func datePickerChanged(picker: UIDatePicker) {
+//        print("In datePickerChanged: date: ", picker.date)
+//        self.dateSelected = picker.date
+//    }
+//
+//    @objc func timePickerChanged(picker: UIDatePicker) {
+//        print("In timePickerChanged: date: ", picker.date)
+//        self.timePicker = picker
+//    }
     
     // set repeat occurrences in the form of an Alert Action Sheet
     @IBAction func repeatButtonPressed(_ sender: UIButton) {
@@ -104,7 +98,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                         attributedTitle?.setValue("Hourly", forKey: "string")
                                         sender.setAttributedTitle(attributedTitle, for: .normal)
                                         self.repeatButton.setTitle("Hourly", for: .normal)
-                                        self.recurrence = "Hourly"
+                                        self.recurring = "Hourly"
                                         print( "Hourly")
                                     }))
         
@@ -115,7 +109,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                         attributedTitle?.setValue("Daily", forKey: "string")
                                         sender.setAttributedTitle(attributedTitle, for: .normal)
                                         self.repeatButton.setTitle( "Daily" , for: .normal )
-                                        self.recurrence = "Daily"
+                                        self.recurring = "Daily"
                                         print( "Daily")
                                     }))
         
@@ -126,7 +120,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                         attributedTitle?.setValue("Weekly", forKey: "string")
                                         sender.setAttributedTitle(attributedTitle, for: .normal)
                                         self.repeatButton.setTitle( "Weekly" , for: .normal )
-                                        self.recurrence = "Weekly"
+                                        self.recurring = "Weekly"
                                         print( "Weekly")
                                     }))
         
@@ -137,7 +131,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                         attributedTitle?.setValue("Monthly", forKey: "string")
                                         sender.setAttributedTitle(attributedTitle, for: .normal)
                                         self.repeatButton.setTitle( "Monthly" , for: .normal )
-                                        self.recurrence = "Monthly"
+                                        self.recurring = "Monthly"
                                         print( "Monthly")
                                     }))
         
@@ -149,7 +143,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                         sender.setAttributedTitle(attributedTitle, for: .normal)
                                         self.repeatButton.setTitle( "Yearly" , for: .normal )
 
-                                        self.recurrence = "Yearly"
+                                        self.recurring = "Yearly"
                                         print( "Yearly")
                                     }))
         
@@ -160,7 +154,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                         attributedTitle?.setValue("Never", forKey: "string")
                                         sender.setAttributedTitle(attributedTitle, for: .normal)
                                         self.repeatButton.setTitle( "Never" , for: .normal )
-                                        self.recurrence = "Never"
+                                        self.recurring = "Never"
                                         print( "Never")
                                     }))
        
@@ -183,20 +177,17 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     // MARK: - Button actions
     @IBAction func saveButtonPressed(_ sender: Any) {
         // add new alarm to core data
-        // storeAlarmEntity()
-//        let date = datePicker.date
-//        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
-//        let hour = components.hour!
-//        let minute = components.minute!
-        
-        if let time = self.timeSelected,
-           let date = self.dateSelected,
-           let title = self.titleSelected,
-           let recurrence = self.recurrence,
-           
+
+        if let time = self.timePicker?.date,
+           let date = self.datePicker?.date,
+           let mergedDate = self.combineDateWithTime(date: date, time: time),
+           let title = self.titleTextField.text,
            let _ = self.delegate as? HomeViewController {
             let homeViewController = self.delegate as! AlarmAdder
-            homeViewController.addAlarm(time: time, date: date, name: title, recurrence: recurrence)
+            // TODO: clean up date - extraneous
+            homeViewController.addAlarm(time: mergedDate, date: date, name: title, recurring: recurring)
+        } else {
+            print("Something went wrong when save button pressed")
         }
     }
     
@@ -209,6 +200,24 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     // code to enable tapping on the background to remove software keyboard
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    // MARK: - Utility
+    func combineDateWithTime(date: Date, time: Date) -> Date? {
+        let calendar = Calendar.current
+        
+        let dateSelected = calendar.dateComponents([.year, .month, .day], from: date)
+        let timeSelected = calendar.dateComponents([.hour, .minute, .second], from: time)
+
+        var mergedComponents = DateComponents()
+        mergedComponents.year = dateSelected.year
+        mergedComponents.month = dateSelected.month
+        mergedComponents.day = dateSelected.day
+        mergedComponents.hour = timeSelected.hour
+        mergedComponents.minute = timeSelected.minute
+        mergedComponents.second = timeSelected.second
+
+        return calendar.date(from: mergedComponents)
     }
 }
 
