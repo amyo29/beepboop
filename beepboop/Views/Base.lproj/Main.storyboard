@@ -154,7 +154,7 @@
             <objects>
                 <viewController id="i0J-ZC-Eri" customClass="CreateAlarmViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iae-B6-fkC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8k6-0A-EX8">
@@ -218,7 +218,7 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqR-sc-c73" userLabel="ShareButton">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqR-sc-c73" userLabel="ShareButton">
                                 <rect key="frame" x="176" y="596" width="62" height="42"/>
                                 <fontDescription key="fontDescription" name="SFMono-Medium" family="SF Mono" pointSize="25"/>
                                 <state key="normal" title="share"/>
@@ -254,11 +254,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PgA-3P-YD3">
+                            <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PgA-3P-YD3">
                                 <rect key="frame" x="194" y="361" width="200" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="DWc-H5-9WM"/>
-                                    <constraint firstAttribute="height" constant="110" id="geO-7I-Is3"/>
+                                    <constraint firstAttribute="height" constant="90" id="geO-7I-Is3"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="Sunnyvalue" value="YES"/>
@@ -295,7 +295,7 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-7D-KGI">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-7D-KGI">
                                 <rect key="frame" x="199" y="322" width="190" height="36"/>
                                 <fontDescription key="fontDescription" name="SFMono-Medium" family="SF Mono" pointSize="24"/>
                                 <state key="normal" title="repeat"/>
@@ -303,7 +303,7 @@
                                     <action selector="repeatButtonPressed:" destination="i0J-ZC-Eri" eventType="touchUpInside" id="VZm-h4-SxB"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jc4-Qs-oLq">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jc4-Qs-oLq">
                                 <rect key="frame" x="264" y="487" width="51" height="31"/>
                             </switch>
                         </subviews>
@@ -329,7 +329,7 @@
                             <constraint firstItem="5Ya-3y-xdD" firstAttribute="top" secondItem="suQ-kN-82r" secondAttribute="bottom" constant="-14" id="Hni-En-wJw"/>
                             <constraint firstItem="8k6-0A-EX8" firstAttribute="leading" secondItem="Mky-D0-7lJ" secondAttribute="leading" constant="20" id="LdL-uo-RFF"/>
                             <constraint firstItem="Mky-D0-7lJ" firstAttribute="trailing" secondItem="jc4-Qs-oLq" secondAttribute="trailing" constant="101" id="Qr6-0N-hE4"/>
-                            <constraint firstItem="bqR-sc-c73" firstAttribute="top" secondItem="jc4-Qs-oLq" secondAttribute="bottom" constant="78" id="Rfk-bK-Rba"/>
+                            <constraint firstItem="bqR-sc-c73" firstAttribute="top" secondItem="jc4-Qs-oLq" secondAttribute="bottom" constant="50" id="Rfk-bK-Rba"/>
                             <constraint firstItem="5Ya-3y-xdD" firstAttribute="leading" secondItem="ssz-fS-gY1" secondAttribute="trailing" constant="15" id="Sgk-bW-tJX"/>
                             <constraint firstItem="Mky-D0-7lJ" firstAttribute="trailing" secondItem="Yhl-iR-V2h" secondAttribute="trailing" constant="30" id="TZM-bN-Rp9"/>
                             <constraint firstItem="lLT-fV-9Y0" firstAttribute="leading" secondItem="Mky-D0-7lJ" secondAttribute="leading" constant="76" id="VbD-4D-vaV"/>
@@ -360,6 +360,7 @@
                         <outlet property="saveButton" destination="8YA-Fe-WpR" id="hQ2-lX-I7g"/>
                         <outlet property="screenTitleLabel" destination="8k6-0A-EX8" id="q64-s8-c36"/>
                         <outlet property="shareButton" destination="bqR-sc-c73" id="pK0-OE-2FA"/>
+                        <outlet property="snoozeLabel" destination="lLT-fV-9Y0" id="lzk-z1-fZu"/>
                         <outlet property="soundLabel" destination="RM6-go-ZSU" id="H4a-Hz-rnu"/>
                         <outlet property="soundPickerView" destination="PgA-3P-YD3" id="KvA-US-ppH"/>
                         <outlet property="timeLabel" destination="xXc-vl-7Hv" id="ELm-bx-gJe"/>
@@ -633,14 +634,11 @@
         <image name="EventPic" width="50" height="49"/>
         <image name="GroupsTabIcon" width="25" height="25"/>
         <image name="LoginButton" width="268" height="118"/>
+        <image name="LoginFacebookButton" width="378" height="54"/>
+        <image name="LoginGoogleButton" width="378" height="54"/>
         <image name="NavBarBackground" width="414" height="64"/>
         <image name="SaveButton" width="268" height="71"/>
         <image name="SettingsTabIcon" width="25" height="25"/>
-        <image name="LoginFacebookButton" width="378" height="54"/>
-        <image name="LoginGoogleButton" width="378" height="54"/>
-        <image name="NavBarBackground" width="128" height="128"/>
-        <image name="NotificationAlert" width="70" height="70"/>
-        <image name="ProfileTabIcon" width="42" height="42"/>
         <image name="SignUpButton" width="268" height="119"/>
         <image name="Title" width="361" height="106"/>
         <systemColor name="labelColor">

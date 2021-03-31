@@ -25,6 +25,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var repeatButton: UIButton!
+    @IBOutlet weak var snoozeLabel: UILabel!
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
     private var recurring:String = "Never"
@@ -51,6 +52,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         repeatLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         soundLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        snoozeLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         repeatButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
         repeatButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         shareButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
