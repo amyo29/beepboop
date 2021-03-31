@@ -4,8 +4,7 @@
 
 ### Running the application
 
-Please run the application on an iPhone 11/iPhone 11 Pro Max/iPhone 12 
-simulator. 
+Please run the application on an iPhone 12 simulator. 
 
 ### Contributions
 
