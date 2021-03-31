@@ -56,6 +56,10 @@ We modified the Alarm Creation screen from the initial design to now display
 time, date, and sound in Picker Views. The title is a customized text field. We
 added a toggle for snoozing (no functionality). 
 
+The user has the option to set the recurring option for an alarm on the UI. 
+However, due to issues with notifications not anticipated, we have decided to 
+move the recurring alarm notification functionality to a later phase.
+
 #### Home Screen
 
 The tab bar has been redesigned with a different set of icons, titles, and 
