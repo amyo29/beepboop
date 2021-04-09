@@ -28,9 +28,9 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var snoozeLabel: UILabel!
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
-    private var recurring:String = "Never"
+    private var recurring: String = "Never"
+    private let createAlarmToHomeSegueIdentifier = "CreateAlarmToHomeSegueIdentifier"
    
-    
     var delegate: UIViewController!
     
     // MARK: - Views
@@ -44,7 +44,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
         timeLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         titleTextField.font = UIFont(name: "JosefinSans-Regular", size: 25.0)
-        let aquablue = UIColor(hex: "#00ffff")
+//        let aquablue = UIColor(hex: "#00ffff")
 //        titleTextField.textColor = UIColor(red:0/255, green:128/255, blue:255/255, alpha:1.0) // aqua
 //        titleTextField.textColor = UIColor(red:0/255, green:255/255, blue:255/255, alpha:1.0) // turquoise
         titleTextField.textColor = UIColor(red:31/255, green:207/255, blue:245/255, alpha:1.0) // figma blue colour title
@@ -68,20 +68,8 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
 //
 //        // set listener for timePicker
 //        self.timePicker.addTarget(self, action: #selector(self.timePickerChanged(picker:)), for: .valueChanged)
-                
-
     }
-    
-//    @objc func datePickerChanged(picker: UIDatePicker) {
-//        print("In datePickerChanged: date: ", picker.date)
-//        self.dateSelected = picker.date
-//    }
-//
-//    @objc func timePickerChanged(picker: UIDatePicker) {
-//        print("In timePickerChanged: date: ", picker.date)
-//        self.timePicker = picker
-//    }
-    
+        
     // set repeat occurrences in the form of an Alert Action Sheet
     @IBAction func repeatButtonPressed(_ sender: UIButton) {
         repeatButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
@@ -115,8 +103,9 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                         print( "Daily")
                                     }))
         
+        // TODO: consider adding selecting days of the week back in
         alertController.addAction(UIAlertAction(
-                                    title: "Weekly - select days",
+                                    title: "Weekly",
                                     style: .default,
                                     handler: { (action) -> Void in
                                         attributedTitle?.setValue("Weekly", forKey: "string")
@@ -179,18 +168,18 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     // MARK: - Button actions
     @IBAction func saveButtonPressed(_ sender: Any) {
         // add new alarm to core data
-
         if let time = self.timePicker?.date,
            let date = self.datePicker?.date,
            let mergedDate = self.combineDateWithTime(date: date, time: time),
            let title = self.titleTextField.text,
            let _ = self.delegate as? HomeViewController {
             let homeViewController = self.delegate as! AlarmAdder
-            // TODO: clean up date - extraneous
-            homeViewController.addAlarm(time: mergedDate, date: date, name: title, recurring: recurring)
+            homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring)
         } else {
             print("Something went wrong when save button pressed")
         }
+        
+        self.performSegue(withIdentifier: self.createAlarmToHomeSegueIdentifier, sender: self)
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {

@@ -15,6 +15,9 @@
  */
 #import <Foundation/Foundation.h>
 
+#import <FirebaseCore/FIRComponentType.h>
+#import <FirebaseCore/FIRLibrary.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// A type-safe macro to retrieve a component from a container. This should be used to retrieve

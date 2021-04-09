@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#import "FirebaseAuth/Sources/Public/FirebaseAuth/FIRAdditionalUserInfo.h"
+#import <FirebaseAuth/FIRAdditionalUserInfo.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

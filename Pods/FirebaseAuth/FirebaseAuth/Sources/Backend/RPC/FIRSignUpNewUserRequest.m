@@ -43,11 +43,6 @@ static NSString *const kDisplayNameKey = @"displayName";
  */
 static NSString *const kReturnSecureTokenKey = @"returnSecureToken";
 
-/** @var kTenantIDKey
-    @brief The key for the tenant id value in the request.
- */
-static NSString *const kTenantIDKey = @"tenantId";
-
 @implementation FIRSignUpNewUserRequest
 
 - (nullable instancetype)initWithEmail:(nullable NSString *)email
@@ -86,9 +81,6 @@ static NSString *const kTenantIDKey = @"tenantId";
   }
   if (_returnSecureToken) {
     postBody[kReturnSecureTokenKey] = @YES;
-  }
-  if (self.tenantID) {
-    postBody[kTenantIDKey] = self.tenantID;
   }
   return [postBody copy];
 }

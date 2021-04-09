@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#import <TargetConditionals.h>
-#if !TARGET_OS_OSX && !TARGET_OS_WATCH
+#include <TargetConditionals.h>
+#if !TARGET_OS_OSX
 
 #import <GoogleUtilities/GULAppEnvironmentUtil.h>
 #import <UIKit/UIKit.h>

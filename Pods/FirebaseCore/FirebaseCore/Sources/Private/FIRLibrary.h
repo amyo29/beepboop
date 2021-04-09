@@ -19,8 +19,9 @@
 
 #import <Foundation/Foundation.h>
 
+#import <FirebaseCore/FIRComponent.h>
+
 @class FIRApp;
-@class FIRComponent;
 
 NS_ASSUME_NONNULL_BEGIN
 

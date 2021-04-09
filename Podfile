@@ -10,5 +10,8 @@ target 'beepboop' do
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
   pod 'FBSDKLoginKit'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'BoringSSL-GRPC', '0.0.3'
   
 end

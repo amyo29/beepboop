@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-#import <TargetConditionals.h>
+#include <TargetConditionals.h>
 #if TARGET_OS_IOS
 
-#import "FirebaseAuth/Sources/Public/FirebaseAuth/FIRMultiFactor.h"
+#import <FirebaseAuth/FIRMultiFactor.h>
 
 #import "FirebaseAuth/Sources/Backend/RPC/Proto/FIRAuthProtoMFAEnrollment.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FIRMultiFactor () <NSSecureCoding>
+@interface FIRMultiFactor ()
 
 @property(nonatomic, weak) FIRUser *user;
 

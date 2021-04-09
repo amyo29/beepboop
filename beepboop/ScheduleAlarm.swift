@@ -8,28 +8,61 @@
 import Foundation
 import UIKit
 
+enum RepeatInterval: String {
+    case Never = "Never"
+    case Hourly = "Hourly"
+    case Daily = "Daily"
+    case Weekly = "Weekly"
+    case Monthly = "Monthly"
+    case Yearly = "Yearly"
+    
+    static let allValues = [Never, Hourly, Daily, Weekly, Monthly, Yearly]
+    
+    func retrieveRepeatInterval(time: Date) -> DateComponents {
+        let calendar = Calendar.current
+        var component = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: time)
+
+        switch self {
+        case .Never:
+            break
+        case .Hourly:
+            component = calendar.dateComponents([.minute], from: time)
+        case .Daily:
+            component = calendar.dateComponents([.hour, .minute], from: time)
+        case .Weekly:
+            component = calendar.dateComponents([.hour, .minute, .weekday], from: time)
+        case .Monthly:
+            component = calendar.dateComponents([.hour, .minute, .day], from: time)
+        case .Yearly:
+            component = calendar.dateComponents([.hour, .minute, .day, .month], from: time)
+        }
+        
+        component.second = 0
+        return component
+    }
+}
+
 class ScheduleAlarm : ScheduleAlarmDelegate {
     
-    func setNotificationWithTimeAndDate(name: String, time: Date, recurring: String, uuid: UUID) {
-        print("here at start of notification function")
+    func setNotificationWithTimeAndDate(name: String, time: Date, recurring: String, uuidStr: String) {
+        guard let repeatInterval = RepeatInterval(rawValue: recurring) else {
+            print("Recurring value cannot be mapped")
+            abort()
+        }
+        
         let timeDisplay = extractTimeFromDate(time: time)
+        
         let content = UNMutableNotificationContent()
         content.title = name
         content.body = "Repeats \(recurring) at \(timeDisplay)"
         content.sound = .default
         
-        let calendar = Calendar.current
-        print(calendar.dateComponents([.year, .month, .day, .hour, .minute], from: time))
-        
-        let timeSelected = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: time)
-        
         // Create the trigger as a repeating event.
         let trigger = UNCalendarNotificationTrigger(
-                 dateMatching: timeSelected, repeats: true)
+            dateMatching: repeatInterval.retrieveRepeatInterval(time: time), repeats: repeatInterval != RepeatInterval.Never)
         
         // Create the request
-        let uuidString = uuid.uuidString
-        let request = UNNotificationRequest(identifier: uuidString,
+        let request = UNNotificationRequest(identifier: uuidStr,
                     content: content, trigger: trigger)
 
         // Schedule the request with the system.

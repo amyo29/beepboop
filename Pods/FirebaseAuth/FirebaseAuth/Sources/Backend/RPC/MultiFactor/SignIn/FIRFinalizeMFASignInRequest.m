@@ -18,11 +18,6 @@
 
 static NSString *const kFinalizeMFASignInEndPoint = @"accounts/mfaSignIn:finalize";
 
-/** @var kTenantIDKey
-    @brief The key for the tenant id value in the request.
- */
-static NSString *const kTenantIDKey = @"tenantId";
-
 @implementation FIRFinalizeMFASignInRequest
 
 - (nullable instancetype)
@@ -49,9 +44,6 @@ static NSString *const kTenantIDKey = @"tenantId";
     if ([_verificationInfo isKindOfClass:[FIRAuthProtoFinalizeMFAPhoneRequestInfo class]]) {
       postBody[@"phoneVerificationInfo"] = [_verificationInfo dictionary];
     }
-  }
-  if (self.tenantID) {
-    postBody[kTenantIDKey] = self.tenantID;
   }
   return [postBody copy];
 }

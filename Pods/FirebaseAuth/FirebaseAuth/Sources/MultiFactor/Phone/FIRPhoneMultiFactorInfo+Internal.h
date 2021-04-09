@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-#import <TargetConditionals.h>
+#include <TargetConditionals.h>
 #if TARGET_OS_IOS
 
-#import "FirebaseAuth/Sources/Public/FirebaseAuth/FIRPhoneMultiFactorInfo.h"
+#import <FirebaseAuth/FIRPhoneMultiFactorInfo.h>
 
 @class FIRAuthProtoMFAEnrollment;
 

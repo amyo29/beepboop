@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#import <TargetConditionals.h>
+#include <TargetConditionals.h>
 #if TARGET_OS_IOS
 
 #import "FirebaseAuth/Sources/Backend/FIRAuthBackend+MultiFactor.h"

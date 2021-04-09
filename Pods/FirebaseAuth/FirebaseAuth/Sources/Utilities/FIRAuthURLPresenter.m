@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-#import <TargetConditionals.h>
+#include <TargetConditionals.h>
 #if TARGET_OS_IOS
 
+#import <FirebaseAuth/FIRAuthUIDelegate.h>
 #import <SafariServices/SafariServices.h>
-#import "FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthUIDelegate.h"
 
 #import "FirebaseAuth/Sources/Auth/FIRAuthGlobalWorkQueue.h"
 #import "FirebaseAuth/Sources/Utilities/FIRAuthDefaultUIDelegate.h"
@@ -39,8 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation FIRAuthURLPresenter {
   /** @var _isPresenting
       @brief Whether or not some web-based content is being presented.
-          Accesses to this property are serialized on the global Auth work queue
-          and thus this variable should not be read or written outside of the work queue.
    */
   BOOL _isPresenting;
 
@@ -65,9 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
   id<FIRAuthUIDelegate> _UIDelegate;
 
   /** @var _completion
-      @brief The completion handler for the current presentation, if one is active.
-          Accesses to this variable are serialized on the global Auth work queue
-          and thus this variable should not be read or written outside of the work queue.
+      @brief The completion handler for the current presentaion, if one is active.
       @remarks This variable is also used as a flag to indicate a presentation is active.
    */
   FIRAuthURLPresentationCompletion _Nullable _completion;
@@ -79,24 +75,14 @@ NS_ASSUME_NONNULL_BEGIN
          completion:(FIRAuthURLPresentationCompletion)completion {
   if (_isPresenting) {
     // Unable to start a new presentation on top of another.
-    // Invoke the new completion closure and leave the old one as-is
-    // to be invoked when the presentation finishes.
-    dispatch_async(dispatch_get_main_queue(), ^() {
-      completion(nil, [FIRAuthErrorUtils webContextAlreadyPresentedErrorWithMessage:nil]);
-    });
+    _completion(nil, [FIRAuthErrorUtils webContextAlreadyPresentedErrorWithMessage:nil]);
     return;
   }
   _isPresenting = YES;
   _callbackMatcher = callbackMatcher;
-  _completion = [completion copy];
+  _completion = completion;
   dispatch_async(dispatch_get_main_queue(), ^() {
     self->_UIDelegate = UIDelegate ?: [FIRAuthDefaultUIDelegate defaultUIDelegate];
-#if TARGET_OS_MACCATALYST
-    self->_webViewController = [[FIRAuthWebViewController alloc] initWithURL:URL delegate:self];
-    UINavigationController *navController =
-        [[UINavigationController alloc] initWithRootViewController:self->_webViewController];
-    [self->_UIDelegate presentViewController:navController animated:YES completion:nil];
-#else
     if ([SFSafariViewController class]) {
       self->_safariViewController = [[SFSafariViewController alloc] initWithURL:URL];
       self->_safariViewController.delegate = self;
@@ -110,7 +96,6 @@ NS_ASSUME_NONNULL_BEGIN
           [[UINavigationController alloc] initWithRootViewController:self->_webViewController];
       [self->_UIDelegate presentViewController:navController animated:YES completion:nil];
     }
-#endif
   });
 }
 
@@ -177,8 +162,8 @@ NS_ASSUME_NONNULL_BEGIN
   _callbackMatcher = nil;
   id<FIRAuthUIDelegate> UIDelegate = _UIDelegate;
   _UIDelegate = nil;
-  FIRAuthURLPresentationCompletion completion = [_completion copy];
-  _completion = NULL;
+  FIRAuthURLPresentationCompletion completion = _completion;
+  _completion = nil;
   void (^finishBlock)(void) = ^() {
     self->_isPresenting = NO;
     completion(URL, error);

@@ -7,18 +7,27 @@
 
 import UIKit
 import CoreData
+import FirebaseCore
+import Firebase
 
 protocol AlarmAdder {
-    func addAlarm(time: Date, date: Date, name: String, recurring: String)
+    func addAlarm(time: Date, name: String, recurrence: String)
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlarmAdder{
-
+    
     // MARK: - Properties
-    var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
-
+    var docRef: DocumentReference!
+    var collectionRef: CollectionReference!
+    private var alarmList: [AlarmCustom] = []
+    private var documents: [DocumentSnapshot] = []
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var alarmTableView: UITableView!
+    
+    var dataListener: ListenerRegistration! // Increases efficiency of app by only listening to data when view is on screen
+    
+    var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
     
     // data source of stored alarms per user
     private var alarms: [Alarm] = []
@@ -26,14 +35,29 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     private let alarmTableViewCellIdentifier = "AlarmTableViewCell"
     
     // TODO: add back userEmail functionality
-//    var userEmail: String?
-
+    //    var userEmail: String?
+    
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-//        clearCoreData()
+        docRef = Firestore.firestore().collection("alarmData").document("test") //or Firestore.firestore().document("alarmData/test")
+        collectionRef = Firestore.firestore().collection("alarmData")
+        
+        // read from firestore
+        let db = Firestore.firestore()
+        db.collection("alarms").getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
+        
+        //        clearCoreData()
         self.alarmTableView.delegate = self
         self.alarmTableView.dataSource = self
         
@@ -48,9 +72,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.view.sendSubviewToBack(self.alarmTableView)
-        self.updateAlarmList()
-        print("alarms count: ", self.alarms.count)
+        self.updateAlarmsFirestore()
+        
+        //        print("alarms count: ", self.alarms.count)
     }
     
     // load system supported fonts to determine system font labels
@@ -69,89 +95,84 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("In tableView count method, count: ", self.alarms.count)
-        return self.alarms.count
+        print("In tableView count method, count: ", self.alarmList.count)
+        return self.alarmList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("In tableView cell render method, count: ", self.alarms.count)
+        print("In tableView cell render method, count: ", self.alarmList.count)
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: self.alarmTableViewCellIdentifier, for: indexPath as IndexPath) as! AlarmTableViewCell
         
-        cell.alarmNameLabel?.text = self.alarms[row].name
-        cell.alarmTimeLabel?.text = self.extractTimeFromDate(time: self.alarms[row].time)
-        cell.alarmDateLabel?.text = self.extractDate(time: self.alarms[row].time)
+        let alarm = alarmList[row]
         cell.alarmToggleSwitch?.tag = row
-        cell.alarmImageView?.image = UIImage(named: "EventPic")
+        populateCell(alarm: alarm, cell: cell)
         
         return cell
     }
     
+    func populateCell(alarm: AlarmCustom, cell: AlarmTableViewCell) {
+        print("in populateCell, alarm=\(alarm)")
+        cell.alarmNameLabel?.text = alarm.name
+        cell.alarmTimeLabel?.text = self.extractTimeFromDate(time: alarm.time)
+        cell.alarmDateLabel?.text = self.extractDate(time: alarm.time)
+        cell.alarmImageView?.image = UIImage(named: "EventPic")
+    }
+    
     // Remove alarm from table view by swiping to delete
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
         if editingStyle == .delete {
             // Delete notifications
-            if let uuid = self.alarms[indexPath.row].uuid {
+            if let uuid = self.alarmList[indexPath.row].uuidStr {
                 let notificationCenter = UNUserNotificationCenter.current()
-                notificationCenter.removePendingNotificationRequests(withIdentifiers: [uuid.uuidString])
+                notificationCenter.removePendingNotificationRequests(withIdentifiers: [uuid])
+                
+                
+                collectionRef.whereField("uuid", isEqualTo: uuid).getDocuments(completion: { (snapshot, error) in
+                                                                                if let error = error {
+                                                                                    print(error.localizedDescription)
+                                                                                } else {
+                                                                                    for document in snapshot!.documents {
+                                                                                        document.reference.delete()
+                                                                                    }
+                                                                                }})
             }
             
-            // Delete Alarm Entity (NSManagedObject) from alarms list
-            context.delete(alarms[indexPath.row])
-            alarms.remove(at: indexPath.row)
+            
+            alarmList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            // Commit the changes
-            do {
-                try context.save()
-            } catch {
-                // if an error occurs
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
-            }
         }
     }
     
-    
     @IBAction func switchTapped(_ sender: UISwitch) {
         let index = sender.tag
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
         
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Alarm")
-        request.predicate = NSPredicate(format: "uuid == %@", self.alarms[index].uuid! as NSUUID)
-        
-        // Update enable value
-        do {
-            if let fetchedResults = try context.fetch(request) as? [Alarm],
-               fetchedResults.count > 0 {
-                fetchedResults[0].setValue(sender.isOn, forKey: "enabled")
+        collectionRef.whereField("uuid", isEqualTo: self.alarmList[index].uuidStr!).getDocuments(completion: { (snapshot, error) in
+            if let error = error {
+                print("An error occurred when retrieving alarmData: \(error.localizedDescription)")
+            } else if snapshot!.documents.count != 1 {
+                print("The specified alarm with UUID \(self.alarmList[index].uuidStr!) does not exist.")
+            } else {
+                let document = snapshot?.documents.first
+                document?.reference.updateData([
+                    "enabled": sender.isOn
+                ])
             }
-            try context.save()
-        } catch {
-            // if an error occurs
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
+        })
         
         // Enable/Disable notifications
-        let alarm = self.alarms[index]
+        let alarm = self.alarmList[index]
         if sender.isOn {
             if let name = alarm.name,
                let time = alarm.time,
-               let recurring = alarm.recurring,
-               let uuid = alarm.uuid {
-                alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurring, uuid: uuid)
+               let recurring = alarm.recurrence,
+               let uuid = alarm.uuidStr {
+                alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurring, uuidStr: uuid)
             }
         } else {
-            if let uuid = alarm.uuid {
+            if let uuid = alarm.uuidStr {
                 let notificationCenter = UNUserNotificationCenter.current()
-                notificationCenter.removePendingNotificationRequests(withIdentifiers: [uuid.uuidString])
+                notificationCenter.removePendingNotificationRequests(withIdentifiers: [uuid])
             }
         }
     }
@@ -168,7 +189,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.contentView.layer.shadowRadius = 4
         cell.contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
         cell.contentView.layer.shadowColor = UIColor.black.cgColor
-
+        
         // add corner radius on `contentView`
         cell.contentView.backgroundColor = .white
         cell.contentView.layer.cornerRadius = 8
@@ -181,76 +202,68 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Delegate functions
     
-    func addAlarm(time: Date, date: Date, name: String, recurring: String) {
-        self.addAlarmToCoreData(time: time, date: date, name: name, recurring: recurring)
-        self.updateAlarmList()
+    func addAlarm(time: Date, name: String, recurrence: String) {
+        self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence)
+        self.updateAlarmsFirestore()
     }
     
-    // MARK: - CoreData functions
-    
-    func addAlarmToCoreData(time: Date, date: Date, name: String, recurring: String) {
-        // store new Alarm in CoreData
-        // Alarm is user-specific
-        print("adding alarm to coredata")
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let alarm = NSEntityDescription.insertNewObject(forEntityName: "Alarm", into: context)
+    func addAlarmToFirestore(time: Date, name: String, recurrence: String) {
         let uuid = UUID()
-        alarm.setValue(uuid, forKey: "uuid")
-        alarm.setValue(time, forKey: "time")
-        alarm.setValue(date, forKey: "date")
-        alarm.setValue(name, forKey: "name")
-        alarm.setValue(recurring, forKey: "recurring")
-        alarm.setValue(true, forKey: "enabled")
-        alarm.setValue(true, forKey: "snoozeEnabled")
+        let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, enabled: true, snoozeEnabled: false, uuidStr:uuid.uuidString)
         
-        alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurring, uuid: uuid)
-        
-        do {
-            try context.save()
-        } catch {
-            let nsError = error as NSError
-            NSLog("Unresolved error \(nsError), \(nsError.userInfo)")
-            abort()
+        collectionRef.addDocument(data: newAlarm.dictionary)
+        alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, uuidStr: uuid.uuidString)
+    }
+    
+    // Updates Firestore data manually
+    func retrieveDataFromFirestore() {
+        docRef.getDocument { (docSnapshot, error) in
+            guard let docSnapshot = docSnapshot, docSnapshot.exists else { return }
+            let myData = docSnapshot.data()
+            let latestAlarm = myData?["name"] as? String ?? "(none)"
+            print(latestAlarm)
         }
     }
     
-    func updateAlarmList() {
-        // update data source
-        print("in update alarm list, number of alarms: ", self.alarms.count)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Alarm")
-        var fetchedResults: [Alarm]? = [Alarm]()
-        
-//        request.predicate = NSPredicate(format: "userEmail == %@", self.userEmail! as NSString)
-        
-        do {
-            try fetchedResults = context.fetch(request) as? [Alarm]
-        } catch {
-            // if an error occurs
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
+    // Updates Firestore data in real-time via snapshot listener
+    // Updates Table view as soon as users create/edit alarm w/o needing to manually fetch data from firestore (see retrieveDataFromFirestore() code)
+    func updateAlarmsFirestore() {
+        dataListener = collectionRef.addSnapshotListener { [unowned self] (snapshot, error) in
+            guard let snapshot = snapshot else {
+                print("Error fetching snapshot results: \(error!)")
+                return
+            }
+            let models = snapshot.documents.map { (document) -> AlarmCustom in
+                if let model = AlarmCustom(dictionary: document.data()) {
+                    return model
+                } else {
+                    print(document.data())
+                    // Don't use fatalError here in a real app.
+                    fatalError("Unable to initialize type \(AlarmCustom.self) with dictionary \(document.data())")
+                }
+            }
+            self.alarmList = models
+            self.documents = snapshot.documents
+            
+            
+            self.alarmTableView?.reloadData()
         }
-        
-        self.alarms = fetchedResults ?? [Alarm]()
-        print("in update alarm list, number of alarms: ", self.alarms.count)
-        self.alarmTableView?.reloadData()
+    }
+    
+    // Increases efficiency of app by only listening to data when view is on screen
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dataListener.remove()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? CreateAlarmViewController{
-//            let trans = CATransition()
-//            trans.type = CATransitionType.moveIn
-//            trans.subtype = CATransitionSubtype.fromLeft
-//            trans.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-//            trans.duration = 0.35
-//            self.navigationController?.view.layer.add(trans, forKey: nil)
             destination.delegate = self
         }
+    }
+    
+    @IBAction func unwindToHome(segue: UIStoryboardSegue) {
+        
     }
     
     // MARK: - Utility
@@ -283,38 +296,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             return "Error when extracting date from Date object"
         }
-    }
-    
-    
-    func clearCoreData() {
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Alarm")
-        
-        var fetchedResults: [NSManagedObject]
-        
-        do {
-            try fetchedResults = context.fetch(request) as! [NSManagedObject]
-            
-            if fetchedResults.count > 0 {
-                
-                for result:AnyObject in fetchedResults {
-                    context.delete(result as! NSManagedObject)
-                    print("\(result.value(forKey:"name")!) has been deleted")
-                }
-            }
-            try context.save()
-            
-        } catch {
-            // if an error occurs
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-        
-        
     }
 }
 
