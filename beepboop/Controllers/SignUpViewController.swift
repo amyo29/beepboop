@@ -7,6 +7,8 @@
 
 import UIKit
 import Firebase
+import FirebaseCore
+import FirebaseFirestore
 
 class SignUpViewController: UIViewController {
 
@@ -18,14 +20,21 @@ class SignUpViewController: UIViewController {
     
     private let signUpToMainSegueIdentifier = "SignUpToMain"
     
+    private var userCollectionRef: CollectionReference!
+    
+    private var userID: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        userCollectionRef = Firestore.firestore().collection("userData")
+
 
         // Do any additional setup after loading the view.
         Auth.auth().addStateDidChangeListener() {
             auth, user in
 
-            if let _ = user {
+            if let user = user {
+                self.userID = user.uid
                 self.emailTextField.text = nil
                 self.passwordTextField.text = nil
                 self.performSegue(withIdentifier: self.signUpToMainSegueIdentifier, sender: nil)
@@ -75,7 +84,10 @@ class SignUpViewController: UIViewController {
         
         Auth.auth().createUser(withEmail: email, password: password) {
             user, error in
-            if error == nil {
+            if error == nil, let user = user {
+                // Create user document in Firestore
+                self.userID = user.user.uid
+                self.userCollectionRef.addDocument(data: ["userID": self.userID])
                 Auth.auth().signIn(withEmail: email, password: password)
             } else {
                 if let error = error, user == nil {
@@ -97,15 +109,17 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "HomeSegueIdentifier",
+           let tabBarController = segue.destination as? UITabBarController,
+           let destination = tabBarController.viewControllers?.first as? HomeViewController {
+            destination.userID = self.userID
+        }
     }
-    */
+    
     
     // MARK: - Hide Keyboard
     

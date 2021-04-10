@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		063208BE2612393400C22C0A /* ScheduleAlarmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063208BD2612393400C22C0A /* ScheduleAlarmDelegate.swift */; };
 		063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063208C026123A8F00C22C0A /* ScheduleAlarm.swift */; };
-		063209032612E4A400C22C0A /* Alarm+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063209012612E4A400C22C0A /* Alarm+CoreDataClass.swift */; };
-		063209042612E4A400C22C0A /* Alarm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063209022612E4A400C22C0A /* Alarm+CoreDataProperties.swift */; };
 		0633D49E260D902C004B50FB /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D49D260D902C004B50FB /* GroupViewController.swift */; };
 		0633D4A3260D9088004B50FB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D4A2260D9088004B50FB /* ProfileViewController.swift */; };
 		0633D4A6260D9612004B50FB /* ProfileTabIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D4A5260D9612004B50FB /* ProfileTabIcon.png */; };
@@ -67,8 +65,6 @@
 /* Begin PBXFileReference section */
 		063208BD2612393400C22C0A /* ScheduleAlarmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAlarmDelegate.swift; sourceTree = "<group>"; };
 		063208C026123A8F00C22C0A /* ScheduleAlarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAlarm.swift; sourceTree = "<group>"; };
-		063209012612E4A400C22C0A /* Alarm+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alarm+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		063209022612E4A400C22C0A /* Alarm+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alarm+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		0633D49D260D902C004B50FB /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		0633D4A2260D9088004B50FB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0633D4A5260D9612004B50FB /* ProfileTabIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileTabIcon.png; sourceTree = "<group>"; };
@@ -146,8 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				0694565F261F984D00450AC8 /* AlarmCustom.swift */,
-				063209012612E4A400C22C0A /* Alarm+CoreDataClass.swift */,
-				063209022612E4A400C22C0A /* Alarm+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -474,8 +468,6 @@
 				9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */,
 				063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */,
 				9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */,
-				063209032612E4A400C22C0A /* Alarm+CoreDataClass.swift in Sources */,
-				063209042612E4A400C22C0A /* Alarm+CoreDataProperties.swift in Sources */,
 				9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */,
 				0633D54C260F181E004B50FB /* CreateAlarmViewController.swift in Sources */,
 				063208BE2612393400C22C0A /* ScheduleAlarmDelegate.swift in Sources */,

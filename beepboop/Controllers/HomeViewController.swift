@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 import FirebaseCore
 import Firebase
 
@@ -19,23 +18,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: - Properties
     var docRef: DocumentReference!
     var collectionRef: CollectionReference!
+    var dataListener: ListenerRegistration! // Increases efficiency of app by only listening to data when view is on screen
+    // data source of stored alarms per user
     private var alarmList: [AlarmCustom] = []
     private var documents: [DocumentSnapshot] = []
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var alarmTableView: UITableView!
     
-    var dataListener: ListenerRegistration! // Increases efficiency of app by only listening to data when view is on screen
-    
     var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
-    
-    // data source of stored alarms per user
-    private var alarms: [Alarm] = []
-    
+        
     private let alarmTableViewCellIdentifier = "AlarmTableViewCell"
     
-    // TODO: add back userEmail functionality
-    //    var userEmail: String?
+    var userID: String?
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -57,7 +52,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
-        //        clearCoreData()
         self.alarmTableView.delegate = self
         self.alarmTableView.dataSource = self
         
@@ -207,15 +201,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.updateAlarmsFirestore()
     }
     
+   // MARK: - Firestore functions
+    
     func addAlarmToFirestore(time: Date, name: String, recurrence: String) {
         let uuid = UUID()
-        let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, enabled: true, snoozeEnabled: false, uuidStr:uuid.uuidString)
+        let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, enabled: true, snoozeEnabled: false, uuidStr:uuid.uuidString, userId: self.userID)
         
         collectionRef.addDocument(data: newAlarm.dictionary)
         alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, uuidStr: uuid.uuidString)
     }
     
-    // Updates Firestore data manually
+    // Function for Testing purposes: Updates Firestore data manually
     func retrieveDataFromFirestore() {
         docRef.getDocument { (docSnapshot, error) in
             guard let docSnapshot = docSnapshot, docSnapshot.exists else { return }
@@ -228,7 +224,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Updates Firestore data in real-time via snapshot listener
     // Updates Table view as soon as users create/edit alarm w/o needing to manually fetch data from firestore (see retrieveDataFromFirestore() code)
     func updateAlarmsFirestore() {
-        dataListener = collectionRef.addSnapshotListener { [unowned self] (snapshot, error) in
+        dataListener = collectionRef.whereField("userId", isEqualTo: self.userID).addSnapshotListener { [unowned self] (snapshot, error) in
             guard let snapshot = snapshot else {
                 print("Error fetching snapshot results: \(error!)")
                 return
@@ -260,6 +256,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let destination = segue.destination as? CreateAlarmViewController{
             destination.delegate = self
         }
+        
     }
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {

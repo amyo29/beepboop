@@ -16,6 +16,7 @@ struct AlarmCustom {
     var enabled: Bool?
     var snoozeEnabled: Bool?
     var uuidStr: String?
+    var userId: String?
     
     var dictionary: [String: Any] {
         return [
@@ -24,7 +25,8 @@ struct AlarmCustom {
             "recurrence": self.recurrence ?? "Never",
             "enabled": self.enabled ?? false,
             "snoozeEnabled": self.snoozeEnabled ?? false,
-            "uuid": self.uuidStr ?? UUID().uuidString
+            "uuid": self.uuidStr ?? UUID().uuidString,
+            "userId": self.userId ?? UUID().uuidString
         ]
     }
 }
@@ -66,7 +68,8 @@ extension AlarmCustom {
               let recurrence = dictionary["recurrence"] as? String,
               let enabled = dictionary["enabled"] as? Bool,
               let snoozeEnabled = dictionary["snoozeEnabled"] as? Bool,
-              let uuidStr = dictionary["uuid"] as? String
+              let uuidStr = dictionary["uuid"] as? String,
+              let userId = dictionary["userId"] as? String
         else { return nil }
         
         self.init(name: name,
@@ -74,7 +77,8 @@ extension AlarmCustom {
                   recurrence: recurrence,
                   enabled: enabled,
                   snoozeEnabled: snoozeEnabled,
-                  uuidStr: uuidStr
+                  uuidStr: uuidStr,
+                  userId: userId
         )
     }
 }

@@ -16,6 +16,8 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    private var userId: String!
+    
     private let loginToMainSegueIdentifier = "LoginToMain"
     let facebookLoginButton = FBLoginButton(frame: .zero, permissions: [.publicProfile])
 
@@ -27,18 +29,19 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         
 //        clearCoreData()
-//        do {
-//            try Auth.auth().signOut()
-//
-//        } catch {
-//            print("Error occurred signing out of this account.")
-//        }
+        do {
+            try Auth.auth().signOut()
+
+        } catch {
+            print("Error occurred signing out of this account.")
+        }
 
         // Do any additional setup after loading the view.
         Auth.auth().addStateDidChangeListener() {
             auth, user in
 
-            if let _ = user {
+            if let user = user {
+                self.userId = user.uid
                 self.emailTextField.text = nil
                 self.passwordTextField.text = nil
                 self.performSegue(withIdentifier: self.loginToMainSegueIdentifier, sender: nil)
@@ -120,13 +123,13 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
         return
     }
     
-//      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == self.loginToMainSegueIdentifier,
-//           let tabBarController = segue.destination as? UITabBarController,
-//           let destination = tabBarController as? MainViewController {
-//            destination.userEmail = self.userEmail
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == self.loginToMainSegueIdentifier,
+           let tabBarController = segue.destination as? UITabBarController,
+           let destination = tabBarController.viewControllers?.first as? HomeViewController {
+            destination.userID = self.userId
+        }
+    }
     
     // MARK: - Hide Keyboard
     

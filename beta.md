@@ -31,14 +31,26 @@
 - [x] Set up user input fields
 - [x] Click on the “save” button to finalize the newly created alarm and navigate back to the Home Screen
 - [x] ~~Click on the “Back” button to go back to the previous screen~~ Swipe down to go back to Home Screen
-- [ ] Move alarm to Firebase
+- [x] Move alarm to Firebase Firestore
     - [ ] Retrieve alarms by user via API call
-- [ ] Implement recurring feature
+- [x] Implement recurring feature
 
 ### Alarm Popup Screen
 - [ ] Direct users to alarm popup screen when users click on the notification shown when alarm triggers
 - [ ] Snooze/Accept/Reject button
 - [ ] Dots button to lead the user to the alarm response screen
+
+alarmData collection -> alarm w/ userID
+userData collection -> user w/ userID, [userID's], [alarmIDs]
+userDoc
+- userID: String
+- profilePic: UIImage
+- snoozeEnabled: Bool
+- alarmIDs: [alarm uuids]
+- contacts: [userIds]
+- invites_received: [userIDs]
+- invites_sent: [userIDs]
+- notifications: 
 
 ### Notification
 - [x] Set up local notifications to pop up at designated time and date
@@ -61,7 +73,7 @@
 - [ ] Implement accept/decline feature for each alarm
 - [ ] Back button to go back to previous screen
 
-### Profile/Settings Screen
+### Profile/Settings Screen - Evan
 - [ ] Enable users to change pfp
 - [ ] Toggle for enabling/disabling snooze for all alarms
 - [ ] Toggle for enabling/disabling dark mode
