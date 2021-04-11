@@ -149,10 +149,12 @@
             </objects>
             <point key="canvasLocation" x="922" y="68"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Friends View Controller-->
         <scene sceneID="hbs-9F-HMh">
             <objects>
-                <viewController id="qkT-gJ-o3M" userLabel="Home View Controller" customClass="FriendsViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
+                <exit id="CAv-DL-MAb" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Ux-WT-G5X" sceneMemberID="firstResponder"/>
+                <viewController id="qkT-gJ-o3M" userLabel="Friends View Controller" customClass="FriendsViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V6h-Fz-Nhb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -160,6 +162,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kx-ur-bHa" userLabel="AddButton">
                                 <rect key="frame" x="294.5" y="715.5" width="116.5" height="62.5"/>
                                 <state key="normal" title="Button" image="AddButton"/>
+                                <connections>
+                                    <segue destination="dld-ux-Cp7" kind="show" id="sZU-dj-Rky"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7AP-ii-8rm" userLabel="Friends Table View">
                                 <rect key="frame" x="0.0" y="183.5" width="414" height="629.5"/>
@@ -209,8 +214,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="alarmImageView" destination="K1N-vo-Bed" id="rCr-1V-aib"/>
-                                            <outlet property="alarmNameLabel" destination="FRX-Dh-32H" id="c65-NL-bAI"/>
                                             <outlet property="friendImageView" destination="K1N-vo-Bed" id="94g-go-YQd"/>
                                             <outlet property="friendMetadataButton" destination="zvi-0n-nsR" id="dRZ-if-bo4"/>
                                             <outlet property="friendNameLabel" destination="FRX-Dh-32H" id="PRT-Xc-X6t"/>
@@ -269,22 +272,118 @@
                     <navigationItem key="navigationItem" id="20y-cs-DAa"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="alarmTableView" destination="7AP-ii-8rm" id="Qlu-7c-neQ"/>
                         <outlet property="friendsTableView" destination="7AP-ii-8rm" id="29t-QE-yBb"/>
-                        <outlet property="titleLabel" destination="yod-9x-kiS" id="G60-Y5-Grd"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0Ux-WT-G5X" sceneMemberID="firstResponder"/>
-                <exit id="CAv-DL-MAb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2120.289855072464" y="851.11607142857144"/>
+            <point key="canvasLocation" x="2138" y="869"/>
+        </scene>
+        <!--Add Friends View Controller-->
+        <scene sceneID="kp4-2B-o49">
+            <objects>
+                <exit id="d4u-x1-mDz" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9uR-Gp-lYY" sceneMemberID="firstResponder"/>
+                <viewController id="dld-ux-Cp7" userLabel="Add Friends View Controller" customClass="AddFriendsViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="eWB-il-rsN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YW6-eP-NZb">
+                                <rect key="frame" x="20" y="64" width="71" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="71" id="4HL-lf-rYW"/>
+                                    <constraint firstAttribute="height" constant="45" id="NkR-kk-FfB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="&lt; Back">
+                                    <color key="titleColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="d4u-x1-mDz" kind="unwind" unwindAction="unwindToHomeWithSegue:" id="wsI-KO-bh9"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="mVd-g8-7GX">
+                                <rect key="frame" x="47" y="129" width="320" height="543"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddFriendsIcon" translatesAutoresizingMaskIntoConstraints="NO" id="5iw-mV-hCF">
+                                        <rect key="frame" x="123" y="0.0" width="74" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="L6V-uJ-XZw"/>
+                                            <constraint firstAttribute="width" constant="74" id="f5b-21-PHI"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvF-7J-yY2">
+                                        <rect key="frame" x="51.5" y="160" width="217" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="BHv-B9-NSs"/>
+                                            <constraint firstAttribute="width" constant="217" id="Ryh-4O-jTM"/>
+                                            <constraint firstAttribute="height" constant="40" id="duf-eP-2Bz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Enter your friend's email:">
+                                            <color key="titleColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WSK-bf-vbw">
+                                        <rect key="frame" x="0.0" y="260" width="320" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="5gx-IP-u8C"/>
+                                            <constraint firstAttribute="width" constant="320" id="WEl-Gm-wZp"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="Wn3-g0-Che"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="opW-n0-za0" userLabel="Add Friend Button">
+                                        <rect key="frame" x="27.5" y="370" width="265" height="173"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="265" id="otA-je-JwN"/>
+                                            <constraint firstAttribute="height" constant="173" id="vya-ty-reR"/>
+                                        </constraints>
+                                        <state key="normal" title="Add" image="Add Friend Button"/>
+                                        <connections>
+                                            <action selector="addFriendButtonPressed:" destination="dld-ux-Cp7" eventType="touchUpInside" id="fdk-Me-cSG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="WSK-bf-vbw" firstAttribute="top" secondItem="XvF-7J-yY2" secondAttribute="bottom" constant="10" id="KIK-qi-QWW"/>
+                                    <constraint firstItem="opW-n0-za0" firstAttribute="top" secondItem="WSK-bf-vbw" secondAttribute="bottom" constant="60" id="alA-yg-owL"/>
+                                    <constraint firstItem="XvF-7J-yY2" firstAttribute="top" secondItem="5iw-mV-hCF" secondAttribute="bottom" constant="50" id="eaU-1W-RGD"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="oiR-j9-OX9"/>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="YW6-eP-NZb" firstAttribute="top" secondItem="oiR-j9-OX9" secondAttribute="top" constant="20" id="EhO-Np-0r1"/>
+                            <constraint firstItem="mVd-g8-7GX" firstAttribute="centerY" secondItem="eWB-il-rsN" secondAttribute="centerY" id="XBD-yz-NFj"/>
+                            <constraint firstItem="YW6-eP-NZb" firstAttribute="leading" secondItem="oiR-j9-OX9" secondAttribute="leading" constant="20" id="djc-D8-s4W"/>
+                            <constraint firstItem="5iw-mV-hCF" firstAttribute="top" secondItem="oiR-j9-OX9" secondAttribute="top" constant="60" id="nw1-d4-h2I"/>
+                            <constraint firstItem="mVd-g8-7GX" firstAttribute="centerX" secondItem="eWB-il-rsN" secondAttribute="centerX" id="yXo-s3-dUM"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Alarms" image="AlarmsTabIcon" selectedImage="AlarmsTabIcon" id="JGm-Te-dnG">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="HKx-5d-1Ox"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="EnterFriendEmailTextLabel" destination="XvF-7J-yY2" id="Agf-U5-GKW"/>
+                        <outlet property="addFriendButton" destination="opW-n0-za0" id="PVT-J6-tMw"/>
+                        <outlet property="emailTextField" destination="WSK-bf-vbw" id="llq-Jo-U4t"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3078.2608695652175" y="868.52678571428567"/>
         </scene>
         <!--Create Alarm View Controller-->
         <scene sceneID="hF8-od-a1e">
             <objects>
                 <viewController id="i0J-ZC-Eri" customClass="CreateAlarmViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iae-B6-fkC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8k6-0A-EX8">
@@ -509,7 +608,7 @@
             <objects>
                 <viewController id="jZp-6H-UMW" customClass="LoginViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R50-1X-hqG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J57-JS-J9U">
@@ -757,8 +856,8 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIT-H6-cfl">
-                                <rect key="frame" x="60" y="377" width="116" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIT-H6-cfl">
+                                <rect key="frame" x="60" y="377" width="77.5" height="28"/>
                                 <attributedString key="attributedText">
                                     <fragment content="snooze">
                                         <attributes>
@@ -872,10 +971,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="S7Q-Ua-MLD"/>
+        <segue reference="vSh-1G-Le3"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Add Friend Button" width="268" height="173"/>
         <image name="AddButton" width="62.5" height="62.5"/>
+        <image name="AddFriendsIcon" width="74" height="82"/>
         <image name="AlarmsTabIcon" width="25" height="25"/>
         <image name="EventPic" width="50" height="49"/>
         <image name="GroupsTabIcon" width="25" height="25"/>
