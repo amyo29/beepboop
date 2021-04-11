@@ -29,7 +29,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
     private var recurring: String = "Never"
-    private let createAlarmToHomeSegueIdentifier = "CreateAlarmToHomeSegueIdentifier"
+    private let createAlarmToHomeSegueIdentifier = "CreateAlarmToHome"
    
     var delegate: UIViewController!
     
@@ -62,12 +62,6 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         bottomLine.backgroundColor = UIColor.black.cgColor
         titleTextField.borderStyle = UITextField.BorderStyle.none
         titleTextField.layer.addSublayer(bottomLine)
-                
-//        // set listener for datePicker
-//        self.datePicker.addTarget(self, action: #selector(self.datePickerChanged(picker:)), for: .valueChanged)
-//
-//        // set listener for timePicker
-//        self.timePicker.addTarget(self, action: #selector(self.timePickerChanged(picker:)), for: .valueChanged)
     }
         
     // set repeat occurrences in the form of an Alert Action Sheet

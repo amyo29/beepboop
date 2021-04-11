@@ -87,7 +87,8 @@ class SignUpViewController: UIViewController {
             if error == nil, let user = user {
                 // Create user document in Firestore
                 self.userID = user.user.uid
-                self.userCollectionRef.addDocument(data: ["userID": self.userID])
+                let newUser = UserCustom(userId: user.user.uid, alarmData: nil, snoozeEnabled: false, darkModeEnabled: false, friendRequestsReceived: nil, friendRequestsSent: nil)
+                self.userCollectionRef.addDocument(data: newUser.dictionary)
                 Auth.auth().signIn(withEmail: email, password: password)
             } else {
                 if let error = error, user == nil {
@@ -113,7 +114,7 @@ class SignUpViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "HomeSegueIdentifier",
+        if segue.identifier == self.signUpToMainSegueIdentifier,
            let tabBarController = segue.destination as? UITabBarController,
            let destination = tabBarController.viewControllers?.first as? HomeViewController {
             destination.userID = self.userID

@@ -47,7 +47,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Do any additional setup after loading the view.
     }
     
-    func loadProfilePic(user: User?) {
+    func loadProfilePic(user: Firebase.User?) {
         let photoURL = user?.photoURL
         if let url = photoURL {
             loadData(url: url) { data, response, error in
@@ -66,7 +66,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
-    func loadUsername(user: User?) {
+    func loadUsername(user: Firebase.User?) {
         userLabel.text = user?.displayName ?? user?.email ?? "Nil"
     }
     

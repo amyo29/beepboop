@@ -10,7 +10,7 @@ import UIKit
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var friendsTableView: UITableView!
-    private var friendsList: [User] = []
+    private var friendsList: [UserCustom] = []
     private let friendsTableViewCellIdentifier = "FriendsTableViewCell"
     
     override func viewDidLoad() {
@@ -38,7 +38,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    func populateCell(friend: User, cell: FriendsTableViewCell) {
+    func populateCell(friend: UserCustom, cell: FriendsTableViewCell) {
         print("in populateCell, friend=\(friend)")
         cell.friendNameLabel?.text = friend.userId
         cell.friendImageView?.image = UIImage(named: "EventPic") // change to friend user profile pic

@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
-struct User {
+struct UserCustom {
     var userId: String?
     var alarmData: [[String: Any]]?
     // groups
@@ -32,7 +32,7 @@ struct User {
 }
 
 
-extension User {
+extension UserCustom {
     init?(dictionary: [String : Any]) {
         guard let userId = dictionary["userId"] as? String,
               let alarmData = dictionary["alarmData"] as? [[String: Any]],
