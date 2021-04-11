@@ -194,7 +194,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func addAlarmToFirestore(time: Date, name: String, recurrence: String) {
         let uuid = UUID()
-        let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, enabled: true, snoozeEnabled: false, uuidStr:uuid.uuidString, userId: self.userID)
+        let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, uuidStr:uuid.uuidString, userId: [self.userID!])
         
         collectionRef.addDocument(data: newAlarm.dictionary)
         alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, uuidStr: uuid.uuidString)
