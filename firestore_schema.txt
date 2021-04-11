@@ -1,0 +1,91 @@
+User
+- User 1
+    - ID: 1
+    - Alarm Metadata[]
+        - Alarm Metadata 1
+            - ID: 1
+            - Snooze: true
+            - Enabled: true
+
+        - Alarm Metadata 2
+            - ID: 2
+            - Snooze: false
+            - Enabled: false
+
+    - Received Friend Request[]
+
+    - Sent Friend Request[]
+        - Sent Friend Request 1
+            - userID: 1
+
+- User 2
+    - ID: 2
+    - Alarm Metadata[]
+        -  Alarm Metadata 1
+            - ID: 1
+            - Snooze: false
+            - Enabled: true
+
+        - Alarm Metadata 2
+            - ID: 2
+            - Snooze: true
+            - Enabled: true
+
+    - Received Friend Request[]
+        - Received Friend Request 1
+            - userID: 1
+
+    - Sent Friend Request[]
+
+
+User Notifications
+- User 1
+    - userID: 1
+    - Message[]
+        - Message 1
+            - String
+
+        - Message 2
+            - String
+- User 2
+    - userID: 2
+    - Message[]
+        - Message 1
+            - String
+
+        - Message 2
+            - String
+
+Friends
+- Friend List 1
+    - Owner ID: 1
+    - Friends IDs[]
+        - ID: 2
+
+- Friend List 2
+    - Owner ID: 2
+    - Friend IDs[]
+        - ID: 1
+
+Alarm
+- Alarm 1
+    - Time
+    - Recurring
+    - Alarm ID: 1
+    - Owner IDs[]
+        - Owner ID 1
+            - ID: 1
+
+        - Owner ID 2
+            - ID: 2
+
+- Alarm 2
+    - Time
+    - Recurring
+    - Alarm ID: 1
+    - Owner IDs[]
+        - Owner ID 1
+            - ID: 1
+            
+        - Owner ID 2
+            - ID: 2
