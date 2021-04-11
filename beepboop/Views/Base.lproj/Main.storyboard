@@ -147,14 +147,128 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="928.98550724637687" y="77.678571428571431"/>
+            <point key="canvasLocation" x="922" y="68"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="hbs-9F-HMh">
+            <objects>
+                <viewController id="qkT-gJ-o3M" userLabel="Home View Controller" customClass="FriendsViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V6h-Fz-Nhb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kx-ur-bHa" userLabel="AddButton">
+                                <rect key="frame" x="294.5" y="715.5" width="116.5" height="62.5"/>
+                                <state key="normal" title="Button" image="AddButton"/>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7AP-ii-8rm" userLabel="Friends Table View">
+                                <rect key="frame" x="0.0" y="133.5" width="414" height="679.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmTableViewCell" rowHeight="48" id="05x-BQ-tHq" userLabel="FriendsTableViewCell" customClass="FriendsTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="48"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="05x-BQ-tHq" id="5vU-cF-K8i">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="93" translatesAutoresizingMaskIntoConstraints="NO" id="GHQ-Hc-W0M">
+                                                    <rect key="frame" x="20" y="-2" width="377" height="49"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="K1N-vo-Bed" userLabel="Friend Image View">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="49"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRX-Dh-32H" userLabel="Friend Name Label">
+                                                            <rect key="frame" x="143" y="0.0" width="126" height="49"/>
+                                                            <attributedString key="attributedText">
+                                                                <fragment content="Bill Bulko">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="30" name="SFMono-Medium"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvi-0n-nsR">
+                                                            <rect key="frame" x="362" y="0.0" width="15" height="49"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="49" id="YM2-80-4Be"/>
+                                                                <constraint firstAttribute="width" constant="15" id="lTe-hE-ReH"/>
+                                                            </constraints>
+                                                            <state key="normal" title="Button" image="MetadataButton"/>
+                                                            <connections>
+                                                                <action selector="friendMetadataButtonPressed:" destination="qkT-gJ-o3M" eventType="touchUpInside" id="VG2-P2-FlV"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="zvi-0n-nsR" secondAttribute="trailing" id="wzT-wM-Rej"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="alarmImageView" destination="K1N-vo-Bed" id="rCr-1V-aib"/>
+                                            <outlet property="alarmNameLabel" destination="FRX-Dh-32H" id="c65-NL-bAI"/>
+                                            <outlet property="friendImageView" destination="K1N-vo-Bed" id="94g-go-YQd"/>
+                                            <outlet property="friendMetadataButton" destination="zvi-0n-nsR" id="dRZ-if-bo4"/>
+                                            <outlet property="friendNameLabel" destination="FRX-Dh-32H" id="PRT-Xc-X6t"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yod-9x-kiS">
+                                <rect key="frame" x="154.5" y="64" width="105.5" height="49.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Friends">
+                                        <attributes>
+                                            <color key="NSColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" metaFont="system" size="33"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hjE-JE-nB3"/>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="yod-9x-kiS" firstAttribute="top" secondItem="hjE-JE-nB3" secondAttribute="top" constant="20" id="1O9-Il-Rjd"/>
+                            <constraint firstItem="7AP-ii-8rm" firstAttribute="top" secondItem="hjE-JE-nB3" secondAttribute="top" constant="89.5" id="J7o-X9-CoG"/>
+                            <constraint firstItem="hjE-JE-nB3" firstAttribute="bottom" secondItem="7AP-ii-8rm" secondAttribute="bottom" id="Lq7-ny-8Aw"/>
+                            <constraint firstItem="yod-9x-kiS" firstAttribute="centerX" secondItem="V6h-Fz-Nhb" secondAttribute="centerX" id="Mt3-VM-h1N"/>
+                            <constraint firstItem="hjE-JE-nB3" firstAttribute="trailing" secondItem="7AP-ii-8rm" secondAttribute="trailing" id="UN0-kD-Z2S"/>
+                            <constraint firstItem="7AP-ii-8rm" firstAttribute="centerX" secondItem="hjE-JE-nB3" secondAttribute="centerX" id="ZK2-0c-Xmv"/>
+                            <constraint firstItem="hjE-JE-nB3" firstAttribute="trailing" secondItem="5Kx-ur-bHa" secondAttribute="trailing" constant="3" id="b6H-ll-E3w"/>
+                            <constraint firstItem="7AP-ii-8rm" firstAttribute="top" secondItem="yod-9x-kiS" secondAttribute="bottom" constant="20" id="pVJ-Rh-rmE"/>
+                            <constraint firstItem="hjE-JE-nB3" firstAttribute="bottom" secondItem="5Kx-ur-bHa" secondAttribute="bottom" constant="35" id="phb-Ws-NHG"/>
+                            <constraint firstItem="7AP-ii-8rm" firstAttribute="leading" secondItem="hjE-JE-nB3" secondAttribute="leading" id="xfK-bX-i5C"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Alarms" image="AlarmsTabIcon" selectedImage="AlarmsTabIcon" id="TyW-xx-FjP">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="20y-cs-DAa"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="alarmTableView" destination="7AP-ii-8rm" id="Qlu-7c-neQ"/>
+                        <outlet property="friendsTableView" destination="7AP-ii-8rm" id="29t-QE-yBb"/>
+                        <outlet property="titleLabel" destination="yod-9x-kiS" id="G60-Y5-Grd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Ux-WT-G5X" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2120.289855072464" y="851.11607142857144"/>
         </scene>
         <!--Create Alarm View Controller-->
         <scene sceneID="hF8-od-a1e">
             <objects>
                 <viewController id="i0J-ZC-Eri" customClass="CreateAlarmViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iae-B6-fkC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8k6-0A-EX8">
@@ -206,8 +320,8 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RM6-go-ZSU">
-                                <rect key="frame" x="60" y="412" width="119" height="29.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RM6-go-ZSU">
+                                <rect key="frame" x="60" y="397.5" width="119" height="29.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="sound">
                                         <attributes>
@@ -226,8 +340,8 @@
                                     <action selector="shareButtonPressed:" destination="i0J-ZC-Eri" eventType="touchUpInside" id="f3p-Pl-vfb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8YA-Fe-WpR" userLabel="SaveButton">
-                                <rect key="frame" x="82" y="685" width="250" height="70"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8YA-Fe-WpR" userLabel="SaveButton">
+                                <rect key="frame" x="82" y="688" width="250" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="swp-MV-bWV"/>
                                     <constraint firstAttribute="height" constant="70" id="wjR-a4-ukz"/>
@@ -270,8 +384,8 @@
                                     <constraint firstAttribute="width" constant="200" id="mKH-pS-qCs"/>
                                 </constraints>
                             </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgO-Ev-KoI">
-                                <rect key="frame" x="76" y="327" width="71" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgO-Ev-KoI">
+                                <rect key="frame" x="75" y="328" width="71" height="29.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="repeat">
                                         <attributes>
@@ -282,8 +396,8 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLT-fV-9Y0">
-                                <rect key="frame" x="76" y="479" width="87" height="46"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLT-fV-9Y0">
+                                <rect key="frame" x="76" y="467" width="81" height="29.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="snooze">
                                         <attributes>
@@ -294,8 +408,8 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-7D-KGI">
-                                <rect key="frame" x="199" y="322" width="190" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-7D-KGI">
+                                <rect key="frame" x="198" y="322" width="191" height="36"/>
                                 <fontDescription key="fontDescription" name="SFMono-Medium" family="SF Mono" pointSize="24"/>
                                 <state key="normal" title="Never"/>
                                 <connections>
@@ -408,8 +522,8 @@
                                     <action selector="loginButtonPressed:" destination="jZp-6H-UMW" eventType="touchUpInside" id="SP6-R6-3AE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxX-Ut-hEo">
-                                <rect key="frame" x="123" y="760" width="168" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxX-Ut-hEo">
+                                <rect key="frame" x="127.5" y="763" width="159" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Sign up with email">
                                     <color key="titleColor" red="0.97254901960784312" green="0.16470588235294117" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -421,15 +535,15 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="cA0-rE-aAc">
                                 <rect key="frame" x="26.5" y="60" width="361" height="106"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-U9-jqs">
-                                <rect key="frame" x="20" y="546" width="374" height="54"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-U9-jqs">
+                                <rect key="frame" x="20" y="547" width="374" height="54"/>
                                 <state key="normal" title="FacebookLogin" image="LoginFacebookButton"/>
                                 <connections>
                                     <action selector="facebookLoginButtonPressed:" destination="jZp-6H-UMW" eventType="touchUpInside" id="bvm-8q-Zfc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xG3-DV-hrX">
-                                <rect key="frame" x="20" y="623" width="374" height="54"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xG3-DV-hrX">
+                                <rect key="frame" x="20" y="626" width="374" height="54"/>
                                 <state key="normal" title="GoogleLogin" image="LoginGoogleButton"/>
                                 <connections>
                                     <action selector="googleLoginButtonPressed:" destination="jZp-6H-UMW" eventType="touchUpInside" id="D37-ph-jkM"/>
@@ -749,6 +863,7 @@
         <image name="LoginButton" width="268" height="118"/>
         <image name="LoginFacebookButton" width="378" height="54"/>
         <image name="LoginGoogleButton" width="378" height="54"/>
+        <image name="MetadataButton" width="5" height="21"/>
         <image name="NavBarBackground" width="414" height="64"/>
         <image name="SaveButton" width="268" height="71"/>
         <image name="SettingsTabIcon" width="25" height="25"/>
