@@ -10,7 +10,7 @@
 - [x] Sign up using email
 - [x] Sign up using FB/Google
 - [x] Set up Firebase authentication
-- [ ] Back button to go back to sign in screen from sign up screen
+- [x] Back button to go back to sign in screen from sign up screen
 
 ### Home Screen
 - [x] Set up table view for all alarms
@@ -73,10 +73,10 @@ userDoc
 - [ ] Implement accept/decline feature for each alarm
 - [ ] Back button to go back to previous screen
 
-### Profile/Settings Screen - Evan
-- [ ] Enable users to change pfp
-- [ ] Toggle for enabling/disabling snooze for all alarms
-- [ ] Toggle for enabling/disabling dark mode
+### Profile/Settings Screen
+- [x] Enable users to change pfp
+- [x] Toggle for enabling/disabling snooze for all alarms
+- [x] Toggle for enabling/disabling dark mode
 
 ### Contacts Screen
 - [ ] Retrieve list of contacts from Firebase

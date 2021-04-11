@@ -45,6 +45,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
         return true
     }
 
+    // MARK: UserNotificationCenter Snoozing
+    /*
+     userNotificationCenter:center:willPresent:completionHandler deals with incoming local notifications, we turn off the settings if snooze is enabled.
+     */
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        var fetchedResults: [NSManagedObject]
+        
+        do {
+            try fetchedResults = context.fetch(request) as! [NSManagedObject]
+            if fetchedResults.count > 0 {
+                if let snooze = fetchedResults[0].value(forKey: "snoozeEnabled") as? Bool {
+                    if snooze { // Passing in empty list disables notifications that come through
+                        completionHandler([])
+                    }
+                    else { // not too sure if this line is necessary
+                        completionHandler([.badge, .banner, .list, .sound])
+                    }
+                }
+            }
+            else {
+                completionHandler([.badge, .banner, .list, .sound])
+            }
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+    }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
