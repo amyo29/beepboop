@@ -21,6 +21,11 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.friendsTableView.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.sendSubviewToBack(self.friendsTableView)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("In tableView count method, count: ", self.friendsList.count)
         return self.friendsList.count
