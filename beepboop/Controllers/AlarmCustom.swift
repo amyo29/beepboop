@@ -26,7 +26,7 @@ struct AlarmCustom {
 //            "enabled": self.enabled ?? false,
 //            "snoozeEnabled": self.snoozeEnabled ?? false,
             "uuid": self.uuidStr ?? UUID().uuidString,
-            "userId": self.userId ?? UUID().uuidString
+            "userId": self.userId ?? [UUID().uuidString]
         ]
     }
 }

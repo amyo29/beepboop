@@ -17,8 +17,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZo-i5-xca" userLabel="AddButton">
-                                <rect key="frame" x="294.5" y="666.5" width="116.5" height="62.5"/>
-                                <state key="normal" title="Button" image="AddButton"/>
+                                <rect key="frame" x="321.5" y="666.5" width="62.5" height="62.5"/>
+                                <state key="normal" image="AddButton"/>
                                 <connections>
                                     <segue destination="i0J-ZC-Eri" kind="popoverPresentation" identifier="addAlarmSegueIdentifier" popoverAnchorView="sZo-i5-xca" id="Pex-yV-eTb">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -109,9 +109,9 @@
                                 <sections/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJh-8C-39w">
-                                <rect key="frame" x="157.5" y="64" width="99" height="49.5"/>
+                                <rect key="frame" x="160" y="64" width="94.5" height="49.5"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Alarms">
+                                    <fragment content="alarms">
                                         <attributes>
                                             <color key="NSColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" metaFont="system" size="33"/>
@@ -127,7 +127,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sZo-i5-xca" secondAttribute="bottom" constant="35" id="3N7-at-mxe"/>
                             <constraint firstItem="nJh-8C-39w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9ch-za-pLU"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NTB-h7-7hv"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sZo-i5-xca" secondAttribute="trailing" constant="3" id="Npn-0V-AHo"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sZo-i5-xca" secondAttribute="trailing" constant="30" id="Npn-0V-AHo"/>
                             <constraint firstItem="nJh-8C-39w" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Svz-uB-IbR"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="WZD-VN-BHD"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="nJh-8C-39w" secondAttribute="bottom" constant="20" id="YdG-2f-gjw"/>
@@ -164,7 +164,7 @@
                                 <state key="normal" title="Button" image="AddButton"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7AP-ii-8rm" userLabel="Friends Table View">
-                                <rect key="frame" x="0.0" y="133.5" width="414" height="679.5"/>
+                                <rect key="frame" x="0.0" y="183.5" width="414" height="629.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmTableViewCell" rowHeight="48" id="05x-BQ-tHq" userLabel="FriendsTableViewCell" customClass="FriendsTableViewCell" customModule="beepboop" customModuleProvider="target">
@@ -222,29 +222,44 @@
                                 <sections/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yod-9x-kiS">
-                                <rect key="frame" x="154.5" y="64" width="105.5" height="49.5"/>
+                                <rect key="frame" x="158" y="104" width="98" height="39.5"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Friends">
+                                    <fragment content="friends">
                                         <attributes>
-                                            <color key="NSColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="NSColor" red="0.12156862745098039" green="0.81176470588235294" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" metaFont="system" size="33"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h68-Zv-weP">
+                                <rect key="frame" x="20" y="64" width="71" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="7rK-H7-ZGB"/>
+                                    <constraint firstAttribute="width" constant="71" id="fCM-qH-4w3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="&lt; Back">
+                                    <color key="titleColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="CAv-DL-MAb" kind="unwind" unwindAction="unwindToHomeWithSegue:" id="i8g-l8-v2N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hjE-JE-nB3"/>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="yod-9x-kiS" firstAttribute="top" secondItem="hjE-JE-nB3" secondAttribute="top" constant="20" id="1O9-Il-Rjd"/>
-                            <constraint firstItem="7AP-ii-8rm" firstAttribute="top" secondItem="hjE-JE-nB3" secondAttribute="top" constant="89.5" id="J7o-X9-CoG"/>
+                            <constraint firstItem="yod-9x-kiS" firstAttribute="top" secondItem="hjE-JE-nB3" secondAttribute="top" constant="60" id="1O9-Il-Rjd"/>
+                            <constraint firstItem="h68-Zv-weP" firstAttribute="leading" secondItem="hjE-JE-nB3" secondAttribute="leading" constant="20" id="1kU-T6-p2a"/>
                             <constraint firstItem="hjE-JE-nB3" firstAttribute="bottom" secondItem="7AP-ii-8rm" secondAttribute="bottom" id="Lq7-ny-8Aw"/>
                             <constraint firstItem="yod-9x-kiS" firstAttribute="centerX" secondItem="V6h-Fz-Nhb" secondAttribute="centerX" id="Mt3-VM-h1N"/>
                             <constraint firstItem="hjE-JE-nB3" firstAttribute="trailing" secondItem="7AP-ii-8rm" secondAttribute="trailing" id="UN0-kD-Z2S"/>
+                            <constraint firstItem="h68-Zv-weP" firstAttribute="top" secondItem="hjE-JE-nB3" secondAttribute="top" constant="20" id="WCq-2j-vZo"/>
                             <constraint firstItem="7AP-ii-8rm" firstAttribute="centerX" secondItem="hjE-JE-nB3" secondAttribute="centerX" id="ZK2-0c-Xmv"/>
                             <constraint firstItem="hjE-JE-nB3" firstAttribute="trailing" secondItem="5Kx-ur-bHa" secondAttribute="trailing" constant="3" id="b6H-ll-E3w"/>
-                            <constraint firstItem="7AP-ii-8rm" firstAttribute="top" secondItem="yod-9x-kiS" secondAttribute="bottom" constant="20" id="pVJ-Rh-rmE"/>
+                            <constraint firstItem="7AP-ii-8rm" firstAttribute="top" secondItem="yod-9x-kiS" secondAttribute="bottom" constant="40" id="pVJ-Rh-rmE"/>
                             <constraint firstItem="hjE-JE-nB3" firstAttribute="bottom" secondItem="5Kx-ur-bHa" secondAttribute="bottom" constant="35" id="phb-Ws-NHG"/>
                             <constraint firstItem="7AP-ii-8rm" firstAttribute="leading" secondItem="hjE-JE-nB3" secondAttribute="leading" id="xfK-bX-i5C"/>
                         </constraints>
@@ -262,6 +277,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ux-WT-G5X" sceneMemberID="firstResponder"/>
+                <exit id="CAv-DL-MAb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2120.289855072464" y="851.11607142857144"/>
         </scene>
@@ -270,13 +286,13 @@
             <objects>
                 <viewController id="i0J-ZC-Eri" customClass="CreateAlarmViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iae-B6-fkC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8k6-0A-EX8">
-                                <rect key="frame" x="20" y="30" width="374" height="43.5"/>
+                                <rect key="frame" x="20" y="30" width="374" height="44"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="New Alarm">
+                                    <fragment content="new alarm">
                                         <attributes>
                                             <color key="NSColor" red="0.12156862745098039" green="0.81176470588235294" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="37" name="SFMono-Medium"/>
@@ -482,7 +498,7 @@
                         <outlet property="timePicker" destination="suQ-kN-82r" id="2Vb-KE-hYX"/>
                         <outlet property="titleLabel" destination="4fy-L1-Yvd" id="0x7-uW-Z0d"/>
                         <outlet property="titleTextField" destination="Yhl-iR-V2h" id="0KL-mn-3ae"/>
-                        <segue destination="cLc-dU-AvF" kind="unwind" identifier="CreateAlarmToHomeSegueIdentifier" unwindAction="unwindToHomeWithSegue:" id="uG1-RD-ea7"/>
+                        <segue destination="cLc-dU-AvF" kind="unwind" identifier="CreateAlarmToHome" unwindAction="unwindToHomeWithSegue:" id="uG1-RD-ea7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Spe-Q3-Pvd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -525,7 +541,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxX-Ut-hEo">
-                                <rect key="frame" x="127.5" y="763" width="159" height="36"/>
+                                <rect key="frame" x="127.5" y="719" width="159" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Sign up with email">
                                     <color key="titleColor" red="0.97254901960784312" green="0.16470588235294117" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -538,14 +554,14 @@
                                 <rect key="frame" x="26.5" y="60" width="361" height="106"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-U9-jqs">
-                                <rect key="frame" x="20" y="547" width="374" height="54"/>
+                                <rect key="frame" x="20" y="503" width="374" height="54"/>
                                 <state key="normal" title="FacebookLogin" image="LoginFacebookButton"/>
                                 <connections>
                                     <action selector="facebookLoginButtonPressed:" destination="jZp-6H-UMW" eventType="touchUpInside" id="bvm-8q-Zfc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xG3-DV-hrX">
-                                <rect key="frame" x="20" y="626" width="374" height="54"/>
+                                <rect key="frame" x="20" y="582" width="374" height="54"/>
                                 <state key="normal" title="GoogleLogin" image="LoginGoogleButton"/>
                                 <connections>
                                     <action selector="googleLoginButtonPressed:" destination="jZp-6H-UMW" eventType="touchUpInside" id="D37-ph-jkM"/>
@@ -790,6 +806,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <segue destination="qkT-gJ-o3M" kind="presentation" identifier="ProfileToFriendsSegueIdentifier" modalPresentationStyle="fullScreen" id="AFC-B6-JT1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tVx-42-7zz">
                                 <rect key="frame" x="164" y="629" width="86" height="40"/>

@@ -43,7 +43,7 @@
 		0633D549260F0115004B50FB /* AddButton-3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D546260F0115004B50FB /* AddButton-3x.png */; };
 		0633D54C260F181E004B50FB /* CreateAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D54B260F181E004B50FB /* CreateAlarmViewController.swift */; };
 		06945660261F984D00450AC8 /* AlarmCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694565F261F984D00450AC8 /* AlarmCustom.swift */; };
-		069456AB2622C10800450AC8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456AA2622C10800450AC8 /* User.swift */; };
+		069456AB2622C10800450AC8 /* UserCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456AA2622C10800450AC8 /* UserCustom.swift */; };
 		069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069456AD2622D7DE00450AC8 /* VectormetadataButton.png */; };
 		069456B12622DB0800450AC8 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456B02622DB0800450AC8 /* FriendsViewController.swift */; };
 		069456B42622DD7D00450AC8 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */; };
@@ -107,7 +107,7 @@
 		0633D546260F0115004B50FB /* AddButton-3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton-3x.png"; sourceTree = "<group>"; };
 		0633D54B260F181E004B50FB /* CreateAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateAlarmViewController.swift; path = beepboop/Views/CreateAlarmViewController.swift; sourceTree = SOURCE_ROOT; };
 		0694565F261F984D00450AC8 /* AlarmCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlarmCustom.swift; path = beepboop/Controllers/AlarmCustom.swift; sourceTree = SOURCE_ROOT; };
-		069456AA2622C10800450AC8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		069456AA2622C10800450AC8 /* UserCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCustom.swift; sourceTree = "<group>"; };
 		069456AD2622D7DE00450AC8 /* VectormetadataButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VectormetadataButton.png; sourceTree = "<group>"; };
 		069456B02622DB0800450AC8 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				0694565F261F984D00450AC8 /* AlarmCustom.swift */,
-				069456AA2622C10800450AC8 /* User.swift */,
+				069456AA2622C10800450AC8 /* UserCustom.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -250,6 +250,7 @@
 				9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */,
 				9A53F8232602DB7A00D4711A /* HomeViewController.swift */,
 				0633D4A2260D9088004B50FB /* ProfileViewController.swift */,
+				069456B02622DB0800450AC8 /* FriendsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -260,7 +261,6 @@
 				0633D4DF260E7F7B004B50FB /* AlarmTableViewCell.swift */,
 				069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */,
 				9A53F8252602DB7A00D4711A /* Main.storyboard */,
-				069456B02622DB0800450AC8 /* FriendsViewController.swift */,
 				9A53F82D2602DB7C00D4711A /* LaunchScreen.storyboard */,
 			);
 			path = Views;
@@ -482,7 +482,7 @@
 				9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */,
 				9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */,
 				063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */,
-				069456AB2622C10800450AC8 /* User.swift in Sources */,
+				069456AB2622C10800450AC8 /* UserCustom.swift in Sources */,
 				9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */,
 				9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */,
 				0633D54C260F181E004B50FB /* CreateAlarmViewController.swift in Sources */,

@@ -16,9 +16,10 @@ protocol AlarmAdder {
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlarmAdder{
     
     // MARK: - Properties
-    var docRef: DocumentReference!
-    var collectionRef: CollectionReference!
+    var userDocRef: DocumentReference!
+    var alarmCollectionRef: CollectionReference!    
     var dataListener: ListenerRegistration! // Increases efficiency of app by only listening to data when view is on screen
+    
     // data source of stored alarms per user
     private var alarmList: [AlarmCustom] = []
     private var documents: [DocumentSnapshot] = []
@@ -27,7 +28,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var alarmTableView: UITableView!
     
     var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
-        
+    
     private let alarmTableViewCellIdentifier = "AlarmTableViewCell"
     
     var userID: String?
@@ -37,20 +38,32 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        docRef = Firestore.firestore().collection("alarmData").document("test") //or Firestore.firestore().document("alarmData/test")
-        collectionRef = Firestore.firestore().collection("alarmData")
-        
-        // read from firestore
-        let db = Firestore.firestore()
-        db.collection("alarms").getDocuments() { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
+        Firestore.firestore().collection("userData").whereField("userId", isEqualTo: self.userID!).getDocuments(
+            completion:
+            { (snapshot, error) in
+                if let error = error {
+                    print("An error occurred when retrieving the user: \(error.localizedDescription)")
+                } else if snapshot!.documents.count != 1 {
+                    print("The specified user with UUID \(self.userID!) does not exist.")
+                } else {
+                    self.userDocRef = snapshot?.documents.first?.reference
                 }
             }
-        }
+        )
+        
+        alarmCollectionRef = Firestore.firestore().collection("alarmData")
+        
+        // read from firestore
+        //        let db = Firestore.firestore()
+        //        db.collection("alarms").getDocuments() { (querySnapshot, error) in
+        //            if let error = error {
+        //                print("Error getting documents: \(error)")
+        //            } else {
+        //                for document in querySnapshot!.documents {
+        //                    print("\(document.documentID) => \(document.data())")
+        //                }
+        //            }
+        //        }
         
         self.alarmTableView.delegate = self
         self.alarmTableView.dataSource = self
@@ -129,14 +142,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 notificationCenter.removePendingNotificationRequests(withIdentifiers: [uuid])
                 
                 
-                collectionRef.whereField("uuid", isEqualTo: uuid).getDocuments(completion: { (snapshot, error) in
-                                                                                if let error = error {
-                                                                                    print(error.localizedDescription)
-                                                                                } else {
-                                                                                    for document in snapshot!.documents {
-                                                                                        document.reference.delete()
-                                                                                    }
-                                                                                }})
+                alarmCollectionRef.whereField("uuid", isEqualTo: uuid).getDocuments(completion: { (snapshot, error) in
+                                                                                        if let error = error {
+                                                                                            print(error.localizedDescription)
+                                                                                        } else {
+                                                                                            for document in snapshot!.documents {
+                                                                                                document.reference.delete()
+                                                                                            }
+                                                                                        }})
+                
+                
+                
+                
             }
             
             
@@ -148,7 +165,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func switchTapped(_ sender: UISwitch) {
         let index = sender.tag
         
-        collectionRef.whereField("uuid", isEqualTo: self.alarmList[index].uuidStr!).getDocuments(completion: { (snapshot, error) in
+        alarmCollectionRef.whereField("uuid", isEqualTo: self.alarmList[index].uuidStr!).getDocuments(completion: { (snapshot, error) in
             if let error = error {
                 print("An error occurred when retrieving alarmData: \(error.localizedDescription)")
             } else if snapshot!.documents.count != 1 {
@@ -159,7 +176,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     "enabled": sender.isOn
                 ])
             }
-        })
+        }
+        )
         
         // Enable/Disable notifications
         let alarm = self.alarmList[index]
@@ -190,34 +208,38 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.updateAlarmsFirestore()
     }
     
-   // MARK: - Firestore functions
+    // MARK: - Firestore functions
     
     func addAlarmToFirestore(time: Date, name: String, recurrence: String) {
         let uuid = UUID()
         let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, uuidStr:uuid.uuidString, userId: [self.userID!])
         
-        collectionRef.addDocument(data: newAlarm.dictionary)
+        alarmCollectionRef.addDocument(data: newAlarm.dictionary)
+        userDocRef.updateData([
+            "alarmData": FieldValue.arrayUnion([["alarmId": uuid.uuidString, "snooze": false, "enabled": true]])
+        ])
         alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, uuidStr: uuid.uuidString)
     }
     
     // Function for Testing purposes: Updates Firestore data manually
-    func retrieveDataFromFirestore() {
-        docRef.getDocument { (docSnapshot, error) in
-            guard let docSnapshot = docSnapshot, docSnapshot.exists else { return }
-            let myData = docSnapshot.data()
-            let latestAlarm = myData?["name"] as? String ?? "(none)"
-            print(latestAlarm)
-        }
-    }
+//    func retrieveDataFromFirestore() {
+//        docRef.getDocument { (docSnapshot, error) in
+//            guard let docSnapshot = docSnapshot, docSnapshot.exists else { return }
+//            let myData = docSnapshot.data()
+//            let latestAlarm = myData?["name"] as? String ?? "(none)"
+//            print(latestAlarm)
+//        }
+//    }
     
     // Updates Firestore data in real-time via snapshot listener
     // Updates Table view as soon as users create/edit alarm w/o needing to manually fetch data from firestore (see retrieveDataFromFirestore() code)
     func updateAlarmsFirestore() {
-        dataListener = collectionRef.whereField("userId", isEqualTo: self.userID).addSnapshotListener { [unowned self] (snapshot, error) in
+        dataListener = alarmCollectionRef.whereField("userId", arrayContains: self.userID!).addSnapshotListener { [unowned self] (snapshot, error) in
             guard let snapshot = snapshot else {
                 print("Error fetching snapshot results: \(error!)")
                 return
             }
+            
             let models = snapshot.documents.map { (document) -> AlarmCustom in
                 if let model = AlarmCustom(dictionary: document.data()) {
                     return model
@@ -229,7 +251,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             self.alarmList = models
             self.documents = snapshot.documents
-            
             
             self.alarmTableView?.reloadData()
         }
