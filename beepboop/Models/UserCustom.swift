@@ -18,6 +18,7 @@ struct UserCustom {
     var darkModeEnabled: Bool?
     var friendRequestsReceived: [String]?
     var friendRequestsSent: [String]?
+    var friendsList: [String]?
     
     
     var dictionary: [String: Any] {
@@ -28,7 +29,8 @@ struct UserCustom {
             "snoozeEnabled": self.snoozeEnabled ?? false,
             "darkModeEnabled": self.darkModeEnabled ?? false,
             "friendRequestsReceived": self.friendRequestsReceived ?? [],
-            "friendRequestsSent": self.friendRequestsSent ?? []
+            "friendRequestsSent": self.friendRequestsSent ?? [],
+            "friendsList": self.friendsList ?? []
         ]
     }
 }
@@ -42,7 +44,8 @@ extension UserCustom {
               let snoozeEnabled = dictionary["snoozeEnabled"] as? Bool,
               let darkModeEnabled = dictionary["darkModeEnabled"] as? Bool,
               let friendRequestsReceived = dictionary["friendRequestsReceived"] as? [String],
-              let friendRequestsSent = dictionary["friendRequestsSent"] as? [String]
+              let friendRequestsSent = dictionary["friendRequestsSent"] as? [String],
+              let friendsList = dictionary["friendsList"] as? [String]
               
               
         else { return nil }
@@ -53,7 +56,8 @@ extension UserCustom {
                   snoozeEnabled: snoozeEnabled,
                   darkModeEnabled: darkModeEnabled,
                   friendRequestsReceived: friendRequestsReceived,
-                  friendRequestsSent: friendRequestsSent
+                  friendRequestsSent: friendRequestsSent,
+                  friendsList: friendsList
         )
     }
 }

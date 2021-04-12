@@ -74,7 +74,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                                         print( "Block this user")
                                     }))
         
-        // TODO: consider adding selecting days of the week back in
         alertController.addAction(UIAlertAction(
                                     title: "Edit",
                                     style: .default,

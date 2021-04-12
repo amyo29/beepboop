@@ -41,13 +41,16 @@
 		0633D547260F0115004B50FB /* AddButton-1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D544260F0114004B50FB /* AddButton-1x.png */; };
 		0633D548260F0115004B50FB /* AddButton-2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D545260F0115004B50FB /* AddButton-2x.png */; };
 		0633D549260F0115004B50FB /* AddButton-3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D546260F0115004B50FB /* AddButton-3x.png */; };
-		0633D54C260F181E004B50FB /* CreateAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D54B260F181E004B50FB /* CreateAlarmViewController.swift */; };
 		06945660261F984D00450AC8 /* AlarmCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694565F261F984D00450AC8 /* AlarmCustom.swift */; };
 		069456AB2622C10800450AC8 /* UserCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456AA2622C10800450AC8 /* UserCustom.swift */; };
 		069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069456AD2622D7DE00450AC8 /* VectormetadataButton.png */; };
 		069456B12622DB0800450AC8 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456B02622DB0800450AC8 /* FriendsViewController.swift */; };
 		069456B42622DD7D00450AC8 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */; };
 		069456E12623B67000450AC8 /* AddFriendsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 069456E02623B66B00450AC8 /* AddFriendsIcon.png */; };
+		0694570A262417C700450AC8 /* Send Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 06945708262417C600450AC8 /* Send Button.png */; };
+		0694570E2624194100450AC8 /* ShareToFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694570D2624194100450AC8 /* ShareToFriendsViewController.swift */; };
+		069457112624199F00450AC8 /* CreateAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069457102624199F00450AC8 /* CreateAlarmViewController.swift */; };
+		0694571426241A7C00450AC8 /* ShareToFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */; };
 		069C638D260F1FD500702623 /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069C638C260F1FD500702623 /* SaveButton.png */; };
 		264B12B050DDA7D4F85FAF9C /* Pods_beepboop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */; };
 		9A29A04B2623DFBE000A5275 /* AddFriendButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A29A04A2623DFBE000A5275 /* AddFriendButton.png */; };
@@ -108,13 +111,16 @@
 		0633D544260F0114004B50FB /* AddButton-1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton-1x.png"; sourceTree = "<group>"; };
 		0633D545260F0115004B50FB /* AddButton-2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton-2x.png"; sourceTree = "<group>"; };
 		0633D546260F0115004B50FB /* AddButton-3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton-3x.png"; sourceTree = "<group>"; };
-		0633D54B260F181E004B50FB /* CreateAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateAlarmViewController.swift; path = beepboop/Views/CreateAlarmViewController.swift; sourceTree = SOURCE_ROOT; };
 		0694565F261F984D00450AC8 /* AlarmCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlarmCustom.swift; path = beepboop/Controllers/AlarmCustom.swift; sourceTree = SOURCE_ROOT; };
 		069456AA2622C10800450AC8 /* UserCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCustom.swift; sourceTree = "<group>"; };
 		069456AD2622D7DE00450AC8 /* VectormetadataButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VectormetadataButton.png; sourceTree = "<group>"; };
 		069456B02622DB0800450AC8 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		069456E02623B66B00450AC8 /* AddFriendsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddFriendsIcon.png; sourceTree = "<group>"; };
+		06945708262417C600450AC8 /* Send Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Send Button.png"; path = "../../../../../../../../Send Button.png"; sourceTree = "<group>"; };
+		0694570D2624194100450AC8 /* ShareToFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToFriendsViewController.swift; sourceTree = "<group>"; };
+		069457102624199F00450AC8 /* CreateAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAlarmViewController.swift; sourceTree = "<group>"; };
+		0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		069C638C260F1FD500702623 /* SaveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SaveButton.png; sourceTree = "<group>"; };
 		87F6CE25CB0B8BC778D8B9BF /* Pods-beepboop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.release.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.release.xcconfig"; sourceTree = "<group>"; };
 		9A29A04A2623DFBE000A5275 /* AddFriendButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddFriendButton.png; sourceTree = "<group>"; };
@@ -250,8 +256,9 @@
 		9A8AE64C260C5E5F00181515 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0694570D2624194100450AC8 /* ShareToFriendsViewController.swift */,
+				069457102624199F00450AC8 /* CreateAlarmViewController.swift */,
 				9A29A04D2623E6DD000A5275 /* AddFriendsViewController.swift */,
-				0633D54B260F181E004B50FB /* CreateAlarmViewController.swift */,
 				0633D49D260D902C004B50FB /* GroupViewController.swift */,
 				9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */,
 				9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */,
@@ -268,6 +275,7 @@
 				0633D4DF260E7F7B004B50FB /* AlarmTableViewCell.swift */,
 				069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */,
 				9A53F8252602DB7A00D4711A /* Main.storyboard */,
+				0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */,
 				9A53F82D2602DB7C00D4711A /* LaunchScreen.storyboard */,
 			);
 			path = Views;
@@ -292,6 +300,7 @@
 				0633D52E260EF713004B50FB /* SettingsTabIcon-1x.png */,
 				0633D528260EF70F004B50FB /* SettingsTabIcon-2x.png */,
 				0633D529260EF70F004B50FB /* SettingsTabIcon-3x.png */,
+				06945708262417C600450AC8 /* Send Button.png */,
 				9ADC0E10260E8D80009AD333 /* NavBarBackground.png */,
 				0633D4D7260E7864004B50FB /* EventPic.png */,
 				0633D4AE260D9E37004B50FB /* NotificationAlert.png */,
@@ -395,6 +404,7 @@
 				0633D50A260ED9E6004B50FB /* JosefinSans-ExtraLight.ttf in Resources */,
 				9ADC0E11260E8D80009AD333 /* NavBarBackground.png in Resources */,
 				0633D4BE260E674D004B50FB /* JosefinSans-VariableFont_wght.ttf in Resources */,
+				0694570A262417C700450AC8 /* Send Button.png in Resources */,
 				069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */,
 				0633D500260ED9CA004B50FB /* JosefinSans-Light.ttf in Resources */,
 				0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */,
@@ -491,15 +501,17 @@
 				069456B42622DD7D00450AC8 /* FriendsTableViewCell.swift in Sources */,
 				06945660261F984D00450AC8 /* AlarmCustom.swift in Sources */,
 				9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */,
+				069457112624199F00450AC8 /* CreateAlarmViewController.swift in Sources */,
 				9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */,
+				0694570E2624194100450AC8 /* ShareToFriendsViewController.swift in Sources */,
 				063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */,
 				069456AB2622C10800450AC8 /* UserCustom.swift in Sources */,
 				9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */,
 				9A29A04E2623E6DD000A5275 /* AddFriendsViewController.swift in Sources */,
 				9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */,
-				0633D54C260F181E004B50FB /* CreateAlarmViewController.swift in Sources */,
 				063208BE2612393400C22C0A /* ScheduleAlarmDelegate.swift in Sources */,
 				0633D4A3260D9088004B50FB /* ProfileViewController.swift in Sources */,
+				0694571426241A7C00450AC8 /* ShareToFriendsTableViewCell.swift in Sources */,
 				0633D49E260D902C004B50FB /* GroupViewController.swift in Sources */,
 				0633D4E0260E7F7B004B50FB /* AlarmTableViewCell.swift in Sources */,
 			);

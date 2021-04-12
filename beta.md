@@ -40,6 +40,7 @@
 - [ ] Snooze/Accept/Reject button
 - [ ] Dots button to lead the user to the alarm response screen
 
+friendsData collection -> friendsList w/ userID
 alarmData collection -> alarm w/ userID
 userData collection -> user w/ userID, [userID's], [alarmIDs]
 userDoc

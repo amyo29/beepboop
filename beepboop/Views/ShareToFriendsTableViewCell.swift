@@ -1,18 +1,18 @@
 //
-//  FriendsTableViewCell.swift
+//  ShareToFriendsTableViewCell.swift
 //  beepboop
 //
-//  Created by Amy Ouyang on 4/11/21.
+//  Created by Amy Ouyang on 4/12/21.
 //
 
 import UIKit
 
-class FriendsTableViewCell: UITableViewCell {
+class ShareToFriendsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var friendImageView: UIImageView!
+    @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var friendNameLabel: UILabel!
-    @IBOutlet weak var friendMetadataButton: UIButton!
-  
+    @IBOutlet weak var friendImageView: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,4 +46,6 @@ class FriendsTableViewCell: UITableViewCell {
         contentView.frame = contentView.frame.inset(by: margins)
     }
 
+    @IBAction func shareButtonPressed(_ sender: Any) {
+    }
 }
