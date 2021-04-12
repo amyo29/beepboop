@@ -160,6 +160,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         picker.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func unwindToProfile(segue: UIStoryboardSegue) {
+        
+    }
+    
     /*
      END UIImagePickerControllerDelegate Functions
      */

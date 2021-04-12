@@ -47,11 +47,11 @@
 		069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069456AD2622D7DE00450AC8 /* VectormetadataButton.png */; };
 		069456B12622DB0800450AC8 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456B02622DB0800450AC8 /* FriendsViewController.swift */; };
 		069456B42622DD7D00450AC8 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */; };
-		069456DD2623B60A00450AC8 /* Add Friend Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 069456DC2623B60A00450AC8 /* Add Friend Button.png */; };
 		069456E12623B67000450AC8 /* AddFriendsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 069456E02623B66B00450AC8 /* AddFriendsIcon.png */; };
-		069456E42623B9CA00450AC8 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456E32623B9CA00450AC8 /* AddFriendsViewController.swift */; };
 		069C638D260F1FD500702623 /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069C638C260F1FD500702623 /* SaveButton.png */; };
 		264B12B050DDA7D4F85FAF9C /* Pods_beepboop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */; };
+		9A29A04B2623DFBE000A5275 /* AddFriendButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A29A04A2623DFBE000A5275 /* AddFriendButton.png */; };
+		9A29A04E2623E6DD000A5275 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A29A04D2623E6DD000A5275 /* AddFriendsViewController.swift */; };
 		9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F81F2602DB7A00D4711A /* AppDelegate.swift */; };
 		9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F8212602DB7A00D4711A /* SceneDelegate.swift */; };
 		9A53F8242602DB7A00D4711A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A53F8232602DB7A00D4711A /* HomeViewController.swift */; };
@@ -114,11 +114,11 @@
 		069456AD2622D7DE00450AC8 /* VectormetadataButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VectormetadataButton.png; sourceTree = "<group>"; };
 		069456B02622DB0800450AC8 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
-		069456DC2623B60A00450AC8 /* Add Friend Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Add Friend Button.png"; path = "../../../../../../../../Add Friend Button.png"; sourceTree = "<group>"; };
 		069456E02623B66B00450AC8 /* AddFriendsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddFriendsIcon.png; sourceTree = "<group>"; };
-		069456E32623B9CA00450AC8 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = SOURCE_ROOT; };
 		069C638C260F1FD500702623 /* SaveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SaveButton.png; sourceTree = "<group>"; };
 		87F6CE25CB0B8BC778D8B9BF /* Pods-beepboop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.release.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.release.xcconfig"; sourceTree = "<group>"; };
+		9A29A04A2623DFBE000A5275 /* AddFriendButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddFriendButton.png; sourceTree = "<group>"; };
+		9A29A04D2623E6DD000A5275 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		9A53F81C2602DB7A00D4711A /* beepboop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = beepboop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A53F81F2602DB7A00D4711A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A53F8212602DB7A00D4711A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -250,7 +250,7 @@
 		9A8AE64C260C5E5F00181515 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				069456E32623B9CA00450AC8 /* AddFriendsViewController.swift */,
+				9A29A04D2623E6DD000A5275 /* AddFriendsViewController.swift */,
 				0633D54B260F181E004B50FB /* CreateAlarmViewController.swift */,
 				0633D49D260D902C004B50FB /* GroupViewController.swift */,
 				9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */,
@@ -276,7 +276,7 @@
 		9A8AE64E260C5ED000181515 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				069456DC2623B60A00450AC8 /* Add Friend Button.png */,
+				9A29A04A2623DFBE000A5275 /* AddFriendButton.png */,
 				069456E02623B66B00450AC8 /* AddFriendsIcon.png */,
 				069456AD2622D7DE00450AC8 /* VectormetadataButton.png */,
 				0633D530260EF714004B50FB /* AlarmsTabIcon-2x.png */,
@@ -377,11 +377,11 @@
 				9A53F82F2602DB7C00D4711A /* LaunchScreen.storyboard in Resources */,
 				0633D538260EF715004B50FB /* GroupsTabIcon-2x.png in Resources */,
 				0633D547260F0115004B50FB /* AddButton-1x.png in Resources */,
-				069456DD2623B60A00450AC8 /* Add Friend Button.png in Resources */,
 				0633D534260EF715004B50FB /* AlarmsTabIcon-3x.png in Resources */,
 				0633D549260F0115004B50FB /* AddButton-3x.png in Resources */,
 				0633D506260ED9E2004B50FB /* JosefinSans-Bold.ttf in Resources */,
 				0633D50E260ED9EB004B50FB /* JosefinSans-Italic.ttf in Resources */,
+				9A29A04B2623DFBE000A5275 /* AddFriendButton.png in Resources */,
 				9A8AE653260C649200181515 /* LoginButton.png in Resources */,
 				9A8AE649260C5E4400181515 /* BeepBoopTitle.png in Resources */,
 				0633D548260F0115004B50FB /* AddButton-2x.png in Resources */,
@@ -495,7 +495,7 @@
 				063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */,
 				069456AB2622C10800450AC8 /* UserCustom.swift in Sources */,
 				9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */,
-				069456E42623B9CA00450AC8 /* AddFriendsViewController.swift in Sources */,
+				9A29A04E2623E6DD000A5275 /* AddFriendsViewController.swift in Sources */,
 				9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */,
 				0633D54C260F181E004B50FB /* CreateAlarmViewController.swift in Sources */,
 				063208BE2612393400C22C0A /* ScheduleAlarmDelegate.swift in Sources */,

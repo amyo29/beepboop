@@ -164,8 +164,6 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
-        
-        
     }
 
 }

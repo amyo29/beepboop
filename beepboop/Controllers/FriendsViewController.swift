@@ -10,8 +10,10 @@ import UIKit
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var friendsTableView: UITableView!
+    @IBOutlet weak var backButton: UIButton!
     private var friendsList: [UserCustom] = []
     private let friendsTableViewCellIdentifier = "FriendsTableViewCell"
+    private let friendsToProfileSegueIdentifier = "FriendsToProfile"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +51,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.friendImageView?.image = UIImage(named: "EventPic") // change to friend user profile pic
     }
     
-
     @IBAction func friendMetadataButtonPressed(_ sender: Any) {
         
         let alertController = UIAlertController(
@@ -85,6 +86,15 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
        
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: self.friendsToProfileSegueIdentifier, sender: self)
+    }
+    
+    @IBAction func unwindToFriends(segue: UIStoryboardSegue) {
+        
+    }
+    
     /*
     // MARK: - Navigation
 
