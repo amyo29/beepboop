@@ -100,6 +100,7 @@ class AddFriendsViewController: UIViewController {
                     return
                 } else {
                     guard let friendDocument = snapshot?.documents.first else {
+                        
                         print("Unreachable State. This document has to exist.")
                         let alertController = UIAlertController(
                             title: "Unknown Error",
@@ -115,43 +116,69 @@ class AddFriendsViewController: UIViewController {
                         return
                     }
                     
+                    print("friendDocument.id: ", friendDocument.documentID)
+                    
                     friendDocument.reference.updateData([
                         "friendRequestsReceived": FieldValue.arrayUnion([currentUserUid])
                     ])
                     
                     //Update current logged in user's document's "friendRequestsSent" field with specified friend's uid from email entered
-                    Firestore.firestore().collection("userData").whereField("userId", isEqualTo: currentUserUid).getDocuments(completion:
-                        { (snapshot, error) in
-                            if let error = error {
-                                print("An error occurred when retrieving the user: \(error.localizedDescription)")
-                            } else if snapshot!.documents.count != 1 {
-                                print("Multiple users share this email. Please contact our tech support.")
-                            } else {
-                                guard let document = snapshot?.documents.first,
-                                      let friendUserId = friendDocument.get("userId") else {
-                                    print("what is going on")
-                                    return
-                                }
-                                
-                                document.reference.updateData([
-                                    "friendRequestsSent": FieldValue.arrayUnion([friendUserId])
-                                ])
-                                
-                                let alertController = UIAlertController(
-                                    title: "Friend Request Sent",
-                                    message: "Friend request sent to \(email).",
-                                    preferredStyle: .alert)
-                                
-                                alertController.addAction(UIAlertAction(
-                                                            title: "Ok",
-                                                            style: .default,
-                                                            handler: nil))
-                                
-                                self.present(alertController, animated: true, completion: nil)
-                                return
-                            }
+                    Firestore.firestore().collection("userData").document(currentUserUid).getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let friendUserId = friendDocument.documentID
+                            document.reference.updateData([
+                                "friendRequestsSent": FieldValue.arrayUnion([friendUserId])
+                            ])
+                            
+                            let alertController = UIAlertController(
+                                title: "Friend Request Sent",
+                                message: "Friend request sent to \(email).",
+                                preferredStyle: .alert)
+                            
+                            alertController.addAction(UIAlertAction(
+                                                        title: "Ok",
+                                                        style: .default,
+                                                        handler: nil))
+                            
+                            self.present(alertController, animated: true, completion: nil)
+                            return
+                        } else {
+                            print("Document does not exist")
                         }
-                    )
+                    }
+                    
+//                    Firestore.firestore().collection("userData").whereField("userId", isEqualTo: currentUserUid).getDocuments(completion:
+//                        { (snapshot, error) in
+//                            if let error = error {
+//                                print("An error occurred when retrieving the user: \(error.localizedDescription)")
+//                            } else if snapshot!.documents.count != 1 {
+//                                print("Multiple users share this email. Please contact our tech support.")
+//                            } else {
+//                                guard let document = snapshot?.documents.first,
+//                                      let friendUserId = friendDocument.get("userId") else {
+//                                    print("what is going on")
+//                                    return
+//                                }
+//
+//                                document.reference.updateData([
+//                                    "friendRequestsSent": FieldValue.arrayUnion([friendUserId])
+//                                ])
+//
+//                                let alertController = UIAlertController(
+//                                    title: "Friend Request Sent",
+//                                    message: "Friend request sent to \(email).",
+//                                    preferredStyle: .alert)
+//
+//                                alertController.addAction(UIAlertAction(
+//                                                            title: "Ok",
+//                                                            style: .default,
+//                                                            handler: nil))
+//
+//                                self.present(alertController, animated: true, completion: nil)
+//                                return
+//                            }
+//                        }
+//                    )
                 }
             }
         )

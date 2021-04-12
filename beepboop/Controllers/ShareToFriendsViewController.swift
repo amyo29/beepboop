@@ -148,7 +148,7 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
     
     func populateCell(friend: UserCustom, cell: ShareToFriendsTableViewCell) {
         print("in populateCell, friend=\(friend)")
-        cell.friendNameLabel?.text = friend.userId
+        cell.friendNameLabel?.text = friend.userEmail
         cell.friendImageView?.image = UIImage(named: "EventPic") // change to friend user profile pic
     }
     
