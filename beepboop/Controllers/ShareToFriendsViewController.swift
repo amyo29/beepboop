@@ -47,18 +47,20 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
         }
         self.currentUserUid = currentUserUid
         
-        userCollectionRef.whereField("userId", isEqualTo: self.currentUserUid!).getDocuments(
-            completion:
-            { (snapshot, error) in
-                if let error = error {
-                    print("An error occurred when retrieving the user: \(error.localizedDescription)")
-                } else if snapshot!.documents.count != 1 {
-                    print("The specified user with UUID \(self.currentUserUid!) does not exist.")
-                } else {
-                    self.userDocRef = snapshot?.documents.first?.reference
-                }
-            }
-        )
+//        userCollectionRef.whereField("userId", isEqualTo: self.currentUserUid!).getDocuments(
+//            completion:
+//            { (snapshot, error) in
+//                if let error = error {
+//                    print("An error occurred when retrieving the user: \(error.localizedDescription)")
+//                } else if snapshot!.documents.count != 1 {
+//                    print("The specified user with UUID \(self.currentUserUid!) does not exist.")
+//                } else {
+//                    self.userDocRef = snapshot?.documents.first?.reference
+//                    #imageLiteral(resourceName: "AddButton-3x.png")           }
+//            }
+//        )
+        
+        self.userDocRef = userCollectionRef.document(currentUserUid)
         print("before updatefriendsfirestore")
         updateFriendsFirestore()
         
@@ -74,14 +76,22 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
         // Extract friends list from current user's document
         userDocRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
-                let friendsList = document["friendsList"] as? Array ?? [""]
+//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                let documentData = document.data()
+                print("Document data: \(documentData)")
+                let friendsList = documentData?["friendsList"] as? [String] ?? [""]
                 print(friendsList)
             } else {
                 print("Document does not exist")
             }
         }
+        
+        
+//        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
+//        docRef.getDocument { (document, error) in
+//            if let document = document, document.exists
+//            
+//        }
 //
 //        let group_array = document["friendsList"] as? Array ?? [""]
 //        print(group_array)
