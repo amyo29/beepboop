@@ -29,12 +29,12 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         
 //        clearCoreData()
-        do {
-            try Auth.auth().signOut()
-
-        } catch {
-            print("Error occurred signing out of this account.")
-        }
+//        do {
+//            try Auth.auth().signOut()
+//
+//        } catch {
+//            print("Error occurred signing out of this account.")
+//        }
 
         // Do any additional setup after loading the view.
         Auth.auth().addStateDidChangeListener() {
@@ -164,8 +164,6 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
-        
-        
     }
 
 }
