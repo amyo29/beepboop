@@ -76,6 +76,8 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 print("Document data: \(dataDescription)")
+                let friendsList = document["friendsList"] as? Array ?? [""]
+                print(friendsList)
             } else {
                 print("Document does not exist")
             }
