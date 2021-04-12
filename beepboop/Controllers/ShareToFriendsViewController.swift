@@ -80,7 +80,7 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
                 let documentData = document.data()
                 print("Document data: \(documentData)")
                 let friendsList = documentData?["friendsList"] as? [String] ?? [""]
-                print(friendsList)
+                print("friendsList:  \(friendsList)")
             } else {
                 print("Document does not exist")
             }

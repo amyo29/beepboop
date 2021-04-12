@@ -19,6 +19,9 @@ struct UserCustom {
     var friendRequestsReceived: [String]?
     var friendRequestsSent: [String]?
     var friendsList: [String]?
+    var alarmRequestsReceived: [String]?
+    var alarmRequestsSent: [String]?
+    var notifications: [[String: Any]]?
     
     
     var dictionary: [String: Any] {
@@ -30,7 +33,10 @@ struct UserCustom {
             "darkModeEnabled": self.darkModeEnabled ?? false,
             "friendRequestsReceived": self.friendRequestsReceived ?? [],
             "friendRequestsSent": self.friendRequestsSent ?? [],
-            "friendsList": self.friendsList ?? []
+            "friendsList": self.friendsList ?? [],
+            "alarmRequestsReceived": self.alarmRequestsReceived ?? [],
+            "alarmRequestsSent": self.alarmRequestsSent ?? [],
+            "notifications": self.notifications ?? []
         ]
     }
 }
@@ -45,7 +51,10 @@ extension UserCustom {
               let darkModeEnabled = dictionary["darkModeEnabled"] as? Bool,
               let friendRequestsReceived = dictionary["friendRequestsReceived"] as? [String],
               let friendRequestsSent = dictionary["friendRequestsSent"] as? [String],
-              let friendsList = dictionary["friendsList"] as? [String]
+              let friendsList = dictionary["friendsList"] as? [String],
+              let alarmRequestsReceived = dictionary["alarmRequestsReceived"] as? [String],
+              let alarmRequestsSent = dictionary["alarmRequestsSent"] as? [String],
+              let notifications = dictionary["notifications"] as? [[String: Any]]
               
               
         else { return nil }
@@ -57,7 +66,10 @@ extension UserCustom {
                   darkModeEnabled: darkModeEnabled,
                   friendRequestsReceived: friendRequestsReceived,
                   friendRequestsSent: friendRequestsSent,
-                  friendsList: friendsList
+                  friendsList: friendsList,
+                  alarmRequestsReceived: alarmRequestsReceived,
+                  alarmRequestsSent: alarmRequestsSent,
+                  notifications: notifications
         )
     }
 }
