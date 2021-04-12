@@ -54,6 +54,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.alarmTableView.delegate = self
         self.alarmTableView.dataSource = self
+        self.alarmTableView.backgroundColor = UIColor(hex: "FEFDEC")
+        self.alarmTableView.separatorColor = .clear
         
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
         
@@ -111,6 +113,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.alarmTimeLabel?.text = self.extractTimeFromDate(time: alarm.time)
         cell.alarmDateLabel?.text = self.extractDate(time: alarm.time)
         cell.alarmImageView?.image = UIImage(named: "EventPic")
+        
+        // if you do not set `shadowPath` you'll notice laggy scrolling
+        // add this in `willDisplay` method
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
     
     // Remove alarm from table view by swiping to delete
@@ -173,25 +180,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // Customize table view cell
     func tableView(_ tableView: UITableView, willDisplay cell: AlarmTableViewCell, forRowAt indexPath: IndexPath) {
-        // this will turn on `masksToBounds` just before showing the cell
-        cell.contentView.layer.masksToBounds = true
         
-        // add shadow on cell
-        cell.backgroundColor = .clear // very important
-        cell.contentView.layer.masksToBounds = false
-        cell.contentView.layer.shadowOpacity = 0.23
-        cell.contentView.layer.shadowRadius = 4
-        cell.contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        cell.contentView.layer.shadowColor = UIColor.black.cgColor
-        
-        // add corner radius on `contentView`
-        cell.contentView.backgroundColor = .white
-        cell.contentView.layer.cornerRadius = 8
-        
-        // if you do not set `shadowPath` you'll notice laggy scrolling
-        // add this in `willDisplay` method
-        let radius = cell.contentView.layer.cornerRadius
-        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
     
     // MARK: - Delegate functions

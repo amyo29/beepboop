@@ -26,40 +26,52 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tz5-dh-ZWb">
-                                <rect key="frame" x="0.0" y="133.5" width="414" height="630.5"/>
+                                <rect key="frame" x="10" y="133.5" width="394" height="630.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmTableViewCell" rowHeight="100" id="Qhy-96-1pY" customClass="AlarmTableViewCell" customModule="beepboop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmTableViewCell" rowHeight="75" id="Qhy-96-1pY" customClass="AlarmTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="394" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qhy-96-1pY" id="AdG-mN-03r">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="keZ-Ah-4p3">
-                                                    <rect key="frame" x="20" y="18" width="50" height="64"/>
+                                                    <rect key="frame" x="10" y="18" width="50" height="39"/>
                                                 </imageView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zy7-2F-XHB">
-                                                    <rect key="frame" x="345" y="34.5" width="51" height="31"/>
+                                                    <rect key="frame" x="325" y="22" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="switchTapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="Ad0-lS-FsO"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEX-qU-6HH">
-                                                    <rect key="frame" x="86" y="18" width="76" height="35"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utC-5g-DPo">
+                                                    <rect key="frame" x="77" y="42" width="72.5" height="17.5"/>
                                                     <attributedString key="attributedText">
-                                                        <fragment content="Exam">
+                                                        <fragment content="Fri, Mar 26">
                                                             <attributes>
-                                                                <font key="NSFont" size="30" name="SFMono-Medium"/>
+                                                                <font key="NSFont" size="15" name="SFMono-Medium"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utC-5g-DPo">
-                                                    <rect key="frame" x="86" y="61" width="97" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9sT-sN-V89">
+                                                    <rect key="frame" x="240.5" y="26" width="69.5" height="23.5"/>
                                                     <attributedString key="attributedText">
-                                                        <fragment content="Fri, Mar 26">
+                                                        <fragment content="9:30AM">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Regular"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEX-qU-6HH">
+                                                    <rect key="frame" x="77" y="14" width="50.5" height="23.5"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Exam">
                                                             <attributes>
                                                                 <font key="NSFont" size="20" name="SFMono-Medium"/>
                                                             </attributes>
@@ -67,34 +79,24 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9sT-sN-V89">
-                                                    <rect key="frame" x="239" y="34.5" width="91" height="31"/>
-                                                    <attributedString key="attributedText">
-                                                        <fragment content="9:30AM">
-                                                            <attributes>
-                                                                <font key="NSFont" size="26" name="SFMono-Regular"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="utC-5g-DPo" firstAttribute="leading" secondItem="keZ-Ah-4p3" secondAttribute="trailing" constant="16" id="5dh-bP-K95"/>
+                                                <constraint firstItem="keZ-Ah-4p3" firstAttribute="leading" secondItem="AdG-mN-03r" secondAttribute="leading" constant="10" id="2FD-nW-wmL"/>
                                                 <constraint firstAttribute="trailing" secondItem="Zy7-2F-XHB" secondAttribute="trailing" constant="20" id="9nD-ha-A8e"/>
                                                 <constraint firstItem="Zy7-2F-XHB" firstAttribute="leading" secondItem="9sT-sN-V89" secondAttribute="trailing" constant="15" id="A6M-P1-TDX"/>
+                                                <constraint firstItem="utC-5g-DPo" firstAttribute="top" secondItem="JEX-qU-6HH" secondAttribute="bottom" constant="4.5" id="DV0-VM-CLb"/>
                                                 <constraint firstItem="Zy7-2F-XHB" firstAttribute="centerY" secondItem="AdG-mN-03r" secondAttribute="centerY" id="FBU-aU-g6e"/>
-                                                <constraint firstItem="JEX-qU-6HH" firstAttribute="leading" secondItem="keZ-Ah-4p3" secondAttribute="trailing" constant="16" id="GeJ-dV-eI5"/>
-                                                <constraint firstItem="keZ-Ah-4p3" firstAttribute="leading" secondItem="AdG-mN-03r" secondAttribute="leading" constant="20" symbolic="YES" id="Qta-g8-GQ4"/>
-                                                <constraint firstAttribute="bottom" secondItem="utC-5g-DPo" secondAttribute="bottom" constant="15" id="VLw-EA-GXV"/>
+                                                <constraint firstItem="JEX-qU-6HH" firstAttribute="leading" secondItem="keZ-Ah-4p3" secondAttribute="trailing" constant="17" id="I6z-a0-Eb5"/>
+                                                <constraint firstItem="JEX-qU-6HH" firstAttribute="top" secondItem="AdG-mN-03r" secondAttribute="top" constant="14" id="Jwf-x6-gqd"/>
+                                                <constraint firstItem="utC-5g-DPo" firstAttribute="leading" secondItem="keZ-Ah-4p3" secondAttribute="trailing" constant="17" id="Nx7-oM-2zu"/>
+                                                <constraint firstAttribute="bottom" secondItem="utC-5g-DPo" secondAttribute="bottom" constant="15.5" id="UT0-nv-Vxb"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="keZ-Ah-4p3" secondAttribute="bottom" constant="7" id="XP7-Hz-cjy"/>
-                                                <constraint firstItem="utC-5g-DPo" firstAttribute="top" secondItem="JEX-qU-6HH" secondAttribute="bottom" constant="8" symbolic="YES" id="Y4c-ZS-bm6"/>
                                                 <constraint firstItem="9sT-sN-V89" firstAttribute="centerY" secondItem="AdG-mN-03r" secondAttribute="centerY" id="gjz-Cs-fda"/>
                                                 <constraint firstItem="keZ-Ah-4p3" firstAttribute="centerY" secondItem="AdG-mN-03r" secondAttribute="centerY" id="mo5-uh-6K9"/>
-                                                <constraint firstItem="JEX-qU-6HH" firstAttribute="top" secondItem="AdG-mN-03r" secondAttribute="top" constant="18" id="pvS-r9-rxT"/>
                                                 <constraint firstItem="keZ-Ah-4p3" firstAttribute="top" secondItem="AdG-mN-03r" secondAttribute="topMargin" constant="7" id="rXC-dJ-GaM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="alarmDateLabel" destination="utC-5g-DPo" id="00p-vu-Job"/>
                                             <outlet property="alarmImageView" destination="keZ-Ah-4p3" id="uce-R8-HbV"/>
@@ -127,11 +129,11 @@
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NTB-h7-7hv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sZo-i5-xca" secondAttribute="trailing" constant="3" id="Npn-0V-AHo"/>
                             <constraint firstItem="nJh-8C-39w" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Svz-uB-IbR"/>
-                            <constraint firstItem="tz5-dh-ZWb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WZD-VN-BHD"/>
+                            <constraint firstItem="tz5-dh-ZWb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="WZD-VN-BHD"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="nJh-8C-39w" secondAttribute="bottom" constant="20" id="YdG-2f-gjw"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="89.5" id="lJb-uD-pPR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tz5-dh-ZWb" secondAttribute="bottom" id="mLE-RJ-jyQ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tz5-dh-ZWb" secondAttribute="trailing" id="wTq-Fr-Rn2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tz5-dh-ZWb" secondAttribute="trailing" constant="10" id="wTq-Fr-Rn2"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Alarms" image="AlarmsTabIcon" selectedImage="AlarmsTabIcon" id="iLM-My-QI9">
@@ -154,7 +156,7 @@
             <objects>
                 <viewController id="i0J-ZC-Eri" customClass="CreateAlarmViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iae-B6-fkC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8k6-0A-EX8">
@@ -379,7 +381,7 @@
             <objects>
                 <viewController id="jZp-6H-UMW" customClass="LoginViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R50-1X-hqG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J57-JS-J9U">
