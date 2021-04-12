@@ -163,7 +163,7 @@
                                 <rect key="frame" x="294.5" y="715.5" width="116.5" height="62.5"/>
                                 <state key="normal" title="Button" image="AddButton"/>
                                 <connections>
-                                    <segue destination="dld-ux-Cp7" kind="show" id="sZU-dj-Rky"/>
+                                    <segue destination="dld-ux-Cp7" kind="presentation" modalPresentationStyle="fullScreen" id="sZU-dj-Rky"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7AP-ii-8rm" userLabel="Friends Table View">

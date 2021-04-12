@@ -7,7 +7,9 @@
 
 /**
  TODO:
- 1. add check to see whether friend request has already been sent to the other user
+ 1. Add check to see whether friend request has already been sent to the other user
+ 2. Add user name field to UserCustom struct and SignUp Screen, and display name on friends list in FriendsViewController table view
+ 3. Handle friend request invitation - accept/decline
  */
 
 import UIKit
@@ -85,12 +87,12 @@ class AddFriendsViewController: UIViewController {
                     return
                 } else if snapshot!.documents.count != 1 {
                     let alertController = UIAlertController(
-                        title: "Invalid email",
-                        message: "The specified user with email \(email) does not exist.",
+                        title: "Someone's missing out",
+                        message: "Looks like \(email) hasn't joined beepboop yet. Want to invite them to the club?",
                         preferredStyle: .alert)
                     
                     alertController.addAction(UIAlertAction(
-                                                title: "Ok",
+                                                title: "Invite and cure their FOMO",
                                                 style: .default,
                                                 handler: nil))
                     
