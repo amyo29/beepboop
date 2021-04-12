@@ -78,11 +78,17 @@ userDoc
 - [x] Toggle for enabling/disabling snooze for all alarms
 - [x] Toggle for enabling/disabling dark mode
 
-### Contacts Screen
+### Contacts Screen -- redesigned to Friends screen
 - [ ] Retrieve list of contacts from Firebase
 - [ ] Add a new contact
 
 ### Friend Requests Screen
 - [ ] Display all active friend requests
-- [ ] Search for users through OAuth/Phone/Email
+- [x] Search for users through OAuth/Phone/Email
 
+### Notifications Screen
+- [ ] Display all incoming notifications for a user, navigated to via tab bar
+- [ ] Respond to incoming friend requests - accept/decline
+- [ ] Display all incoming alarm requests - accept/decline
+- [ ] Display all incoming group requests - accept/decline [Final phase task]
+- [ ] Update Firestore alarm and user data based on notification response
