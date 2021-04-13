@@ -14,6 +14,8 @@ class SignUpViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     
+    @IBOutlet weak var nameTextField: UITextField!
+    
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var confirmPasswordTextField: UITextField!
@@ -44,15 +46,17 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
         guard let email = self.emailTextField.text,
+              let name = self.nameTextField.text,
               let password = self.passwordTextField.text,
               let confirmPassword = self.confirmPasswordTextField.text,
               email.count > 0,
+              name.count > 0,
               password.count > 0,
               confirmPassword.count > 0
         else {
             let alertController = UIAlertController(
                 title: "Missing input",
-                message: "Please enter your email and password, and confirm your password above.",
+                message: "Please enter your email, name, and password, and confirm your password above.",
                 preferredStyle: .alert)
             
             alertController.addAction(UIAlertAction(
@@ -87,7 +91,9 @@ class SignUpViewController: UIViewController {
             if error == nil, let user = user {
                 // Create user document in Firestore
                 self.userID = user.user.uid
-                self.userCollectionRef.addDocument(data: ["userID": self.userID])
+                let newUser = UserCustom( userEmail: email, name: name, alarmData: nil, snoozeEnabled: false, darkModeEnabled: false, friendRequestsReceived: nil, friendRequestsSent: nil, alarmRequestsReceived: nil, alarmRequestsSent: nil, notifications: nil)
+//                self.userCollectionRef.addDocument(data: newUser.dictionary)
+                self.userCollectionRef.document(user.user.uid).setData(newUser.dictionary)
                 Auth.auth().signIn(withEmail: email, password: password)
             } else {
                 if let error = error, user == nil {
@@ -109,17 +115,20 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - Navigation
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "HomeSegueIdentifier",
-           let tabBarController = segue.destination as? UITabBarController,
-           let destination = tabBarController.viewControllers?.first as? HomeViewController {
-            destination.userID = self.userID
-        }
-    }
-    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == self.signUpToMainSegueIdentifier,
+//           let tabBarController = segue.destination as? UITabBarController,
+//           let destination = tabBarController.viewControllers?.first as? HomeViewController {
+//            destination.userID = self.userID
+//        }
+//    }
+//
     
     // MARK: - Hide Keyboard
     

@@ -29,7 +29,6 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
     private var recurring: String = "Never"
-    private let createAlarmToHomeSegueIdentifier = "CreateAlarmToHomeSegueIdentifier"
    
     var delegate: UIViewController!
     
@@ -62,12 +61,6 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         bottomLine.backgroundColor = UIColor.black.cgColor
         titleTextField.borderStyle = UITextField.BorderStyle.none
         titleTextField.layer.addSublayer(bottomLine)
-                
-//        // set listener for datePicker
-//        self.datePicker.addTarget(self, action: #selector(self.datePickerChanged(picker:)), for: .valueChanged)
-//
-//        // set listener for timePicker
-//        self.timePicker.addTarget(self, action: #selector(self.timePickerChanged(picker:)), for: .valueChanged)
     }
         
     // set repeat occurrences in the form of an Alert Action Sheet
@@ -175,11 +168,23 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
            let _ = self.delegate as? HomeViewController {
             let homeViewController = self.delegate as! AlarmAdder
             homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring)
+            self.dismiss(animated: true, completion: nil)
         } else {
-            print("Something went wrong when save button pressed")
+            let alertController = UIAlertController(
+                title: "Oops",
+                message: "We are not sure what went wrong. Please try again?",
+                preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(
+                                        title: "Ok",
+                                        style: .default,
+                                        handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
         }
         
-        self.performSegue(withIdentifier: self.createAlarmToHomeSegueIdentifier, sender: self)
+        
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {

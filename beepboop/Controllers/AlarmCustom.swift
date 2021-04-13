@@ -13,20 +13,20 @@ struct AlarmCustom {
     var name: String?
     var time: Date?
     var recurrence: String?
-    var enabled: Bool?
-    var snoozeEnabled: Bool?
+//    var enabled: Bool?
+//    var snoozeEnabled: Bool?
     var uuidStr: String?
-    var userId: String?
+    var userId: [String]?
     
     var dictionary: [String: Any] {
         return [
             "name": self.name ?? "None",
             "time": self.time ?? NSDate.distantPast,
             "recurrence": self.recurrence ?? "Never",
-            "enabled": self.enabled ?? false,
-            "snoozeEnabled": self.snoozeEnabled ?? false,
+//            "enabled": self.enabled ?? false,
+//            "snoozeEnabled": self.snoozeEnabled ?? false,
             "uuid": self.uuidStr ?? UUID().uuidString,
-            "userId": self.userId ?? UUID().uuidString
+            "userId": self.userId ?? [UUID().uuidString]
         ]
     }
 }
@@ -66,17 +66,17 @@ extension AlarmCustom {
         guard let name = dictionary["name"] as? String,
               let timestamp = dictionary["time"] as? Timestamp,
               let recurrence = dictionary["recurrence"] as? String,
-              let enabled = dictionary["enabled"] as? Bool,
-              let snoozeEnabled = dictionary["snoozeEnabled"] as? Bool,
+//              let enabled = dictionary["enabled"] as? Bool,
+//              let snoozeEnabled = dictionary["snoozeEnabled"] as? Bool,
               let uuidStr = dictionary["uuid"] as? String,
-              let userId = dictionary["userId"] as? String
+              let userId = dictionary["userId"] as? [String]
         else { return nil }
         
         self.init(name: name,
                   time: timestamp.dateValue(),
                   recurrence: recurrence,
-                  enabled: enabled,
-                  snoozeEnabled: snoozeEnabled,
+//                  enabled: enabled,
+//                  snoozeEnabled: snoozeEnabled,
                   uuidStr: uuidStr,
                   userId: userId
         )
