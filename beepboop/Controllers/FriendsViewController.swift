@@ -46,12 +46,11 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func populateCell(friend: UserCustom, cell: FriendsTableViewCell) {
         print("in populateCell, friend=\(friend)")
-        cell.friendNameLabel?.text = friend.userEmail
+        cell.friendNameLabel?.text = friend.name
         cell.friendImageView?.image = UIImage(named: "EventPic") // change to friend user profile pic
     }
     
     @IBAction func friendMetadataButtonPressed(_ sender: Any) {
-        
         let alertController = UIAlertController(
             title: "Edit settings for this friend",
             message: "Select action for this friend",
