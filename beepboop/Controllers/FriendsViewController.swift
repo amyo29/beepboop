@@ -13,7 +13,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var backButton: UIButton!
     private var friendsList: [UserCustom] = []
     private let friendsTableViewCellIdentifier = "FriendsTableViewCell"
-    private let friendsToProfileSegueIdentifier = "FriendsToProfile"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,11 +86,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: self.friendsToProfileSegueIdentifier, sender: self)
-    }
-    
-    @IBAction func unwindToFriends(segue: UIStoryboardSegue) {
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
     /*

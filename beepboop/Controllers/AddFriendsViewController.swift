@@ -24,7 +24,6 @@ class AddFriendsViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     
     var userCollectionRef: CollectionReference!
-    private let addFriendsToFriendsSegueIdentifier = "AddFriendsToFriends"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,7 +184,7 @@ class AddFriendsViewController: UIViewController {
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: self.addFriendsToFriendsSegueIdentifier, sender: self)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Hide Keyboard

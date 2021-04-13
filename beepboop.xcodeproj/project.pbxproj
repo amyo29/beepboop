@@ -47,7 +47,6 @@
 		069456B12622DB0800450AC8 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456B02622DB0800450AC8 /* FriendsViewController.swift */; };
 		069456B42622DD7D00450AC8 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */; };
 		069456E12623B67000450AC8 /* AddFriendsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 069456E02623B66B00450AC8 /* AddFriendsIcon.png */; };
-		0694570A262417C700450AC8 /* Send Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 06945708262417C600450AC8 /* Send Button.png */; };
 		0694570E2624194100450AC8 /* ShareToFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694570D2624194100450AC8 /* ShareToFriendsViewController.swift */; };
 		069457112624199F00450AC8 /* CreateAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069457102624199F00450AC8 /* CreateAlarmViewController.swift */; };
 		0694571426241A7C00450AC8 /* ShareToFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */; };
@@ -70,6 +69,7 @@
 		9A8AE653260C649200181515 /* LoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE652260C649200181515 /* LoginButton.png */; };
 		9A8AE656260C660600181515 /* SignUpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE655260C660600181515 /* SignUpButton.png */; };
 		9ADC0E11260E8D80009AD333 /* NavBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADC0E10260E8D80009AD333 /* NavBarBackground.png */; };
+		9AE40D3C2624E89900DB47FB /* SendButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AE40D3B2624E89900DB47FB /* SendButton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,7 +117,6 @@
 		069456B02622DB0800450AC8 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		069456E02623B66B00450AC8 /* AddFriendsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddFriendsIcon.png; sourceTree = "<group>"; };
-		06945708262417C600450AC8 /* Send Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Send Button.png"; path = "../../../../../../../../Send Button.png"; sourceTree = "<group>"; };
 		0694570D2624194100450AC8 /* ShareToFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToFriendsViewController.swift; sourceTree = "<group>"; };
 		069457102624199F00450AC8 /* CreateAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAlarmViewController.swift; sourceTree = "<group>"; };
 		0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToFriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -142,6 +141,7 @@
 		9A8AE652260C649200181515 /* LoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButton.png; sourceTree = "<group>"; };
 		9A8AE655260C660600181515 /* SignUpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignUpButton.png; sourceTree = "<group>"; };
 		9ADC0E10260E8D80009AD333 /* NavBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarBackground.png; sourceTree = "<group>"; };
+		9AE40D3B2624E89900DB47FB /* SendButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SendButton.png; sourceTree = "<group>"; };
 		9D052F14A3B950A3364393A7 /* Pods-beepboop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.debug.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.debug.xcconfig"; sourceTree = "<group>"; };
 		C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_beepboop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -284,6 +284,7 @@
 		9A8AE64E260C5ED000181515 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9AE40D3B2624E89900DB47FB /* SendButton.png */,
 				9A29A04A2623DFBE000A5275 /* AddFriendButton.png */,
 				069456E02623B66B00450AC8 /* AddFriendsIcon.png */,
 				069456AD2622D7DE00450AC8 /* VectormetadataButton.png */,
@@ -300,7 +301,6 @@
 				0633D52E260EF713004B50FB /* SettingsTabIcon-1x.png */,
 				0633D528260EF70F004B50FB /* SettingsTabIcon-2x.png */,
 				0633D529260EF70F004B50FB /* SettingsTabIcon-3x.png */,
-				06945708262417C600450AC8 /* Send Button.png */,
 				9ADC0E10260E8D80009AD333 /* NavBarBackground.png */,
 				0633D4D7260E7864004B50FB /* EventPic.png */,
 				0633D4AE260D9E37004B50FB /* NotificationAlert.png */,
@@ -384,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A53F82F2602DB7C00D4711A /* LaunchScreen.storyboard in Resources */,
+				9AE40D3C2624E89900DB47FB /* SendButton.png in Resources */,
 				0633D538260EF715004B50FB /* GroupsTabIcon-2x.png in Resources */,
 				0633D547260F0115004B50FB /* AddButton-1x.png in Resources */,
 				0633D534260EF715004B50FB /* AlarmsTabIcon-3x.png in Resources */,
@@ -404,7 +405,6 @@
 				0633D50A260ED9E6004B50FB /* JosefinSans-ExtraLight.ttf in Resources */,
 				9ADC0E11260E8D80009AD333 /* NavBarBackground.png in Resources */,
 				0633D4BE260E674D004B50FB /* JosefinSans-VariableFont_wght.ttf in Resources */,
-				0694570A262417C700450AC8 /* Send Button.png in Resources */,
 				069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */,
 				0633D500260ED9CA004B50FB /* JosefinSans-Light.ttf in Resources */,
 				0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */,

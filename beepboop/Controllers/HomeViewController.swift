@@ -269,10 +269,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    @IBAction func unwindToHome(segue: UIStoryboardSegue) {
-        
-    }
-    
     // MARK: - Utility
     func extractTimeFromDate(time: Date?) -> String {
         if let time = time {
