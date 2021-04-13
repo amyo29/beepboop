@@ -275,6 +275,7 @@
                     <connections>
                         <outlet property="backButton" destination="h68-Zv-weP" id="Fhe-4i-itY"/>
                         <outlet property="friendsTableView" destination="7AP-ii-8rm" id="29t-QE-yBb"/>
+                        <outlet property="titleLabel" destination="yod-9x-kiS" id="qv9-od-Lc6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ux-WT-G5X" sceneMemberID="firstResponder"/>
@@ -499,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9uR-Gp-lYY" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3464" y="857"/>
+            <point key="canvasLocation" x="3542" y="869"/>
         </scene>
         <!--Create Alarm View Controller-->
         <scene sceneID="hF8-od-a1e">
@@ -1128,6 +1129,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0s0-xS-vUU">
                                 <rect key="frame" x="105" y="64" width="180" height="40"/>
+
                                 <attributedString key="attributedText">
                                     <fragment content="Notifications">
                                         <attributes>
@@ -1199,7 +1201,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tS8-7D-Vrp">
-                                                    <rect key="frame" x="77" y="42.666666666666664" width="42.666666666666657" height="18"/>
+                                                    <rect key="frame" x="77" y="42.666666666666664" width="42.666666666666657" height="18"
                                                     <attributedString key="attributedText">
                                                         <fragment content="Friend">
                                                             <attributes>
@@ -1261,24 +1263,35 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="ccX-9g-HFe">
                                                     <rect key="frame" x="10" y="18" width="50" height="39"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9p-x7-lIX" userLabel="Accept">
-                                                    <rect key="frame" x="295" y="16" width="42" height="42"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" backgroundImage="Accept Button"/>
-                                                    <connections>
-                                                        <action selector="acceptFriend:" destination="bbN-jg-8tq" eventType="touchUpInside" id="4js-QT-WFQ"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHt-75-exU" userLabel="Deny">
-                                                    <rect key="frame" x="345" y="16" width="42" height="42"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" backgroundImage="Decline Button"/>
-                                                    <connections>
-                                                        <action selector="denyFriend:" destination="bbN-jg-8tq" eventType="touchUpInside" id="q2T-7V-6Ly"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GoR-aC-eY8">
-                                                    <rect key="frame" x="77" y="25" width="53" height="24"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9kE-j5-V1K">
+                                                    <rect key="frame" x="292" y="16.5" width="92" height="42"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9p-x7-lIX" userLabel="Accept">
+                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="42" id="uua-OC-7FL"/>
+                                                                <constraint firstAttribute="width" constant="42" id="xxm-O3-Qkw"/>
+                                                            </constraints>
+                                                            <state key="normal" backgroundImage="Accept Button"/>
+                                                            <connections>
+                                                                <action selector="acceptFriend:" destination="bbN-jg-8tq" eventType="touchUpInside" id="4js-QT-WFQ"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHt-75-exU" userLabel="Deny">
+                                                            <rect key="frame" x="50" y="0.0" width="42" height="42"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="42" id="5gR-DG-E4S"/>
+                                                                <constraint firstAttribute="height" constant="42" id="gxD-Fr-RDc"/>
+                                                            </constraints>
+                                                            <state key="normal" backgroundImage="Decline Button"/>
+                                                            <connections>
+                                                                <action selector="denyFriend:" destination="bbN-jg-8tq" eventType="touchUpInside" id="q2T-7V-6Ly"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GoR-aC-eY8">
+                                                    <rect key="frame" x="75" y="14" width="53" height="23.5"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Name">
                                                             <attributes>
@@ -1289,13 +1302,23 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sent you a friend request" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSk-mo-LPW">
+                                                    <rect key="frame" x="75" y="45.5" width="189.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="tSk-mo-LPW" firstAttribute="top" secondItem="GoR-aC-eY8" secondAttribute="bottom" constant="8" id="3Vd-xe-zLd"/>
                                                 <constraint firstItem="ccX-9g-HFe" firstAttribute="centerY" secondItem="EWZ-s0-bqZ" secondAttribute="centerY" id="GZO-DB-ImB"/>
                                                 <constraint firstItem="GoR-aC-eY8" firstAttribute="top" secondItem="EWZ-s0-bqZ" secondAttribute="top" constant="14" id="M0P-kj-J61"/>
+                                                <constraint firstAttribute="trailing" secondItem="9kE-j5-V1K" secondAttribute="trailing" constant="10" id="SUe-c2-HjO"/>
+                                                <constraint firstItem="9kE-j5-V1K" firstAttribute="centerY" secondItem="EWZ-s0-bqZ" secondAttribute="centerY" id="T3Y-PC-eYL"/>
                                                 <constraint firstItem="ccX-9g-HFe" firstAttribute="leading" secondItem="EWZ-s0-bqZ" secondAttribute="leading" constant="10" id="XMG-4V-hz4"/>
                                                 <constraint firstItem="ccX-9g-HFe" firstAttribute="top" secondItem="EWZ-s0-bqZ" secondAttribute="topMargin" constant="7" id="c9n-qi-x9K"/>
-                                                <constraint firstItem="GoR-aC-eY8" firstAttribute="leading" secondItem="ccX-9g-HFe" secondAttribute="trailing" constant="17" id="oGX-fL-Apc"/>
+                                                <constraint firstItem="tSk-mo-LPW" firstAttribute="leading" secondItem="ccX-9g-HFe" secondAttribute="trailing" constant="15" id="jum-b8-PgE"/>
+                                                <constraint firstItem="GoR-aC-eY8" firstAttribute="leading" secondItem="ccX-9g-HFe" secondAttribute="trailing" constant="15" id="oGX-fL-Apc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1304,6 +1327,7 @@
                                             <outlet property="denyButton" destination="CHt-75-exU" id="AhC-g6-s1D"/>
                                             <outlet property="friendImageView" destination="ccX-9g-HFe" id="MPi-El-kaH"/>
                                             <outlet property="friendLabel" destination="GoR-aC-eY8" id="5k6-ng-5oG"/>
+                                            <outlet property="friendRequestLabel" destination="tSk-mo-LPW" id="Bm8-Oa-72x"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmUpdateTableViewCell" rowHeight="75" id="FFw-gA-Wxj" customClass="AlarmUpdateTableViewCell" customModule="beepboop" customModuleProvider="target">
@@ -1426,9 +1450,12 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="emD-Og-uYp">
                                                     <rect key="frame" x="10" y="18" width="50" height="39"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="lec-1n-idn"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk1-fX-xIF">
-                                                    <rect key="frame" x="77" y="25" width="210" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk1-fX-xIF">
+                                                    <rect key="frame" x="77" y="14" width="307" height="23.5"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Name accepted/denied">
                                                             <attributes>
@@ -1443,8 +1470,10 @@
                                             <constraints>
                                                 <constraint firstItem="dk1-fX-xIF" firstAttribute="top" secondItem="UUn-HV-KmJ" secondAttribute="top" constant="14" id="15R-SS-Ryb"/>
                                                 <constraint firstItem="emD-Og-uYp" firstAttribute="leading" secondItem="UUn-HV-KmJ" secondAttribute="leading" constant="10" id="5rF-No-0tb"/>
+                                                <constraint firstAttribute="trailing" secondItem="dk1-fX-xIF" secondAttribute="trailing" constant="10" id="L5a-Xm-NN7"/>
                                                 <constraint firstItem="dk1-fX-xIF" firstAttribute="leading" secondItem="emD-Og-uYp" secondAttribute="trailing" constant="17" id="PM9-85-qAG"/>
                                                 <constraint firstItem="emD-Og-uYp" firstAttribute="centerY" secondItem="UUn-HV-KmJ" secondAttribute="centerY" id="Vui-uz-X93"/>
+                                                <constraint firstAttribute="bottom" secondItem="emD-Og-uYp" secondAttribute="bottom" constant="18" id="fxE-rI-5Uy"/>
                                                 <constraint firstItem="emD-Og-uYp" firstAttribute="top" secondItem="UUn-HV-KmJ" secondAttribute="topMargin" constant="7" id="xsT-4g-qaQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1514,7 +1543,7 @@
                     <connections>
                         <outlet property="notifTableView" destination="oQP-PW-2zr" id="6Bm-qW-CT8"/>
                         <outlet property="segCtrl" destination="Glg-NJ-epw" id="FOy-MD-8Un"/>
-                        <outlet property="titleLabel" destination="0s0-xS-vUU" id="JQF-3h-ZEd"/>
+                        <outlet property="titleLabel" destination="0s0-xS-vUU" id="y0g-Ov-Jop"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBF-02-uLp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

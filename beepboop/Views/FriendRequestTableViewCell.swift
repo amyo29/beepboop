@@ -11,6 +11,7 @@ class FriendRequestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var friendImageView: UIImageView!
     @IBOutlet weak var friendLabel: UILabel!
+    @IBOutlet weak var friendRequestLabel: UILabel!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var denyButton: UIButton!
     

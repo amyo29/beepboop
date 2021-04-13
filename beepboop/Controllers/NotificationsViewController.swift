@@ -92,9 +92,11 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.loadNewData()
-
-        // Do any additional setup after loading the view.
     }
     
     // MARK: - Table Functions
@@ -227,6 +229,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             }
             // Cannot currently access photoURL directly, will need to store in user
             cell.friendLabel.text = userDoc.get("name") as? String
+            cell.friendLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
+            cell.friendRequestLabel.font = UIFont(name: "JosefinSans-Regular", size: 14.0)
+
             cell.acceptButton.tag = tag
             cell.denyButton.tag = tag
         }
@@ -234,6 +239,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func populateFriendUpdateCell(name: String, status: Bool, cell: FriendUpdateTableViewCell) {
         cell.friendStatus.text = "\(name) \(accepted(status: status)) your friend request"
+        cell.friendStatus.font = UIFont(name: "JosefinSans-Regular", size: 18.0)
     }
     
     // MARK: - Accept/Deny Friends/Alarms
@@ -286,14 +292,14 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func acceptFriend(_ sender: UIButton) {
-        friendAcceptyDeny(index: sender.tag, accepted: true)
+        self.handleFriendRequestResponse(index: sender.tag, accepted: true)
     }
     
     @IBAction func denyFriend(_ sender: UIButton) {
-        friendAcceptyDeny(index: sender.tag, accepted: false)
+        self.handleFriendRequestResponse(index: sender.tag, accepted: false)
     }
     
-    func friendAcceptyDeny(index: Int, accepted: Bool) {
+    func handleFriendRequestResponse(index: Int, accepted: Bool) {
         let requestUID = self.friendRequests[index]
         if let user = Auth.auth().currentUser {
             // Accept the requester

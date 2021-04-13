@@ -6,13 +6,21 @@
 //
 
 import UIKit
+import FirebaseCore
+import Firebase
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     private var friendsList: [UserCustom] = []
     private let friendsTableViewCellIdentifier = "FriendsTableViewCell"
+    
+    var userCollectionRef: CollectionReference!
+    var userDocRef: DocumentReference!
+    var currentUserUid: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +28,34 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Do any additional setup after loading the view.
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
+                
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {
+            let alertController = UIAlertController(
+                title: "Unknown error",
+                message: "Something went wrong, please try again.",
+                preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(
+                                        title: "Ok",
+                                        style: .default,
+                                        handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        self.currentUserUid = currentUserUid
+        self.userCollectionRef = Firestore.firestore().collection("userData")
+        self.userDocRef = userCollectionRef.document(currentUserUid)
+        
+        titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.sendSubviewToBack(self.friendsTableView)
+        self.updateFriendsFirestore()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,6 +117,41 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func updateFriendsFirestore() {
+        self.friendsList = [UserCustom]()
+        
+        guard let currentUserUid = self.currentUserUid else {
+            print("Cannot get current user uid")
+            return
+        }
+        
+        self.userCollectionRef.document(currentUserUid).getDocument { (document, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                guard let document = document else {
+                    print("Error getting documents")
+                    return
+                }
+                
+                if let friendUuids = document.get("friendsList") as? [String] {
+                    for friendUuid in friendUuids {
+                        let friendDocRef = self.userCollectionRef.document(friendUuid)
+                        friendDocRef.getDocument { (document, error) in
+                            if let document = document,
+                               document.exists,
+                               let data = document.data(),
+                               let model = UserCustom(dictionary: data) {
+                                self.friendsList.append(model)
+                                self.friendsTableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     /*
