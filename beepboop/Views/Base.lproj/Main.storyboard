@@ -812,6 +812,7 @@
                             <constraint firstItem="0BF-if-pIW" firstAttribute="top" secondItem="hrS-p8-2Hi" secondAttribute="bottom" constant="50" id="vgL-i5-ZjK"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Ogd-6O-BZK"/>
                     <connections>
                         <outlet property="emailTextField" destination="J57-JS-J9U" id="4nP-sJ-shQ"/>
                         <outlet property="passwordTextField" destination="hrS-p8-2Hi" id="MUI-Jn-lR4"/>
@@ -1067,16 +1068,27 @@
                                     <action selector="changeProfileImageButtonPressed:" destination="X2Q-dW-nb0" eventType="touchUpInside" id="pdM-rd-164"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rW2-RQ-I6M">
+                                <rect key="frame" x="173" y="704" width="68" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="log out"/>
+                                <connections>
+                                    <action selector="logoutButtonPressed:" destination="X2Q-dW-nb0" eventType="touchUpInside" id="KPF-Y6-HdR"/>
+                                    <segue destination="jZp-6H-UMW" kind="presentation" modalPresentationStyle="fullScreen" id="521-8F-rzt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="25I-6c-nQS"/>
                         <color key="backgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KI0-NK-Bie" firstAttribute="top" secondItem="25I-6c-nQS" secondAttribute="top" constant="80" id="1HJ-e5-LdN"/>
+                            <constraint firstItem="rW2-RQ-I6M" firstAttribute="top" secondItem="tVx-42-7zz" secondAttribute="bottom" constant="35" id="1px-83-Wfe"/>
                             <constraint firstItem="NLA-25-Wgh" firstAttribute="top" secondItem="1WE-62-S4c" secondAttribute="bottom" constant="38.5" id="2tF-1f-G1Q"/>
                             <constraint firstItem="1WE-62-S4c" firstAttribute="top" secondItem="25I-6c-nQS" secondAttribute="top" constant="331.5" id="2wK-CQ-HIE"/>
                             <constraint firstItem="DEW-FR-Z5W" firstAttribute="centerX" secondItem="25I-6c-nQS" secondAttribute="centerX" id="5ZO-EI-bWU"/>
                             <constraint firstItem="xIT-H6-cfl" firstAttribute="leading" secondItem="25I-6c-nQS" secondAttribute="leading" constant="60" id="Jjp-w8-0un"/>
                             <constraint firstItem="KI0-NK-Bie" firstAttribute="centerX" secondItem="25I-6c-nQS" secondAttribute="centerX" id="Kxf-1O-zuv"/>
+                            <constraint firstItem="rW2-RQ-I6M" firstAttribute="centerX" secondItem="NOd-ua-zfJ" secondAttribute="centerX" id="SOu-cu-dMQ"/>
                             <constraint firstItem="25I-6c-nQS" firstAttribute="trailing" secondItem="NLA-25-Wgh" secondAttribute="trailing" constant="77" id="fQa-tp-ZZa"/>
                             <constraint firstItem="yQe-aN-3Q9" firstAttribute="leading" secondItem="25I-6c-nQS" secondAttribute="leading" constant="60" id="hqi-gg-ISP"/>
                             <constraint firstItem="xIT-H6-cfl" firstAttribute="top" secondItem="DEW-FR-Z5W" secondAttribute="bottom" constant="67" id="lwe-ZX-FS5"/>

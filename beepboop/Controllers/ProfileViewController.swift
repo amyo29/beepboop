@@ -47,6 +47,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+
+        } catch {
+            print("Error occurred when signing out of this account.")
+        }
+    }
     func loadProfilePic(user: Firebase.User?) {
         let photoURL = user?.photoURL
         if let url = photoURL {
