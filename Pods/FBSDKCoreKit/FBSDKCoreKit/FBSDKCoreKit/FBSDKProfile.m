@@ -22,6 +22,8 @@
 
  #import "FBSDKProfile+Internal.h"
 
+ #import "FBSDKUserAgeRange.h"
+
  #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 
 NSNotificationName const FBSDKProfileDidChangeNotification = @"com.facebook.sdk.FBSDKProfile.FBSDKProfileDidChangeNotification";;
@@ -36,6 +38,7 @@ NSString *const FBSDKProfileChangeOldKey = @"FBSDKProfileOld";
 NSString *const FBSDKProfileChangeNewKey = @"FBSDKProfileNew";
 static NSString *const FBSDKProfileUserDefaultsKey = @"com.facebook.sdk.FBSDKProfile.currentProfile";
 static FBSDKProfile *g_currentProfile;
+static NSDateFormatter *_dateFormatter;
 
  #define FBSDKPROFILE_USERID_KEY @"userID"
  #define FBSDKPROFILE_FIRSTNAME_KEY @"firstName"
@@ -47,11 +50,27 @@ static FBSDKProfile *g_currentProfile;
  #define FBSDKPROFILE_IMAGEURL_KEY @"imageURL"
  #define FBSDKPROFILE_EMAIL_KEY @"email"
  #define FBSDKPROFILE_FRIENDIDS_KEY @"friendIDs"
+ #define FBSDKPROFILE_IS_LIMITED_KEY @"isLimited"
+ #define FBSDKPROFILE_BIRTHDAY_KEY @"birthday"
+ #define FBSDKPROFILE_AGERANGE_KEY @"ageRange"
 
 // Once a day
  #define FBSDKPROFILE_STALE_IN_SECONDS (60 * 60 * 24)
 
+@interface FBSDKProfile ()
+
+@property (nonatomic, assign) BOOL isLimited;
+
+@end
+
 @implementation FBSDKProfile
+
+static Class<FBSDKAccessTokenProviding> _accessTokenProvider = nil;
+
++ (Class<FBSDKAccessTokenProviding>)accessTokenProvider
+{
+  return _accessTokenProvider;
+}
 
 - (instancetype)initWithUserID:(FBSDKUserIdentifier *)userID
                      firstName:(NSString *)firstName
@@ -70,7 +89,9 @@ static FBSDKProfile *g_currentProfile;
                   refreshDate:refreshDate
                      imageURL:nil
                         email:nil
-                    friendIDs:nil];
+                    friendIDs:nil
+                     birthday:nil
+                     ageRange:nil];
 }
 
 - (instancetype)initWithUserID:(FBSDKUserIdentifier *)userID
@@ -92,7 +113,9 @@ static FBSDKProfile *g_currentProfile;
                   refreshDate:refreshDate
                      imageURL:imageURL
                         email:email
-                    friendIDs:nil];
+                    friendIDs:nil
+                     birthday:nil
+                     ageRange:nil];
 }
 
 - (instancetype)initWithUserID:(FBSDKUserIdentifier *)userID
@@ -106,6 +129,63 @@ static FBSDKProfile *g_currentProfile;
                          email:(NSString *)email
                      friendIDs:(NSArray<FBSDKUserIdentifier *> *)friendIDs
 {
+  return [self initWithUserID:userID
+                    firstName:firstName
+                   middleName:middleName
+                     lastName:lastName
+                         name:name
+                      linkURL:linkURL
+                  refreshDate:refreshDate
+                     imageURL:imageURL
+                        email:email
+                    friendIDs:friendIDs
+                     birthday:nil ageRange:nil];
+}
+
+- (instancetype)initWithUserID:(FBSDKUserIdentifier *)userID
+                     firstName:(NSString *)firstName
+                    middleName:(NSString *)middleName
+                      lastName:(NSString *)lastName
+                          name:(NSString *)name
+                       linkURL:(NSURL *)linkURL
+                   refreshDate:(NSDate *)refreshDate
+                      imageURL:(NSURL *)imageURL
+                         email:(NSString *)email
+                     friendIDs:(NSArray<FBSDKUserIdentifier *> *)friendIDs
+                      birthday:(NSDate *)birthday
+                      ageRange:(FBSDKUserAgeRange *)ageRange
+                     isLimited:(BOOL)isLimited
+{
+  self = [self initWithUserID:userID
+                    firstName:firstName
+                   middleName:middleName
+                     lastName:lastName
+                         name:name
+                      linkURL:linkURL
+                  refreshDate:refreshDate
+                     imageURL:imageURL
+                        email:email
+                    friendIDs:friendIDs
+                     birthday:birthday
+                     ageRange:ageRange];
+  self.isLimited = isLimited;
+
+  return self;
+}
+
+- (instancetype)initWithUserID:(FBSDKUserIdentifier *)userID
+                     firstName:(NSString *)firstName
+                    middleName:(NSString *)middleName
+                      lastName:(NSString *)lastName
+                          name:(NSString *)name
+                       linkURL:(NSURL *)linkURL
+                   refreshDate:(NSDate *)refreshDate
+                      imageURL:(NSURL *)imageURL
+                         email:(NSString *)email
+                     friendIDs:(NSArray<FBSDKUserIdentifier *> *)friendIDs
+                      birthday:(NSDate *)birthday
+                      ageRange:(FBSDKUserAgeRange *)ageRange
+{
   if ((self = [super init])) {
     _userID = [userID copy];
     _firstName = [firstName copy];
@@ -117,6 +197,9 @@ static FBSDKProfile *g_currentProfile;
     _imageURL = [imageURL copy];
     _email = [email copy];
     _friendIDs = [friendIDs copy];
+    self.isLimited = NO;
+    _birthday = [birthday copy];
+    _ageRange = [ageRange copy];
   }
   return self;
 }
@@ -169,7 +252,7 @@ static FBSDKProfile *g_currentProfile;
 
 + (void)loadCurrentProfileWithCompletion:(FBSDKProfileBlock)completion
 {
-  [self loadProfileWithToken:[FBSDKAccessToken currentAccessToken] completion:completion];
+  [self loadProfileWithToken:[self.accessTokenProvider currentAccessToken] completion:completion];
 }
 
  #pragma mark - NSCopying
@@ -195,6 +278,9 @@ static FBSDKProfile *g_currentProfile;
     self.imageURL.hash,
     self.email.hash,
     self.friendIDs.hash,
+    self.birthday.hash,
+    self.ageRange.hash,
+    self.isLimited
   };
   return [FBSDKMath hashWithIntegerArray:subhashes count:sizeof(subhashes) / sizeof(subhashes[0])];
 }
@@ -218,10 +304,13 @@ static FBSDKProfile *g_currentProfile;
     && [_lastName isEqualToString:profile.lastName]
     && [_name isEqualToString:profile.name]
     && [_linkURL isEqual:profile.linkURL]
-    && [_refreshDate isEqualToDate:profile.refreshDate])
-  && [_imageURL isEqual:profile.imageURL]
-  && [_email isEqualToString:profile.email]
-  && [_friendIDs isEqualToArray:profile.friendIDs];
+    && [_refreshDate isEqualToDate:profile.refreshDate]
+    && [_imageURL isEqual:profile.imageURL]
+    && [_email isEqualToString:profile.email]
+    && [_friendIDs isEqualToArray:profile.friendIDs]
+    && _isLimited == profile.isLimited
+    && [_birthday isEqualToDate:profile.birthday]
+    && [_ageRange isEqual:profile.ageRange]);
 }
 
  #pragma mark NSCoding
@@ -239,10 +328,13 @@ static FBSDKProfile *g_currentProfile;
   NSString *lastName = [decoder decodeObjectOfClass:[NSString class] forKey:FBSDKPROFILE_LASTNAME_KEY];
   NSString *name = [decoder decodeObjectOfClass:[NSString class] forKey:FBSDKPROFILE_NAME_KEY];
   NSURL *linkURL = [decoder decodeObjectOfClass:[NSURL class] forKey:FBSDKPROFILE_LINKURL_KEY];
-  NSDate *refreshDate = [decoder decodeObjectOfClass:[NSURL class] forKey:FBSDKPROFILE_REFRESHDATE_KEY];
+  NSDate *refreshDate = [decoder decodeObjectOfClass:[NSDate class] forKey:FBSDKPROFILE_REFRESHDATE_KEY];
   NSURL *imageURL = [decoder decodeObjectOfClass:[NSURL class] forKey:FBSDKPROFILE_IMAGEURL_KEY];
   NSString *email = [decoder decodeObjectOfClass:[NSString class] forKey:FBSDKPROFILE_EMAIL_KEY];
   NSArray<FBSDKUserIdentifier *> *friendIDs = [decoder decodeObjectOfClass:[NSArray class] forKey:FBSDKPROFILE_FRIENDIDS_KEY];
+  BOOL isLimited = [decoder decodeBoolForKey:FBSDKPROFILE_IS_LIMITED_KEY];
+  NSDate *birthday = [decoder decodeObjectOfClass:[NSDate class] forKey:FBSDKPROFILE_BIRTHDAY_KEY];
+  FBSDKUserAgeRange *ageRange = [decoder decodeObjectOfClass:[FBSDKUserAgeRange class] forKey:FBSDKPROFILE_AGERANGE_KEY];
   return [self initWithUserID:userID
                     firstName:firstName
                    middleName:middleName
@@ -252,7 +344,10 @@ static FBSDKProfile *g_currentProfile;
                   refreshDate:refreshDate
                      imageURL:imageURL
                         email:email
-                    friendIDs:friendIDs];
+                    friendIDs:friendIDs
+                     birthday:birthday
+                     ageRange:ageRange
+                    isLimited:isLimited];
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
@@ -267,35 +362,48 @@ static FBSDKProfile *g_currentProfile;
   [encoder encodeObject:self.imageURL forKey:FBSDKPROFILE_IMAGEURL_KEY];
   [encoder encodeObject:self.email forKey:FBSDKPROFILE_EMAIL_KEY];
   [encoder encodeObject:self.friendIDs forKey:FBSDKPROFILE_FRIENDIDS_KEY];
+  [encoder encodeBool:self.isLimited forKey:FBSDKPROFILE_IS_LIMITED_KEY];
+  [encoder encodeObject:self.birthday forKey:FBSDKPROFILE_BIRTHDAY_KEY];
+  [encoder encodeObject:self.ageRange forKey:FBSDKPROFILE_AGERANGE_KEY];
 }
 
 @end
 
 @implementation FBSDKProfile (Internal)
 
+static id <FBSDKDataPersisting> _store;
+
++ (void)configureWithStore:(id<FBSDKDataPersisting>)store
+       accessTokenProvider:(Class<FBSDKAccessTokenProviding>)accessTokenProvider
+{
+  if (self == [FBSDKProfile class]) {
+    _store = store;
+    _accessTokenProvider = accessTokenProvider;
+  }
+}
+
  #pragma clang diagnostic push
  #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (void)cacheProfile:(FBSDKProfile *)profile
 {
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
   if (profile) {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:profile];
-    [userDefaults setObject:data forKey:FBSDKProfileUserDefaultsKey];
+    [_store setObject:data forKey:FBSDKProfileUserDefaultsKey];
   } else {
-    [userDefaults removeObjectForKey:FBSDKProfileUserDefaultsKey];
+    [_store removeObjectForKey:FBSDKProfileUserDefaultsKey];
   }
-  [userDefaults synchronize];
 }
 
 + (FBSDKProfile *)fetchCachedProfile
 {
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  NSData *data = [userDefaults objectForKey:FBSDKProfileUserDefaultsKey];
+  NSData *data = [_store objectForKey:FBSDKProfileUserDefaultsKey];
   if (data != nil) {
+    id<FBSDKObjectDecoding> unarchiver = [FBSDKUnarchiverProvider createSecureUnarchiverFor:data];
+
     @try {
-      return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+      return [unarchiver decodeObjectOfClass:[FBSDKProfile class] forKey:NSKeyedArchiveRootObjectKey];
     } @catch (NSException *exception) {
-      return nil;
+      // Ignore decode error
     }
   }
   return nil;
@@ -325,8 +433,9 @@ static FBSDKProfile *g_currentProfile;
   [FBSDKTypeUtility dictionary:queryParameters setObject:@(roundf(size.width)) forKey:widthKey];
   [FBSDKTypeUtility dictionary:queryParameters setObject:@(roundf(size.height)) forKey:heightKey];
 
-  if (FBSDKAccessToken.currentAccessToken) {
-    [FBSDKTypeUtility dictionary:queryParameters setObject:FBSDKAccessToken.currentAccessToken.tokenString forKey:accessTokenKey];
+  if ([self.accessTokenProvider currentAccessToken]) {
+    [FBSDKTypeUtility dictionary:queryParameters setObject:[[self.accessTokenProvider currentAccessToken] tokenString]
+                          forKey:accessTokenKey];
   } else if (FBSDKSettings.clientToken) {
     [FBSDKTypeUtility dictionary:queryParameters setObject:FBSDKSettings.clientToken forKey:accessTokenKey];
   } else {
@@ -356,15 +465,23 @@ static FBSDKProfile *g_currentProfile;
     graphPath = [graphPath stringByAppendingString:@",friends"];
   }
 
-  FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:graphPath
-                                                                 parameters:nil
-                                                                      flags:FBSDKGraphRequestFlagDoNotInvalidateTokenOnError | FBSDKGraphRequestFlagDisableErrorRecovery];
+  if ([token.permissions containsObject:@"user_birthday"]) {
+    graphPath = [graphPath stringByAppendingString:@",birthday"];
+  }
+
+  if ([token.permissions containsObject:@"user_age_range"]) {
+    graphPath = [graphPath stringByAppendingString:@",age_range"];
+  }
+
+  id<FBSDKGraphRequest> request = [[FBSDKGraphRequest alloc] initWithGraphPath:graphPath
+                                                                    parameters:nil
+                                                                         flags:FBSDKGraphRequestFlagDoNotInvalidateTokenOnError | FBSDKGraphRequestFlagDisableErrorRecovery];
   [[self class] loadProfileWithToken:token completion:completion graphRequest:request];
 }
 
 + (void)loadProfileWithToken:(FBSDKAccessToken *)token
                   completion:(FBSDKProfileBlock)completion
-                graphRequest:(FBSDKGraphRequest *)request
+                graphRequest:(id<FBSDKGraphRequest>)request
 {
   FBSDKParseProfileBlock parseBlock = ^void (id result, FBSDKProfile **profileRef) {
     if (profileRef == NULL
@@ -381,6 +498,10 @@ static FBSDKProfile *g_currentProfile;
     NSString *urlString = [FBSDKTypeUtility stringValue:result[@"link"]];
     NSURL *linkUrl = [FBSDKTypeUtility URLValue:[NSURL URLWithString:urlString]];
     NSArray<FBSDKUserIdentifier *> *friendIDs = [self friendIDsFromGraphResult:[FBSDKTypeUtility dictionaryValue:result[@"friends"]]];
+    FBSDKUserAgeRange *ageRange = [FBSDKUserAgeRange ageRangeFromDictionary:[FBSDKTypeUtility dictionaryValue:result[@"age_range"]]];
+
+    [FBSDKProfile.dateFormatter setDateFormat:@"MM/dd/yyyy"];
+    NSDate *birthday = [FBSDKProfile.dateFormatter dateFromString:[FBSDKTypeUtility stringValue:result[@"birthday"]]];
 
     FBSDKProfile *profile = [[FBSDKProfile alloc] initWithUserID:profileID
                                                        firstName:[FBSDKTypeUtility stringValue:result[@"first_name"]]
@@ -391,22 +512,27 @@ static FBSDKProfile *g_currentProfile;
                                                      refreshDate:[NSDate date]
                                                         imageURL:nil
                                                            email:[FBSDKTypeUtility stringValue:result[@"email"]]
-                                                       friendIDs:friendIDs];
+                                                       friendIDs:friendIDs
+                                                        birthday:birthday
+                                                        ageRange:ageRange];
     *profileRef = [profile copy];
   };
-  [[self class] loadProfileWithToken:token completion:completion graphRequest:request parseBlock:parseBlock];
+  [[self class] loadProfileWithToken:token
+                          completion:completion
+                        graphRequest:request
+                          parseBlock:parseBlock];
 }
 
 + (void)loadProfileWithToken:(FBSDKAccessToken *)token
                   completion:(FBSDKProfileBlock)completion
-                graphRequest:(FBSDKGraphRequest *)request
+                graphRequest:(id<FBSDKGraphRequest>)request
                   parseBlock:(FBSDKParseProfileBlock)parseBlock;
 {
-  static FBSDKGraphRequestConnection *executingRequestConnection = nil;
+  static id<FBSDKGraphRequestConnecting> executingRequestConnection = nil;
 
   BOOL isStale = [[NSDate date] timeIntervalSinceDate:g_currentProfile.refreshDate] > FBSDKPROFILE_STALE_IN_SECONDS;
   if (token
-      && (isStale || ![g_currentProfile.userID isEqualToString:token.userID])) {
+      && (isStale || ![g_currentProfile.userID isEqualToString:token.userID] || g_currentProfile.isLimited)) {
     FBSDKProfile *expectedCurrentProfile = g_currentProfile;
 
     [executingRequestConnection cancel];
@@ -456,16 +582,42 @@ static FBSDKProfile *g_currentProfile;
   return friendIDs;
 }
 
++ (NSDateFormatter *)dateFormatter
+{
+  if (!_dateFormatter) {
+    _dateFormatter = NSDateFormatter.new;
+  }
+  return _dateFormatter;
+}
+
  #pragma clang diagnostic pop
 
-@end
-
-@implementation FBSDKProfile (Testing)
+ #if DEBUG
+  #if FBSDKTEST
 
 + (void)resetCurrentProfileCache
 {
   g_currentProfile = nil;
 }
+
++ (id<FBSDKDataPersisting>)store
+{
+  return _store;
+}
+
++ (void)setAccessTokenProvider:(Class<FBSDKAccessTokenProviding>)accessTokenProvider
+{
+  _accessTokenProvider = accessTokenProvider;
+}
+
++ (void)reset
+{
+  _store = nil;
+  _accessTokenProvider = nil;
+}
+
+  #endif
+ #endif
 
 @end
 

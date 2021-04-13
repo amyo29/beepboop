@@ -21,10 +21,10 @@
 #import <objc/runtime.h>
 
 #import "FBSDKAppEventsUtility.h"
+#import "FBSDKCoreKit+Internal.h"
 #import "FBSDKGraphRequest.h"
 #import "FBSDKGraphRequest+Internal.h"
 #import "FBSDKImageDownloader.h"
-#import "FBSDKInternalUtility.h"
 #import "FBSDKLogger.h"
 #import "FBSDKServerConfiguration.h"
 #import "FBSDKServerConfiguration+Internal.h"
@@ -131,8 +131,13 @@ typedef NS_OPTIONS(NSUInteger, FBSDKServerConfigurationManagerAppEventsFeatures)
         NSData *data = [defaults objectForKey:defaultsKey];
         if ([data isKindOfClass:[NSData class]]) {
           // decode the configuration
-          FBSDKServerConfiguration *serverConfiguration = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-          if ([serverConfiguration isKindOfClass:[FBSDKServerConfiguration class]]) {
+          id<FBSDKObjectDecoding> unarchiver = [FBSDKUnarchiverProvider createSecureUnarchiverFor:data];
+          FBSDKServerConfiguration *serverConfiguration = nil;
+          @try {
+            serverConfiguration = [unarchiver decodeObjectOfClass:[FBSDKServerConfiguration class] forKey:NSKeyedArchiveRootObjectKey];
+          } @catch (NSException *ex) {
+            // Ignore decoding error
+          } @finally {
             // ensure that the configuration points to the current appID
             if ([serverConfiguration.appID isEqualToString:appID]) {
               _serverConfiguration = serverConfiguration;

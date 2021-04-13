@@ -16,14 +16,18 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "TargetConditionals.h"
+#if !TARGET_OS_TV
 
-#import "FBSDKGraphRequestConnecting.h"
+ #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+ #import "FBSDKSKAdNetworkReporter.h"
 
-// Default conformance to the FBSDKGraphRequestConnecting protocol
-@interface FBSDKGraphRequestConnection (ConnectionProviding) <FBSDKGraphRequestConnecting>
+@interface FBSDKSKAdNetworkReporter (Internal)
+
++ (void)configureWithRequestProvider:(id<FBSDKGraphRequestProviding>)requestProvider
+                               store:(id<FBSDKDataPersisting>)store;
+
 @end
 
-NS_ASSUME_NONNULL_END
+#endif

@@ -18,9 +18,10 @@
 
 #import "FBSDKTokenCache.h"
 
+#import "FBSDKAuthenticationToken+Internal.h"
 #import "FBSDKDynamicFrameworkLoader.h"
-#import "FBSDKInternalUtility.h"
 #import "FBSDKKeychainStore.h"
+#import "FBSDKUnarchiverProvider.h"
 
 static NSString *const kFBSDKAccessTokenUserDefaultsKey = @"com.facebook.sdk.v4.FBSDKAccessTokenInformationKey";
 static NSString *const kFBSDKAccessTokenKeychainKey = @"com.facebook.sdk.v4.FBSDKAccessTokenInformationKeychainKey";
@@ -52,15 +53,37 @@ static NSString *const kFBSDKTokenEncodedKey = @"tokenEncoded";
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSString *uuid = [defaults objectForKey:kFBSDKAccessTokenUserDefaultsKey];
-
   NSDictionary<NSString *, id> *dict = [_keychainStore dictionaryForKey:kFBSDKAccessTokenKeychainKey];
+
+  if (!uuid && !dict) {
+    return nil;
+  }
+
+  if (!uuid) {
+    [self clearAccessTokenCache];
+    return nil;
+  }
+
+  if (!dict) {
+    [defaults setObject:nil forKey:kFBSDKAccessTokenUserDefaultsKey];
+    return nil;
+  }
+
   if ([dict[kFBSDKTokenUUIDKey] isKindOfClass:[NSString class]]) {
     // there is a bug while running on simulator that the uuid stored in dict can be NSData,
     // do a type check to make sure it is NSString
     if ([dict[kFBSDKTokenUUIDKey] isEqualToString:uuid]) {
       id tokenData = dict[kFBSDKTokenEncodedKey];
       if ([tokenData isKindOfClass:[NSData class]]) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:tokenData];
+        id<FBSDKObjectDecoding> unarchiver = [FBSDKUnarchiverProvider createSecureUnarchiverFor:tokenData];
+
+        FBSDKAccessToken *unarchivedToken = nil;
+        @try {
+          unarchivedToken = [unarchiver decodeObjectOfClass:FBSDKAccessToken.class forKey:NSKeyedArchiveRootObjectKey];
+        } @catch (NSException *ex) {
+          // ignore decoding exceptions
+        }
+        return unarchivedToken;
       }
     }
   }
@@ -104,9 +127,17 @@ static NSString *const kFBSDKTokenEncodedKey = @"tokenEncoded";
     // do a type check to make sure it is NSString
     if ([dict[kFBSDKTokenUUIDKey] isEqualToString:uuid]) {
       id tokenData = dict[kFBSDKTokenEncodedKey];
-      if ([tokenData isKindOfClass:[NSData class]]) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:tokenData];
+      id<FBSDKObjectDecoding> unarchiver = [FBSDKUnarchiverProvider createSecureUnarchiverFor:tokenData];
+
+      FBSDKAuthenticationToken *unarchivedToken = nil;
+      @try {
+        unarchivedToken = [unarchiver decodeObjectOfClass:FBSDKAuthenticationToken.class forKey:NSKeyedArchiveRootObjectKey];
+      } @catch (NSException *ex) {
+        // ignore decoding exceptions
+      } @finally {
+        return unarchivedToken;
       }
+      return nil;
     }
   }
   // if the uuid doesn't match (including if there is no uuid in defaults which means uninstalled case)

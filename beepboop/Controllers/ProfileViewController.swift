@@ -2,7 +2,7 @@
 //  ProfileViewController.swift
 //  beepboop
 //
-//  Created by Amy Ouyang on 3/25/21.
+//  Created by Evan Peng on 3/25/21.
 //
 
 import UIKit

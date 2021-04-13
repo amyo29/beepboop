@@ -24,18 +24,11 @@
  #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #endif
 
-#if defined FBSDKCOCOAPODS
- #import <FBSDKCoreKit/FBSDKCoreKit_Basics.h>
-#elif defined BUCK
- #import <FBSDKCoreKit_Basics/FBSDKCoreKit_Basics.h>
-#endif
+#import "FBSDKCoreKitBasicsImport.h"
 
 #if defined FBSDKCOCOAPODS || defined BUCK
 
- #import "FBSDKCoreKit+Internal.h"
-
  #if !TARGET_OS_TV
-  #import "FBSDKAudioResourceLoader.h"
   #import "FBSDKAuthenticationStatusUtility.h"
   #import "FBSDKBridgeAPI.h"
   #import "FBSDKBridgeAPI+Internal.h"
@@ -45,6 +38,7 @@
   #import "FBSDKContainerViewController.h"
   #import "FBSDKCrypto.h"
   #import "FBSDKHumanSilhouetteIcon.h"
+  #import "FBSDKInternalUtility+WindowFinding.h"
   #import "FBSDKMetadataIndexer.h"
   #import "FBSDKMonotonicTime.h"
   #import "FBSDKSKAdNetworkReporter.h"
@@ -54,6 +48,7 @@
   #import "FBSDKViewHierarchyMacros.h"
   #import "FBSDKViewImpressionTracker.h"
   #import "FBSDKWebDialog.h"
+  #import "FBSDKWindowFinding.h"
  #else
   #import "FBSDKDeviceButton+Internal.h"
   #import "FBSDKDeviceDialogView.h"
@@ -62,6 +57,7 @@
   #import "FBSDKSmartDeviceDialogView.h"
  #endif
 
+ #import "FBSDKAccessToken+AccessTokenProtocols.h"
  #import "FBSDKAccessToken+Internal.h"
  #import "FBSDKAppEvents+Internal.h"
  #import "FBSDKAppEventsConfiguration.h"
@@ -72,7 +68,7 @@
  #import "FBSDKApplicationDelegate+Internal.h"
  #import "FBSDKApplicationObserving.h"
  #import "FBSDKAuthenticationStatusUtility.h"
- #import "FBSDKAuthenticationTokenClaims.h"
+ #import "FBSDKAuthenticationToken+Internal.h"
  #import "FBSDKAuthenticationTokenFactory.h"
  #import "FBSDKAuthenticationTokenHeader.h"
  #import "FBSDKBase64.h"
@@ -82,13 +78,14 @@
  #import "FBSDKDynamicFrameworkLoader.h"
  #import "FBSDKError.h"
  #import "FBSDKErrorRecoveryAttempter.h"
+ #import "FBSDKEventLogger.h"
  #import "FBSDKGateKeeperManager.h"
  #import "FBSDKGraphRequest+Internal.h"
  #import "FBSDKGraphRequestBody.h"
- #import "FBSDKGraphRequestConnecting.h"
- #import "FBSDKGraphRequestConnection+GraphRequestConnecting.h"
  #import "FBSDKGraphRequestConnection+Internal.h"
  #import "FBSDKGraphRequestConnectionFactory.h"
+ #import "FBSDKGraphRequestConnectionProviding.h"
+ #import "FBSDKGraphRequestFactory.h"
  #import "FBSDKGraphRequestMetadata.h"
  #import "FBSDKGraphRequestPiggybackManager.h"
  #import "FBSDKGraphRequestProtocol+Internal.h"
@@ -98,6 +95,8 @@
  #import "FBSDKKeychainStore.h"
  #import "FBSDKKeychainStoreViaBundleID.h"
  #import "FBSDKLogger.h"
+ #import "FBSDKLogger+Logging.h"
+ #import "FBSDKLogging.h"
  #import "FBSDKLogo.h"
  #import "FBSDKMath.h"
  #import "FBSDKProfile+Internal.h"
@@ -112,6 +111,8 @@
  #import "FBSDKTimeSpentData.h"
  #import "FBSDKTokenCache.h"
  #import "FBSDKTokenCaching.h"
+ #import "FBSDKTokenStringProviding.h"
+ #import "FBSDKUnarchiverProvider.h"
 
 #else
 
@@ -125,10 +126,11 @@
   #import "BridgeAPI/FBSDKBridgeAPI.h"
   #import "BridgeAPI/FBSDKBridgeAPI+Internal.h"
   #import "Cryptography/FBSDKCrypto.h"
-  #import "FBSDKAudioResourceLoader.h"
   #import "FBSDKAuthenticationStatusUtility.h"
   #import "FBSDKContainerViewController.h"
+  #import "FBSDKInternalUtility+WindowFinding.h"
   #import "FBSDKMonotonicTime.h"
+  #import "FBSDKWindowFinding.h"
   #import "UI/FBSDKCloseIcon.h"
   #import "UI/FBSDKColor.h"
   #import "UI/FBSDKHumanSilhouetteIcon.h"
@@ -143,7 +145,6 @@
   #import "Device/FBSDKSmartDeviceDialogView.h"
  #endif
 
- #import "../../../Sources/FBSDKCoreKit_Basics/include/FBSDKCoreKit_Basics.h"
  #import "../AppEvents/Internal/FBSDKAppEvents+Internal.h"
  #import "../AppEvents/Internal/FBSDKAppEventsConfiguration.h"
  #import "../AppEvents/Internal/FBSDKAppEventsConfigurationManager.h"
@@ -154,28 +155,35 @@
  #import "../AppEvents/Internal/Integrity/FBSDKRestrictiveDataFilterManager.h"
  #import "Base64/FBSDKBase64.h"
  #import "ErrorRecovery/FBSDKErrorRecoveryAttempter.h"
+ #import "FBSDKAccessToken+AccessTokenProtocols.h"
  #import "FBSDKAccessToken+Internal.h"
  #import "FBSDKApplicationDelegate+Internal.h"
  #import "FBSDKApplicationObserving.h"
+ #import "FBSDKAuthenticationToken+Internal.h"
  #import "FBSDKAuthenticationTokenFactory.h"
  #import "FBSDKAuthenticationTokenHeader.h"
  #import "FBSDKDeviceRequestsHelper.h"
  #import "FBSDKDynamicFrameworkLoader.h"
  #import "FBSDKError.h"
+ #import "FBSDKEventLogger.h"
  #import "FBSDKImageDownloader.h"
  #import "FBSDKInternalUtility.h"
  #import "FBSDKLogger.h"
+ #import "FBSDKLogger+Logging.h"
+ #import "FBSDKLogging.h"
  #import "FBSDKMath.h"
  #import "FBSDKProfile+Internal.h"
  #import "FBSDKProfilePictureView+Internal.h"
  #import "FBSDKSettings+Internal.h"
  #import "FBSDKSwizzler.h"
+ #import "FBSDKTokenStringProviding.h"
+ #import "FBSDKUnarchiverProvider.h"
  #import "Network/FBSDKGraphRequest+Internal.h"
  #import "Network/FBSDKGraphRequestBody.h"
- #import "Network/FBSDKGraphRequestConnecting.h"
- #import "Network/FBSDKGraphRequestConnection+GraphRequestConnecting.h"
  #import "Network/FBSDKGraphRequestConnection+Internal.h"
  #import "Network/FBSDKGraphRequestConnectionFactory.h"
+ #import "Network/FBSDKGraphRequestConnectionProviding.h"
+ #import "Network/FBSDKGraphRequestFactory.h"
  #import "Network/FBSDKGraphRequestMetadata.h"
  #import "Network/FBSDKGraphRequestPiggybackManager.h"
  #import "Network/FBSDKGraphRequestProtocol+Internal.h"

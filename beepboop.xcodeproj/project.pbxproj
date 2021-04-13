@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0040915E2624BE9A0098875B /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040915D2624BE9A0098875B /* NotificationsViewController.swift */; };
+		004091612624C2130098875B /* AlarmRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004091602624C2130098875B /* AlarmRequestTableViewCell.swift */; };
+		004091642624C3080098875B /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004091632624C3080098875B /* FriendRequestTableViewCell.swift */; };
+		004091672624C31C0098875B /* AlarmUpdateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004091662624C31C0098875B /* AlarmUpdateTableViewCell.swift */; };
+		0040916C2624F1840098875B /* FriendUpdateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040916B2624F1840098875B /* FriendUpdateTableViewCell.swift */; };
+		0040918F262513E70098875B /* AlarmRequestUpdateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040918E262513E70098875B /* AlarmRequestUpdateTableViewCell.swift */; };
 		063208BE2612393400C22C0A /* ScheduleAlarmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063208BD2612393400C22C0A /* ScheduleAlarmDelegate.swift */; };
 		063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063208C026123A8F00C22C0A /* ScheduleAlarm.swift */; };
 		0633D49E260D902C004B50FB /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0633D49D260D902C004B50FB /* GroupViewController.swift */; };
@@ -73,6 +79,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0040915D2624BE9A0098875B /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		004091602624C2130098875B /* AlarmRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRequestTableViewCell.swift; sourceTree = "<group>"; };
+		004091632624C3080098875B /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
+		004091662624C31C0098875B /* AlarmUpdateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmUpdateTableViewCell.swift; sourceTree = "<group>"; };
+		0040916B2624F1840098875B /* FriendUpdateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUpdateTableViewCell.swift; sourceTree = "<group>"; };
+		0040918E262513E70098875B /* AlarmRequestUpdateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRequestUpdateTableViewCell.swift; sourceTree = "<group>"; };
 		063208BD2612393400C22C0A /* ScheduleAlarmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAlarmDelegate.swift; sourceTree = "<group>"; };
 		063208C026123A8F00C22C0A /* ScheduleAlarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAlarm.swift; sourceTree = "<group>"; };
 		0633D49D260D902C004B50FB /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +276,7 @@
 				9A7F3C11260AA21A00EEFE41 /* SignUpViewController.swift */,
 				9A53F8232602DB7A00D4711A /* HomeViewController.swift */,
 				0633D4A2260D9088004B50FB /* ProfileViewController.swift */,
+				0040915D2624BE9A0098875B /* NotificationsViewController.swift */,
 				069456B02622DB0800450AC8 /* FriendsViewController.swift */,
 			);
 			path = Controllers;
@@ -277,6 +290,11 @@
 				9A53F8252602DB7A00D4711A /* Main.storyboard */,
 				0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */,
 				9A53F82D2602DB7C00D4711A /* LaunchScreen.storyboard */,
+				004091602624C2130098875B /* AlarmRequestTableViewCell.swift */,
+				0040916B2624F1840098875B /* FriendUpdateTableViewCell.swift */,
+				0040918E262513E70098875B /* AlarmRequestUpdateTableViewCell.swift */,
+				004091632624C3080098875B /* FriendRequestTableViewCell.swift */,
+				004091662624C31C0098875B /* AlarmUpdateTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -503,17 +521,23 @@
 				9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */,
 				069457112624199F00450AC8 /* CreateAlarmViewController.swift in Sources */,
 				9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */,
+				0040918F262513E70098875B /* AlarmRequestUpdateTableViewCell.swift in Sources */,
+				0040915E2624BE9A0098875B /* NotificationsViewController.swift in Sources */,
 				0694570E2624194100450AC8 /* ShareToFriendsViewController.swift in Sources */,
 				063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */,
 				069456AB2622C10800450AC8 /* UserCustom.swift in Sources */,
 				9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */,
+				004091672624C31C0098875B /* AlarmUpdateTableViewCell.swift in Sources */,
 				9A29A04E2623E6DD000A5275 /* AddFriendsViewController.swift in Sources */,
 				9A53F8222602DB7A00D4711A /* SceneDelegate.swift in Sources */,
 				063208BE2612393400C22C0A /* ScheduleAlarmDelegate.swift in Sources */,
+				0040916C2624F1840098875B /* FriendUpdateTableViewCell.swift in Sources */,
 				0633D4A3260D9088004B50FB /* ProfileViewController.swift in Sources */,
 				0694571426241A7C00450AC8 /* ShareToFriendsTableViewCell.swift in Sources */,
 				0633D49E260D902C004B50FB /* GroupViewController.swift in Sources */,
 				0633D4E0260E7F7B004B50FB /* AlarmTableViewCell.swift in Sources */,
+				004091642624C3080098875B /* FriendRequestTableViewCell.swift in Sources */,
+				004091612624C2130098875B /* AlarmRequestTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

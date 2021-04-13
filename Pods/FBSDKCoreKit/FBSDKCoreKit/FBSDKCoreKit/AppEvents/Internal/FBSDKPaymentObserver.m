@@ -65,7 +65,7 @@ static NSString *const FBSDKGateKeeperAppEventsIfAutoLogSubs = @"app_events_if_a
 }
 
 // These are stored at the class level so that they can be reset in unit tests
-static dispatch_once_t *singletonToken;
+static dispatch_once_t singletonToken;
 
 + (void)startObservingTransactions
 {
@@ -81,11 +81,8 @@ static dispatch_once_t *singletonToken;
 
 + (FBSDKPaymentObserver *)singleton
 {
-  static dispatch_once_t once_token;
-  singletonToken = &once_token;
   static FBSDKPaymentObserver *shared = nil;
-
-  dispatch_once(&once_token, ^{
+  dispatch_once(&singletonToken, ^{
     shared = [[FBSDKPaymentObserver alloc] init];
   });
   return shared;
@@ -145,14 +142,16 @@ static dispatch_once_t *singletonToken;
 #pragma mark - Testability
 
 #if DEBUG
+ #if FBSDKTEST
 
 + (void)resetSingletonToken
 {
   if (singletonToken) {
-    *singletonToken = 0;
+    singletonToken = 0;
   }
 }
 
+ #endif
 #endif
 
 @end

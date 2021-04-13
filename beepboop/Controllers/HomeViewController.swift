@@ -61,7 +61,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.userDocRef = userCollectionRef.document(currentUserUid)
         
         alarmCollectionRef = Firestore.firestore().collection("alarmData")
-        
+        print(self.currentUserUid)
+        if let user = Auth.auth().currentUser {
+            print(user.uid)
+        }
         // read from firestore
         //        let db = Firestore.firestore()
         //        db.collection("alarms").getDocuments() { (querySnapshot, error) in
@@ -94,6 +97,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.sendSubviewToBack(self.alarmTableView)
         self.updateAlarmsFirestore()
         
+            //let user = Auth.auth().currentUser
+
         //        print("alarms count: ", self.alarms.count)
     }
     

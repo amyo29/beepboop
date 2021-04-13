@@ -278,7 +278,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ux-WT-G5X" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2138" y="869"/>
+            <point key="canvasLocation" x="2713" y="869"/>
         </scene>
         <!--Share To Friends View Controller-->
         <scene sceneID="iu3-gi-iTS">
@@ -498,7 +498,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9uR-Gp-lYY" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3078.2608695652175" y="868.52678571428567"/>
+            <point key="canvasLocation" x="3464" y="857"/>
         </scene>
         <!--Create Alarm View Controller-->
         <scene sceneID="hF8-od-a1e">
@@ -723,7 +723,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Spe-Q3-Pvd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2163.768115942029" y="67.633928571428569"/>
+            <point key="canvasLocation" x="1881" y="78"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="xTa-ah-mNS">
@@ -938,6 +938,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="aFc-MF-gin"/>
                         <segue destination="T9O-Aj-NH4" kind="relationship" relationship="viewControllers" id="LEs-GY-hoi"/>
                         <segue destination="X2Q-dW-nb0" kind="relationship" relationship="viewControllers" id="Ihv-aT-HgU"/>
+                        <segue destination="bbN-jg-8tq" kind="relationship" relationship="viewControllers" id="F3s-8P-t1h"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kbd-hE-s7j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1116,16 +1117,421 @@
             </objects>
             <point key="canvasLocation" x="960.86956521739137" y="868.52678571428567"/>
         </scene>
+        <!--Notifications-->
+        <scene sceneID="yJP-HS-sBY">
+            <objects>
+                <viewController id="bbN-jg-8tq" customClass="NotificationsViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2cA-DN-nEt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0s0-xS-vUU">
+                                <rect key="frame" x="117" y="64" width="180" height="40"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Notifications">
+                                        <attributes>
+                                            <color key="NSColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" metaFont="system" size="33"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Glg-NJ-epw">
+                                <rect key="frame" x="141.5" y="112" width="131" height="32"/>
+                                <segments>
+                                    <segment title="Alarms"/>
+                                    <segment title="Friends"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="bbN-jg-8tq" eventType="valueChanged" id="gAK-1I-DeM"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oQP-PW-2zr">
+                                <rect key="frame" x="10" y="151" width="394" height="645"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmRequestTableViewCell" rowHeight="75" id="lEC-ZP-xyB" customClass="AlarmRequestTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="394" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lEC-ZP-xyB" id="Qic-Xq-cGj">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boz-cO-NrJ">
+                                                    <rect key="frame" x="209" y="14" width="69.5" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Time">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Regular"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUT-Sn-UhN">
+                                                    <rect key="frame" x="77" y="14" width="37.5" height="24"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Title">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUW-oS-vay">
+                                                    <rect key="frame" x="209" y="42" width="72.5" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Date">
+                                                            <attributes>
+                                                                <font key="NSFont" size="15" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tS8-7D-Vrp">
+                                                    <rect key="frame" x="77" y="42.5" width="42.5" height="18"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Friend">
+                                                            <attributes>
+                                                                <font key="NSFont" size="15" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="cCq-Gn-yrO">
+                                                    <rect key="frame" x="10" y="18" width="50" height="39"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7P-Oe-2KT" userLabel="Accept">
+                                                    <rect key="frame" x="295" y="16" width="42" height="42"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" backgroundImage="Accept Button"/>
+                                                    <connections>
+                                                        <action selector="acceptAlarm:" destination="bbN-jg-8tq" eventType="touchUpInside" id="KPH-et-REc"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DxP-ua-W3D" userLabel="Deny">
+                                                    <rect key="frame" x="345" y="16" width="42" height="42"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" backgroundImage="Decline Button"/>
+                                                    <connections>
+                                                        <action selector="denyAlarm:" destination="bbN-jg-8tq" eventType="touchUpInside" id="S2i-dF-WOY"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tS8-7D-Vrp" firstAttribute="leading" secondItem="cCq-Gn-yrO" secondAttribute="trailing" constant="17" id="8Bg-sx-TMY"/>
+                                                <constraint firstItem="bUT-Sn-UhN" firstAttribute="leading" secondItem="cCq-Gn-yrO" secondAttribute="trailing" constant="17" id="8LQ-HS-cRv"/>
+                                                <constraint firstItem="tS8-7D-Vrp" firstAttribute="top" secondItem="bUT-Sn-UhN" secondAttribute="bottom" constant="4.5" id="QSB-rl-YBm"/>
+                                                <constraint firstItem="cCq-Gn-yrO" firstAttribute="top" secondItem="Qic-Xq-cGj" secondAttribute="topMargin" constant="7" id="Spi-Xj-xgT"/>
+                                                <constraint firstItem="bUT-Sn-UhN" firstAttribute="top" secondItem="Qic-Xq-cGj" secondAttribute="top" constant="14" id="dpT-q1-QPL"/>
+                                                <constraint firstItem="cCq-Gn-yrO" firstAttribute="centerY" secondItem="Qic-Xq-cGj" secondAttribute="centerY" id="fSC-xK-A5R"/>
+                                                <constraint firstItem="cCq-Gn-yrO" firstAttribute="leading" secondItem="Qic-Xq-cGj" secondAttribute="leading" constant="10" id="uyr-5R-bHy"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="alarmAcceptButton" destination="Q7P-Oe-2KT" id="htf-9i-kbd"/>
+                                            <outlet property="alarmDateLabel" destination="kUW-oS-vay" id="WaN-XQ-buS"/>
+                                            <outlet property="alarmDenyButton" destination="DxP-ua-W3D" id="IGY-8B-fFM"/>
+                                            <outlet property="alarmFriendLabel" destination="tS8-7D-Vrp" id="d9R-AW-7yU"/>
+                                            <outlet property="alarmImageView" destination="cCq-Gn-yrO" id="8dq-eb-C2X"/>
+                                            <outlet property="alarmNameLabel" destination="bUT-Sn-UhN" id="BMS-Lj-lEi"/>
+                                            <outlet property="alarmTimeLabel" destination="boz-cO-NrJ" id="uuE-rp-G6W"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendRequestTableViewCell" rowHeight="75" id="mCY-NU-DJe" customClass="FriendRequestTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="103" width="394" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mCY-NU-DJe" id="EWZ-s0-bqZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="ccX-9g-HFe">
+                                                    <rect key="frame" x="10" y="18" width="50" height="39"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9p-x7-lIX" userLabel="Accept">
+                                                    <rect key="frame" x="295" y="16" width="42" height="42"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" backgroundImage="Accept Button"/>
+                                                    <connections>
+                                                        <action selector="acceptFriend:" destination="bbN-jg-8tq" eventType="touchUpInside" id="4js-QT-WFQ"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHt-75-exU" userLabel="Deny">
+                                                    <rect key="frame" x="345" y="16" width="42" height="42"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" backgroundImage="Decline Button"/>
+                                                    <connections>
+                                                        <action selector="denyFriend:" destination="bbN-jg-8tq" eventType="touchUpInside" id="q2T-7V-6Ly"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GoR-aC-eY8">
+                                                    <rect key="frame" x="77" y="25" width="53" height="24"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Name">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ccX-9g-HFe" firstAttribute="centerY" secondItem="EWZ-s0-bqZ" secondAttribute="centerY" id="GZO-DB-ImB"/>
+                                                <constraint firstItem="GoR-aC-eY8" firstAttribute="top" secondItem="EWZ-s0-bqZ" secondAttribute="top" constant="14" id="M0P-kj-J61"/>
+                                                <constraint firstItem="ccX-9g-HFe" firstAttribute="leading" secondItem="EWZ-s0-bqZ" secondAttribute="leading" constant="10" id="XMG-4V-hz4"/>
+                                                <constraint firstItem="ccX-9g-HFe" firstAttribute="top" secondItem="EWZ-s0-bqZ" secondAttribute="topMargin" constant="7" id="c9n-qi-x9K"/>
+                                                <constraint firstItem="GoR-aC-eY8" firstAttribute="leading" secondItem="ccX-9g-HFe" secondAttribute="trailing" constant="17" id="oGX-fL-Apc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="acceptButton" destination="G9p-x7-lIX" id="E40-Ud-8a6"/>
+                                            <outlet property="denyButton" destination="CHt-75-exU" id="AhC-g6-s1D"/>
+                                            <outlet property="friendImageView" destination="ccX-9g-HFe" id="MPi-El-kaH"/>
+                                            <outlet property="friendLabel" destination="GoR-aC-eY8" id="5k6-ng-5oG"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmUpdateTableViewCell" rowHeight="75" id="FFw-gA-Wxj" customClass="AlarmUpdateTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="178" width="394" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FFw-gA-Wxj" id="vyF-3h-dWh">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vlh-b9-ePG">
+                                                    <rect key="frame" x="209" y="14" width="69.5" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Time">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Regular"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUM-Ia-CDo">
+                                                    <rect key="frame" x="77" y="14" width="37.5" height="24"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Title">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fS-Kn-qgr">
+                                                    <rect key="frame" x="209" y="42" width="72.5" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Date">
+                                                            <attributes>
+                                                                <font key="NSFont" size="15" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7A-wH-w8D">
+                                                    <rect key="frame" x="77" y="42.5" width="113" height="18"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Changed From...">
+                                                            <attributes>
+                                                                <font key="NSFont" size="15" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="yKB-a9-gjl">
+                                                    <rect key="frame" x="10" y="18" width="50" height="39"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Imj-R3-c6G">
+                                                    <rect key="frame" x="258" y="23.5" width="61" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbd-V5-0Eq">
+                                                    <rect key="frame" x="321" y="14" width="69.5" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Time">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Regular"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieo-Sk-tor">
+                                                    <rect key="frame" x="321" y="42" width="72.5" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Date">
+                                                            <attributes>
+                                                                <font key="NSFont" size="15" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EUM-Ia-CDo" firstAttribute="leading" secondItem="yKB-a9-gjl" secondAttribute="trailing" constant="17" id="93L-t1-XIb"/>
+                                                <constraint firstItem="m7A-wH-w8D" firstAttribute="leading" secondItem="yKB-a9-gjl" secondAttribute="trailing" constant="17" id="Aka-7A-C46"/>
+                                                <constraint firstItem="yKB-a9-gjl" firstAttribute="leading" secondItem="vyF-3h-dWh" secondAttribute="leading" constant="10" id="BzX-aC-etN"/>
+                                                <constraint firstItem="m7A-wH-w8D" firstAttribute="top" secondItem="EUM-Ia-CDo" secondAttribute="bottom" constant="4.5" id="c7F-nB-4gO"/>
+                                                <constraint firstItem="EUM-Ia-CDo" firstAttribute="top" secondItem="vyF-3h-dWh" secondAttribute="top" constant="14" id="oXG-JP-iKg"/>
+                                                <constraint firstItem="yKB-a9-gjl" firstAttribute="top" secondItem="vyF-3h-dWh" secondAttribute="topMargin" constant="7" id="oeo-82-0Dl"/>
+                                                <constraint firstItem="yKB-a9-gjl" firstAttribute="centerY" secondItem="vyF-3h-dWh" secondAttribute="centerY" id="opq-AH-saV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="alarmImageView" destination="yKB-a9-gjl" id="l9e-Oi-pUE"/>
+                                            <outlet property="alarmNameLabel" destination="EUM-Ia-CDo" id="6D3-87-qyw"/>
+                                            <outlet property="alarmNewDateLabel" destination="ieo-Sk-tor" id="RYF-B7-gk0"/>
+                                            <outlet property="alarmNewTimeLabel" destination="Dbd-V5-0Eq" id="LeR-Ib-0cj"/>
+                                            <outlet property="alarmOldDateLabel" destination="8fS-Kn-qgr" id="SdJ-eI-coZ"/>
+                                            <outlet property="alarmOldTimeLabel" destination="Vlh-b9-ePG" id="24G-l5-nr9"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendUpdateTableViewCell" rowHeight="75" id="bpR-SH-u1T" customClass="FriendUpdateTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="253" width="394" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bpR-SH-u1T" id="UUn-HV-KmJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="emD-Og-uYp">
+                                                    <rect key="frame" x="10" y="18" width="50" height="39"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk1-fX-xIF">
+                                                    <rect key="frame" x="77" y="25" width="210" height="24"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Name accepted/denied">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dk1-fX-xIF" firstAttribute="top" secondItem="UUn-HV-KmJ" secondAttribute="top" constant="14" id="15R-SS-Ryb"/>
+                                                <constraint firstItem="emD-Og-uYp" firstAttribute="leading" secondItem="UUn-HV-KmJ" secondAttribute="leading" constant="10" id="5rF-No-0tb"/>
+                                                <constraint firstItem="dk1-fX-xIF" firstAttribute="leading" secondItem="emD-Og-uYp" secondAttribute="trailing" constant="17" id="PM9-85-qAG"/>
+                                                <constraint firstItem="emD-Og-uYp" firstAttribute="centerY" secondItem="UUn-HV-KmJ" secondAttribute="centerY" id="Vui-uz-X93"/>
+                                                <constraint firstItem="emD-Og-uYp" firstAttribute="top" secondItem="UUn-HV-KmJ" secondAttribute="topMargin" constant="7" id="xsT-4g-qaQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="friendImageView" destination="emD-Og-uYp" id="qOi-bJ-sdh"/>
+                                            <outlet property="friendStatus" destination="dk1-fX-xIF" id="peW-6F-1Ee"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmChangeTableViewCell" rowHeight="75" id="xYG-1h-9Ne" customClass="AlarmRequestUpdateTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="328" width="394" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xYG-1h-9Ne" id="ydk-I1-mHX">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="3Fc-Lr-R32">
+                                                    <rect key="frame" x="10" y="18" width="50" height="39"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9I-Y0-S1R">
+                                                    <rect key="frame" x="77" y="25" width="269" height="24"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Name accepted/denied Name">
+                                                            <attributes>
+                                                                <font key="NSFont" size="20" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3Fc-Lr-R32" firstAttribute="top" secondItem="ydk-I1-mHX" secondAttribute="topMargin" constant="7" id="AwJ-dX-5t8"/>
+                                                <constraint firstItem="J9I-Y0-S1R" firstAttribute="top" secondItem="ydk-I1-mHX" secondAttribute="top" constant="14" id="dBz-te-fJ1"/>
+                                                <constraint firstItem="3Fc-Lr-R32" firstAttribute="centerY" secondItem="ydk-I1-mHX" secondAttribute="centerY" id="ghc-qy-Ol2"/>
+                                                <constraint firstItem="J9I-Y0-S1R" firstAttribute="leading" secondItem="3Fc-Lr-R32" secondAttribute="trailing" constant="17" id="mcE-Me-BQM"/>
+                                                <constraint firstItem="3Fc-Lr-R32" firstAttribute="leading" secondItem="ydk-I1-mHX" secondAttribute="leading" constant="10" id="vqv-zR-OTU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="alarmImageView" destination="3Fc-Lr-R32" id="4FP-68-zg2"/>
+                                            <outlet property="alarmUpdate" destination="J9I-Y0-S1R" id="NNY-Ir-8Nr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="HI5-in-llv"/>
+                        <color key="backgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="HI5-in-llv" firstAttribute="bottom" secondItem="oQP-PW-2zr" secondAttribute="bottom" constant="17" id="1Ce-Ew-9uP"/>
+                            <constraint firstItem="0s0-xS-vUU" firstAttribute="centerX" secondItem="HI5-in-llv" secondAttribute="centerX" id="3hn-45-LVh"/>
+                            <constraint firstItem="Glg-NJ-epw" firstAttribute="top" secondItem="0s0-xS-vUU" secondAttribute="bottom" constant="8" symbolic="YES" id="GFA-ms-MJQ"/>
+                            <constraint firstItem="oQP-PW-2zr" firstAttribute="top" secondItem="Glg-NJ-epw" secondAttribute="bottom" constant="8" symbolic="YES" id="V5k-Vv-F9N"/>
+                            <constraint firstItem="oQP-PW-2zr" firstAttribute="leading" secondItem="HI5-in-llv" secondAttribute="leading" constant="10" id="WdJ-7s-w8G"/>
+                            <constraint firstItem="Glg-NJ-epw" firstAttribute="centerX" secondItem="HI5-in-llv" secondAttribute="centerX" id="bRa-lA-W3C"/>
+                            <constraint firstItem="HI5-in-llv" firstAttribute="trailing" secondItem="oQP-PW-2zr" secondAttribute="trailing" constant="10" id="dZZ-wb-sfD"/>
+                            <constraint firstItem="oQP-PW-2zr" firstAttribute="centerX" secondItem="HI5-in-llv" secondAttribute="centerX" id="fKt-7s-3F6"/>
+                            <constraint firstItem="0s0-xS-vUU" firstAttribute="top" secondItem="HI5-in-llv" secondAttribute="top" constant="20" id="o9X-am-gDh"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="bell.fill" catalog="system" selectedImage="bell.fill" id="sB7-G4-q8y">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="notifTableView" destination="oQP-PW-2zr" id="6Bm-qW-CT8"/>
+                        <outlet property="segCtrl" destination="Glg-NJ-epw" id="FOy-MD-8Un"/>
+                        <outlet property="titleLabel" destination="0s0-xS-vUU" id="JQF-3h-ZEd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vBF-02-uLp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1879.7101449275365" y="868.52678571428567"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="S7Q-Ua-MLD"/>
         <segue reference="cSI-KQ-mpk"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Accept Button" width="50" height="50"/>
         <image name="Add Friend Button" width="268" height="173"/>
         <image name="AddButton" width="62.5" height="62.5"/>
         <image name="AddFriendsIcon" width="74" height="82"/>
         <image name="AlarmsTabIcon" width="25" height="25"/>
+        <image name="Decline Button" width="52" height="52"/>
         <image name="EventPic" width="50" height="49"/>
         <image name="GroupsTabIcon" width="25" height="25"/>
         <image name="LoginButton" width="268" height="118"/>
@@ -1138,6 +1544,8 @@
         <image name="SettingsTabIcon" width="25" height="25"/>
         <image name="SignUpButton" width="268" height="119"/>
         <image name="Title" width="361" height="106"/>
+        <image name="arrow.right" catalog="system" width="128" height="98"/>
+        <image name="bell.fill" catalog="system" width="128" height="124"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

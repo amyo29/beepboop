@@ -87,9 +87,12 @@ userDoc
 - [ ] Display all active friend requests
 - [x] Search for users through OAuth/Phone/Email
 
-### Notifications Screen
-- [ ] Display all incoming notifications for a user, navigated to via tab bar
-- [ ] Respond to incoming friend requests - accept/decline
-- [ ] Display all incoming alarm requests - accept/decline
-- [ ] Display all incoming group requests - accept/decline [Final phase task]
-- [ ] Update Firestore alarm and user data based on notification response
+
+### Notifications Screen 
+- [x] Expose notifications screen as a tab on the tab bar
+- [ ] Display all incoming notifications for a user
+    - [x] Display all changes to alarms that a user is a part of
+    - [x] Respond to incoming friend requests - accept/decline
+    - [x] Display all incoming alarm invitations - accept/decline
+    - [ ] Display all incoming group requests - accept/decline [Final phase task]
+- [x] Update Firestore alarm and user data based on notification responses

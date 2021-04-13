@@ -18,24 +18,16 @@
 
 #import <Foundation/Foundation.h>
 
-#if SWIFT_PACKAGE
-#import "FBSDKCoreKit.h"
-#else
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#endif
-
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol FBSDKGraphRequest;
+NS_SWIFT_NAME(Logging)
+@protocol FBSDKLogging
 
-/// A protocol to describe an object that can manage graph requests
-NS_SWIFT_NAME(GraphRequestConnecting)
-@protocol FBSDKGraphRequestConnecting
++ (void)singleShotLogEntry:(NSString *)loggingBehavior
+                  logEntry:(NSString *)logEntry;
 
-- (void)addRequest:(id<FBSDKGraphRequest>)request
- completionHandler:(FBSDKGraphRequestBlock)handler;
-
-- (void)start;
++ (void)singleShotLogEntry:(NSString *)loggingBehavior
+              formatString:(NSString *)formatString, ... NS_FORMAT_FUNCTION(2,3);
 
 @end
 
