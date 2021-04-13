@@ -123,13 +123,13 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
         return
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == self.loginToMainSegueIdentifier,
-           let tabBarController = segue.destination as? UITabBarController,
-           let destination = tabBarController.viewControllers?.first as? HomeViewController {
-            destination.userID = self.userId
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == self.loginToMainSegueIdentifier,
+//           let tabBarController = segue.destination as? UITabBarController,
+//           let destination = tabBarController.viewControllers?.first as? HomeViewController {
+//            destination.userID = self.userId
+//        }
+//    }
     
     // MARK: - Hide Keyboard
     

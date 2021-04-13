@@ -31,25 +31,34 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private let alarmTableViewCellIdentifier = "AlarmTableViewCell"
     
-    var userID: String?
+    var currentUserUid: String?
     
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        Firestore.firestore().collection("userData").whereField("userId", isEqualTo: self.userID!).getDocuments(
-            completion:
-            { (snapshot, error) in
-                if let error = error {
-                    print("An error occurred when retrieving the user: \(error.localizedDescription)")
-                } else if snapshot!.documents.count != 1 {
-                    print("The specified user with UUID \(self.userID!) does not exist.")
-                } else {
-                    self.userDocRef = snapshot?.documents.first?.reference
-                }
-            }
-        )
+        let userCollectionRef = Firestore.firestore().collection("userData")
+        
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {
+            let alertController = UIAlertController(
+                title: "Unknown error",
+                message: "Something went wrong, please try again.",
+                preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(
+                                        title: "Ok",
+                                        style: .default,
+                                        handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        self.currentUserUid = currentUserUid
+        
+        self.userDocRef = userCollectionRef.document(currentUserUid)
         
         alarmCollectionRef = Firestore.firestore().collection("alarmData")
         
@@ -212,7 +221,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func addAlarmToFirestore(time: Date, name: String, recurrence: String) {
         let uuid = UUID()
-        let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, uuidStr:uuid.uuidString, userId: [self.userID!])
+        let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, uuidStr:uuid.uuidString, userId: [self.currentUserUid!])
         
         alarmCollectionRef.addDocument(data: newAlarm.dictionary)
         userDocRef.updateData([
@@ -234,7 +243,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Updates Firestore data in real-time via snapshot listener
     // Updates Table view as soon as users create/edit alarm w/o needing to manually fetch data from firestore (see retrieveDataFromFirestore() code)
     func updateAlarmsFirestore() {
-        dataListener = alarmCollectionRef.whereField("userId", arrayContains: self.userID!).addSnapshotListener { [unowned self] (snapshot, error) in
+        dataListener = alarmCollectionRef.whereField("userId", arrayContains: self.currentUserUid!).addSnapshotListener { [unowned self] (snapshot, error) in
             guard let snapshot = snapshot else {
                 print("Error fetching snapshot results: \(error!)")
                 return

@@ -111,17 +111,20 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - Navigation
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == self.signUpToMainSegueIdentifier,
-           let tabBarController = segue.destination as? UITabBarController,
-           let destination = tabBarController.viewControllers?.first as? HomeViewController {
-            destination.userID = self.userID
-        }
-    }
-    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == self.signUpToMainSegueIdentifier,
+//           let tabBarController = segue.destination as? UITabBarController,
+//           let destination = tabBarController.viewControllers?.first as? HomeViewController {
+//            destination.userID = self.userID
+//        }
+//    }
+//
     
     // MARK: - Hide Keyboard
     
