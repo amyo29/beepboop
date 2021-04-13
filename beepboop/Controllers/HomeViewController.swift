@@ -78,7 +78,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.sendSubviewToBack(self.alarmTableView)
-        self.alarmList = [AlarmCustom]()
         self.updateAlarmsFirestore()
     }
     
@@ -283,6 +282,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //    }
     
     func updateAlarmsFirestore() {
+        self.alarmList = [AlarmCustom]()
         var alarmUuids = [String]()
         userDocRef.collection("alarmMetadata").getDocuments() { (querySnapshot, err) in
             if let err = err {
