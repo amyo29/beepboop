@@ -91,7 +91,9 @@ class SignUpViewController: UIViewController {
             if error == nil, let user = user {
                 // Create user document in Firestore
                 self.userID = user.user.uid
-                let newUser = UserCustom( userEmail: email, name: name, alarmData: nil, snoozeEnabled: false, darkModeEnabled: false, friendRequestsReceived: nil, friendRequestsSent: nil, alarmRequestsReceived: nil, alarmRequestsSent: nil, notifications: nil)
+//                let newUser = UserCustom( userEmail: email, name: name, alarmData: nil, snoozeEnabled: false, darkModeEnabled: false, friendRequestsReceived: nil, friendRequestsSent: nil, alarmRequestsReceived: nil, alarmRequestsSent: nil, notifications: nil)
+                
+                let newUser = UserCustom( userEmail: email, name: name, snoozeEnabled: false, darkModeEnabled: false, friendRequestsReceived: nil, friendRequestsSent: nil, alarmRequestsReceived: nil, alarmRequestsSent: nil, notifications: nil)
 //                self.userCollectionRef.addDocument(data: newUser.dictionary)
                 self.userCollectionRef.document(user.user.uid).setData(newUser.dictionary)
                 Auth.auth().signIn(withEmail: email, password: password)

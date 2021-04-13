@@ -12,7 +12,7 @@ import FirebaseFirestore
 struct UserCustom {
     var userEmail: String?
     var name: String?
-    var alarmData: [[String: Any]]?
+//    var alarmData: [[String: Any]]?
     // groups
     var snoozeEnabled: Bool?
     var darkModeEnabled: Bool?
@@ -28,7 +28,7 @@ struct UserCustom {
         return [
             "userEmail": self.userEmail ?? "",
             "name": self.name ?? "",
-            "alarmData": self.alarmData ?? [],
+//            "alarmData": self.alarmData ?? [],
             "snoozeEnabled": self.snoozeEnabled ?? false,
             "darkModeEnabled": self.darkModeEnabled ?? false,
             "friendRequestsReceived": self.friendRequestsReceived ?? [],
@@ -46,7 +46,7 @@ extension UserCustom {
     init?(dictionary: [String : Any]) {
         guard let userEmail = dictionary["userEmail"] as? String,
               let name = dictionary["name"] as? String,
-              let alarmData = dictionary["alarmData"] as? [[String: Any]],
+//              let alarmData = dictionary["alarmData"] as? [[String: Any]],
               let snoozeEnabled = dictionary["snoozeEnabled"] as? Bool,
               let darkModeEnabled = dictionary["darkModeEnabled"] as? Bool,
               let friendRequestsReceived = dictionary["friendRequestsReceived"] as? [String],
@@ -59,7 +59,7 @@ extension UserCustom {
         
         self.init(userEmail: userEmail,
                   name: name,
-                  alarmData: alarmData,
+//                  alarmData: alarmData,
                   snoozeEnabled: snoozeEnabled,
                   darkModeEnabled: darkModeEnabled,
                   friendRequestsReceived: friendRequestsReceived,
