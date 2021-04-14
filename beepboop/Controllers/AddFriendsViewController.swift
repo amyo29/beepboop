@@ -18,10 +18,10 @@ import Firebase
 
 class AddFriendsViewController: UIViewController {
 
-    @IBOutlet weak var EnterFriendEmailTextLabel: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var addFriendButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var instructionTextLabel: UILabel!
     
     var userCollectionRef: CollectionReference!
     
@@ -29,6 +29,9 @@ class AddFriendsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        backButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 23.0)
+        instructionTextLabel.font = UIFont(name: "JosefinSans-Regular", size: 23.0)
+        emailTextField.font = UIFont(name: "JosefinSans-Regular", size: 12.0)
     }
     
     @IBAction func addFriendButtonPressed(_ sender: Any) {
