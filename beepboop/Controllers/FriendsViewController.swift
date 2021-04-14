@@ -28,6 +28,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Do any additional setup after loading the view.
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
+        self.friendsTableView.backgroundColor = UIColor(hex: "FEFDEC")
+        self.friendsTableView.separatorColor = .clear
                 
         guard let currentUserUid = Auth.auth().currentUser?.uid else {
             let alertController = UIAlertController(
@@ -50,6 +52,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.userDocRef = userCollectionRef.document(currentUserUid)
         
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+        backButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 23.0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +81,13 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func populateCell(friend: UserCustom, cell: FriendsTableViewCell) {
         print("in populateCell, friend=\(friend)")
         cell.friendNameLabel?.text = friend.name
+        cell.friendNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
         cell.friendImageView?.image = UIImage(named: "EventPic") // change to friend user profile pic
+        
+        // if you do not set `shadowPath` you'll notice laggy scrolling
+        // add this in `willDisplay` method
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
     
     @IBAction func friendMetadataButtonPressed(_ sender: Any) {
@@ -89,7 +98,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         alertController.addAction(UIAlertAction(
                                     title: "Remove",
-                                    style: .cancel,
+                                    style: .destructive,
                                     handler: { (action) -> Void in
                                         
                                         print( "Remove friend from friends list and table view")
@@ -111,6 +120,12 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                                         print( "Edit friend")
                                     }))
         
+        alertController.addAction(UIAlertAction(
+                                    title: "Cancel",
+                                    style: .cancel,
+                                    handler: { (action) -> Void in
+                                    }))
+        
        
         self.present(alertController, animated: true, completion: nil)
     }
@@ -128,29 +143,34 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         self.userCollectionRef.document(currentUserUid).getDocument { (document, error) in
+            self.friendsTableView.isHidden = true
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
-                guard let document = document else {
+                guard let document = document, document.exists else {
                     print("Error getting documents")
                     return
                 }
                 
                 if let friendUuids = document.get("friendsList") as? [String] {
                     for friendUuid in friendUuids {
-                        let friendDocRef = self.userCollectionRef.document(friendUuid)
-                        friendDocRef.getDocument { (document, error) in
+                        self.userCollectionRef.document(friendUuid).getDocument { (document, error) in
                             if let document = document,
                                document.exists,
-                               let data = document.data(),
-                               let model = UserCustom(dictionary: data) {
-                                self.friendsList.append(model)
-                                self.friendsTableView.reloadData()
+                               let data = document.data() {
+                                if let model = UserCustom(dictionary: data) {
+                                    self.friendsList.append(model)
+                                    self.friendsTableView.reloadData()
+                                }
                             }
+                               
                         }
                     }
+                    self.friendsTableView.isHidden = false
+
                 }
             }
+            
         }
     }
     
