@@ -17,7 +17,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Properties
     var userDocRef: DocumentReference!
-    var alarmCollectionRef: CollectionReference!    
+    var alarmCollectionRef: CollectionReference!
+    var userCollectionRef: CollectionReference!
     var dataListener: ListenerRegistration! // Increases efficiency of app by only listening to data when view is on screen
     
     // data source of stored alarms per user
@@ -38,7 +39,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let userCollectionRef = Firestore.firestore().collection("userData")
+        userCollectionRef = Firestore.firestore().collection("userData")
         
         guard let currentUserUid = Auth.auth().currentUser?.uid else {
             let alertController = UIAlertController(
@@ -379,6 +380,54 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "HomeToAlarmMetadata", let destination = segue.destination as? AlarmMetadataViewController, let opIndex = alarmTableView.indexPathForSelectedRow?.row {
+            var alarmUserStatus = alarmList[opIndex].userStatus
+//            print("type alarmuserStatus: ", type(of: alarmUserStatus))
+            var acceptedList: [Dictionary<String, Any>] = []
+            var declinedList: [Dictionary<String, Any>] = []
+            var pendingList: [Dictionary<String, Any>] = []
+            
+//            let g = DispatchGroup()
+            for (uuid, response) in alarmUserStatus! {
+                let docRef = userCollectionRef.document(uuid)
+//                g.enter()
+                docRef.getDocument { (document, error) in
+                    if let document = document, document.exists, let dataDescription = document.data() {
+                        print("are we ever getting in here #3")
+                        // TODO: turn into enum
+                        switch response {
+                        case "Accepted":
+                            print("appended to accepted list")
+                            acceptedList.append(dataDescription)
+                            destination.acceptedList = acceptedList
+                            print("acceptedList after append: ", acceptedList)
+                        case "Denied":
+                            print("appended to declined list")
+                            declinedList.append(dataDescription)
+                        case "Pending":
+                            print("appended to pending list")
+                            pendingList.append(dataDescription)
+                        default:
+                            print("seems response values weren't set correctly: \(response)")
+                        }
+//                        g.leave()
+                    } else {
+                        print("Document does not exist")
+//                        g.leave()
+                    }
+                }
+            }
+//            g.notify(queue:.main) {
+//                print("acceptedList: ", acceptedList)
+//                completion(acceptedList)
+//            }
+            print("acceptedList: ", acceptedList)
+            destination.time = self.extractTimeFromDate(time: alarmList[opIndex].time)
+            destination.alarmName = alarmList[opIndex].name!
+            destination.acceptedList = acceptedList
+            destination.declinedList = declinedList
+            destination.pendingList = pendingList
+        }
         if let destination = segue.destination as? CreateAlarmViewController{
             destination.delegate = self
         }
