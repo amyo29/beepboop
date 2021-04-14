@@ -160,68 +160,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kx-ur-bHa" userLabel="AddButton">
-                                <rect key="frame" x="294.5" y="715.5" width="116.5" height="62.5"/>
-                                <state key="normal" title="Button" image="AddButton"/>
+                                <rect key="frame" x="321.5" y="715.5" width="62.5" height="62.5"/>
+                                <state key="normal" image="AddButton"/>
                                 <connections>
                                     <segue destination="dld-ux-Cp7" kind="presentation" modalPresentationStyle="fullScreen" id="sZU-dj-Rky"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7AP-ii-8rm" userLabel="Friends Table View">
-                                <rect key="frame" x="0.0" y="183.5" width="414" height="629.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmTableViewCell" rowHeight="48" id="05x-BQ-tHq" userLabel="FriendsTableViewCell" customClass="FriendsTableViewCell" customModule="beepboop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="48"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="05x-BQ-tHq" id="5vU-cF-K8i">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="93" translatesAutoresizingMaskIntoConstraints="NO" id="GHQ-Hc-W0M">
-                                                    <rect key="frame" x="20" y="-2" width="377" height="49"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="K1N-vo-Bed" userLabel="Friend Image View">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="49"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRX-Dh-32H" userLabel="Friend Name Label">
-                                                            <rect key="frame" x="143" y="0.0" width="126" height="49"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Bill Bulko">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="30" name="SFMono-Medium"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvi-0n-nsR">
-                                                            <rect key="frame" x="362" y="0.0" width="15" height="49"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="49" id="YM2-80-4Be"/>
-                                                                <constraint firstAttribute="width" constant="15" id="lTe-hE-ReH"/>
-                                                            </constraints>
-                                                            <state key="normal" title="Button" image="MetadataButton"/>
-                                                            <connections>
-                                                                <action selector="friendMetadataButtonPressed:" destination="qkT-gJ-o3M" eventType="touchUpInside" id="VG2-P2-FlV"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="zvi-0n-nsR" secondAttribute="trailing" id="wzT-wM-Rej"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="friendImageView" destination="K1N-vo-Bed" id="94g-go-YQd"/>
-                                            <outlet property="friendMetadataButton" destination="zvi-0n-nsR" id="dRZ-if-bo4"/>
-                                            <outlet property="friendNameLabel" destination="FRX-Dh-32H" id="PRT-Xc-X6t"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <sections/>
-                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yod-9x-kiS">
                                 <rect key="frame" x="158" y="104" width="98" height="39.5"/>
                                 <attributedString key="attributedText">
@@ -248,21 +192,85 @@
                                     <action selector="backButtonPressed:" destination="qkT-gJ-o3M" eventType="touchUpInside" id="Tl5-6h-aY4"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IUP-LP-lkw">
+                                <rect key="frame" x="10" y="183.5" width="394" height="712.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendsTableViewCell" rowHeight="75" id="g1f-fN-6fO" customClass="FriendsTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="394" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g1f-fN-6fO" id="8dI-7w-SSr">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="RPv-Ct-pWx" userLabel="Friend Image View">
+                                                    <rect key="frame" x="10" y="18" width="50" height="39"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="Gjl-qX-bVX"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gS-pN-0Vb" userLabel="Friend Name Label">
+                                                    <rect key="frame" x="77" y="14" width="247" height="47"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Name">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <font key="NSFont" size="20" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22e-Rh-yDM" userLabel="Metadata Button">
+                                                    <rect key="frame" x="344" y="26.5" width="20" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="7jt-gR-E0W"/>
+                                                    </constraints>
+                                                    <state key="normal" image="MetadataButton"/>
+                                                    <connections>
+                                                        <action selector="friendMetadataButtonPressed:" destination="qkT-gJ-o3M" eventType="touchUpInside" id="Yse-1V-DbN"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RPv-Ct-pWx" firstAttribute="leading" secondItem="8dI-7w-SSr" secondAttribute="leading" constant="10" id="9a5-OZ-Zoe"/>
+                                                <constraint firstAttribute="bottom" secondItem="1gS-pN-0Vb" secondAttribute="bottom" constant="14" id="9cT-6w-YCv"/>
+                                                <constraint firstItem="1gS-pN-0Vb" firstAttribute="top" secondItem="8dI-7w-SSr" secondAttribute="top" constant="14" id="AgA-c6-3iZ"/>
+                                                <constraint firstItem="1gS-pN-0Vb" firstAttribute="leading" secondItem="RPv-Ct-pWx" secondAttribute="trailing" constant="17" id="QS5-bX-Mco"/>
+                                                <constraint firstItem="RPv-Ct-pWx" firstAttribute="top" secondItem="8dI-7w-SSr" secondAttribute="topMargin" constant="7" id="UMr-V9-etc"/>
+                                                <constraint firstAttribute="trailing" secondItem="22e-Rh-yDM" secondAttribute="trailing" constant="30" id="bqB-qk-Zak"/>
+                                                <constraint firstItem="RPv-Ct-pWx" firstAttribute="centerY" secondItem="8dI-7w-SSr" secondAttribute="centerY" id="btO-k6-w5T"/>
+                                                <constraint firstItem="22e-Rh-yDM" firstAttribute="leading" secondItem="1gS-pN-0Vb" secondAttribute="trailing" constant="20" id="gn5-kc-a8E"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="RPv-Ct-pWx" secondAttribute="bottom" constant="7" id="sFp-Rs-DeH"/>
+                                                <constraint firstItem="22e-Rh-yDM" firstAttribute="centerY" secondItem="8dI-7w-SSr" secondAttribute="centerY" id="xaL-ys-gqT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="friendImageView" destination="RPv-Ct-pWx" id="wGe-B1-gCs"/>
+                                            <outlet property="friendMetadataButton" destination="22e-Rh-yDM" id="pS3-lJ-gwy"/>
+                                            <outlet property="friendNameLabel" destination="1gS-pN-0Vb" id="w5Z-yv-7LC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hjE-JE-nB3"/>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="yod-9x-kiS" firstAttribute="top" secondItem="hjE-JE-nB3" secondAttribute="top" constant="60" id="1O9-Il-Rjd"/>
                             <constraint firstItem="h68-Zv-weP" firstAttribute="leading" secondItem="hjE-JE-nB3" secondAttribute="leading" constant="20" id="1kU-T6-p2a"/>
-                            <constraint firstItem="hjE-JE-nB3" firstAttribute="bottom" secondItem="7AP-ii-8rm" secondAttribute="bottom" id="Lq7-ny-8Aw"/>
+                            <constraint firstItem="hjE-JE-nB3" firstAttribute="trailing" secondItem="IUP-LP-lkw" secondAttribute="trailing" constant="10" id="DEe-o4-Stj"/>
                             <constraint firstItem="yod-9x-kiS" firstAttribute="centerX" secondItem="V6h-Fz-Nhb" secondAttribute="centerX" id="Mt3-VM-h1N"/>
-                            <constraint firstItem="hjE-JE-nB3" firstAttribute="trailing" secondItem="7AP-ii-8rm" secondAttribute="trailing" id="UN0-kD-Z2S"/>
+                            <constraint firstAttribute="bottom" secondItem="IUP-LP-lkw" secondAttribute="bottom" id="Rvh-hr-OSF"/>
                             <constraint firstItem="h68-Zv-weP" firstAttribute="top" secondItem="hjE-JE-nB3" secondAttribute="top" constant="20" id="WCq-2j-vZo"/>
-                            <constraint firstItem="7AP-ii-8rm" firstAttribute="centerX" secondItem="hjE-JE-nB3" secondAttribute="centerX" id="ZK2-0c-Xmv"/>
-                            <constraint firstItem="hjE-JE-nB3" firstAttribute="trailing" secondItem="5Kx-ur-bHa" secondAttribute="trailing" constant="3" id="b6H-ll-E3w"/>
-                            <constraint firstItem="7AP-ii-8rm" firstAttribute="top" secondItem="yod-9x-kiS" secondAttribute="bottom" constant="40" id="pVJ-Rh-rmE"/>
+                            <constraint firstItem="hjE-JE-nB3" firstAttribute="trailing" secondItem="5Kx-ur-bHa" secondAttribute="trailing" constant="30" id="b6H-ll-E3w"/>
+                            <constraint firstItem="IUP-LP-lkw" firstAttribute="leading" secondItem="hjE-JE-nB3" secondAttribute="leading" constant="10" id="inH-bh-EtQ"/>
                             <constraint firstItem="hjE-JE-nB3" firstAttribute="bottom" secondItem="5Kx-ur-bHa" secondAttribute="bottom" constant="35" id="phb-Ws-NHG"/>
-                            <constraint firstItem="7AP-ii-8rm" firstAttribute="leading" secondItem="hjE-JE-nB3" secondAttribute="leading" id="xfK-bX-i5C"/>
+                            <constraint firstItem="IUP-LP-lkw" firstAttribute="top" secondItem="yod-9x-kiS" secondAttribute="bottom" constant="40" id="zRq-ZF-3SE"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Alarms" image="AlarmsTabIcon" selectedImage="AlarmsTabIcon" id="TyW-xx-FjP">
@@ -273,13 +281,13 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="backButton" destination="h68-Zv-weP" id="Fhe-4i-itY"/>
-                        <outlet property="friendsTableView" destination="7AP-ii-8rm" id="29t-QE-yBb"/>
+                        <outlet property="friendsTableView" destination="IUP-LP-lkw" id="PYc-eI-jPu"/>
                         <outlet property="titleLabel" destination="yod-9x-kiS" id="qv9-od-Lc6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ux-WT-G5X" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2713" y="869"/>
+            <point key="canvasLocation" x="2711.594202898551" y="868.52678571428567"/>
         </scene>
         <!--Share To Friends View Controller-->
         <scene sceneID="iu3-gi-iTS">
@@ -426,7 +434,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="mVd-g8-7GX">
-                                <rect key="frame" x="47" y="157" width="320" height="543"/>
+                                <rect key="frame" x="47" y="163.5" width="320" height="530"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddFriendsIcon" translatesAutoresizingMaskIntoConstraints="NO" id="5iw-mV-hCF">
                                         <rect key="frame" x="123" y="0.0" width="74" height="100"/>
@@ -435,20 +443,20 @@
                                             <constraint firstAttribute="width" constant="74" id="f5b-21-PHI"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvF-7J-yY2">
-                                        <rect key="frame" x="51.5" y="160" width="217" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="BHv-B9-NSs"/>
-                                            <constraint firstAttribute="width" constant="217" id="Ryh-4O-jTM"/>
-                                            <constraint firstAttribute="height" constant="40" id="duf-eP-2Bz"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Enter your friend's email:">
-                                            <color key="titleColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UT7-4F-l79">
+                                        <rect key="frame" x="32" y="160" width="256" height="27"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Enter your friend's email:">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.97254901960784312" green="0.16470588235294117" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="23" name="SFMono-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WSK-bf-vbw">
-                                        <rect key="frame" x="0.0" y="260" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="247" width="320" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="5gx-IP-u8C"/>
                                             <constraint firstAttribute="width" constant="320" id="WEl-Gm-wZp"/>
@@ -457,7 +465,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="opW-n0-za0" userLabel="Add Friend Button">
-                                        <rect key="frame" x="27.5" y="370" width="265" height="173"/>
+                                        <rect key="frame" x="27.5" y="357" width="265" height="173"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="265" id="otA-je-JwN"/>
                                             <constraint firstAttribute="height" constant="173" id="vya-ty-reR"/>
@@ -469,7 +477,6 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="WSK-bf-vbw" firstAttribute="top" secondItem="XvF-7J-yY2" secondAttribute="bottom" constant="60" id="9qD-ut-O4K"/>
                                     <constraint firstItem="WSK-bf-vbw" firstAttribute="centerX" secondItem="mVd-g8-7GX" secondAttribute="centerX" id="NrP-sa-YHZ"/>
                                 </constraints>
                             </stackView>
@@ -491,10 +498,10 @@
                     <navigationItem key="navigationItem" id="HKx-5d-1Ox"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="EnterFriendEmailTextLabel" destination="XvF-7J-yY2" id="Agf-U5-GKW"/>
                         <outlet property="addFriendButton" destination="opW-n0-za0" id="PVT-J6-tMw"/>
                         <outlet property="backButton" destination="YW6-eP-NZb" id="U8X-cR-gaD"/>
                         <outlet property="emailTextField" destination="WSK-bf-vbw" id="llq-Jo-U4t"/>
+                        <outlet property="instructionTextLabel" destination="UT7-4F-l79" id="thh-Rp-cLq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9uR-Gp-lYY" sceneMemberID="firstResponder"/>
