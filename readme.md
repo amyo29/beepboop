@@ -8,7 +8,7 @@ Please run the application on an iPhone 12 simulator.
 
 ### Contributions
 
-#### Sanjana Kapoor (20%)
+#### Sanjana Kapoor (Release 20%, Overall 20%)
 -  Created Alarm Popup Screen
 - Worked on creating segue from navigation banner to Alarm Popup Screen (incomplete)
 - Logic for Alarm Metadata page
@@ -20,8 +20,12 @@ Please run the application on an iPhone 12 simulator.
 - Login and Sign Up with FB/Google logic and related UI
 - Snooze button UI on Alarm Creation screen
 
-#### Alvin Lo (30%)
-- Designed Firebase database
+#### Alvin Lo (Release 30%, Overall 30%)
+- Added functionality for removing alarms from Firestore
+- Added functionality for sending/enabling/disabling notifications for individual alarms in Firestore
+- Added new table view logic and alarm creation logic
+- Setup logic for Firestore users collection
+- Added functionality for storing user-specific alarms
 - Majority of UI work on Launch, Login, and Sign Up screens
 - Logic Alarm CoreData
 - Logic for populating UI with data from CoreData and user input
@@ -31,9 +35,15 @@ Please run the application on an iPhone 12 simulator.
 - Login and Sign Up with email logic
 - Firebase setup and related logic
 
-#### Amy Ouyang (40%)
-- Designed Firebase database
-- Logic for Friends + Add Friends screens
+#### Amy Ouyang (Release 40%, Overall 40%)
+- Setup Firestore and migrated alarm data storage from Core Data to Firebase Firestore
+- Configured Firestore backend integration and database
+- Added functionality for automatic and immediate adding, retrieving, deleting, and modifying alarms in Firestore in real-time
+- Added functionality for storing alarms in Firestore
+- Added functionality for retrieving alarms in Firestore
+- Added functionality for alarm recurrence 
+- Add Friends screen UI and functionality
+- Share Friends screen UI and functionality
 - Majority of UI work on Home and Alarm Creation screens
 - Home screen (table view and tab bar) UI and logic
 - Logic for Alarm Creation view controller
@@ -45,7 +55,7 @@ Please run the application on an iPhone 12 simulator.
 - Logic for allowing notifications through user permissions
 - Importing and setting custom fonts
 
-#### Evan Peng (10%)
+#### Evan Peng (Release 10%, Overall 10%)
 - Logic for Notifications Screen
 - Logic for Profile/Settings Page
 - Research and PoC on UIEventKit as an approach to notification triggers
