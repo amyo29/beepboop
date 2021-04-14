@@ -47,7 +47,7 @@
 
 ### Alarm Response Screen
 - [x] Implement ~~custom segment controller~~ 3 buttons and table view to display the status of each invited member of the alarm.
-- [ ] Add toggle to allow users to opt in/out of the specific alarm
+- [x] Add toggle to allow users to opt in/out of the specific alarm
 - [x] ~~Drag on the screen to go back to previous screen~~ Determine most user-friendly segue to return to previous screen
 
 ### Share Alarms Screen
