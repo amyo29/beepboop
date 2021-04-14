@@ -40,28 +40,15 @@
 - [ ] Snooze/Accept/Reject button
 - [ ] Dots button to lead the user to the alarm response screen
 
-friendsData collection -> friendsList w/ userID
-alarmData collection -> alarm w/ userID
-userData collection -> user w/ userID, [userID's], [alarmIDs]
-userDoc
-- userID: String
-- profilePic: UIImage
-- snoozeEnabled: Bool
-- alarmIDs: [alarm uuids]
-- contacts: [userIds]
-- invites_received: [userIDs]
-- invites_sent: [userIDs]
-- notifications: 
-
 ### Notification
 - [x] Set up local notifications to pop up at designated time and date
     - [x] Correctly populate title and body in notifications
 - [x] Cancel notifications when alarm is off/deleted
 
 ### Alarm Response Screen
-- [ ] Implement custom segment controller and table view to display the status of each invited member of the alarm
+- [x] Implement ~~custom segment controller~~ 3 buttons and table view to display the status of each invited member of the alarm.
 - [ ] Add toggle to allow users to opt in/out of the specific alarm
-- [ ] ~~Drag on the screen to go back to previous screen~~ Determine most user-friendly segue to return to previous screen
+- [x] ~~Drag on the screen to go back to previous screen~~ Determine most user-friendly segue to return to previous screen
 
 ### Share Alarms Screen
 - [ ] Display list of contacts (method TBD)
@@ -87,7 +74,6 @@ userDoc
 - [ ] Display all active friend requests
 - [x] Search for users through OAuth/Phone/Email
 
-
 ### Notifications Screen 
 - [x] Expose notifications screen as a tab on the tab bar
 - [ ] Display all incoming notifications for a user
@@ -96,3 +82,17 @@ userDoc
     - [x] Display all incoming alarm invitations - accept/decline
     - [ ] Display all incoming group requests - accept/decline [Final phase task]
 - [x] Update Firestore alarm and user data based on notification responses
+
+### Extra Planning/Notes
+friendsData collection -> friendsList w/ userID
+alarmData collection -> alarm w/ userID
+userData collection -> user w/ userID, [userID's], [alarmIDs]
+userDoc
+- userID: String
+- profilePic: UIImage
+- snoozeEnabled: Bool
+- alarmIDs: [alarm uuids]
+- contacts: [userIds]
+- invites_received: [userIDs]
+- invites_sent: [userIDs]
+- notifications: 
