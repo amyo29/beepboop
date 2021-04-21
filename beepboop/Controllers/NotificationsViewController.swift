@@ -200,9 +200,13 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                     return
                 }
                 cell.alarmNameLabel.text = alarmDoc.get("name") as? String
+                cell.alarmNameLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
                 cell.alarmFriendLabel.text = userDoc.get("name") as? String
+                cell.alarmFriendLabel.font = UIFont(name: "JosefinSans-Regular", size: 15.0)
                 cell.alarmTimeLabel.text = self.extractTimeFromDate(time: alarmDoc.get("time") as? Timestamp)
+                cell.alarmTimeLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
                 cell.alarmDateLabel.text = self.extractDate(time: alarmDoc.get("time") as? Timestamp)
+                cell.alarmDateLabel.font = UIFont(name: "JosefinSans-Regular", size: 15.0)
                 cell.alarmAcceptButton.tag = tag
                 cell.alarmDenyButton.tag = tag
             }
@@ -219,6 +223,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func populateAlarmRequestUpdateCell(name: String, alarmName: String, status: Bool, cell: AlarmRequestUpdateTableViewCell) {
         cell.alarmUpdate.text = "\(name) \(accepted(status: status)) the invitation for \(alarmName)"
+        cell.alarmUpdate.font = UIFont(name: "JosefinSans-Regular", size: 18.0)
     }
     
     func populateFriendRequestCell(requestUID: String, cell: FriendRequestTableViewCell, tag: Int) {

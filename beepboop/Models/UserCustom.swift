@@ -22,6 +22,7 @@ struct UserCustom {
     var alarmRequestsReceived: [String]?
     var alarmRequestsSent: [String]?
 //    var notifications: [[String: Any]]?
+
     var notifications: [String]?
     
     
@@ -57,7 +58,6 @@ extension UserCustom {
               let alarmRequestsSent = dictionary["alarmRequestsSent"] as? [String],
 //              let notifications = dictionary["notifications"] as? [[String: Any]]
               let notifications = dictionary["notifications"] as? [String]
-
         else { return nil }
         
         self.init(userEmail: userEmail,

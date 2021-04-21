@@ -1,4 +1,5 @@
 //
+
 //  ShareToFriendsViewController.swift
 //  beepboop
 //
@@ -11,16 +12,23 @@ import Firebase
 
 class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
     @IBOutlet weak var shareToFriendsTableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     var dataListener: ListenerRegistration!
     private var documents: [DocumentSnapshot] = []
     var userDocRef: DocumentReference!
     
-    private var shareToFriendsList: [UserCustom] = [] // string?
+    private var friendUuidList: [String]!
     private var friendsList: [UserCustom] = []
+    private var sharedToList: [String] = []
     var userCollectionRef: CollectionReference!
     private var currentUserUid: String!
     private let shareToFriendsTableViewCellIdentifier = "ShareToFriendsTableViewCell"
+    
+    var delegate: UIViewController!
+    var previousDelegate: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +36,10 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
         // Do any additional setup after loading the view.
         self.shareToFriendsTableView.delegate = self
         self.shareToFriendsTableView.dataSource = self
+        self.shareToFriendsTableView.backgroundColor = UIColor(hex: "FEFDEC")
+        self.shareToFriendsTableView.separatorColor = .clear
+        titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+        
         userCollectionRef = Firestore.firestore().collection("userData")
         
         guard let currentUserUid = Auth.auth().currentUser?.uid else {
@@ -61,73 +73,59 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
 //        )
         
         self.userDocRef = userCollectionRef.document(currentUserUid)
-        print("before updatefriendsfirestore")
-        updateFriendsFirestore()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.sendSubviewToBack(self.shareToFriendsTableView)
+        
+        self.sharedToList = []
+        self.friendsList = [UserCustom]()
+        self.updateFriendsFirestore()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let viewController = self.delegate as? ShareToListUpdater {
+            viewController.updateSharedToList(sharedToList: self.sharedToList)
+        }
+        super.viewWillDisappear(animated)
+    }
+    
+    func mapFriendsToUserStruct(friendUuids: [String]) {
+        for friendUuid in friendUuids {
+            let docRef = self.userCollectionRef.document(friendUuid)
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists,
+                   let data = document.data() {
+                    if let model = UserCustom(dictionary: data) {
+                        self.friendsList.append(model)
+                        self.shareToFriendsTableView.reloadData()
+                    }
+                }
+            }
+        }
     }
     
     func updateFriendsFirestore() {
-        
         // Extract friends list from current user's document
         userDocRef.getDocument { (document, error) in
             if let document = document, document.exists {
-//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                let documentData = document.data()
-                print("Document data: \(documentData)")
-                let friendsList = documentData?["friendsList"] as? [String] ?? [""]
-                print("friendsList:  \(friendsList)")
+//                let documentData = document.data()
+//                let friendUuids = documentData?["friendsList"] as? [String] ?? [""]
+                self.friendUuidList = document.get("friendsList") as? [String] ?? [""]
+                self.mapFriendsToUserStruct(friendUuids: self.friendUuidList)
+                
             } else {
                 print("Document does not exist")
             }
         }
-        
-        
-//        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
-//        docRef.getDocument { (document, error) in
-//            if let document = document, document.exists
-//            
-//        }
-//
-//        let group_array = document["friendsList"] as? Array ?? [""]
-//        print(group_array)
-//
-        
-        // For each friend in friends list, get friend's User doc
-        // Populate table with friend's User doc data for each friend
-        
-        
-        dataListener = userCollectionRef.whereField("userId", arrayContains: self.currentUserUid!).addSnapshotListener { [unowned self] (snapshot, error) in
-            guard let snapshot = snapshot else {
-                print("Error fetching snapshot results: \(error!)")
-                return
-            }
-            
-            let models = snapshot.documents.map { (document) -> UserCustom in
-                if let model = UserCustom(dictionary: document.data()) {
-                    return model
-                } else {
-                    print(document.data())
-                    // Don't use fatalError here in a real app.
-                    fatalError("Unable to initialize type \(UserCustom.self) with dictionary \(document.data())")
-                }
-            }
-            self.friendsList = models
-            self.documents = snapshot.documents
-            
-            self.shareToFriendsTableView?.reloadData()
-        }
     }
     
     // Increases efficiency of app by only listening to data when view is on screen
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        dataListener.remove()
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        dataListener.remove()
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("In tableView count method, count: ", self.friendsList.count)
@@ -138,9 +136,8 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
         print("In tableView cell render method, count: ", self.friendsList.count)
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: self.shareToFriendsTableViewCellIdentifier, for: indexPath as IndexPath) as! ShareToFriendsTableViewCell
-        
-        let friend = friendsList[row]
-    
+        let friend = self.friendsList[row]
+        cell.shareButton.tag = row
         populateCell(friend: friend, cell: cell)
         
         return cell
@@ -148,19 +145,19 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
     
     func populateCell(friend: UserCustom, cell: ShareToFriendsTableViewCell) {
         print("in populateCell, friend=\(friend)")
-        cell.friendNameLabel?.text = friend.userEmail
+        cell.friendNameLabel?.text = friend.name
+        cell.friendNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
         cell.friendImageView?.image = UIImage(named: "EventPic") // change to friend user profile pic
     }
     
-    @IBAction func shareButtonPressed(_ sender: Any) {
-        
+    @IBAction func shareButtonPressed(_ sender: UIButton) {
         let alertController = UIAlertController(
-            title: "Share to friend",
-            message: "Shared to this friend",
+            title: "Sent",
+            message: "You shared this alarm",
             preferredStyle: .actionSheet)
         
         alertController.addAction(UIAlertAction(
-                                    title: "Shared",
+                                    title: "Ok",
                                     style: .default,
                                     handler: { (action) -> Void in
                                         
@@ -168,16 +165,29 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
                                     }))
        
         self.present(alertController, animated: true, completion: nil)
+        self.addToSharedList(index: sender.tag)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func addToSharedList(index: Int) {
+        let friendUID = self.friendUuidList[index]
+        self.sharedToList.append(friendUID)
     }
-    */
 
+    func shareToFriend(index: Int) {
+        let friendUID = self.friendUuidList[index]
+        // Add friend's UID to current user's alarmRequestsSent list
+        userDocRef.updateData([
+            "alarmRequestsSent": FieldValue.arrayUnion([friendUID]),
+        ])
+        
+        // Add current user's UID to friend's alarmRequestsReceived list
+        let friendDocRef = userCollectionRef.document(friendUID)
+        friendDocRef.updateData([
+            "alarmRequestsReceived": FieldValue.arrayUnion([currentUserUid]),
+        ])
+    }
+    
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

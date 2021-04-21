@@ -1,6 +1,6 @@
 # README
 
-## Alpha
+## BETA
 
 ### Running the application
 
@@ -84,7 +84,8 @@ see all their relevant notifications (hopefully making the experience easier).
 #### Sharing
 We have implemented the front end for sharing and are mid way implementing it
 in the backend. We ran into some issues when implementing the backend that
-took longer than expected to resolve. We've decided to push this to the final stage.
+took longer than expected to resolve. There is also an issue with opening the share screen
+that causes the app to display an error message and not add an alarm as intended. 
 
 #### Login/Sign Up Screens (Alpha)
 

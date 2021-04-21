@@ -8,10 +8,12 @@
 import UIKit
 
 class ShareToFriendsTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var friendNameLabel: UILabel!
+    
     @IBOutlet weak var friendImageView: UIImageView!
+    
+    @IBOutlet weak var friendNameLabel: UILabel!
+    @IBOutlet weak var shareButton: UIButton!
+    
     
     
     override func awakeFromNib() {

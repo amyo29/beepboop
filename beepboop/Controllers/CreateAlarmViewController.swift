@@ -7,7 +7,11 @@
 
 import UIKit
 
-class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+protocol ShareToListUpdater {
+    func updateSharedToList(sharedToList: [String])
+}
+
+class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, ShareToListUpdater{
     
     var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
     
@@ -29,6 +33,9 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
     private var recurring: String = "Never"
+    
+    private var sharedToList: [String] = []
+    private let createAlarmToShareToFriendsSegueIdentifier = "CreateAlarmToShareToFriends"
    
     var delegate: UIViewController!
     
@@ -167,7 +174,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
            let title = self.titleTextField.text,
            let _ = self.delegate as? HomeViewController {
             let homeViewController = self.delegate as! AlarmAdder
-            homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring)
+            homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, invitedUsers: self.sharedToList)
             self.dismiss(animated: true, completion: nil)
         } else {
             let alertController = UIAlertController(
@@ -183,13 +190,22 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
             self.present(alertController, animated: true, completion: nil)
             
         }
-        
-        
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {
         // transition to share to contacts popover/screen
         print("shareButtonPressed")
+    }
+    
+    func updateSharedToList(sharedToList: [String]) {
+        self.sharedToList = sharedToList
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == self.createAlarmToShareToFriendsSegueIdentifier,
+           let destination = segue.destination as? ShareToFriendsViewController {
+            destination.delegate = self
+        }
     }
     
     // MARK: - Hide keyboard

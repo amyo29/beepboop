@@ -10,7 +10,7 @@ import FirebaseCore
 import Firebase
 
 protocol AlarmAdder {
-    func addAlarm(time: Date, name: String, recurrence: String)
+    func addAlarm(time: Date, name: String, recurrence: String, invitedUsers: [String])
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlarmAdder{
@@ -31,6 +31,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
     
     private let alarmTableViewCellIdentifier = "AlarmTableViewCell"
+    private let homeToCreateAlarmSegueIdentifier = "HomeToCreateAlarm"
     
     var currentUserUid: String?
     
@@ -186,14 +187,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Delegate functions
     
-    func addAlarm(time: Date, name: String, recurrence: String) {
-        self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence)
+    func addAlarm(time: Date, name: String, recurrence: String, invitedUsers: [String]) {
+        self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence, invitedUsers: invitedUsers)
 //        self.updateAlarmsFirestore()
     }
     
     // MARK: - Firestore functions
     
-    func addAlarmToFirestore(time: Date, name: String, recurrence: String) {
+    func addAlarmToFirestore(time: Date, name: String, recurrence: String, invitedUsers: [String]) {
         guard let currentUserUid = self.currentUserUid else {
             let alertController = UIAlertController(
                 title: "Unknown error",
@@ -210,14 +211,37 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return
         }
         
+        
         let uuid = UUID()
-        let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, uuid: uuid.uuidString, userList: [currentUserUid], userStatus: [currentUserUid: "Accepted"])
+        let userStatus = self.getStatusForUsers(invitedUsers: invitedUsers)
+        let userCollectionRef = Firestore.firestore().collection("userData")
+        let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, uuid: uuid.uuidString, userList: [currentUserUid] + invitedUsers, userStatus: userStatus)
         
         alarmCollectionRef.document(uuid.uuidString).setData(newAlarm.dictionary)
         userDocRef.collection("alarmMetadata").document(uuid.uuidString).setData(["snooze": false, "enabled": true])
+        userDocRef.updateData([
+            "alarmRequestsSent": FieldValue.arrayUnion([uuid.uuidString])
+        ])
+        
+        for user in invitedUsers {
+            userCollectionRef.document(user).updateData([
+                "notifications": FieldValue.arrayUnion(["\(user);\(newAlarm.name);Pending"]),
+                "alarmRequestsReceived": FieldValue.arrayUnion([uuid.uuidString])
+            ])
+        }
         alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, uuidStr: uuid.uuidString)
         self.alarmList.append(newAlarm)
         self.alarmTableView.reloadData()
+    }
+    
+    func getStatusForUsers(invitedUsers: [String]) -> [String: String] {
+        var userStatuses = [String: String]()
+        userStatuses[self.currentUserUid!] = "Accepted"
+        for user in invitedUsers {
+            userStatuses[user] = "Pending"
+        }
+        return userStatuses
+        
     }
     
     // TODO: no current logic to completely delete an alarmData document from Firestore
@@ -380,7 +404,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "HomeToAlarmMetadata", let destination = segue.destination as? AlarmMetadataViewController, let opIndex = alarmTableView.indexPathForSelectedRow?.row {
+        if segue.identifier == "HomeToAlarmMetadata",
+           let destination = segue.destination as? AlarmMetadataViewController,
+           let opIndex = alarmTableView.indexPathForSelectedRow?.row {
             var alarmUserStatus = alarmList[opIndex].userStatus
 //            print("type alarmuserStatus: ", type(of: alarmUserStatus))
             var acceptedList: [Dictionary<String, Any>] = []
@@ -427,8 +453,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             destination.acceptedList = acceptedList
             destination.declinedList = declinedList
             destination.pendingList = pendingList
-        }
-        if let destination = segue.destination as? CreateAlarmViewController{
+        } else if segue.identifier == self.homeToCreateAlarmSegueIdentifier,
+           let destination = segue.destination as? CreateAlarmViewController {
             destination.delegate = self
         }
         
