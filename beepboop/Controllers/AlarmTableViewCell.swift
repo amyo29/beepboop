@@ -15,6 +15,9 @@ class AlarmTableViewCell: UITableViewCell {
     @IBOutlet weak var alarmDateLabel: UILabel!
     @IBOutlet weak var alarmToggleSwitch: UISwitch!
     
+    var upperView: Any?
+    var indexP: IndexPath?
+    
 //    @IBOutlet weak var containerView: UIView! {
 //        didSet {
 //            // Make it card-like
@@ -26,6 +29,7 @@ class AlarmTableViewCell: UITableViewCell {
 //            containerView.backgroundColor = UIColor(named: "Red")
 //        }
 //    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -58,5 +62,6 @@ class AlarmTableViewCell: UITableViewCell {
         let margins = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         contentView.frame = contentView.frame.inset(by: margins)
     }
+    
 
 }

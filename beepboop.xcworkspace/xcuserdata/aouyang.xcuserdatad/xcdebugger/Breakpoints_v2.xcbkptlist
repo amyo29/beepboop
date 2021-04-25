@@ -14,10 +14,10 @@
             filePath = "beepboop/Controllers/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "374"
-            endingLineNumber = "374"
-            landmarkName = "viewWillDisappear(_:)"
-            landmarkType = "7">
+            startingLineNumber = "431"
+            endingLineNumber = "431"
+            landmarkName = "HomeViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -30,8 +30,8 @@
             filePath = "beepboop/Controllers/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "366"
-            endingLineNumber = "366"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "HomeViewController"
             landmarkType = "3">
          </BreakpointContent>

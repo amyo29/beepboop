@@ -51,6 +51,7 @@
                                                     <attributedString key="attributedText">
                                                         <fragment content="Fri, Mar 26">
                                                             <attributes>
+                                                                <color key="NSColor" red="0.23529411764705882" green="0.23137254901960785" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <font key="NSFont" size="15" name="SFMono-Medium"/>
                                                             </attributes>
                                                         </fragment>
@@ -62,6 +63,7 @@
                                                     <attributedString key="attributedText">
                                                         <fragment content="9:30AM">
                                                             <attributes>
+                                                                <color key="NSColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <font key="NSFont" size="20" name="SFMono-Regular"/>
                                                             </attributes>
                                                         </fragment>
@@ -73,6 +75,7 @@
                                                     <attributedString key="attributedText">
                                                         <fragment content="Exam">
                                                             <attributes>
+                                                                <color key="NSColor" red="0.23529411764705882" green="0.23137254901960785" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <font key="NSFont" size="20" name="SFMono-Medium"/>
                                                             </attributes>
                                                         </fragment>
@@ -138,6 +141,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Alarms" image="AlarmsTabIcon" selectedImage="AlarmsTabIcon" id="iLM-My-QI9">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -526,7 +530,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8k6-0A-EX8">
-                                <rect key="frame" x="20" y="74" width="350" height="44"/>
+                                <rect key="frame" x="20" y="30" width="350" height="44"/>
                                 <attributedString key="attributedText">
                                     <fragment content="new alarm">
                                         <attributes>
@@ -539,7 +543,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXc-vl-7Hv">
-                                <rect key="frame" x="60" y="164" width="95" height="28"/>
+                                <rect key="frame" x="60" y="120" width="95" height="28"/>
                                 <attributedString key="attributedText">
                                     <fragment content="time">
                                         <attributes>
@@ -551,7 +555,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssz-fS-gY1">
-                                <rect key="frame" x="60" y="232" width="95" height="30"/>
+                                <rect key="frame" x="60" y="188" width="95" height="30"/>
                                 <attributedString key="attributedText">
                                     <fragment content="date">
                                         <attributes>
@@ -563,7 +567,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fy-L1-Yvd">
-                                <rect key="frame" x="70" y="302" width="75" height="30"/>
+                                <rect key="frame" x="70" y="258" width="75" height="30"/>
                                 <attributedString key="attributedText">
                                     <fragment content="title">
                                         <attributes>
@@ -575,7 +579,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RM6-go-ZSU">
-                                <rect key="frame" x="60" y="441.66666666666669" width="95" height="29.333333333333314"/>
+                                <rect key="frame" x="60" y="397.66666666666669" width="95" height="29.333333333333314"/>
                                 <attributedString key="attributedText">
                                     <fragment content="sound">
                                         <attributes>
@@ -596,7 +600,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8YA-Fe-WpR" userLabel="SaveButton">
-                                <rect key="frame" x="70" y="641" width="250" height="70"/>
+                                <rect key="frame" x="70" y="636" width="250" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="swp-MV-bWV"/>
                                     <constraint firstAttribute="height" constant="70" id="wjR-a4-ukz"/>
@@ -607,14 +611,14 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="suQ-kN-82r" userLabel="Time Picker">
-                                <rect key="frame" x="170" y="134" width="200" height="85"/>
+                                <rect key="frame" x="170" y="90" width="200" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="C3m-vv-hv8"/>
                                     <constraint firstAttribute="height" constant="85" id="jSG-zN-y8A"/>
                                 </constraints>
                             </datePicker>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Alarm" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yhl-iR-V2h">
-                                <rect key="frame" x="160" y="295" width="200" height="35"/>
+                                <rect key="frame" x="160" y="251" width="200" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="gjr-sh-VjD"/>
                                     <constraint firstAttribute="height" constant="35" id="uWY-Wd-NrG"/>
@@ -633,14 +637,14 @@
                                 </userDefinedRuntimeAttributes>
                             </pickerView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="5Ya-3y-xdD">
-                                <rect key="frame" x="170" y="205" width="200" height="85"/>
+                                <rect key="frame" x="170" y="161" width="200" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="AwA-Wg-AU7"/>
                                     <constraint firstAttribute="width" constant="200" id="mKH-pS-qCs"/>
                                 </constraints>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgO-Ev-KoI">
-                                <rect key="frame" x="75" y="372" width="71" height="29.666666666666686"/>
+                                <rect key="frame" x="75" y="328" width="71" height="29.666666666666686"/>
                                 <attributedString key="attributedText">
                                     <fragment content="repeat">
                                         <attributes>
@@ -652,7 +656,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLT-fV-9Y0">
-                                <rect key="frame" x="76" y="511.00000000000006" width="81" height="29.666666666666686"/>
+                                <rect key="frame" x="76" y="467" width="81" height="29.666666666666686"/>
                                 <attributedString key="attributedText">
                                     <fragment content="snooze">
                                         <attributes>
@@ -942,20 +946,19 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Zr8-7e-Iwi">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="2zh-zB-mME" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="2zh-zB-mME" customClass="TabBarController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backgroundImage="NavBarBackground" id="DjP-4H-Arv">
+                    <tabBar key="tabBar" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" id="DjP-4H-Arv" customClass="TabBar" customModule="beepboop" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" systemColor="labelColor"/>
                         <color key="barTintColor" systemColor="labelColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="aFc-MF-gin"/>
                         <segue destination="T9O-Aj-NH4" kind="relationship" relationship="viewControllers" id="LEs-GY-hoi"/>
-                        <segue destination="X2Q-dW-nb0" kind="relationship" relationship="viewControllers" id="Ihv-aT-HgU"/>
                         <segue destination="bbN-jg-8tq" kind="relationship" relationship="viewControllers" id="F3s-8P-t1h"/>
+                        <segue destination="X2Q-dW-nb0" kind="relationship" relationship="viewControllers" id="Ihv-aT-HgU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kbd-hE-s7j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -982,6 +985,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Groups" image="GroupsTabIcon" selectedImage="GroupsTabIcon" id="hIU-Ha-dyc">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="XEa-xm-Jxs"/>
@@ -1120,6 +1124,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="SettingsTabIcon" selectedImage="SettingsTabIcon" id="fEz-ed-ftO">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="SHq-zr-tv3"/>
@@ -1566,7 +1571,8 @@
                             <constraint firstItem="0s0-xS-vUU" firstAttribute="top" secondItem="HI5-in-llv" secondAttribute="top" constant="20" id="o9X-am-gDh"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Notifications" image="bell.fill" catalog="system" selectedImage="bell.fill" id="sB7-G4-q8y">
+                    <tabBarItem key="tabBarItem" title="Notifications" image="NotificationsTabIcon" selectedImage="NotificationsTabIcon" id="sB7-G4-q8y">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
@@ -1812,7 +1818,7 @@
         <image name="LoginFacebookButton" width="378" height="54"/>
         <image name="LoginGoogleButton" width="378" height="54"/>
         <image name="MetadataButton" width="5" height="21"/>
-        <image name="NavBarBackground" width="414" height="64"/>
+        <image name="NotificationsTabIcon" width="25" height="25"/>
         <image name="PendingEmoji" width="80" height="80"/>
         <image name="SaveButton" width="268" height="71"/>
         <image name="Send Button" width="39" height="39"/>
@@ -1821,7 +1827,6 @@
         <image name="SnoozeIcon" width="83" height="88"/>
         <image name="Title" width="361" height="106"/>
         <image name="arrow.right" catalog="system" width="128" height="98"/>
-        <image name="bell.fill" catalog="system" width="128" height="124"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

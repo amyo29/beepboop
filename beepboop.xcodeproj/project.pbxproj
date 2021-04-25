@@ -47,6 +47,13 @@
 		0633D547260F0115004B50FB /* AddButton-1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D544260F0114004B50FB /* AddButton-1x.png */; };
 		0633D548260F0115004B50FB /* AddButton-2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D545260F0115004B50FB /* AddButton-2x.png */; };
 		0633D549260F0115004B50FB /* AddButton-3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0633D546260F0115004B50FB /* AddButton-3x.png */; };
+		0659FA9C26353E3D0042DDE1 /* UITableViewCell+IndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0659FA9B26353E3D0042DDE1 /* UITableViewCell+IndexPath.swift */; };
+		0659FA9F26355D260042DDE1 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0659FA9E26355D260042DDE1 /* TabBar.swift */; };
+		0659FAA226355EB20042DDE1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0659FAA126355EB20042DDE1 /* TabBarController.swift */; };
+		0659FAA5263567800042DDE1 /* TealGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FAA42635677F0042DDE1 /* TealGradient.png */; };
+		0659FAA926356B3B0042DDE1 /* NotificationsTabIcon-1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FAA826356B3B0042DDE1 /* NotificationsTabIcon-1x.png */; };
+		0659FAAC26356B720042DDE1 /* NotificationsTabIcon-3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FAAB26356B720042DDE1 /* NotificationsTabIcon-3x.png */; };
+		0659FAAF26356B780042DDE1 /* NotificationsTabsIcon-2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FAAE26356B780042DDE1 /* NotificationsTabsIcon-2x.png */; };
 		06945660261F984D00450AC8 /* AlarmCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694565F261F984D00450AC8 /* AlarmCustom.swift */; };
 		069456AB2622C10800450AC8 /* UserCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456AA2622C10800450AC8 /* UserCustom.swift */; };
 		069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069456AD2622D7DE00450AC8 /* VectormetadataButton.png */; };
@@ -125,6 +132,13 @@
 		0633D544260F0114004B50FB /* AddButton-1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton-1x.png"; sourceTree = "<group>"; };
 		0633D545260F0115004B50FB /* AddButton-2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton-2x.png"; sourceTree = "<group>"; };
 		0633D546260F0115004B50FB /* AddButton-3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton-3x.png"; sourceTree = "<group>"; };
+		0659FA9B26353E3D0042DDE1 /* UITableViewCell+IndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+IndexPath.swift"; sourceTree = "<group>"; };
+		0659FA9E26355D260042DDE1 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		0659FAA126355EB20042DDE1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		0659FAA42635677F0042DDE1 /* TealGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TealGradient.png; sourceTree = "<group>"; };
+		0659FAA826356B3B0042DDE1 /* NotificationsTabIcon-1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationsTabIcon-1x.png"; sourceTree = "<group>"; };
+		0659FAAB26356B720042DDE1 /* NotificationsTabIcon-3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationsTabIcon-3x.png"; sourceTree = "<group>"; };
+		0659FAAE26356B780042DDE1 /* NotificationsTabsIcon-2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationsTabsIcon-2x.png"; sourceTree = "<group>"; };
 		0694565F261F984D00450AC8 /* AlarmCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlarmCustom.swift; path = beepboop/Controllers/AlarmCustom.swift; sourceTree = SOURCE_ROOT; };
 		069456AA2622C10800450AC8 /* UserCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCustom.swift; sourceTree = "<group>"; };
 		069456AD2622D7DE00450AC8 /* VectormetadataButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VectormetadataButton.png; sourceTree = "<group>"; };
@@ -272,6 +286,7 @@
 		9A8AE64C260C5E5F00181515 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0659FAA126355EB20042DDE1 /* TabBarController.swift */,
 				0694570D2624194100450AC8 /* ShareToFriendsViewController.swift */,
 				E8E4A43C26256D7500CE4426 /* AlarmMetadataViewController.swift */,
 				069457102624199F00450AC8 /* CreateAlarmViewController.swift */,
@@ -291,9 +306,11 @@
 			isa = PBXGroup;
 			children = (
 				0633D4DF260E7F7B004B50FB /* AlarmTableViewCell.swift */,
+				0659FA9B26353E3D0042DDE1 /* UITableViewCell+IndexPath.swift */,
 				E8BC5F1B2626672900AE496D /* ResponsesTableViewCell.swift */,
 				069456B32622DD7D00450AC8 /* FriendsTableViewCell.swift */,
 				9A53F8252602DB7A00D4711A /* Main.storyboard */,
+				0659FA9E26355D260042DDE1 /* TabBar.swift */,
 				0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */,
 				9A53F82D2602DB7C00D4711A /* LaunchScreen.storyboard */,
 				004091602624C2130098875B /* AlarmRequestTableViewCell.swift */,
@@ -315,11 +332,15 @@
 				0633D530260EF714004B50FB /* AlarmsTabIcon-2x.png */,
 				069C638C260F1FD500702623 /* SaveButton.png */,
 				0633D544260F0114004B50FB /* AddButton-1x.png */,
+				0659FAAE26356B780042DDE1 /* NotificationsTabsIcon-2x.png */,
 				0633D545260F0115004B50FB /* AddButton-2x.png */,
+				0659FAA826356B3B0042DDE1 /* NotificationsTabIcon-1x.png */,
+				0659FAAB26356B720042DDE1 /* NotificationsTabIcon-3x.png */,
 				0633D546260F0115004B50FB /* AddButton-3x.png */,
 				0633D52B260EF710004B50FB /* AlarmsTabIcon-3x.png */,
 				0633D52A260EF710004B50FB /* AlarmTabIcon-1x.png */,
 				0633D52D260EF712004B50FB /* GroupsTabIcon-1x.png */,
+				0659FAA42635677F0042DDE1 /* TealGradient.png */,
 				0633D52F260EF714004B50FB /* GroupsTabIcon-2x.png */,
 				0633D52C260EF711004B50FB /* GroupsTabIcon-3x.png */,
 				0633D52E260EF713004B50FB /* SettingsTabIcon-1x.png */,
@@ -415,6 +436,7 @@
 				0633D549260F0115004B50FB /* AddButton-3x.png in Resources */,
 				0633D506260ED9E2004B50FB /* JosefinSans-Bold.ttf in Resources */,
 				0633D50E260ED9EB004B50FB /* JosefinSans-Italic.ttf in Resources */,
+				0659FAAC26356B720042DDE1 /* NotificationsTabIcon-3x.png in Resources */,
 				9A29A04B2623DFBE000A5275 /* AddFriendButton.png in Resources */,
 				9A8AE653260C649200181515 /* LoginButton.png in Resources */,
 				9A8AE649260C5E4400181515 /* BeepBoopTitle.png in Resources */,
@@ -433,12 +455,14 @@
 				0633D500260ED9CA004B50FB /* JosefinSans-Light.ttf in Resources */,
 				0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */,
 				0633D50C260ED9E9004B50FB /* JosefinSans-ExtraLightItalic.ttf in Resources */,
+				0659FAA5263567800042DDE1 /* TealGradient.png in Resources */,
 				0633D510260ED9F0004B50FB /* JosefinSans-Medium.ttf in Resources */,
 				0633D502260ED9CF004B50FB /* JosefinSans-Regular.ttf in Resources */,
 				0633D508260ED9E4004B50FB /* JosefinSans-BoldItalic.ttf in Resources */,
 				9A53F8272602DB7A00D4711A /* Main.storyboard in Resources */,
 				0633D531260EF714004B50FB /* SettingsTabIcon-2x.png in Resources */,
 				9A8AE656260C660600181515 /* SignUpButton.png in Resources */,
+				0659FAAF26356B780042DDE1 /* NotificationsTabsIcon-2x.png in Resources */,
 				0633D504260ED9DE004B50FB /* JosefinSans-LightItalic.ttf in Resources */,
 				0633D536260EF715004B50FB /* GroupsTabIcon-1x.png in Resources */,
 				0633D532260EF715004B50FB /* SettingsTabIcon-3x.png in Resources */,
@@ -449,6 +473,7 @@
 				9A6F19BC260A7E77005D4E21 /* GoogleService-Info.plist in Resources */,
 				9A8AE64A260C5E4400181515 /* LoadingScreenRobot.png in Resources */,
 				0633D533260EF715004B50FB /* AlarmTabIcon-1x.png in Resources */,
+				0659FAA926356B3B0042DDE1 /* NotificationsTabIcon-1x.png in Resources */,
 				0633D535260EF715004B50FB /* GroupsTabIcon-3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,6 +547,7 @@
 				9A7F3C12260AA21A00EEFE41 /* SignUpViewController.swift in Sources */,
 				069456B12622DB0800450AC8 /* FriendsViewController.swift in Sources */,
 				9A53F8242602DB7A00D4711A /* HomeViewController.swift in Sources */,
+				0659FAA226355EB20042DDE1 /* TabBarController.swift in Sources */,
 				069456B42622DD7D00450AC8 /* FriendsTableViewCell.swift in Sources */,
 				06945660261F984D00450AC8 /* AlarmCustom.swift in Sources */,
 				9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */,
@@ -532,8 +558,10 @@
 				0040915E2624BE9A0098875B /* NotificationsViewController.swift in Sources */,
 				0694570E2624194100450AC8 /* ShareToFriendsViewController.swift in Sources */,
 				063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */,
+				0659FA9F26355D260042DDE1 /* TabBar.swift in Sources */,
 				E8BC5F1C2626672900AE496D /* ResponsesTableViewCell.swift in Sources */,
 				069456AB2622C10800450AC8 /* UserCustom.swift in Sources */,
+				0659FA9C26353E3D0042DDE1 /* UITableViewCell+IndexPath.swift in Sources */,
 				9A7F3C0E260A9DF600EEFE41 /* LoginViewController.swift in Sources */,
 				004091672624C31C0098875B /* AlarmUpdateTableViewCell.swift in Sources */,
 				9A29A04E2623E6DD000A5275 /* AddFriendsViewController.swift in Sources */,
@@ -694,7 +722,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VF8K5L5FZJ;
+				DEVELOPMENT_TEAM = FUTTDQCH3J;
 				INFOPLIST_FILE = beepboop/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -714,7 +742,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VF8K5L5FZJ;
+				DEVELOPMENT_TEAM = FUTTDQCH3J;
 				INFOPLIST_FILE = beepboop/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
