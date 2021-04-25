@@ -111,6 +111,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let alarm = alarmList[row]
         cell.alarmToggleSwitch?.tag = row
         
+        populateCell(alarm: alarm, cell: cell)
+        colourCell(alarm: alarm, cell: cell, row: row)
+        colourSwitch(alarm: alarm, cell: cell)
+        
+        return cell
+    }
+    
+    func colourSwitch(alarm: AlarmCustom, cell: AlarmTableViewCell) {
         let beepboopPink = UIColor(red: 0.97, green: 0.16, blue: 0.60, alpha: 1.00) // hex: #F82A99
         let beepboopBlue = UIColor(red: 0.04, green: 0.83, blue: 0.83, alpha: 1.00)
         
@@ -119,7 +127,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.alarmToggleSwitch.thumbTintColor = UIColor.white
 //        cell.alarmToggleSwitch.backgroundColor = UIColor.blue
         cell.alarmToggleSwitch.layer.cornerRadius = 16
-        populateCell(alarm: alarm, cell: cell)
+    }
+    
+    func colourCell(alarm: AlarmCustom, cell: AlarmTableViewCell, row: Int) {
         let pastelGreen = UIColor(red: 0.58, green: 0.92, blue: 0.78, alpha: 1.00) // hex: #95EBC8
         let lightGreen = UIColor(red: 0.69, green: 1.00, blue: 0.74, alpha: 1.00) // hex: #AFFFBC
         let softYellow = UIColor(red: 0.98, green: 1.00, blue: 0.69, alpha: 1.00) // hex: #F9FFAF
@@ -134,11 +144,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cellColours = [pastelGreen, lightGreen, softYellow, orangeGold, rose, babyPink, lilac, lavender, doveEggBlue, tiffanyBlue]
         let frequency = row % cellColours.count
         cell.contentView.backgroundColor = cellColours[frequency]
-//        let firstColor: UIColor = UIColor.red
-//        let secondColor: UIColor = UIColor.blue
-//        cell.backgroundColor = ((indexPath.row % 2) == 0) ? firstColor : secondColor;
-        
-        return cell
     }
     
     func populateCell(alarm: AlarmCustom, cell: AlarmTableViewCell) {
@@ -146,15 +151,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.alarmNameLabel?.text = alarm.name
         cell.alarmNameLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
         cell.alarmTimeLabel?.text = self.extractTimeFromDate(time: alarm.time)
-        cell.alarmTimeLabel.font = UIFont(name: "JosefinSans-Regular", size: 23.0)
+        cell.alarmTimeLabel.font = UIFont(name: "JosefinSans-Regular", size: 25.0)
         cell.alarmDateLabel?.text = self.extractDate(time: alarm.time)
         cell.alarmDateLabel.font = UIFont(name: "JosefinSans-Regular", size: 15.0)
-        cell.alarmImageView?.image = UIImage(named: "EventPic")
-        
-        // if you do not set `shadowPath` you'll notice laggy scrolling
-        // add this in `willDisplay` method
-        let radius = cell.contentView.layer.cornerRadius
-        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
+        cell.alarmImageView?.image = UIImage(named: "icons8-iceberg-50")
     }
     
     // Remove alarm from table view by swiping to delete
