@@ -18,7 +18,9 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var pendingButton: UIButton!
     @IBOutlet weak var pendingLabel: UILabel!
     @IBOutlet weak var responseTableView: UITableView!
+    @IBOutlet weak var responsesLabel: UILabel!
     
+    var userCollectionRef: CollectionReference!
     private let responsesTableViewCellIdentifier = "ResponseTableViewCell"
     private var nameList: [Dictionary<String, Any>] = []
     private let acceptIcon = UIImage(named: "AcceptIcon")
@@ -40,13 +42,11 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         self.responseTableView.backgroundColor = UIColor(hex: "FEFDEC")
         self.responseTableView.separatorColor = .clear
         
-        
         declinedButton.imageView?.alpha = 0.5
         declinedLabel.alpha = 0.5
         
         pendingButton.imageView?.alpha = 0.5
         pendingLabel.alpha = 0.5
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,9 +65,11 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         if nameList.count > 0 {
             print(nameList)
             cell.friendName.text = String(describing: nameList[row]["name"]!)
+            cell.friendName.font = UIFont(name: "JosefinSans-Regular", size: 25)
             cell.friendProfileImage?.image = UIImage(named: "EventPic")
             cell.friendStatusImage?.image = curIcon
         }
+        
         return cell
     }
     
@@ -111,13 +113,19 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
                 getResponses.notify(queue: .main) {
                     self.time = self.extractTimeFromDate(time: alarmDoc.get("time") as? Timestamp)
                     self.alarmName = alarmDoc.get("name") as! String
+                    self.responsesLabel.font = UIFont(name: "JosefinSans-Regular", size: 40)
                     self.nameList = self.acceptedList
                     self.acceptedLabel.text = "Confirmed (\(self.acceptedList.count))"
+                    self.acceptedLabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
                     self.declinedLabel.text = "Declined (\(self.declinedList.count))"
+                    self.declinedLabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
                     self.pendingLabel.text = "Pending (\(self.pendingList.count))"
+                    self.pendingLabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
                     self.responseTableView.reloadData()
                     self.timeLabel.text = self.time
+                    self.timeLabel.font = UIFont(name: "JosefinSans-Regular", size: 50)
                     self.alarmNameLabel.text = self.alarmName
+                    self.alarmNameLabel.font = UIFont(name: "JosefinSans-Regular", size: 35)
                 }
             }
         }
