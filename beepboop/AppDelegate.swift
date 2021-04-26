@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
         window?.makeKeyAndVisible()
         metadataVC.updateAlarmsFirestore()
         metadataVC.selectedAlarm = target
-        window?.rootViewController?.performSegue(withIdentifier: "HomeToAlarmMetadata", sender: target)
+        window?.rootViewController?.performSegue(withIdentifier: "HomeToAlarmDisplayIdentifier", sender: target)
         completionHandler()
     }
     

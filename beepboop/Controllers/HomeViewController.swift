@@ -347,6 +347,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if segue.identifier == self.homeToCreateAlarmSegueIdentifier,
            let destination = segue.destination as? CreateAlarmViewController {
             destination.delegate = self
+        } else if segue.identifier == "HomeToAlarmDisplayIdentifier", let destination = segue.destination as? AlarmDisplayViewController {
+            if let alarmID = selectedAlarm { // From notifications
+                destination.alarmID = alarmID
+            }
         }
     }
     
@@ -380,6 +384,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             return "Error when extracting date from Date object"
         }
+    }
+    
+    @IBAction func unwind( _ seg: UIStoryboardSegue) {
     }
 }
 
