@@ -1,17 +1,23 @@
 # Final Release Checklist
+- [ ] Calendar screen
+- [ ] Calendar Alarm screen
+- [ ] Groups functionality
+- [ ] Alarm Ringtone and Sound Picker
+- [ ] Alarm Snooze
+- [ ] Dark mode
 
 ## Presentation Checklist
 
 ### TODO
 - Presentation slides
-- Calendar screen
+- Calendar screen (moved to final)
 - UI improvements
 - Beta fixes
 
 ### New Screens
 - [ ] Calendar
 - [ ] Calendar Alarm
-- [ ] Group screen prototype UI
+- [x] Group screen prototype UI
 
 #### TODO for each Screen
 - Calendar
@@ -21,33 +27,37 @@
     - [ ] Copy Home screen design
     - [ ] Allow click to edit
 - Groups: 
-    - [ ] UI: Display table and prototype cells
-    - [ ] Add user profile pictures to replace current placeholder image
+    - [x] UI: Display table and prototype cells
+    - [x] Add customized placeholder image for Groups
+    - [ ] Add groups custom pictures to replace current EventPic placeholder image
 - Home
     - [ ] Allow click to edit - discussion needed on how to do this (swipe to Edit?)
-    - [ ] Add user profile pictures to replace current placeholder image
+    - [x] Add user profile pictures to replace current placeholder image
 - Profile/Settings
     - [ ] Dark mode
     - [ ] Snooze
 - Notifications
-    - [ ] Add user profile pictures to replace current placeholder image
+    - [x] Add user profile pictures to replace current placeholder image
+    - [x] Fix constraints, text positioning, fonts
+
 - Alarm Response:
-    - [ ] UI fixes: add default to Confirmed responses, fix constraints and fonts
+    - [x] UI fixes: add default to Confirmed responses, fix constraints and fonts
 
 #### UI Improvements
 - Table Views
-    - [ ] Add animations to table views - Amy
-    - [ ] Add colours/formatting to custom table view cells - Amy
+    - [x] Add animations to table views - Amy
+    - [x] Add colours/formatting to custom table view cells - Amy
+
 - Settings/Profile screen UI
     - [ ] Fix image quality of default profile picture on Settings (currently noticeably blurry)
     - [ ] Add customized button for Friends
-    - [ ] Add customized button for Blockedd
+    - [ ] Add customized button for Blocked
     - [ ] Add customized button for Sign Out
     - [ ] Add custom fonts 
     - [ ] Add Name field
     - [ ] Reformat layout
  - Tab Bar
-    - [ ] Fix tab bar icon/text spacing
+    - [x] Fix tab bar icon/text spacing, color
 - Notifications
-    - [ ] Add custom font to all notification cell types (eg: missing for Received friend request notification)
+    - [x] Add custom font to all notification cell types (eg: missing for Received friend request notification)
  
