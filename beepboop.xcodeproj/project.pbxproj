@@ -52,6 +52,10 @@
 		0659FABA263618BC0042DDE1 /* icons8-swamp-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FAB9263618BB0042DDE1 /* icons8-swamp-50.png */; };
 		0659FABD26361A7C0042DDE1 /* icons8-iceberg-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FABC26361A7C0042DDE1 /* icons8-iceberg-50.png */; };
 		0659FACE2636985A0042DDE1 /* beepboop_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FACD2636985A0042DDE1 /* beepboop_icon.png */; };
+		0659FB0A2636AF930042DDE1 /* beepboop-icon-solidhead (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FB062636AF920042DDE1 /* beepboop-icon-solidhead (1).png */; };
+		0659FB0B2636AF930042DDE1 /* beepboop-icon-solidbgbeepboop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FB072636AF920042DDE1 /* beepboop-icon-solidbgbeepboop.png */; };
+		0659FB0C2636AF930042DDE1 /* beepboop-icon-solidbg-diagonalbeepboop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FB082636AF930042DDE1 /* beepboop-icon-solidbg-diagonalbeepboop.png */; };
+		0659FB0D2636AF930042DDE1 /* beepboop-icon-pastelbeepboop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FB092636AF930042DDE1 /* beepboop-icon-pastelbeepboop.png */; };
 		06945660261F984D00450AC8 /* AlarmCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694565F261F984D00450AC8 /* AlarmCustom.swift */; };
 		069456AB2622C10800450AC8 /* UserCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456AA2622C10800450AC8 /* UserCustom.swift */; };
 		069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069456AD2622D7DE00450AC8 /* VectormetadataButton.png */; };
@@ -139,6 +143,10 @@
 		0659FAB9263618BB0042DDE1 /* icons8-swamp-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-swamp-50.png"; sourceTree = "<group>"; };
 		0659FABC26361A7C0042DDE1 /* icons8-iceberg-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-iceberg-50.png"; sourceTree = "<group>"; };
 		0659FACD2636985A0042DDE1 /* beepboop_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beepboop_icon.png; sourceTree = "<group>"; };
+		0659FB062636AF920042DDE1 /* beepboop-icon-solidhead (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beepboop-icon-solidhead (1).png"; sourceTree = "<group>"; };
+		0659FB072636AF920042DDE1 /* beepboop-icon-solidbgbeepboop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beepboop-icon-solidbgbeepboop.png"; sourceTree = "<group>"; };
+		0659FB082636AF930042DDE1 /* beepboop-icon-solidbg-diagonalbeepboop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beepboop-icon-solidbg-diagonalbeepboop.png"; sourceTree = "<group>"; };
+		0659FB092636AF930042DDE1 /* beepboop-icon-pastelbeepboop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beepboop-icon-pastelbeepboop.png"; sourceTree = "<group>"; };
 		0694565F261F984D00450AC8 /* AlarmCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlarmCustom.swift; path = beepboop/Controllers/AlarmCustom.swift; sourceTree = SOURCE_ROOT; };
 		069456AA2622C10800450AC8 /* UserCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCustom.swift; sourceTree = "<group>"; };
 		069456AD2622D7DE00450AC8 /* VectormetadataButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VectormetadataButton.png; sourceTree = "<group>"; };
@@ -348,6 +356,10 @@
 				0633D546260F0115004B50FB /* AddButton-3x.png */,
 				0633D52B260EF710004B50FB /* AlarmsTabIcon-3x.png */,
 				0633D52A260EF710004B50FB /* AlarmTabIcon-1x.png */,
+				0659FB092636AF930042DDE1 /* beepboop-icon-pastelbeepboop.png */,
+				0659FB082636AF930042DDE1 /* beepboop-icon-solidbg-diagonalbeepboop.png */,
+				0659FB072636AF920042DDE1 /* beepboop-icon-solidbgbeepboop.png */,
+				0659FB062636AF920042DDE1 /* beepboop-icon-solidhead (1).png */,
 				0633D52D260EF712004B50FB /* GroupsTabIcon-1x.png */,
 				0633D52F260EF714004B50FB /* GroupsTabIcon-2x.png */,
 				0659FAB3263615260042DDE1 /* icons8-alarm-50.png */,
@@ -445,6 +457,7 @@
 				9AE40D3C2624E89900DB47FB /* SendButton.png in Resources */,
 				0633D538260EF715004B50FB /* GroupsTabIcon-2x.png in Resources */,
 				0633D547260F0115004B50FB /* AddButton-1x.png in Resources */,
+				0659FB0C2636AF930042DDE1 /* beepboop-icon-solidbg-diagonalbeepboop.png in Resources */,
 				0633D534260EF715004B50FB /* AlarmsTabIcon-3x.png in Resources */,
 				0633D549260F0115004B50FB /* AddButton-3x.png in Resources */,
 				0633D506260ED9E2004B50FB /* JosefinSans-Bold.ttf in Resources */,
@@ -457,6 +470,7 @@
 				0633D4A6260D9612004B50FB /* ProfileTabIcon.png in Resources */,
 				0633D4AF260D9E37004B50FB /* NotificationAlert.png in Resources */,
 				9A53F82C2602DB7C00D4711A /* Assets.xcassets in Resources */,
+				0659FB0D2636AF930042DDE1 /* beepboop-icon-pastelbeepboop.png in Resources */,
 				0633D4C0260E6752004B50FB /* JosefinSans-Italic-VariableFont_wght.ttf in Resources */,
 				069456E12623B67000450AC8 /* AddFriendsIcon.png in Resources */,
 				0633D512260ED9F2004B50FB /* JosefinSans-MediumItalic.ttf in Resources */,
@@ -470,6 +484,7 @@
 				0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */,
 				0633D50C260ED9E9004B50FB /* JosefinSans-ExtraLightItalic.ttf in Resources */,
 				0659FABA263618BC0042DDE1 /* icons8-swamp-50.png in Resources */,
+				0659FB0B2636AF930042DDE1 /* beepboop-icon-solidbgbeepboop.png in Resources */,
 				0659FACE2636985A0042DDE1 /* beepboop_icon.png in Resources */,
 				9A2935D626362B5500866B06 /* NavBarGradient.png in Resources */,
 				0633D510260ED9F0004B50FB /* JosefinSans-Medium.ttf in Resources */,
@@ -479,6 +494,7 @@
 				0633D531260EF714004B50FB /* SettingsTabIcon-2x.png in Resources */,
 				9A8AE656260C660600181515 /* SignUpButton.png in Resources */,
 				0633D504260ED9DE004B50FB /* JosefinSans-LightItalic.ttf in Resources */,
+				0659FB0A2636AF930042DDE1 /* beepboop-icon-solidhead (1).png in Resources */,
 				0633D536260EF715004B50FB /* GroupsTabIcon-1x.png in Resources */,
 				0633D532260EF715004B50FB /* SettingsTabIcon-3x.png in Resources */,
 				0633D4D8260E7864004B50FB /* EventPic.png in Resources */,
