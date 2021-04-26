@@ -215,10 +215,15 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func populateAlarmUpdateCell(name: String, oldTime: String, oldDate: String, newTime: String, newDate: String, cell: AlarmUpdateTableViewCell) {
         cell.alarmNameLabel.text = name
+        cell.alarmNameLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
         cell.alarmOldTimeLabel.text = oldTime
+        cell.alarmOldTimeLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
         cell.alarmOldDateLabel.text = oldDate
+        cell.alarmOldDateLabel.font = UIFont(name: "JosefinSans-Regular", size: 15.0)
         cell.alarmNewTimeLabel.text = newTime
+        cell.alarmNewTimeLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
         cell.alarmNewDateLabel.text = newDate
+        cell.alarmNewDateLabel.font = UIFont(name: "JosefinSans-Regular", size: 15.0)
     }
     
     func populateAlarmRequestUpdateCell(name: String, alarmName: String, status: Bool, cell: AlarmRequestUpdateTableViewCell) {
@@ -265,6 +270,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             cell.friendStatus.text = "\(userDoc.get("name") as! String) \(self.accepted(status: status)) your friend request"
             cell.friendStatus.font = UIFont(name: "JosefinSans-Regular", size: 18.0)
             if userDoc.get("photoURL") != nil {
+                print("userDoc")
                 self.loadData(url: URL(string: userDoc.get("photoURL") as! String)!) { data, response, error in
                     guard let data = data, error == nil else {
                         print("Could not find image \(String(describing: error))")

@@ -31,7 +31,7 @@ class AddFriendsViewController: UIViewController {
         // Do any additional setup after loading the view.
         backButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 23.0)
         instructionTextLabel.font = UIFont(name: "JosefinSans-Regular", size: 23.0)
-        emailTextField.font = UIFont(name: "JosefinSans-Regular", size: 12.0)
+        emailTextField.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
     }
     
     @IBAction func addFriendButtonPressed(_ sender: Any) {
