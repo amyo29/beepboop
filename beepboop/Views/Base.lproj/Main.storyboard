@@ -216,7 +216,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gS-pN-0Vb" userLabel="Friend Name Label">
-                                                    <rect key="frame" x="77" y="14" width="223" height="47"/>
+                                                    <rect key="frame" x="77" y="28" width="223" height="19"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Name">
                                                             <attributes>
@@ -241,8 +241,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="RPv-Ct-pWx" firstAttribute="leading" secondItem="8dI-7w-SSr" secondAttribute="leading" constant="10" id="9a5-OZ-Zoe"/>
-                                                <constraint firstAttribute="bottom" secondItem="1gS-pN-0Vb" secondAttribute="bottom" constant="14" id="9cT-6w-YCv"/>
-                                                <constraint firstItem="1gS-pN-0Vb" firstAttribute="top" secondItem="8dI-7w-SSr" secondAttribute="top" constant="14" id="AgA-c6-3iZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="1gS-pN-0Vb" secondAttribute="bottom" constant="28" id="9cT-6w-YCv"/>
+                                                <constraint firstItem="1gS-pN-0Vb" firstAttribute="top" secondItem="8dI-7w-SSr" secondAttribute="top" constant="28" id="AgA-c6-3iZ"/>
                                                 <constraint firstItem="1gS-pN-0Vb" firstAttribute="leading" secondItem="RPv-Ct-pWx" secondAttribute="trailing" constant="17" id="QS5-bX-Mco"/>
                                                 <constraint firstItem="RPv-Ct-pWx" firstAttribute="top" secondItem="8dI-7w-SSr" secondAttribute="topMargin" constant="7" id="UMr-V9-etc"/>
                                                 <constraint firstAttribute="trailing" secondItem="22e-Rh-yDM" secondAttribute="trailing" constant="30" id="bqB-qk-Zak"/>
@@ -973,26 +973,118 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group screen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CO1-Ek-bQq">
-                                <rect key="frame" x="156" y="248" width="103" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EfR-US-sbH">
+                                <rect key="frame" x="148" y="104" width="94" height="35"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="groups">
+                                        <attributes>
+                                            <color key="NSBackgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="NSColor" red="0.97254901960784312" green="0.16470588235294117" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="30" name="SFMono-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZfQ-xo-xZF" userLabel="Group Table View">
+                                <rect key="frame" x="10" y="179" width="370" height="582"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GroupTableViewCell" rowHeight="75" id="lvU-rf-k7F" customClass="GroupTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="370" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lvU-rf-k7F" id="myJ-3p-Jng">
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GroupPic" translatesAutoresizingMaskIntoConstraints="NO" id="onT-JT-fwJ" userLabel="Group Image View">
+                                                    <rect key="frame" x="10" y="18" width="50" height="39"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="Bpd-O1-N6q"/>
+                                                        <constraint firstAttribute="height" constant="50" id="I9A-o8-Ew6"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6A-1d-Akn" userLabel="Group Name Label">
+                                                    <rect key="frame" x="77" y="14" width="223" height="47"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Name">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <font key="NSFont" size="20" name="SFMono-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqW-Xq-ktE" userLabel="Metadata Button">
+                                                    <rect key="frame" x="320" y="26.666666666666671" width="20" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="WBi-up-aKz"/>
+                                                    </constraints>
+                                                    <state key="normal" image="MetadataButton"/>
+                                                    <connections>
+                                                        <action selector="groupMetadataButtonPressed:" destination="T9O-Aj-NH4" eventType="touchUpInside" id="JbB-og-Ihb"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mqW-Xq-ktE" firstAttribute="centerY" secondItem="myJ-3p-Jng" secondAttribute="centerY" id="3Gc-Pv-6VF"/>
+                                                <constraint firstItem="onT-JT-fwJ" firstAttribute="leading" secondItem="myJ-3p-Jng" secondAttribute="leading" constant="10" id="DPW-UD-Bcp"/>
+                                                <constraint firstItem="onT-JT-fwJ" firstAttribute="centerY" secondItem="myJ-3p-Jng" secondAttribute="centerY" id="Hrh-Kc-KeJ"/>
+                                                <constraint firstItem="N6A-1d-Akn" firstAttribute="top" secondItem="myJ-3p-Jng" secondAttribute="top" constant="14" id="RiJ-lf-SQ5"/>
+                                                <constraint firstItem="mqW-Xq-ktE" firstAttribute="leading" secondItem="N6A-1d-Akn" secondAttribute="trailing" constant="20" id="cnN-6j-YXg"/>
+                                                <constraint firstAttribute="bottom" secondItem="N6A-1d-Akn" secondAttribute="bottom" constant="14" id="jCI-0b-pas"/>
+                                                <constraint firstAttribute="trailing" secondItem="mqW-Xq-ktE" secondAttribute="trailing" constant="30" id="p0b-WH-DJz"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="onT-JT-fwJ" secondAttribute="bottom" constant="7" id="rtv-8b-ZxP"/>
+                                                <constraint firstItem="onT-JT-fwJ" firstAttribute="top" secondItem="myJ-3p-Jng" secondAttribute="topMargin" constant="7" id="ulJ-gX-vFS"/>
+                                                <constraint firstItem="N6A-1d-Akn" firstAttribute="leading" secondItem="onT-JT-fwJ" secondAttribute="trailing" constant="17" id="zOG-Qr-IPZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="groupImageView" destination="onT-JT-fwJ" id="ry6-ye-LtP"/>
+                                            <outlet property="groupMetadataButton" destination="mqW-Xq-ktE" id="hfq-hx-NdA"/>
+                                            <outlet property="groupNameLabel" destination="N6A-1d-Akn" id="sMK-lC-PIQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eac-D4-mbQ" userLabel="AddButton">
+                                <rect key="frame" x="297.66666666666669" y="668.66666666666663" width="62.333333333333314" height="62.333333333333371"/>
+                                <state key="normal" image="AddButton"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oOm-ae-PLu"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZfQ-xo-xZF" firstAttribute="top" secondItem="EfR-US-sbH" secondAttribute="bottom" constant="40" id="4N5-gS-JtV"/>
+                            <constraint firstItem="oOm-ae-PLu" firstAttribute="bottom" secondItem="Eac-D4-mbQ" secondAttribute="bottom" constant="30" id="GVF-NW-Lqq"/>
+                            <constraint firstItem="oOm-ae-PLu" firstAttribute="bottom" secondItem="ZfQ-xo-xZF" secondAttribute="bottom" id="b4H-gX-cBl"/>
+                            <constraint firstItem="ZfQ-xo-xZF" firstAttribute="centerX" secondItem="oOm-ae-PLu" secondAttribute="centerX" id="d8X-QZ-Dyh"/>
+                            <constraint firstItem="EfR-US-sbH" firstAttribute="top" secondItem="oOm-ae-PLu" secondAttribute="top" constant="60" id="dbC-kD-eWp"/>
+                            <constraint firstItem="oOm-ae-PLu" firstAttribute="trailing" secondItem="ZfQ-xo-xZF" secondAttribute="trailing" constant="10" id="lpA-eN-wWS"/>
+                            <constraint firstItem="ZfQ-xo-xZF" firstAttribute="leading" secondItem="oOm-ae-PLu" secondAttribute="leading" constant="10" id="o31-OJ-gNL"/>
+                            <constraint firstItem="EfR-US-sbH" firstAttribute="centerX" secondItem="oOm-ae-PLu" secondAttribute="centerX" id="qig-dg-t6c"/>
+                            <constraint firstItem="oOm-ae-PLu" firstAttribute="trailing" secondItem="Eac-D4-mbQ" secondAttribute="trailing" constant="30" id="rta-D2-Yhv"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Groups" image="GroupsTabIcon" selectedImage="GroupsTabIcon" id="hIU-Ha-dyc">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="XEa-xm-Jxs"/>
+                    <connections>
+                        <outlet property="groupTableView" destination="ZfQ-xo-xZF" id="2Vf-PA-v31"/>
+                        <outlet property="titleLabel" destination="EfR-US-sbH" id="EyW-cr-TYF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L4e-Uv-NrB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-22" y="869"/>
+            <point key="canvasLocation" x="-23.076923076923077" y="868.72037914691941"/>
         </scene>
         <!--Settings-->
         <scene sceneID="b94-Nb-NrG">
@@ -1904,6 +1996,7 @@
         <image name="DeclineIcon" width="96" height="96"/>
         <image name="Ellipsis" width="73" height="24"/>
         <image name="EventPic" width="50" height="49"/>
+        <image name="GroupPic" width="50" height="50"/>
         <image name="GroupsTabIcon" width="25" height="25"/>
         <image name="LoadingScreenRobot.png" width="182" height="168"/>
         <image name="LoginButton" width="268" height="118"/>
