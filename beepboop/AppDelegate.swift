@@ -94,6 +94,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let target = response.notification.request.identifier
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
+        guard let metadataVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
+        window?.rootViewController = metadataVC
+        window?.makeKeyAndVisible()
+        metadataVC.updateAlarmsFirestore()
+        metadataVC.selectedAlarm = target
+        window?.rootViewController?.performSegue(withIdentifier: "HomeToAlarmMetadata", sender: target)
+        completionHandler()
+    }
+    
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         ApplicationDelegate.shared.application(
                     application,

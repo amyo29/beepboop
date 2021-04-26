@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var timeLabel: UILabel!
@@ -19,38 +20,26 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var responseTableView: UITableView!
     
     private let responsesTableViewCellIdentifier = "ResponseTableViewCell"
-    private var nameList: [Dictionary<String, Any>] = [[:]]
+    private var nameList: [Dictionary<String, Any>] = []
     private let acceptIcon = UIImage(named: "AcceptIcon")
     private let declinedIcon = UIImage(named: "DeclineIcon")
     private var curIcon = UIImage(named: "AcceptIcon")
-//    var acceptedList: [String] = ["Harry", "Sally"]
-//    var declinedList: [String] = ["Ryan", "Emma"]
-//    var pendingList: [String] = ["Alvin", "Amy"]
-    var acceptedList: [Dictionary<String, Any>] = [[:]]
-    var declinedList: [Dictionary<String, Any>] = [[:]]
-    var pendingList: [Dictionary<String, Any>] = [[:]]
+    var acceptedList: [Dictionary<String, Any>] = []
+    var declinedList: [Dictionary<String, Any>] = []
+    var pendingList: [Dictionary<String, Any>] = []
     
-    var time: String = "9:30AM"
+    var alarmID: String = ""
+    var time: String = ""
     var alarmName: String = "iOS Class"
-//    var confirmed:
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        timeLabel.text = self.time
-        alarmNameLabel.text = self.alarmName
         
         self.responseTableView.delegate = self
         self.responseTableView.dataSource = self
         self.responseTableView.backgroundColor = UIColor(hex: "FEFDEC")
         self.responseTableView.separatorColor = .clear
         
-        self.nameList = acceptedList
-        print("nameList value: ", nameList)
-        
-        self.acceptedLabel.text = "Confirmed (\(self.acceptedList.count))"
-        self.declinedLabel.text = "Declined (\(self.declinedList.count))"
-        self.pendingLabel.text = "Pending (\(self.pendingList.count))"
         
         declinedButton.imageView?.alpha = 0.5
         declinedLabel.alpha = 0.5
@@ -60,6 +49,12 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.sendSubviewToBack(self.responseTableView)
+        self.updateStatuses()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.nameList.count
     }
@@ -67,13 +62,65 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: self.responsesTableViewCellIdentifier, for: indexPath as IndexPath) as! ResponsesTableViewCell
-
-        let friendName = String(describing: nameList[row]["name"]!)
-        cell.friendName.text = friendName
-        cell.friendProfileImage?.image = UIImage(named: "EventPic")
-        cell.friendStatusImage?.image = curIcon
-        
+        if nameList.count > 0 {
+            print(nameList)
+            cell.friendName.text = String(describing: nameList[row]["name"]!)
+            cell.friendProfileImage?.image = UIImage(named: "EventPic")
+            cell.friendStatusImage?.image = curIcon
+        }
         return cell
+    }
+    
+    // Necessary for popping up from notifications, since there's no NavController and the segue relies on data loading from the HomeViewController.
+    func updateStatuses() {
+        if alarmID != "" {
+            print("Finding \(alarmID)")
+            let alarmCollectionRef = Firestore.firestore().collection("alarmData")
+            let userCollectionRef = Firestore.firestore().collection("userData")
+            let getResponses = DispatchGroup() // Keeps track of async forloop
+            alarmCollectionRef.document(alarmID).getDocument { (alarmDoc, error) in
+                guard let alarmDoc = alarmDoc, alarmDoc.exists else {
+                    print("Could not find alarm \(String(describing: error))")
+                    return
+                }
+                let responses = alarmDoc.get("userStatus") as! Dictionary<String, String>
+                for (uuid, response) in responses {
+                    getResponses.enter()
+                    userCollectionRef.document(uuid).getDocument { (userDoc, error) in
+                        if let userDoc = userDoc, userDoc.exists, let data = userDoc.data() {
+                            switch response {
+                            case "Accepted":
+                                self.acceptedList.append(data)
+                                break
+                            case "Denied":
+                                self.declinedList.append(data)
+                                break
+                            case "Pending":
+                                self.pendingList.append(data)
+                                break
+                            default:
+                                print("Response value invalid: \(response)")
+                            }
+                        }
+                        else {
+                            print("Could not find user \(uuid)")
+                        }
+                        getResponses.leave()
+                    }
+                }
+                getResponses.notify(queue: .main) {
+                    self.time = self.extractTimeFromDate(time: alarmDoc.get("time") as? Timestamp)
+                    self.alarmName = alarmDoc.get("name") as! String
+                    self.nameList = self.acceptedList
+                    self.acceptedLabel.text = "Confirmed (\(self.acceptedList.count))"
+                    self.declinedLabel.text = "Declined (\(self.declinedList.count))"
+                    self.pendingLabel.text = "Pending (\(self.pendingList.count))"
+                    self.responseTableView.reloadData()
+                    self.timeLabel.text = self.time
+                    self.alarmNameLabel.text = self.alarmName
+                }
+            }
+        }
     }
     
     @IBAction func onAcceptedEmojiPressed(_ sender: Any) {
@@ -123,9 +170,6 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         self.pendingLabel.text = "Pending (\(self.pendingList.count))"
         self.responseTableView?.reloadData()
     }
-    
-    
-
     /*
     // MARK: - Navigation
 
@@ -135,5 +179,26 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         // Pass the selected object to the new view controller.
     }
     */
+    func extractTimeFromDate(time: Timestamp?) -> String {
+        if let time = time?.dateValue() {
+            let calendar = Calendar.current
+            var hour = calendar.component(.hour, from: time)
+            let minutes = calendar.component(.minute, from: time)
+            if hour >= 12 {
+                if hour > 12 {
+                    hour -= 12
+                }
+                return String(format: "%d:%0.2d PM", hour, minutes)
+            } else {
+                if hour == 0 {
+                    hour = 12
+                }
+                return String(format: "%d:%0.2d AM", hour, minutes)
+            }
+        } else {
+            return "Error when extracting time from Date object"
+        }
+    }
+
 
 }

@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var dataListener: ListenerRegistration! // Increases efficiency of app by only listening to data when view is on screen
     
     // data source of stored alarms per user
-    private var alarmList: [AlarmCustom] = []
+    var alarmList: [AlarmCustom] = []
     private var documents: [DocumentSnapshot] = []
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -34,6 +34,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     private let homeToCreateAlarmSegueIdentifier = "HomeToCreateAlarm"
     
     var currentUserUid: String?
+    var selectedAlarm: String?
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -209,7 +210,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    
     // Customize table view cell
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         /// set animation variables
@@ -301,68 +301,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    // TODO: no current logic to completely delete an alarmData document from Firestore
-    
-    // Function for Testing purposes: Updates Firestore data manually
-//    func retrieveDataFromFirestore() {
-//        docRef.getDocument { (docSnapshot, error) in
-//            guard let docSnapshot = docSnapshot, docSnapshot.exists else { return }
-//            let myData = docSnapshot.data()
-//            let latestAlarm = myData?["name"] as? String ?? "(none)"
-//            print(latestAlarm)
-//        }
-//    }
-    
-    // Updates Firestore data in real-time via snapshot listener
-    // Updates Table view as soon as users create/edit alarm w/o needing to manually fetch data from firestore (see retrieveDataFromFirestore() code)
-    
-    // 2 approaches to update alarms
-    // Approach 1 (slower): alarmData collection -> userList -> filter docs with userStatus field dict with value "Accepted"
-    // Approach 2 (faster): userData collection -> alarmList -> find alarm in alarmData collection
-    
-//    func updateAlarmsFirestore() {
-//        if let currentUserUid = self.currentUserUid {
-//            dataListener = alarmCollectionRef.whereField("userList", arrayContains: currentUserUid).addSnapshotListener { [unowned self] (snapshot, error) in
-//                guard let snapshot = snapshot else {
-//                    print("Error fetching snapshot results: \(error!)")
-//                    return
-//                }
-//
-//                let filteredDocuments = snapshot.documents.filter { (document) in
-//                    // TODO: we might be able to simplify the logic here
-//                    if let model = AlarmCustom(dictionary: document.data()) {
-//                        if let userStatuses = model.dictionary["userStatus"] as? [String: String],
-//                           let userStatus = userStatuses[currentUserUid],
-//                           userStatus == "Accepted" {
-//                            return true
-//                        } else {
-//                            return false
-//                        }
-//                    } else {
-//                        print(document.data())
-//                        // Don't use fatalError here in a real app.
-//                        fatalError("Unable to initialize type \(AlarmCustom.self) with dictionary \(document.data())")
-//                    }
-//                }
-//
-//                let models = filteredDocuments.map { (document) -> AlarmCustom in
-//                    if let model = AlarmCustom(dictionary: document.data()) {
-//                        return model
-//                    } else {
-//                        print(document.data())
-//                        // Don't use fatalError here in a real app.
-//                        fatalError("Unable to initialize type \(AlarmCustom.self) with dictionary \(document.data())")
-//                    }
-//                }
-//
-//                self.alarmList = models
-//                self.documents = snapshot.documents
-//
-//                self.alarmTableView?.reloadData()
-//            }
-//        }
-//    }
-    
     func updateAlarmsFirestore() {
         self.alarmList = [AlarmCustom]()
         var alarmUuids = [String]()
@@ -386,71 +324,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     }
                 }
-
-//                if alarmUuids.count > 0 {
-//                    self.dataListener = self.alarmCollectionRef.whereField("uuid", in: alarmUuids).addSnapshotListener { [unowned self] (snapshot, error) in
-//                        guard let snapshot = snapshot else {
-//                            print("Error fetching snapshot results: \(error!)")
-//                            return
-//                        }
-//
-//                        var models = snapshot.documents.map { (document) -> AlarmCustom in
-//                            if let model = AlarmCustom(dictionary: document.data()) {
-//                                return model
-//                            } else {
-//                                print(document.data())
-//                                // Don't use fatalError here in a real app.
-//                                fatalError("Unable to initialize type \(AlarmCustom.self) with dictionary \(document.data())")
-//                            }
-//                        }
-//
-//                        self.alarmList = models
-//                        self.documents = snapshot.documents
-//
-//                        self.alarmTableView?.reloadData()
-//                    }
-//                }
             }
         }
     }
-    
-//    func updateAlarmsFirestore() {
-//        var alarmUuids = [String]()
-//        userDocRef.collection("alarmMetadata").getDocuments() { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                for document in querySnapshot!.documents {
-//                    alarmUuids.append(document.documentID)
-//                }
-//
-//                if alarmUuids.count > 0 {
-//                    self.dataListener = self.alarmCollectionRef.whereField("uuid", in: alarmUuids).addSnapshotListener { [unowned self] (snapshot, error) in
-//                        guard let snapshot = snapshot else {
-//                            print("Error fetching snapshot results: \(error!)")
-//                            return
-//                        }
-//
-//                        var models = snapshot.documents.map { (document) -> AlarmCustom in
-//                            if let model = AlarmCustom(dictionary: document.data()) {
-//                                return model
-//                            } else {
-//                                print(document.data())
-//                                // Don't use fatalError here in a real app.
-//                                fatalError("Unable to initialize type \(AlarmCustom.self) with dictionary \(document.data())")
-//                            }
-//                        }
-//
-//                        self.alarmList = models
-//                        self.documents = snapshot.documents
-//
-//                        self.alarmTableView?.reloadData()
-//                    }
-//                }
-
-//            }
-//        }
-//    }
     
     // Increases efficiency of app by only listening to data when view is on screen
     override func viewWillDisappear(_ animated: Bool) {
@@ -461,60 +337,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "HomeToAlarmMetadata",
-           let destination = segue.destination as? AlarmMetadataViewController,
-           let opIndex = alarmTableView.indexPathForSelectedRow?.row {
-            var alarmUserStatus = alarmList[opIndex].userStatus
-//            print("type alarmuserStatus: ", type(of: alarmUserStatus))
-            var acceptedList: [Dictionary<String, Any>] = []
-            var declinedList: [Dictionary<String, Any>] = []
-            var pendingList: [Dictionary<String, Any>] = []
-            
-//            let g = DispatchGroup()
-            for (uuid, response) in alarmUserStatus! {
-                let docRef = userCollectionRef.document(uuid)
-//                g.enter()
-                docRef.getDocument { (document, error) in
-                    if let document = document, document.exists, let dataDescription = document.data() {
-                        print("are we ever getting in here #3")
-                        // TODO: turn into enum
-                        switch response {
-                        case "Accepted":
-                            print("appended to accepted list")
-                            acceptedList.append(dataDescription)
-                            destination.acceptedList = acceptedList
-                            print("acceptedList after append: ", acceptedList)
-                        case "Denied":
-                            print("appended to declined list")
-                            declinedList.append(dataDescription)
-                        case "Pending":
-                            print("appended to pending list")
-                            pendingList.append(dataDescription)
-                        default:
-                            print("seems response values weren't set correctly: \(response)")
-                        }
-//                        g.leave()
-                    } else {
-                        print("Document does not exist")
-//                        g.leave()
-                    }
-                }
+        if segue.identifier == "HomeToAlarmMetadata", let destination = segue.destination as? AlarmMetadataViewController {
+            if let opIndex = alarmTableView.indexPathForSelectedRow?.row { // From the table
+                destination.alarmID = self.alarmList[opIndex].uuid!
             }
-//            g.notify(queue:.main) {
-//                print("acceptedList: ", acceptedList)
-//                completion(acceptedList)
-//            }
-            print("acceptedList: ", acceptedList)
-            destination.time = self.extractTimeFromDate(time: alarmList[opIndex].time)
-            destination.alarmName = alarmList[opIndex].name!
-            destination.acceptedList = acceptedList
-            destination.declinedList = declinedList
-            destination.pendingList = pendingList
+            else if let alarmID = selectedAlarm { // From notifications
+                destination.alarmID = alarmID
+            }
         } else if segue.identifier == self.homeToCreateAlarmSegueIdentifier,
            let destination = segue.destination as? CreateAlarmViewController {
             destination.delegate = self
         }
-        
     }
     
     // MARK: - Utility

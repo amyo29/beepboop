@@ -308,17 +308,14 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         let requestUID = self.friendRequests[index]
         if let user = Auth.auth().currentUser {
             // Accept the requester
-            print("Did we at least get here")
 
             if accepted {
                 self.userRef.document(user.uid).updateData(["friendsList": FieldValue.arrayUnion([requestUID])])
                 self.userRef.document(requestUID).updateData(["friendsList": FieldValue.arrayUnion([user.uid])])
             }
-            print("Did  least get here")
 
             // Remove from current user's friendRequestReceived list
             self.userRef.document(user.uid).updateData(["friendRequestsReceived": FieldValue.arrayRemove([requestUID])])
-            print("Did get here")
 
             // Remove request from sender's friendRequestsSent list and add to notifications
             let notification = Notifications.friendUpdate(self.currentUserName, accepted).description
@@ -326,8 +323,6 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 "friendRequestsSent": FieldValue.arrayRemove([user.uid]),
                 "notifications": FieldValue.arrayUnion([notification])
             ])
-            print("sere")
-
             // TODO: Find a better way
             self.loadNewData()
             // Need to figure out appropriate way to delete
