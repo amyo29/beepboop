@@ -87,6 +87,7 @@
 		9A8AE656260C660600181515 /* SignUpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE655260C660600181515 /* SignUpButton.png */; };
 		9ADC0E11260E8D80009AD333 /* NavBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADC0E10260E8D80009AD333 /* NavBarBackground.png */; };
 		9AE40D3C2624E89900DB47FB /* SendButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AE40D3B2624E89900DB47FB /* SendButton.png */; };
+		E893695A26368E5E007EEF71 /* beepboop_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E893695926368E5E007EEF71 /* beepboop_icon.png */; };
 		E8BC5F1C2626672900AE496D /* ResponsesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC5F1B2626672900AE496D /* ResponsesTableViewCell.swift */; };
 		E8E4A43D26256D7500CE4426 /* AlarmMetadataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E4A43C26256D7500CE4426 /* AlarmMetadataViewController.swift */; };
 /* End PBXBuildFile section */
@@ -180,6 +181,7 @@
 		9AE40D3B2624E89900DB47FB /* SendButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SendButton.png; sourceTree = "<group>"; };
 		9D052F14A3B950A3364393A7 /* Pods-beepboop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.debug.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.debug.xcconfig"; sourceTree = "<group>"; };
 		C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_beepboop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E893695926368E5E007EEF71 /* beepboop_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = beepboop_icon.png; path = ../../../beepboop_icon.png; sourceTree = "<group>"; };
 		E8BC5F1B2626672900AE496D /* ResponsesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsesTableViewCell.swift; sourceTree = "<group>"; };
 		E8E4A43C26256D7500CE4426 /* AlarmMetadataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmMetadataViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -375,6 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				9A53F8302602DB7C00D4711A /* Info.plist */,
+				E893695926368E5E007EEF71 /* beepboop_icon.png */,
 				9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */,
 			);
 			path = SupportingFiles;
@@ -452,6 +455,7 @@
 				9A29A04B2623DFBE000A5275 /* AddFriendButton.png in Resources */,
 				9A8AE653260C649200181515 /* LoginButton.png in Resources */,
 				9A8AE649260C5E4400181515 /* BeepBoopTitle.png in Resources */,
+				E893695A26368E5E007EEF71 /* beepboop_icon.png in Resources */,
 				0633D548260F0115004B50FB /* AddButton-2x.png in Resources */,
 				0633D537260EF715004B50FB /* SettingsTabIcon-1x.png in Resources */,
 				0633D4A6260D9612004B50FB /* ProfileTabIcon.png in Resources */,
