@@ -159,7 +159,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 switch friendNotification {
                 case .friendUpdate(let name, let status):
                     let cell = tableView.dequeueReusableCell(withIdentifier: self.friendUpdateIdentifier, for: indexPath as IndexPath) as! FriendUpdateTableViewCell
-                    populateFriendUpdateCell(name: name, status: status, cell: cell)
+                    populateFriendUpdateCell(uid: name, status: status, cell: cell)
                     return cell
                 default:
                     print("ERROR in Friends should not be possible")
@@ -236,15 +236,46 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             cell.friendLabel.text = userDoc.get("name") as? String
             cell.friendLabel.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
             cell.friendRequestLabel.font = UIFont(name: "JosefinSans-Regular", size: 14.0)
-
+            if userDoc.get("photoURL") != nil {
+                self.loadData(url: URL(string: userDoc.get("photoURL") as! String)!) { data, response, error in
+                    guard let data = data, error == nil else {
+                        print("Could not find image \(String(describing: error))")
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        cell.friendImageView?.image = UIImage(data: data)?.circleMasked
+                    }
+                }
+            }
             cell.acceptButton.tag = tag
             cell.denyButton.tag = tag
         }
     }
     
-    func populateFriendUpdateCell(name: String, status: Bool, cell: FriendUpdateTableViewCell) {
-        cell.friendStatus.text = "\(name) \(accepted(status: status)) your friend request"
-        cell.friendStatus.font = UIFont(name: "JosefinSans-Regular", size: 18.0)
+    func loadData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func populateFriendUpdateCell(uid: String, status: Bool, cell: FriendUpdateTableViewCell) {
+        userRef.document(uid).getDocument { [self] (userDoc, error) in
+            guard let userDoc = userDoc, userDoc.exists else {
+                print("Could not find user \(uid): \(String(describing: error))")
+                return
+            }
+            cell.friendStatus.text = "\(userDoc.get("name") as! String) \(self.accepted(status: status)) your friend request"
+            cell.friendStatus.font = UIFont(name: "JosefinSans-Regular", size: 18.0)
+            if userDoc.get("photoURL") != nil {
+                self.loadData(url: URL(string: userDoc.get("photoURL") as! String)!) { data, response, error in
+                    guard let data = data, error == nil else {
+                        print("Could not find image \(String(describing: error))")
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        cell.friendImageView?.image = UIImage(data: data)?.circleMasked
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Accept/Deny Friends/Alarms
@@ -318,7 +349,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             self.userRef.document(user.uid).updateData(["friendRequestsReceived": FieldValue.arrayRemove([requestUID])])
 
             // Remove request from sender's friendRequestsSent list and add to notifications
-            let notification = Notifications.friendUpdate(self.currentUserName, accepted).description
+            let notification = Notifications.friendUpdate(user.uid, accepted).description
             self.userRef.document(requestUID).updateData([
                 "friendRequestsSent": FieldValue.arrayRemove([user.uid]),
                 "notifications": FieldValue.arrayUnion([notification])
@@ -378,9 +409,16 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         if let user = Auth.auth().currentUser {
             userRef.document(user.uid).getDocument { (document, error) in
                 guard let document = document, document.exists else {
-                    print("Could not find user \(error!)")
+                    if(error != nil) {
+                        print("error not nil: ", error)
+                    }
                     return
                 }
+                print("document: ", document)
+                if(!document.exists && error == nil) {
+                    print("case where doc does not exists and error is nil")
+                }
+                
                 self.currentUserName = document.get("name") as? String // Don't want to store uid
                 self.friendRequests = document.get("friendRequestsReceived") as? [String]
                 self.alarmRequests = document.get("alarmRequestsReceived") as? [String]

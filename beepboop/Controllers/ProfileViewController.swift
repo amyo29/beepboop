@@ -22,7 +22,7 @@ extension UIImage {
                                               y: isPortrait  ? ((size.height-size.width)/2).rounded(.down) : 0),
                                 size: breadthSize)) else { return nil }
         let format = imageRendererFormat
-        format.opaque = false
+        format.opaque = false   
         return UIGraphicsImageRenderer(size: breadthSize, format: format).image { _ in
             UIBezierPath(ovalIn: breadthRect).addClip()
             UIImage(cgImage: cgImage, scale: format.scale, orientation: imageOrientation)
@@ -149,6 +149,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                                     print("Error during createProfileChangeRequest \(String(describing: error?.localizedDescription))")
                                 }
                             })
+
+                            let userCollectionRef = Firestore.firestore().collection("userData")
+                            userCollectionRef.document(user!.uid).updateData(["photoURL": url?.absoluteString ?? ""])
                         }
                         else {
                             print("Error during storageRef.downloadURL \(String(describing: error?.localizedDescription))")

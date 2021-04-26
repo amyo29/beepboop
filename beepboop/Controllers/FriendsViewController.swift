@@ -15,7 +15,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     
-    private var friendsList: [UserCustom] = []
+    private var friendsList: [String] = []
     private let friendsTableViewCellIdentifier = "FriendsTableViewCell"
     
     var userCollectionRef: CollectionReference!
@@ -73,21 +73,41 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let friend = friendsList[row]
     
-        populateCell(friend: friend, cell: cell)
+        populateCell(uid: friend, cell: cell)
         
         return cell
     }
     
-    func populateCell(friend: UserCustom, cell: FriendsTableViewCell) {
-        print("in populateCell, friend=\(friend)")
-        cell.friendNameLabel?.text = friend.name
-        cell.friendNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
-        cell.friendImageView?.image = UIImage(named: "EventPic") // change to friend user profile pic
+    func populateCell(uid: String, cell: FriendsTableViewCell) {
+        print("in populateCell, friend=\(uid)")
+        userCollectionRef.document(uid).getDocument { (friendDoc, error) in
+            if let friendDoc = friendDoc, friendDoc.exists {
+                cell.friendNameLabel?.text = friendDoc.get("name") as? String
+                cell.friendNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
+                let photoURL = friendDoc.get("photoURL")
+                if photoURL == nil {
+                    cell.friendImageView?.image = UIImage(named: "EventPic") // Default
+                    return
+                }
+                self.loadData(url: URL(string: photoURL as! String)!) { data, response, error in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        cell.friendImageView?.image = UIImage(data: data)?.circleMasked
+                    }
+                }
+            }
+        }
         
         // if you do not set `shadowPath` you'll notice laggy scrolling
         // add this in `willDisplay` method
         let radius = cell.contentView.layer.cornerRadius
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
+    }
+    
+    func loadData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
     @IBAction func friendMetadataButtonPressed(_ sender: Any) {
@@ -135,7 +155,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func updateFriendsFirestore() {
-        self.friendsList = [UserCustom]()
+        self.friendsList = [String]()
         
         guard let currentUserUid = self.currentUserUid else {
             print("Cannot get current user uid")
@@ -153,21 +173,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
                 
                 if let friendUuids = document.get("friendsList") as? [String] {
-                    for friendUuid in friendUuids {
-                        self.userCollectionRef.document(friendUuid).getDocument { (document, error) in
-                            if let document = document,
-                               document.exists,
-                               let data = document.data() {
-                                if let model = UserCustom(dictionary: data) {
-                                    self.friendsList.append(model)
-                                    self.friendsTableView.reloadData()
-                                }
-                            }
-                               
-                        }
-                    }
+                    self.friendsList = friendUuids
+                    self.friendsTableView.reloadData()
                     self.friendsTableView.isHidden = false
-
                 }
             }
             

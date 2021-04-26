@@ -67,10 +67,28 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
             cell.friendName.text = String(describing: nameList[row]["name"]!)
             cell.friendName.font = UIFont(name: "JosefinSans-Regular", size: 25)
             cell.friendProfileImage?.image = UIImage(named: "EventPic")
+            let photoURL = nameList[row]["photoURL"]
+            if photoURL == nil || photoURL as! String == "" {
+                cell.friendProfileImage?.image = UIImage(named: "EventPic") // Default
+                
+            } else {
+                self.loadData(url: URL(string: photoURL as! String)!) { data, response, error in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        cell.friendProfileImage?.image = UIImage(data: data)?.circleMasked
+                    }
+                }
+            }
             cell.friendStatusImage?.image = curIcon
         }
         
         return cell
+    }
+    
+    func loadData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
     // Necessary for popping up from notifications, since there's no NavController and the segue relies on data loading from the HomeViewController.

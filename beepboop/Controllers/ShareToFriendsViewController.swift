@@ -136,18 +136,41 @@ class ShareToFriendsViewController: UIViewController, UITableViewDelegate, UITab
         print("In tableView cell render method, count: ", self.friendsList.count)
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: self.shareToFriendsTableViewCellIdentifier, for: indexPath as IndexPath) as! ShareToFriendsTableViewCell
-        let friend = self.friendsList[row]
+        let friend = row
         cell.shareButton.tag = row
         populateCell(friend: friend, cell: cell)
-        
         return cell
     }
     
-    func populateCell(friend: UserCustom, cell: ShareToFriendsTableViewCell) {
+    func populateCell(friend: Int, cell: ShareToFriendsTableViewCell) {
         print("in populateCell, friend=\(friend)")
-        cell.friendNameLabel?.text = friend.name
+        
+        cell.friendNameLabel?.text = self.friendsList[friend].name
         cell.friendNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
-        cell.friendImageView?.image = UIImage(named: "EventPic") // change to friend user profile pic
+        userCollectionRef.document(self.friendUuidList[friend]).getDocument { (friendDoc, error) in
+            if let friendDoc = friendDoc, friendDoc.exists {
+                let photoURL = friendDoc.get("photoURL")
+                if photoURL == nil {
+                    cell.friendImageView?.image = UIImage(named: "EventPic") // Default
+                    return
+                }
+                self.loadData(url: URL(string: photoURL as! String)!) { data, response, error in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        cell.friendImageView?.image = UIImage(data: data)?.circleMasked
+                    }
+                }
+            }
+            else {
+                cell.friendImageView?.image = UIImage(named: "EventPic") // Default
+            }
+        }
+    }
+    
+    func loadData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
     @IBAction func shareButtonPressed(_ sender: UIButton) {
