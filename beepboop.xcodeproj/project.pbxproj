@@ -51,6 +51,7 @@
 		0659FAB7263617A10042DDE1 /* icons8-swamp-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FAB6263617A10042DDE1 /* icons8-swamp-100.png */; };
 		0659FABA263618BC0042DDE1 /* icons8-swamp-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FAB9263618BB0042DDE1 /* icons8-swamp-50.png */; };
 		0659FABD26361A7C0042DDE1 /* icons8-iceberg-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FABC26361A7C0042DDE1 /* icons8-iceberg-50.png */; };
+		0659FACE2636985A0042DDE1 /* beepboop_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0659FACD2636985A0042DDE1 /* beepboop_icon.png */; };
 		06945660261F984D00450AC8 /* AlarmCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694565F261F984D00450AC8 /* AlarmCustom.swift */; };
 		069456AB2622C10800450AC8 /* UserCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069456AA2622C10800450AC8 /* UserCustom.swift */; };
 		069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069456AD2622D7DE00450AC8 /* VectormetadataButton.png */; };
@@ -83,7 +84,6 @@
 		9AC2E47A26361813008ECAA7 /* GroupCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2E47926361813008ECAA7 /* GroupCustom.swift */; };
 		9ADC0E11260E8D80009AD333 /* NavBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADC0E10260E8D80009AD333 /* NavBarBackground.png */; };
 		9AE40D3C2624E89900DB47FB /* SendButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AE40D3B2624E89900DB47FB /* SendButton.png */; };
-		E893695A26368E5E007EEF71 /* beepboop_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E893695926368E5E007EEF71 /* beepboop_icon.png */; };
 		E8BC5F1C2626672900AE496D /* ResponsesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC5F1B2626672900AE496D /* ResponsesTableViewCell.swift */; };
 		E8E4A43D26256D7500CE4426 /* AlarmMetadataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E4A43C26256D7500CE4426 /* AlarmMetadataViewController.swift */; };
 /* End PBXBuildFile section */
@@ -138,6 +138,7 @@
 		0659FAB6263617A10042DDE1 /* icons8-swamp-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-swamp-100.png"; sourceTree = "<group>"; };
 		0659FAB9263618BB0042DDE1 /* icons8-swamp-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-swamp-50.png"; sourceTree = "<group>"; };
 		0659FABC26361A7C0042DDE1 /* icons8-iceberg-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-iceberg-50.png"; sourceTree = "<group>"; };
+		0659FACD2636985A0042DDE1 /* beepboop_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beepboop_icon.png; sourceTree = "<group>"; };
 		0694565F261F984D00450AC8 /* AlarmCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlarmCustom.swift; path = beepboop/Controllers/AlarmCustom.swift; sourceTree = SOURCE_ROOT; };
 		069456AA2622C10800450AC8 /* UserCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCustom.swift; sourceTree = "<group>"; };
 		069456AD2622D7DE00450AC8 /* VectormetadataButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VectormetadataButton.png; sourceTree = "<group>"; };
@@ -174,7 +175,6 @@
 		9AE40D3B2624E89900DB47FB /* SendButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SendButton.png; sourceTree = "<group>"; };
 		9D052F14A3B950A3364393A7 /* Pods-beepboop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.debug.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.debug.xcconfig"; sourceTree = "<group>"; };
 		C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_beepboop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E893695926368E5E007EEF71 /* beepboop_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = beepboop_icon.png; path = ../../../beepboop_icon.png; sourceTree = "<group>"; };
 		E8BC5F1B2626672900AE496D /* ResponsesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsesTableViewCell.swift; sourceTree = "<group>"; };
 		E8E4A43C26256D7500CE4426 /* AlarmMetadataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmMetadataViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -363,6 +363,7 @@
 				0633D4AE260D9E37004B50FB /* NotificationAlert.png */,
 				0633D4A8260D961F004B50FB /* HomeTabIcon.png */,
 				0633D4A5260D9612004B50FB /* ProfileTabIcon.png */,
+				0659FACD2636985A0042DDE1 /* beepboop_icon.png */,
 				9A8AE655260C660600181515 /* SignUpButton.png */,
 				9A8AE652260C649200181515 /* LoginButton.png */,
 				9A8AE647260C5E4400181515 /* BeepBoopTitle.png */,
@@ -375,7 +376,6 @@
 			isa = PBXGroup;
 			children = (
 				9A53F8302602DB7C00D4711A /* Info.plist */,
-				E893695926368E5E007EEF71 /* beepboop_icon.png */,
 				9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */,
 			);
 			path = SupportingFiles;
@@ -452,7 +452,6 @@
 				9A29A04B2623DFBE000A5275 /* AddFriendButton.png in Resources */,
 				9A8AE653260C649200181515 /* LoginButton.png in Resources */,
 				9A8AE649260C5E4400181515 /* BeepBoopTitle.png in Resources */,
-				E893695A26368E5E007EEF71 /* beepboop_icon.png in Resources */,
 				0633D548260F0115004B50FB /* AddButton-2x.png in Resources */,
 				0633D537260EF715004B50FB /* SettingsTabIcon-1x.png in Resources */,
 				0633D4A6260D9612004B50FB /* ProfileTabIcon.png in Resources */,
@@ -471,6 +470,7 @@
 				0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */,
 				0633D50C260ED9E9004B50FB /* JosefinSans-ExtraLightItalic.ttf in Resources */,
 				0659FABA263618BC0042DDE1 /* icons8-swamp-50.png in Resources */,
+				0659FACE2636985A0042DDE1 /* beepboop_icon.png in Resources */,
 				9A2935D626362B5500866B06 /* NavBarGradient.png in Resources */,
 				0633D510260ED9F0004B50FB /* JosefinSans-Medium.ttf in Resources */,
 				0633D502260ED9CF004B50FB /* JosefinSans-Regular.ttf in Resources */,
@@ -736,7 +736,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VF8K5L5FZJ;
+				DEVELOPMENT_TEAM = FUTTDQCH3J;
 				INFOPLIST_FILE = beepboop/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -756,7 +756,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VF8K5L5FZJ;
+				DEVELOPMENT_TEAM = FUTTDQCH3J;
 				INFOPLIST_FILE = beepboop/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
