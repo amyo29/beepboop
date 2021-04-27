@@ -43,6 +43,24 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         if let user = user {
             loadProfilePic(user: user)
             loadUsername(user: user)
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+            var fetchedResults: [NSManagedObject]
+            
+            do {
+                let count = try context.count(for: fetchRequest)
+                if count > 0 {
+                    try fetchedResults = (context.fetch(fetchRequest) as! [NSManagedObject])
+                    snoozeSwitch.setOn((fetchedResults[0].value(forKey: "snoozeEnabled") as? Bool)!, animated: false)
+                    darkmodeSwitch.setOn((fetchedResults[0].value(forKey: "darkmodeEnabled") as? Bool)!, animated: false)
+                }
+            } catch {
+                let nserror = error as NSError
+                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                abort()
+            }
         }
         // Do any additional setup after loading the view.
     }
@@ -86,14 +104,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func updateSettings(_sender: Any) {
+        
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
         var fetchedResults: [NSManagedObject]
         
         do {
-            try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
-            if fetchedResults.count > 0 { // will be one or 0
+            let count = try context.count(for: fetchRequest)
+            if count > 0 {
+                try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
                 fetchedResults[0].setValue(snoozeSwitch.isOn, forKey: "snoozeEnabled")
                 fetchedResults[0].setValue(darkmodeSwitch.isOn, forKey: "darkmodeEnabled")
             }
@@ -107,6 +128,43 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
+        }
+
+        if snoozeSwitch.isOn {
+            let notificationCenter = UNUserNotificationCenter.current()
+            notificationCenter.removeAllPendingNotificationRequests()
+        }
+        else {
+            let alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
+            if let user = Auth.auth().currentUser {
+                let userDoc = Firestore.firestore().collection("userData").document(user.uid)
+                let alarms = Firestore.firestore().collection("alarmData")
+                userDoc.collection("alarmMetadata").getDocuments { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents from metadata \(err)")
+                    }
+                    else {
+                        for document in querySnapshot!.documents {
+                            if document.get("enabled") as! Bool {
+                                alarms.document(document.documentID).getDocument { (alarm, error) in
+                                    if let error = error {
+                                        print("Could not retreive alarm \(document.documentID) \(error)")
+                                    }
+                                    else {
+                                        if let alarm = alarm, alarm.exists {
+                                            if let name = alarm.get("name") as? String,
+                                               let recurring = alarm.get("recurrence") as? String,
+                                               let time = alarm.get("time") as? Timestamp {
+                                                alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time.dateValue(), recurring: recurring, uuidStr: document.documentID)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     

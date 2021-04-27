@@ -53,11 +53,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
      userNotificationCenter:center:willPresent:completionHandler deals with incoming local notifications, we turn off the settings if snooze is enabled.
      */
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("Received notification \(notification)")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
         var fetchedResults: [NSManagedObject]
-        
         do {
             try fetchedResults = context.fetch(request) as! [NSManagedObject]
             if fetchedResults.count > 0 {

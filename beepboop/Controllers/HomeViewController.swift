@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseCore
 import Firebase
+import CoreData
 
 protocol AlarmAdder {
     func addAlarm(time: Date, name: String, recurrence: String, invitedUsers: [String])
@@ -35,6 +36,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var currentUserUid: String?
     var selectedAlarm: String?
+    var snooze: Bool = false
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -81,6 +83,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.sendSubviewToBack(self.alarmTableView)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        var fetchedResults: [NSManagedObject]
+        do {
+            let count = try context.count(for: fetchRequest)
+            if count > 0 {
+                try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
+                snooze = fetchedResults[0].value(forKey: "snoozeEnabled") as! Bool
+            }
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
         self.updateAlarmsFirestore()
     }
     
@@ -156,6 +174,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.alarmDateLabel?.text = self.extractDate(time: alarm.time)
         cell.alarmDateLabel.font = UIFont(name: "JosefinSans-Regular", size: 15.0)
         cell.alarmImageView?.image = UIImage(named: "icons8-iceberg-50")
+        if snooze {
+            cell.alarmToggleSwitch.setOn(false, animated: false)
+        }
+        else {
+            var on = true
+            userDocRef.collection("alarmMetadata").document(alarm.uuid!).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    on = document.get("enabled") as? Bool ?? true
+                    cell.alarmToggleSwitch.setOn(on, animated: false)
+                }
+            }
+        }
     }
     
     // Remove alarm from table view by swiping to delete
@@ -196,12 +226,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Enable/Disable notifications
         let alarm = self.alarmList[index]
         if sender.isOn {
+            if snooze {
+                sender.setOn(false, animated: true)
+                return
+            }
             if let name = alarm.name,
                let time = alarm.time,
                let recurring = alarm.recurrence,
                let uuid = alarm.uuid {
                 alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurring, uuidStr: uuid)
-            }
+                }
         } else {
             if let uuid = alarm.uuid {
                 let notificationCenter = UNUserNotificationCenter.current()
@@ -286,7 +320,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 "alarmRequestsReceived": FieldValue.arrayUnion([uuid.uuidString])
             ])
         }
-        alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, uuidStr: uuid.uuidString)
+        if !snooze {
+            alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, uuidStr: uuid.uuidString)
+        }
         self.alarmList.append(newAlarm)
         self.alarmTableView.reloadData()
     }
@@ -320,7 +356,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 self.alarmList.append(model)
                                 self.alarmTableView.reloadData()
                             }
-                            
                         }
                     }
                 }
