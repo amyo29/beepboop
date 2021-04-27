@@ -16,15 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZo-i5-xca" userLabel="AddButton">
-                                <rect key="frame" x="297.66666666666669" y="614.66666666666663" width="62.333333333333314" height="62.333333333333371"/>
-                                <state key="normal" image="AddButton"/>
-                                <connections>
-                                    <segue destination="i0J-ZC-Eri" kind="popoverPresentation" identifier="HomeToCreateAlarm" popoverAnchorView="sZo-i5-xca" id="Pex-yV-eTb">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tz5-dh-ZWb">
                                 <rect key="frame" x="10" y="133.66666666666669" width="370" height="578.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -128,17 +119,30 @@
                                     </fragment>
                                 </attributedString>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZo-i5-xca" userLabel="AddButton">
+                                <rect key="frame" x="315" y="68.666666666666671" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="L1K-AZ-cja"/>
+                                    <constraint firstAttribute="width" constant="40" id="bjK-Z9-78g"/>
+                                </constraints>
+                                <state key="normal" image="AddButton"/>
+                                <connections>
+                                    <segue destination="i0J-ZC-Eri" kind="popoverPresentation" identifier="HomeToCreateAlarm" popoverAnchorView="sZo-i5-xca" id="Pex-yV-eTb">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sZo-i5-xca" secondAttribute="bottom" constant="35" id="3N7-at-mxe"/>
                             <constraint firstItem="nJh-8C-39w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9ch-za-pLU"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NTB-h7-7hv"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sZo-i5-xca" secondAttribute="trailing" constant="30" id="Npn-0V-AHo"/>
                             <constraint firstItem="nJh-8C-39w" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Svz-uB-IbR"/>
+                            <constraint firstItem="sZo-i5-xca" firstAttribute="centerY" secondItem="nJh-8C-39w" secondAttribute="centerY" id="U1g-jP-djQ"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="WZD-VN-BHD"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="nJh-8C-39w" secondAttribute="bottom" constant="20" id="YdG-2f-gjw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sZo-i5-xca" secondAttribute="trailing" constant="35" id="l6a-1g-Bhx"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="89.5" id="lJb-uD-pPR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tz5-dh-ZWb" secondAttribute="bottom" id="mLE-RJ-jyQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tz5-dh-ZWb" secondAttribute="trailing" constant="10" id="wTq-Fr-Rn2"/>
@@ -170,7 +174,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kx-ur-bHa" userLabel="AddButton">
-                                <rect key="frame" x="297.66666666666669" y="663.66666666666663" width="62.333333333333314" height="62.333333333333371"/>
+                                <rect key="frame" x="320" y="104" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="c0A-Fd-n3c"/>
+                                    <constraint firstAttribute="height" constant="40" id="lGg-gx-Oo9"/>
+                                </constraints>
                                 <state key="normal" image="AddButton"/>
                                 <connections>
                                     <segue destination="dld-ux-Cp7" kind="presentation" modalPresentationStyle="fullScreen" id="sZU-dj-Rky"/>
@@ -280,12 +288,12 @@
                             <constraint firstItem="yod-9x-kiS" firstAttribute="top" secondItem="hjE-JE-nB3" secondAttribute="top" constant="60" id="1O9-Il-Rjd"/>
                             <constraint firstItem="h68-Zv-weP" firstAttribute="leading" secondItem="hjE-JE-nB3" secondAttribute="leading" constant="20" id="1kU-T6-p2a"/>
                             <constraint firstItem="hjE-JE-nB3" firstAttribute="trailing" secondItem="IUP-LP-lkw" secondAttribute="trailing" constant="10" id="DEe-o4-Stj"/>
+                            <constraint firstItem="5Kx-ur-bHa" firstAttribute="centerY" secondItem="yod-9x-kiS" secondAttribute="centerY" id="MmN-y7-0eo"/>
                             <constraint firstItem="yod-9x-kiS" firstAttribute="centerX" secondItem="V6h-Fz-Nhb" secondAttribute="centerX" id="Mt3-VM-h1N"/>
                             <constraint firstAttribute="bottom" secondItem="IUP-LP-lkw" secondAttribute="bottom" id="Rvh-hr-OSF"/>
                             <constraint firstItem="h68-Zv-weP" firstAttribute="top" secondItem="hjE-JE-nB3" secondAttribute="top" constant="20" id="WCq-2j-vZo"/>
                             <constraint firstItem="hjE-JE-nB3" firstAttribute="trailing" secondItem="5Kx-ur-bHa" secondAttribute="trailing" constant="30" id="b6H-ll-E3w"/>
                             <constraint firstItem="IUP-LP-lkw" firstAttribute="leading" secondItem="hjE-JE-nB3" secondAttribute="leading" constant="10" id="inH-bh-EtQ"/>
-                            <constraint firstItem="hjE-JE-nB3" firstAttribute="bottom" secondItem="5Kx-ur-bHa" secondAttribute="bottom" constant="35" id="phb-Ws-NHG"/>
                             <constraint firstItem="IUP-LP-lkw" firstAttribute="top" secondItem="yod-9x-kiS" secondAttribute="bottom" constant="40" id="zRq-ZF-3SE"/>
                         </constraints>
                     </view>
@@ -987,7 +995,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EfR-US-sbH">
-                                <rect key="frame" x="148" y="104" width="94" height="35"/>
+                                <rect key="frame" x="148" y="68" width="94" height="35"/>
                                 <attributedString key="attributedText">
                                     <fragment content="groups">
                                         <attributes>
@@ -1001,7 +1009,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZfQ-xo-xZF" userLabel="Group Table View">
-                                <rect key="frame" x="10" y="179" width="370" height="582"/>
+                                <rect key="frame" x="10" y="143" width="370" height="618"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -1067,7 +1075,11 @@
                                 <sections/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eac-D4-mbQ" userLabel="AddButton">
-                                <rect key="frame" x="297.66666666666669" y="668.66666666666663" width="62.333333333333314" height="62.333333333333371"/>
+                                <rect key="frame" x="315" y="65.666666666666671" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="St9-Gg-AwE"/>
+                                    <constraint firstAttribute="height" constant="40" id="nvh-GB-yK9"/>
+                                </constraints>
                                 <state key="normal" image="AddButton"/>
                             </button>
                         </subviews>
@@ -1075,14 +1087,14 @@
                         <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ZfQ-xo-xZF" firstAttribute="top" secondItem="EfR-US-sbH" secondAttribute="bottom" constant="40" id="4N5-gS-JtV"/>
-                            <constraint firstItem="oOm-ae-PLu" firstAttribute="bottom" secondItem="Eac-D4-mbQ" secondAttribute="bottom" constant="30" id="GVF-NW-Lqq"/>
+                            <constraint firstItem="Eac-D4-mbQ" firstAttribute="centerY" secondItem="EfR-US-sbH" secondAttribute="centerY" id="BaM-zA-BHw"/>
                             <constraint firstItem="oOm-ae-PLu" firstAttribute="bottom" secondItem="ZfQ-xo-xZF" secondAttribute="bottom" id="b4H-gX-cBl"/>
                             <constraint firstItem="ZfQ-xo-xZF" firstAttribute="centerX" secondItem="oOm-ae-PLu" secondAttribute="centerX" id="d8X-QZ-Dyh"/>
-                            <constraint firstItem="EfR-US-sbH" firstAttribute="top" secondItem="oOm-ae-PLu" secondAttribute="top" constant="60" id="dbC-kD-eWp"/>
+                            <constraint firstItem="EfR-US-sbH" firstAttribute="top" secondItem="oOm-ae-PLu" secondAttribute="top" constant="24" id="dbC-kD-eWp"/>
                             <constraint firstItem="oOm-ae-PLu" firstAttribute="trailing" secondItem="ZfQ-xo-xZF" secondAttribute="trailing" constant="10" id="lpA-eN-wWS"/>
                             <constraint firstItem="ZfQ-xo-xZF" firstAttribute="leading" secondItem="oOm-ae-PLu" secondAttribute="leading" constant="10" id="o31-OJ-gNL"/>
                             <constraint firstItem="EfR-US-sbH" firstAttribute="centerX" secondItem="oOm-ae-PLu" secondAttribute="centerX" id="qig-dg-t6c"/>
-                            <constraint firstItem="oOm-ae-PLu" firstAttribute="trailing" secondItem="Eac-D4-mbQ" secondAttribute="trailing" constant="30" id="rta-D2-Yhv"/>
+                            <constraint firstItem="oOm-ae-PLu" firstAttribute="trailing" secondItem="Eac-D4-mbQ" secondAttribute="trailing" constant="35" id="rta-D2-Yhv"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Groups" image="GroupsTabIcon" selectedImage="GroupsTabIcon" id="hIU-Ha-dyc">

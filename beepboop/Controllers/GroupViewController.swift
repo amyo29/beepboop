@@ -48,6 +48,26 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    // Customize table view cell
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        /// set animation variables
+        let duration = 0.5
+        let delayFactor = 0.05
+        let rowHeight: CGFloat = 62
+        
+        /// moves the cell downwards, then animates the cell's by returning them to their original position with spring bounce based on indexPaths
+        cell.transform = CGAffineTransform(translationX: 0, y: rowHeight)
+        UIView.animate(
+            withDuration: duration,
+            delay: delayFactor * Double(indexPath.row),
+            usingSpringWithDamping: 0.6,
+            initialSpringVelocity: 0.1,
+            options: [.curveEaseInOut],
+            animations: {
+                cell.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+    }
+    
     func populateCell(group: GroupCustom, cell: GroupTableViewCell) {
         cell.groupNameLabel?.text = group.name
         cell.groupNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
