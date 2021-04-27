@@ -131,7 +131,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.alarmToggleSwitch?.tag = row
         
         populateCell(alarm: alarm, cell: cell)
-        colourCell(alarm: alarm, cell: cell, row: row)
+        colourCell(cell: cell, row: row)
         colourSwitch(alarm: alarm, cell: cell)
         
         return cell
@@ -148,7 +148,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.alarmToggleSwitch.layer.cornerRadius = 16
     }
     
-    func colourCell(alarm: AlarmCustom, cell: AlarmTableViewCell, row: Int) {
+    func colourCell(cell: AlarmTableViewCell, row: Int) {
         let pastelGreen = UIColor(red: 0.58, green: 0.92, blue: 0.78, alpha: 1.00) // hex: #95EBC8
         let lightGreen = UIColor(red: 0.69, green: 1.00, blue: 0.74, alpha: 1.00) // hex: #AFFFBC
         let softYellow = UIColor(red: 0.98, green: 1.00, blue: 0.69, alpha: 1.00) // hex: #F9FFAF
@@ -316,7 +316,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         for user in invitedUsers {
             userCollectionRef.document(user).updateData([
-                "notifications": FieldValue.arrayUnion(["\(user);\(newAlarm.name);Pending"]),
                 "alarmRequestsReceived": FieldValue.arrayUnion([uuid.uuidString])
             ])
         }

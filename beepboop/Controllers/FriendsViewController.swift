@@ -74,6 +74,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let friend = friendsList[row]
     
         populateCell(uid: friend, cell: cell)
+        colourCell(cell: cell, row: row)
         
         return cell
     }
@@ -108,6 +109,55 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func loadData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func colourCell(cell: FriendsTableViewCell, row: Int) {
+        let pastelGreen = UIColor(red: 0.58, green: 0.92, blue: 0.78, alpha: 1.00) // hex: #95EBC8
+        let lightGreen = UIColor(red: 0.69, green: 1.00, blue: 0.74, alpha: 1.00) // hex: #AFFFBC
+        let softYellow = UIColor(red: 0.98, green: 1.00, blue: 0.69, alpha: 1.00) // hex: #F9FFAF
+        let orangeGold = UIColor(red: 1.00, green: 0.83, blue: 0.52, alpha: 1.00) // hex: #FFD385
+        let rose = UIColor(red: 1.00, green: 0.70, blue: 0.70, alpha: 1.00) // hex: #FFB3B3
+        let babyPink = UIColor(red: 1.00, green: 0.79, blue: 0.81, alpha: 1.00) // hex: #FFC9CE
+        let lilac = UIColor(red: 1.00, green: 0.75, blue: 0.96, alpha: 1.00) // hex: #FEBEF6
+        let lavender = UIColor(red: 0.83, green: 0.82, blue: 1.00, alpha: 1.00) // hex: #D3D1FF
+        let doveEggBlue = UIColor(red: 0.76, green: 0.87, blue: 1.00, alpha: 1.00) // hex: #C1DDFF
+        let tiffanyBlue = UIColor(red: 0.67, green: 0.95, blue: 1.00, alpha: 1.00) // hex: #ABF1FF
+        
+        let cellColours = [pastelGreen, lightGreen, softYellow, orangeGold, rose, babyPink, lilac, lavender, doveEggBlue, tiffanyBlue]
+        let frequency = row % cellColours.count
+        cell.contentView.backgroundColor = cellColours[frequency]
+    }
+    
+    // Customize table view cell
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        /// set animation variables
+        let duration = 0.5
+        let delayFactor = 0.05
+        let rowHeight: CGFloat = 62
+        
+//        /// fades the cell by setting alpha as zero and moves the cell downwards, then animates the cell's alpha and returns it to it's original position based on indexPaths
+//        cell.transform = CGAffineTransform(translationX: 0, y: rowHeight * 1.4)
+//        cell.alpha = 0
+//        UIView.animate(
+//            withDuration: duration,
+//            delay: delayFactor * Double(indexPath.row),
+//            options: [.curveEaseInOut],
+//            animations: {
+//                cell.transform = CGAffineTransform(translationX: 0, y: 0)
+//                cell.alpha = 1
+//        })
+        
+        /// moves the cell downwards, then animates the cell's by returning them to their original position with spring bounce based on indexPaths
+        cell.transform = CGAffineTransform(translationX: 0, y: rowHeight)
+        UIView.animate(
+            withDuration: duration,
+            delay: delayFactor * Double(indexPath.row),
+            usingSpringWithDamping: 0.6,
+            initialSpringVelocity: 0.1,
+            options: [.curveEaseInOut],
+            animations: {
+                cell.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
     }
     
     @IBAction func friendMetadataButtonPressed(_ sender: Any) {

@@ -128,6 +128,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 let cell = tableView.dequeueReusableCell(withIdentifier: self.alarmRequestIdentifier, for: indexPath as IndexPath) as! AlarmRequestTableViewCell
                 print(self.alarmRequests[row])
                 populateAlarmRequestCell(requestUID: self.alarmRequests[row], cell: cell, tag: row)
+                let babyPink = UIColor(red: 1.00, green: 0.79, blue: 0.81, alpha: 1.00) // hex: #FFC9CE
+                cell.contentView.backgroundColor = babyPink
                 return cell // Need to put these in all if to maintain type
             }
             else {
@@ -137,10 +139,14 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 case .alarmChange(let name, let oldTime, let oldDate, let newTime, let newDate):
                     let cell = tableView.dequeueReusableCell(withIdentifier: self.alarmUpdateIdentifier, for: indexPath as IndexPath) as! AlarmUpdateTableViewCell
                     populateAlarmUpdateCell(name: name, oldTime: oldTime, oldDate: oldDate, newTime: newTime, newDate: newDate, cell: cell)
+                    let pastelGreen = UIColor(red: 0.58, green: 0.92, blue: 0.78, alpha: 1.00) // hex: #95EBC8
+                    cell.contentView.backgroundColor = pastelGreen
                     return cell
                 case .alarmUpdate(let name, let alarm, let status):
                     let cell = tableView.dequeueReusableCell(withIdentifier: self.alarmChangeIdentifier, for: indexPath as IndexPath) as! AlarmRequestUpdateTableViewCell
                     populateAlarmRequestUpdateCell(name: name, alarmName: alarm, status: status, cell: cell)
+                    let doveEggBlue = UIColor(red: 0.76, green: 0.87, blue: 1.00, alpha: 1.00) // hex: #C1DDFF
+                    cell.contentView.backgroundColor = doveEggBlue
                     return cell
                 default: // should not be possible
                     print("ERROR Should not be possible")
@@ -151,6 +157,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             if row < self.friendRequests.count {
                 let cell = tableView.dequeueReusableCell(withIdentifier: self.friendRequestIdentifier, for: indexPath as IndexPath) as! FriendRequestTableViewCell
                 populateFriendRequestCell(requestUID: self.friendRequests[row], cell: cell, tag: row)
+                let orangeGold = UIColor(red: 1.00, green: 0.83, blue: 0.52, alpha: 1.00) // hex: #FFD385
+                cell.contentView.backgroundColor = orangeGold
                 return cell
             }
             else {
@@ -160,6 +168,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 case .friendUpdate(let name, let status):
                     let cell = tableView.dequeueReusableCell(withIdentifier: self.friendUpdateIdentifier, for: indexPath as IndexPath) as! FriendUpdateTableViewCell
                     populateFriendUpdateCell(uid: name, status: status, cell: cell)
+                    let lightGreen = UIColor(red: 0.69, green: 1.00, blue: 0.74, alpha: 1.00) // hex: #AFFFBC
+                    cell.contentView.backgroundColor = lightGreen
                     return cell
                 default:
                     print("ERROR in Friends should not be possible")
@@ -311,7 +321,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             // Add current user to alarm's uid list
             if accepted {
                 self.alarmRef.document(requestUID).updateData(["userList": FieldValue.arrayUnion([user.uid]), "userStatus.\(user.uid)": "Accepted"])
-                self.userRef.document(user.uid).collection("alarmMetaData").document(requestUID).setData(["enabled": true, "snooze": false])
+                self.userRef.document(user.uid).collection("alarmMetadata").document(requestUID).setData(["enabled": true, "snooze": false])
             }
             else {
                 self.alarmRef.document(requestUID).updateData(["userStatus.\(user.uid)": "Denied"])

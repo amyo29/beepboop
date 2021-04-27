@@ -8,6 +8,12 @@
 import UIKit
 import Firebase
 
+enum StatusMode {
+    case accepted
+    case declined
+    case pending
+}
+
 class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var alarmNameLabel: UILabel!
@@ -30,6 +36,8 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     var declinedList: [Dictionary<String, Any>] = []
     var pendingList: [Dictionary<String, Any>] = []
     
+    var status: StatusMode = .accepted
+    
     var alarmID: String = ""
     var time: String = ""
     var alarmName: String = "iOS Class"
@@ -39,6 +47,7 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         
         self.responseTableView.delegate = self
         self.responseTableView.dataSource = self
+        
         self.responseTableView.backgroundColor = UIColor(hex: "FEFDEC")
         self.responseTableView.separatorColor = .clear
         
@@ -82,6 +91,17 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
                 }
             }
             cell.friendStatusImage?.image = curIcon
+        }
+        
+        cell.backgroundColor = UIColor(hex: "FEFDEC")
+        
+        switch status {
+        case .accepted:
+            cell.contentView.backgroundColor = UIColor(red: 0.58, green: 0.92, blue: 0.78, alpha: 1.00) // hex: #95EBC8, pastel green
+        case .declined:
+            cell.contentView.backgroundColor = UIColor(red: 1.00, green: 0.70, blue: 0.70, alpha: 1.00) // hex: #FFB3B3, rose
+        case .pending:
+            cell.contentView.backgroundColor = UIColor(red: 0.98, green: 1.00, blue: 0.69, alpha: 1.00) // hex: #F9FFAF, soft yellow
         }
         
         return cell
@@ -161,6 +181,7 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         
         curIcon = acceptIcon
         nameList = acceptedList
+        status = .accepted
         self.acceptedLabel.text = "Confirmed (\(self.acceptedList.count))"
         self.responseTableView?.reloadData()
     }
@@ -177,6 +198,7 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         
         curIcon = declinedIcon
         nameList = declinedList
+        status = .declined
         self.declinedLabel.text = "Declined (\(self.declinedList.count))"
         self.responseTableView?.reloadData()
     }
@@ -191,8 +213,10 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         acceptedButton.imageView?.alpha = 0.5
         acceptedLabel.alpha = 0.5
         
-        curIcon = UIImage(named: "NotificationAlert")
+//        curIcon = UIImage(named: "NotificationAlert")
+        curIcon = nil
         nameList = pendingList
+        status = .pending
         self.pendingLabel.text = "Pending (\(self.pendingList.count))"
         self.responseTableView?.reloadData()
     }

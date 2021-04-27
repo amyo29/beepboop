@@ -37,6 +37,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var snoozeSwitch: UISwitch!
     @IBOutlet weak var darkmodeSwitch: UISwitch!
         
+    @IBOutlet weak var snoozeLabel: UILabel!
+    @IBOutlet weak var darkModeLabel: UILabel!
+    @IBOutlet weak var friendsButton: UIButton!
+    @IBOutlet weak var blockedButton: UIButton!
+    @IBOutlet weak var logoutButton: UIButton!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let user = Auth.auth().currentUser
@@ -62,7 +70,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 abort()
             }
         }
+        
         // Do any additional setup after loading the view.
+        snoozeLabel.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
+        darkModeLabel.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
+        logoutButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
+        friendsButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
+        blockedButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
     }
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
@@ -73,6 +87,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             print("Error occurred when signing out of this account.")
         }
     }
+    
     func loadProfilePic(user: Firebase.User?) {
         let photoURL = user?.photoURL
         if let url = photoURL {
@@ -94,6 +109,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func loadUsername(user: Firebase.User?) {
         userLabel.text = user?.displayName ?? user?.email ?? "Nil"
+        userLabel.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
     }
     
     /*
