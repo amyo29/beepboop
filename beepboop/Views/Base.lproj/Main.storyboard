@@ -1182,7 +1182,7 @@
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NLA-25-Wgh">
-                                <rect key="frame" x="251" y="473.66666666666669" width="51" height="31"/>
+                                <rect key="frame" x="251" y="470.66666666666669" width="51" height="31"/>
                                 <connections>
                                     <action selector="updateSettingsWith_sender:" destination="X2Q-dW-nb0" eventType="valueChanged" id="OlP-Yf-WIo"/>
                                 </connections>
@@ -1268,8 +1268,8 @@
                         <color key="backgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KI0-NK-Bie" firstAttribute="top" secondItem="25I-6c-nQS" secondAttribute="top" constant="80" id="1HJ-e5-LdN"/>
+                            <constraint firstItem="NLA-25-Wgh" firstAttribute="centerY" secondItem="yQe-aN-3Q9" secondAttribute="centerY" id="1Kr-6n-d6i"/>
                             <constraint firstItem="rW2-RQ-I6M" firstAttribute="top" secondItem="tVx-42-7zz" secondAttribute="bottom" constant="35" id="1px-83-Wfe"/>
-                            <constraint firstItem="NLA-25-Wgh" firstAttribute="top" secondItem="1WE-62-S4c" secondAttribute="bottom" constant="30" id="2tF-1f-G1Q"/>
                             <constraint firstItem="xIT-H6-cfl" firstAttribute="centerY" secondItem="1WE-62-S4c" secondAttribute="centerY" id="3B6-WU-hgX"/>
                             <constraint firstItem="tVx-42-7zz" firstAttribute="centerX" secondItem="NOd-ua-zfJ" secondAttribute="centerX" id="5O6-Sp-Ipe"/>
                             <constraint firstItem="DEW-FR-Z5W" firstAttribute="centerX" secondItem="25I-6c-nQS" secondAttribute="centerX" id="5ZO-EI-bWU"/>
