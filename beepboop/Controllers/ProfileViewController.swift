@@ -33,7 +33,8 @@ extension UIImage {
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var profileImage: UIButton!
-    @IBOutlet weak var userLabel: UILabel!
+    @IBOutlet weak var userEmailLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var snoozeSwitch: UISwitch!
     @IBOutlet weak var darkmodeSwitch: UISwitch!
         
@@ -47,10 +48,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .dark
         let user = Auth.auth().currentUser
         if let user = user {
             loadProfilePic(user: user)
-            loadUsername(user: user)
+            loadUserName(user: user)
+            loadUserEmail(user: user)
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let context = appDelegate.persistentContainer.viewContext
@@ -73,8 +76,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         // Do any additional setup after loading the view.
         snoozeLabel.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
+        let forestGreen = UIColor(red: 0.26, green: 0.39, blue: 0.34, alpha: 1.00)
+        let aqua = UIColor(red: 0.24, green: 0.79, blue: 0.67, alpha: 1.00)
+        let peach = UIColor(red: 0.99, green: 0.62, blue: 0.58, alpha: 1.00)
+        let orange = UIColor(red: 0.96, green: 0.58, blue: 0.12, alpha: 1.00)
+        snoozeLabel.textColor = orange
+        darkModeLabel.textColor = aqua
+        snoozeSwitch.onTintColor = orange
+        snoozeSwitch.tintColor = orange
+        snoozeSwitch.thumbTintColor = UIColor.white
+        darkmodeSwitch.onTintColor = aqua
+        darkmodeSwitch.tintColor = aqua
+        darkmodeSwitch.thumbTintColor = UIColor.white
         darkModeLabel.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
         logoutButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
+        logoutButton.titleLabel?.textColor = orange
         friendsButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
         blockedButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
     }
@@ -107,10 +123,47 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
-    func loadUsername(user: Firebase.User?) {
-        userLabel.text = user?.displayName ?? user?.email ?? "Nil"
-        userLabel.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
+    func loadUserEmail(user: Firebase.User?) {
+        userEmailLabel.text = user?.displayName ?? user?.email ?? "Nil"
+        userEmailLabel.font = UIFont(name: "JosefinSans-Regular", size: 22.0)
+        let beepboopBlue = UIColor(red: 0.04, green: 0.83, blue: 0.83, alpha: 1.00)
+        let peach = UIColor(red: 0.99, green: 0.62, blue: 0.58, alpha: 1.00)
+        userEmailLabel.textColor = peach
     }
+    
+    func loadUserName(user: Firebase.User?) {
+        guard let currentUserUid = user?.uid else {
+            let alertController = UIAlertController(
+            title: "Unknown error",
+            message: "Something went wrong, please try again.",
+            preferredStyle: .alert)
+        
+            alertController.addAction(UIAlertAction(
+                                        title: "Ok",
+                                        style: .default,
+                                        handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        // get current user document from Firestore
+        let userCollectionRef = Firestore.firestore().collection("userData")
+        let userDocRef = userCollectionRef.document(currentUserUid)
+        userDocRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                guard let username = document.get("name") as? String else {
+                    self.userNameLabel.isHidden = true
+                    return
+                }
+                self.userNameLabel.text = username
+                self.userNameLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
     
     /*
      Asynchronously load url so other functions aren't backlogged
@@ -144,6 +197,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
+        }
+        
+        if darkmodeSwitch.isOn {
+            print("dark mode switch is on")
+            self.overrideUserInterfaceStyle = .dark
+        } else {
+            self.overrideUserInterfaceStyle = .light
         }
 
         if snoozeSwitch.isOn {
