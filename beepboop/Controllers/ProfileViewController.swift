@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        overrideUserInterfaceStyle = .dark    
+        overrideUserInterfaceStyle = .dark
         let user = Auth.auth().currentUser
         if let user = user {
             loadProfilePic(user: user)
@@ -126,7 +126,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func loadUserEmail(user: Firebase.User?) {
         userEmailLabel.text = user?.displayName ?? user?.email ?? "Nil"
         userEmailLabel.font = UIFont(name: "JosefinSans-Regular", size: 22.0)
-        let forestGreen = UIColor(red: 0.26, green: 0.39, blue: 0.34, alpha: 1.00)
         let beepboopBlue = UIColor(red: 0.04, green: 0.83, blue: 0.83, alpha: 1.00)
         let peach = UIColor(red: 0.99, green: 0.62, blue: 0.58, alpha: 1.00)
         userEmailLabel.textColor = peach
@@ -139,20 +138,25 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             message: "Something went wrong, please try again.",
             preferredStyle: .alert)
         
-        alertController.addAction(UIAlertAction(
-                                    title: "Ok",
-                                    style: .default,
-                                    handler: nil))
-        
-        self.present(alertController, animated: true, completion: nil)
-        
-        return
+            alertController.addAction(UIAlertAction(
+                                        title: "Ok",
+                                        style: .default,
+                                        handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+            return
         }
+        // get current user document from Firestore
         let userCollectionRef = Firestore.firestore().collection("userData")
         let userDocRef = userCollectionRef.document(currentUserUid)
         userDocRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                self.userNameLabel.text = document.get("name") as? String ?? "no name"
+                guard let username = document.get("name") as? String else {
+                    self.userNameLabel.isHidden = true
+                    return
+                }
+                self.userNameLabel.text = username
                 self.userNameLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
             } else {
                 print("Document does not exist")
