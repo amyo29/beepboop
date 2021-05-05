@@ -84,10 +84,27 @@ class AddFriendsViewController: UIViewController {
             return
         }
         
-        guard let currentUserUid = Auth.auth().currentUser?.uid else {
+        guard let currentUserUid = Auth.auth().currentUser?.uid,
+              let currentUserEmail = Auth.auth().currentUser?.email else {
             let alertController = UIAlertController(
                 title: "Unknown error",
                 message: "Something went wrong, please try again.",
+                preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(
+                                        title: "Ok",
+                                        style: .default,
+                                        handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        if email == currentUserEmail {
+            let alertController = UIAlertController(
+                title: "Oops!",
+                message: "You can't add yourself as a friend.",
                 preferredStyle: .alert)
             
             alertController.addAction(UIAlertAction(
