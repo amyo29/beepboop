@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class AlarmDisplayViewController: UIViewController {
     @IBOutlet weak var alarmNameLabel: UILabel!
@@ -17,6 +18,35 @@ class AlarmDisplayViewController: UIViewController {
         super.viewDidLoad()
         populateInfo()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        var fetchedResults: [NSManagedObject]
+        var darkmode = false
+        do {
+            let count = try context.count(for: fetchRequest)
+            if count > 0 {
+                try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
+                darkmode = fetchedResults[0].value(forKey: "darkmodeEnabled") as! Bool
+            }
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if darkmode {
+            self.view.backgroundColor = UIColor(rgb: 0x262221)
+            overrideUserInterfaceStyle = .dark
+
+        }
+        else {
+            self.view.backgroundColor = UIColor(rgb: 0xFEFDEC)
+            overrideUserInterfaceStyle = .light
+        }
     }
     
     func populateInfo() {

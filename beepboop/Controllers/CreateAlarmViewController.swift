@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol ShareToListUpdater {
     func updateSharedToList(sharedToList: [String])
@@ -53,13 +54,14 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
 //        let aquablue = UIColor(hex: "#00ffff")
 //        titleTextField.textColor = UIColor(red:0/255, green:128/255, blue:255/255, alpha:1.0) // aqua
 //        titleTextField.textColor = UIColor(red:0/255, green:255/255, blue:255/255, alpha:1.0) // turquoise
-        titleTextField.textColor = UIColor(red:31/255, green:207/255, blue:245/255, alpha:1.0) // figma blue colour title
         dateLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         repeatLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         soundLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         snoozeLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         repeatButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
+        titleTextField.textColor = UIColor(red:31/255, green:207/255, blue:245/255, alpha:1.0) // figma blue colour title
+
         repeatButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         shareButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         
@@ -70,6 +72,46 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         titleTextField.layer.addSublayer(bottomLine)
     }
         
+    override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        var fetchedResults: [NSManagedObject]
+        var darkmode = false
+        var textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
+        do {
+            let count = try context.count(for: fetchRequest)
+            if count > 0 {
+                try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
+                darkmode = fetchedResults[0].value(forKey: "darkmodeEnabled") as! Bool
+            }
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+
+        if darkmode {
+            self.view.backgroundColor = UIColor(rgb: 0x262221)
+            overrideUserInterfaceStyle = .dark
+            textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
+
+        }
+        else {
+            self.view.backgroundColor = UIColor(rgb: 0xFEFDEC)
+            overrideUserInterfaceStyle = .light
+            textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+        }
+        timeLabel.textColor = textColor
+        dateLabel.textColor = textColor
+        repeatLabel.textColor = textColor
+        titleLabel.textColor = textColor
+        repeatLabel.textColor = textColor
+        soundLabel.textColor = textColor
+        snoozeLabel.textColor = textColor
+
+    }
+    
     // set repeat occurrences in the form of an Alert Action Sheet
     @IBAction func repeatButtonPressed(_ sender: UIButton) {
         repeatButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)

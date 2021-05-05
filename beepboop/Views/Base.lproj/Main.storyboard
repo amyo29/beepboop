@@ -137,7 +137,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="nJh-8C-39w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9ch-za-pLU"/>
                             <constraint firstItem="tz5-dh-ZWb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NTB-h7-7hv"/>
@@ -573,7 +573,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="time">
                                         <attributes>
-                                            <color key="NSColor" white="0.0" alpha="0.59806488420000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="24" name="SFMono-Medium"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -1012,7 +1012,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="groups">
                                         <attributes>
-                                            <color key="NSBackgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="NSBackgroundColor" red="0.99607843137254903" green="0.99215686274509807" blue="0.92549019607843142" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <color key="NSColor" red="0.97254901960784312" green="0.16470588235294117" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="30" name="SFMono-Regular"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -1970,7 +1970,7 @@
                                     <constraint firstAttribute="width" constant="154" id="17M-EZ-yR2"/>
                                     <constraint firstAttribute="height" constant="100" id="pcS-cv-Y0f"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="AcceptEmoji"/>
+                                <state key="normal" image="AcceptEmoji"/>
                                 <connections>
                                     <action selector="onAcceptedEmojiPressed:" destination="c8V-0L-qU6" eventType="touchUpInside" id="rkz-l5-grR"/>
                                 </connections>
@@ -1981,7 +1981,7 @@
                                     <constraint firstAttribute="height" constant="100" id="ORQ-Jf-svk"/>
                                     <constraint firstAttribute="width" constant="101" id="nFl-5f-aai"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="DeclineEmoji">
+                                <state key="normal" image="DeclineEmoji">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
                                 </state>
                                 <connections>
@@ -1996,7 +1996,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="mKI-Dc-mgE"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="oWt-c0-V8o"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="PendingEmoji"/>
+                                <state key="normal" image="PendingEmoji"/>
                                 <connections>
                                     <action selector="onPendingEmojiPressed:" destination="c8V-0L-qU6" eventType="touchUpInside" id="LLZ-cM-7YE"/>
                                 </connections>
@@ -2155,7 +2155,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="uv2-dB-cLu"/>
-        <segue reference="xLC-PS-IuX"/>
+        <segue reference="vSh-1G-Le3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Accept Button" width="50" height="50"/>

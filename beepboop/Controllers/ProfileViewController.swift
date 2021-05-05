@@ -93,6 +93,36 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         logoutButton.titleLabel?.textColor = orange
         friendsButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
         blockedButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        var fetchedResults: [NSManagedObject]
+        var darkmode = false
+        do {
+            let count = try context.count(for: fetchRequest)
+            if count > 0 {
+                try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
+                darkmode = fetchedResults[0].value(forKey: "darkmodeEnabled") as! Bool
+            }
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if darkmode {
+            self.view.backgroundColor = UIColor(rgb: 0x262221)
+            overrideUserInterfaceStyle = .dark
+        }
+        else {
+            self.view.backgroundColor = UIColor(rgb: 0xFEFDEC)
+            overrideUserInterfaceStyle = .light
+        }
     }
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
@@ -200,10 +230,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         if darkmodeSwitch.isOn {
-            print("dark mode switch is on")
             self.overrideUserInterfaceStyle = .dark
+            self.view.backgroundColor = UIColor(rgb: 0x262221)
         } else {
             self.overrideUserInterfaceStyle = .light
+            self.view.backgroundColor = UIColor(rgb: 0xFEFDEC)
         }
 
         if snoozeSwitch.isOn {
