@@ -990,6 +990,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="aFc-MF-gin"/>
+                        <segue destination="SAW-Vz-zf6" kind="relationship" relationship="viewControllers" id="gjx-6q-NQ0"/>
                         <segue destination="T9O-Aj-NH4" kind="relationship" relationship="viewControllers" id="LEs-GY-hoi"/>
                         <segue destination="bbN-jg-8tq" kind="relationship" relationship="viewControllers" id="F3s-8P-t1h"/>
                         <segue destination="X2Q-dW-nb0" kind="relationship" relationship="viewControllers" id="Ihv-aT-HgU"/>
@@ -2152,10 +2153,193 @@
             </objects>
             <point key="canvasLocation" x="960" y="1753.7914691943126"/>
         </scene>
+        <!--Calendar View Controller-->
+        <scene sceneID="Fhf-Bf-ZBN">
+            <objects>
+                <viewController storyboardIdentifier="CalendarViewController" id="SAW-Vz-zf6" userLabel="Calendar View Controller" customClass="CalendarViewController" customModule="beepboop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JrC-oV-nK7">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jd-Ou-vKq">
+                                <rect key="frame" x="133.66666666666666" y="64" width="122.99999999999997" height="40"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="calendar">
+                                        <attributes>
+                                            <color key="NSColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" metaFont="system" size="33"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H8i-WB-nWK" userLabel="AddButton">
+                                <rect key="frame" x="315" y="64" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="FKc-4F-hgk"/>
+                                    <constraint firstAttribute="width" constant="40" id="WI4-Xe-Nps"/>
+                                </constraints>
+                                <state key="normal" image="AddButton"/>
+                                <connections>
+                                    <segue destination="i0J-ZC-Eri" kind="popoverPresentation" identifier="CalendarToCreateAlarmSegueIdentifier" popoverAnchorView="H8i-WB-nWK" id="2OL-Fb-6o1">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vE7-Tp-uV0">
+                                <rect key="frame" x="10" y="460" width="370" height="301"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AlarmTableViewCell" rowHeight="75" id="zGJ-ox-bs8" customClass="AlarmTableViewCell" customModule="beepboop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="370" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zGJ-ox-bs8" id="ynQ-GS-yUO">
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventPic" translatesAutoresizingMaskIntoConstraints="NO" id="D0F-uh-0f1">
+                                                    <rect key="frame" x="10" y="18" width="50" height="39"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="IjD-pn-a8Y"/>
+                                                        <constraint firstAttribute="width" constant="50" id="KNO-eT-Ok8"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9T1-st-6mn">
+                                                    <rect key="frame" x="301" y="22" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="switchTapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="9MI-8Y-cMK"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVO-Wv-HgN">
+                                                    <rect key="frame" x="77" y="42" width="72.666666666666686" height="17.666666666666671"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17.666666666666671" id="N03-nz-hkE"/>
+                                                    </constraints>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Fri, Mar 26">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.23529411764705882" green="0.23137254901960785" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <font key="NSFont" size="15" name="SFMono-Medium"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMX-Ys-S2K">
+                                                    <rect key="frame" x="216.66666666666666" y="25.666666666666664" width="69.333333333333343" height="23.666666666666664"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="9:30AM">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <font key="NSFont" size="20" name="SFMono-Regular"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wll-Rf-Sb5">
+                                                    <rect key="frame" x="77" y="13.999999999999998" width="50.666666666666657" height="23.333333333333329"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Exam">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.23529411764705882" green="0.23137254901960785" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <font key="NSFont" size="20" name="SFMono-Medium"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9T1-st-6mn" firstAttribute="centerY" secondItem="ynQ-GS-yUO" secondAttribute="centerY" id="4px-SY-PYG"/>
+                                                <constraint firstAttribute="trailing" secondItem="9T1-st-6mn" secondAttribute="trailing" constant="20" id="CJC-48-ra7"/>
+                                                <constraint firstItem="NVO-Wv-HgN" firstAttribute="top" secondItem="Wll-Rf-Sb5" secondAttribute="bottom" constant="4.5" id="Hs6-ua-OlX"/>
+                                                <constraint firstItem="Wll-Rf-Sb5" firstAttribute="leading" secondItem="D0F-uh-0f1" secondAttribute="trailing" constant="17" id="NLP-p3-UFx"/>
+                                                <constraint firstItem="9T1-st-6mn" firstAttribute="leading" secondItem="eMX-Ys-S2K" secondAttribute="trailing" constant="15" id="U4j-wy-rmP"/>
+                                                <constraint firstItem="D0F-uh-0f1" firstAttribute="centerY" secondItem="ynQ-GS-yUO" secondAttribute="centerY" id="ZcF-Rq-Tle"/>
+                                                <constraint firstItem="Wll-Rf-Sb5" firstAttribute="top" secondItem="ynQ-GS-yUO" secondAttribute="top" constant="14" id="c0j-0c-70i"/>
+                                                <constraint firstItem="eMX-Ys-S2K" firstAttribute="centerY" secondItem="ynQ-GS-yUO" secondAttribute="centerY" id="cwP-kh-Ddi"/>
+                                                <constraint firstItem="D0F-uh-0f1" firstAttribute="leading" secondItem="ynQ-GS-yUO" secondAttribute="leading" constant="10" id="d3R-2L-5OG"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="D0F-uh-0f1" secondAttribute="bottom" constant="7" id="jzO-Ey-f4O"/>
+                                                <constraint firstItem="NVO-Wv-HgN" firstAttribute="leading" secondItem="D0F-uh-0f1" secondAttribute="trailing" constant="17" id="mu0-Xu-V3r"/>
+                                                <constraint firstItem="D0F-uh-0f1" firstAttribute="top" secondItem="ynQ-GS-yUO" secondAttribute="topMargin" constant="7" id="oA6-8C-8hf"/>
+                                                <constraint firstAttribute="bottom" secondItem="NVO-Wv-HgN" secondAttribute="bottom" constant="15.5" id="vqc-VS-4aj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="alarmDateLabel" destination="NVO-Wv-HgN" id="Wy0-0F-2pb"/>
+                                            <outlet property="alarmImageView" destination="D0F-uh-0f1" id="eec-12-qL3"/>
+                                            <outlet property="alarmNameLabel" destination="Wll-Rf-Sb5" id="aqK-Wh-8w6"/>
+                                            <outlet property="alarmTimeLabel" destination="eMX-Ys-S2K" id="hq5-DU-oRC"/>
+                                            <outlet property="alarmToggleSwitch" destination="9T1-st-6mn" id="dhe-ju-sdK"/>
+                                            <segue destination="c8V-0L-qU6" kind="show" identifier="CalendarToAlarmMetadataSegueIdentifier" id="MNF-wN-YcF"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pC5-my-29I" customClass="FSCalendar">
+                                <rect key="frame" x="16" y="112" width="358" height="349"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleDefaultColor">
+                                        <color key="value" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
+                                        <color key="value" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectionColor">
+                                        <color key="value" red="0.1215686275" green="0.81176470590000005" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
+                                        <color key="value" red="0.1215686275" green="0.81176470590000005" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="headerTitleColor">
+                                        <color key="value" red="0.97254901959999995" green="0.1647058824" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="SAW-Vz-zf6" id="Hc6-q1-qfV"/>
+                                    <outlet property="delegate" destination="SAW-Vz-zf6" id="TLF-Pv-WAa"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6ct-RY-NqH"/>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="7jd-Ou-vKq" firstAttribute="centerX" secondItem="JrC-oV-nK7" secondAttribute="centerX" id="ARf-RZ-I6c"/>
+                            <constraint firstItem="7jd-Ou-vKq" firstAttribute="top" secondItem="6ct-RY-NqH" secondAttribute="top" constant="20" id="VOT-wW-9K2"/>
+                            <constraint firstItem="6ct-RY-NqH" firstAttribute="trailing" secondItem="H8i-WB-nWK" secondAttribute="trailing" constant="35" id="n3A-UQ-LrT"/>
+                            <constraint firstItem="H8i-WB-nWK" firstAttribute="centerY" secondItem="7jd-Ou-vKq" secondAttribute="centerY" id="tps-2J-fOF"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Calendar" image="CalendarIcon" selectedImage="CalendarIcon" id="Rig-Vi-V4J">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="2Gw-Fa-Z4B"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="alarmTableView" destination="vE7-Tp-uV0" id="hqF-0y-bAG"/>
+                        <outlet property="calendar" destination="pC5-my-29I" id="cG1-Jd-hdn"/>
+                        <outlet property="titleLabel" destination="7jd-Ou-vKq" id="cZ1-pv-0hq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m7J-VQ-WXT" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1936.9230769230769" y="1753.7914691943126"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uv2-dB-cLu"/>
+        <segue reference="QXz-7q-6vG"/>
+        <segue reference="MNF-wN-YcF"/>
         <segue reference="xLC-PS-IuX"/>
+        <segue reference="2OL-Fb-6o1"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Accept Button" width="50" height="50"/>
@@ -2166,6 +2350,7 @@
         <image name="AddFriendsIcon" width="74" height="82"/>
         <image name="AlarmsTabIcon" width="25" height="25"/>
         <image name="BlockedButton" width="268" height="58"/>
+        <image name="CalendarIcon" width="25" height="25"/>
         <image name="Decline Button" width="52" height="52"/>
         <image name="DeclineEmoji" width="100" height="100"/>
         <image name="DeclineIcon" width="96" height="96"/>

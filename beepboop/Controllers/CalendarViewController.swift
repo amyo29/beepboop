@@ -1,20 +1,26 @@
 //
-//  HomeViewController.swift
+//  CalendarViewController.swift
 //  beepboop
 //
-//  Created by Alvin Lo on 3/17/21.
+//  Created by Amy Ouyang on 5/4/21.
 //
 
 import UIKit
-import FirebaseCore
+import FSCalendar
 import Firebase
+import FirebaseCore
 import CoreData
 
-protocol AlarmAdder {
-    func addAlarm(time: Date, name: String, recurrence: String, invitedUsers: [String])
-}
+class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource, AlarmAdder {
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlarmAdder{
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var alarmTableView: UITableView!
+    // data source of stored alarms per user
+    var alarmList: [AlarmCustom] = []
+    private let alarmTableViewCellIdentifier = "AlarmTableViewCell"
+    private let calendarToCreateAlarmSegueIdentifier = "CalendarToCreateAlarmSegueIdentifier"
+
     
     // MARK: - Properties
     var userDocRef: DocumentReference!
@@ -22,18 +28,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var userCollectionRef: CollectionReference!
     var dataListener: ListenerRegistration! // Increases efficiency of app by only listening to data when view is on screen
     
-    // data source of stored alarms per user
-    var alarmList: [AlarmCustom] = []
     private var documents: [DocumentSnapshot] = []
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var alarmTableView: UITableView!
-    
+
     var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
-    
-    private let alarmTableViewCellIdentifier = "AlarmTableViewCell"
-    private let homeToCreateAlarmSegueIdentifier = "HomeToCreateAlarm"
-    
+
     var currentUserUid: String?
     var selectedAlarm: String?
     var snooze: Bool = false
@@ -71,8 +69,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.alarmTableView.dataSource = self
         self.alarmTableView.backgroundColor = UIColor(hex: "FEFDEC")
         self.alarmTableView.separatorColor = .clear
-        
-        titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+        self.calendar.layer.cornerRadius = 15
+        self.titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
         
         // customize tab bar items
         let appearance = UITabBarItem.appearance()
@@ -100,16 +98,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             abort()
         }
         self.updateAlarmsFirestore()
-    }
-    
-    // load system supported fonts to determine system font labels
-    func loadSystemSupportedFonts() {
-        let fontFamilyNames = UIFont.familyNames
-        for familyName in fontFamilyNames {
-            print("Font Family Name = [\(familyName)]")
-            let names = UIFont.fontNames(forFamilyName: familyName as String)
-            print("Font Names = [\(names)]")
-        }
     }
     
     // MARK: - Table View functions
@@ -252,7 +240,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let rowHeight: CGFloat = 62
         
         /// fades the cell by setting alpha as zero and moves the cell downwards, then animates the cell's alpha and returns it to it's original position based on indexPaths
-        cell.transform = CGAffineTransform(translationX: 0, y: rowHeight * 1.4)
+//        cell.transform = CGAffineTransform(translationX: 0, y: rowHeight * 1.4)
         cell.alpha = 0
         UIView.animate(
             withDuration: duration,
@@ -263,17 +251,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.alpha = 1
         })
         
-        /// moves the cell downwards, then animates the cell's by returning them to their original position with spring bounce based on indexPaths
-        cell.transform = CGAffineTransform(translationX: 0, y: rowHeight)
-        UIView.animate(
-            withDuration: duration,
-            delay: delayFactor * Double(indexPath.row),
-            usingSpringWithDamping: 0.6,
-            initialSpringVelocity: 0.1,
-            options: [.curveEaseInOut],
-            animations: {
-                cell.transform = CGAffineTransform(translationX: 0, y: 0)
-        })
     }
     
     // MARK: - Delegate functions
@@ -371,14 +348,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "HomeToAlarmMetadata", let destination = segue.destination as? AlarmMetadataViewController {
+        if segue.identifier == "CalendarToAlarmMetadataSegueIdentifier", let destination = segue.destination as? AlarmMetadataViewController {
             if let opIndex = alarmTableView.indexPathForSelectedRow?.row { // From the table
                 destination.alarmID = self.alarmList[opIndex].uuid!
             }
             else if let alarmID = selectedAlarm { // From notifications
                 destination.alarmID = alarmID
             }
-        } else if segue.identifier == self.homeToCreateAlarmSegueIdentifier,
+        } else if segue.identifier == self.calendarToCreateAlarmSegueIdentifier,
            let destination = segue.destination as? CreateAlarmViewController {
             destination.delegate = self
         } else if segue.identifier == "HomeToAlarmDisplayIdentifier", let destination = segue.destination as? AlarmDisplayViewController {
@@ -422,5 +399,5 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func unwind( _ seg: UIStoryboardSegue) {
     }
-}
 
+}
