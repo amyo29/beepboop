@@ -8,6 +8,7 @@
 import UIKit
 import FSCalendar
 import Firebase
+import FirebaseFirestore
 import FirebaseCore
 import CoreData
 
@@ -325,13 +326,28 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                 }
                 
                 for alarmUuid in alarmUuids {
-                    let docRef = self.alarmCollectionRef.document(alarmUuid)
-                    docRef.getDocument { (document, error) in
+                    let alarmDocRef = self.alarmCollectionRef.document(alarmUuid)
+                    alarmDocRef.getDocument { (document, error) in
                         if let document = document, document.exists {
-                            if let model = AlarmCustom(dictionary: document.data()!) {
-                                self.alarmList.append(model)
-                                self.alarmTableView.reloadData()
+                            
+                            let calendar = Calendar.current
+                            let components = calendar.dateComponents([.year, .month, .day], from: Date())
+                            let start = calendar.date(from: components)!
+                            let end = calendar.date(byAdding: .day, value: 1, to: start)!
+                            let range = start...end
+                            
+                            print("alarm doc time: ", document.get("time")!)
+                            let alarmDate = (document.get("time")! as AnyObject).dateValue()
+                            if range.contains(alarmDate) {
+                                print("The date \(alarmDate) is inside the range \(range)")
+                                if let model = AlarmCustom(dictionary: document.data()!) {
+                                    self.alarmList.append(model)
+                                    self.alarmTableView.reloadData()
+                                }
+                            } else {
+                                print("The date \(alarmDate) is outside the range \(range)")
                             }
+                            
                         }
                     }
                 }
@@ -399,5 +415,21 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     @IBAction func unwind( _ seg: UIStoryboardSegue) {
     }
+    
+    
 
 }
+
+extension CollectionReference {
+    func whereField(_ field: String, isDateInToday value: Date) -> Query {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: value)
+        guard
+            let start = Calendar.current.date(from: components),
+            let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
+        else {
+            fatalError("Could not find start date or calculate end date.")
+        }
+        return whereField(field, isGreaterThan: start).whereField(field, isLessThan: end)
+    }
+}
+

@@ -178,7 +178,7 @@ static FBSDKLogger *_logger;
 
       NSMutableDictionary<NSString *, id> *gateKeeper = [_gateKeepers mutableCopy];
       if (!gateKeeper) {
-        gateKeeper = [[NSMutableDictionary alloc] init];
+        gateKeeper = [NSMutableDictionary new];
       }
       NSDictionary<NSString *, id> *resultDictionary = [FBSDKTypeUtility dictionaryValue:result];
       NSDictionary<NSString *, id> *fetchedData = [FBSDKTypeUtility dictionaryValue:[resultDictionary[@"data"] firstObject]];
@@ -188,7 +188,7 @@ static FBSDKLogger *_logger;
         // updates gate keeper with fetched data
         for (id gateKeeperEntry in gateKeeperList) {
           NSDictionary<NSString *, id> *entry = [FBSDKTypeUtility dictionaryValue:gateKeeperEntry];
-          NSString *key = [FBSDKTypeUtility stringValue:entry[@"key"]];
+          NSString *key = [FBSDKTypeUtility coercedToStringValue:entry[@"key"]];
           NSNumber *value = [FBSDKTypeUtility numberValue:entry[@"value"]];
           if (entry != nil && key != nil && value != nil) {
             [FBSDKTypeUtility dictionary:gateKeeper setObject:value forKey:key];

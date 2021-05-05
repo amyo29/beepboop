@@ -28,10 +28,10 @@ NS_SWIFT_NAME(DataPersisting)
             forKey:(NSString *)defaultName;
 - (void)setObject:(id)value
            forKey:(NSString *)defaultName;
-- (NSData *)dataForKey:(NSString *)defaultName;
+- (nullable NSData *)dataForKey:(NSString *)defaultName;
 - (NSInteger)integerForKey:(NSString *)defaultName;
-- (NSString *)stringForKey:(NSString *)defaultName;
-- (id)objectForKey:(NSString *)defaultName;
+- (nullable NSString *)stringForKey:(NSString *)defaultName;
+- (nullable id)objectForKey:(NSString *)defaultName;
 - (void)removeObjectForKey:(NSString *)defaultName;
 
 @end

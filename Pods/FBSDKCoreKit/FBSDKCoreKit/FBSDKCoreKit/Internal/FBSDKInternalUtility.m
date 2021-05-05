@@ -22,8 +22,8 @@
 #import <sys/time.h>
 
 #import "FBSDKCoreKit+Internal.h"
+#import "FBSDKCoreKitBasicsImport.h"
 #import "FBSDKError.h"
-#import "FBSDKInfoDictionaryProviding.h"
 #import "FBSDKSettings.h"
 #import "FBSDKSettings+Internal.h"
 
@@ -66,7 +66,7 @@ static BOOL ShouldOverrideHostWithGamingDomain(NSString *hostPrefix)
 {
   static id instance;
   dispatch_once(&sharedUtilityNonce, ^{
-    instance = [[self alloc] init];
+    instance = [self new];
   });
   return instance;
 }
@@ -360,7 +360,7 @@ static NSMapTable *_transientObjects;
 {
   NSAssert([NSThread isMainThread], @"Must be called from the main thread!");
   if (!_transientObjects) {
-    _transientObjects = [[NSMapTable alloc] init];
+    _transientObjects = [NSMapTable new];
   }
   NSUInteger count = ((NSNumber *)[_transientObjects objectForKey:object]).unsignedIntegerValue;
   [_transientObjects setObject:@(count + 1) forKey:object];
@@ -426,12 +426,12 @@ static NSMapTable *_transientObjects;
 
 + (BOOL)_canOpenURLScheme:(NSString *)scheme
 {
-  scheme = [FBSDKTypeUtility stringValue:scheme];
+  scheme = [FBSDKTypeUtility coercedToStringValue:scheme];
   if (!scheme) {
     return NO;
   }
 
-  NSURLComponents *components = [[NSURLComponents alloc] init];
+  NSURLComponents *components = [NSURLComponents new];
   @try {
     components.scheme = scheme;
   } @catch (NSException *exception) {

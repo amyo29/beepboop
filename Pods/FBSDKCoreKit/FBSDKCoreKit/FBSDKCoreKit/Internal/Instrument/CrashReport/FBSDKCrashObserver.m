@@ -19,8 +19,8 @@
 #import "FBSDKCrashObserver.h"
 
 #import "FBSDKCrashShield.h"
-#import "FBSDKFeatureCheckerFactory.h"
-#import "FBSDKFeatureCheckerProviding.h"
+#import "FBSDKFeatureChecking.h"
+#import "FBSDKFeatureManager+FeatureChecking.h"
 #import "FBSDKGraphRequestFactory.h"
 #import "FBSDKGraphRequestProviding.h"
 #import "FBSDKSettings+Internal.h"
@@ -28,25 +28,28 @@
 #import "FBSDKSettings+SettingsProtocols.h"
 #import "FBSDKSettingsProtocol.h"
 
+@interface FBSDKCrashObserver ()
+
+@property (nonatomic, strong) id<FBSDKFeatureChecking> featureChecker;
+@property (nonatomic, strong) id<FBSDKGraphRequestProviding> requestProvider;
+@property (nonatomic, strong) id<FBSDKSettings> settings;
+
+@end
+
 @implementation FBSDKCrashObserver
-{
-  Class<FBSDKFeatureChecking> _featureChecker;
-  id<FBSDKGraphRequestProviding> _requestProvider;
-  id<FBSDKSettings> _settings;
-}
 
 @synthesize prefixes, frameworks;
 
 - (instancetype)init
 {
-  return [self initWithFeatureManagerProvider:[FBSDKFeatureCheckerFactory new]
-                         graphRequestProvider:[FBSDKGraphRequestFactory new]
-                                     settings:FBSDKSettings.sharedSettings];
+  return [self initWithFeatureChecker:FBSDKFeatureManager.shared
+                 graphRequestProvider:[FBSDKGraphRequestFactory new]
+                             settings:FBSDKSettings.sharedSettings];
 }
 
-- (instancetype)initWithFeatureManagerProvider:(id<FBSDKFeatureCheckerProviding>)featureManagerProvider
-                          graphRequestProvider:(id<FBSDKGraphRequestProviding>)requestProvider
-                                      settings:(id<FBSDKSettings>)settings
+- (instancetype)initWithFeatureChecker:(id<FBSDKFeatureChecking>)featureChecker
+                  graphRequestProvider:(id<FBSDKGraphRequestProviding>)requestProvider
+                              settings:(id<FBSDKSettings>)settings
 {
   if ((self = [super init])) {
     prefixes = @[@"FBSDK", @"_FBSDK"];
@@ -55,24 +58,19 @@
                    @"FBSDKShareKit",
                    @"FBSDKGamingServicesKit",
                    @"FBSDKTVOSKit"];
-    _featureChecker = [featureManagerProvider createFeatureChecker];
+    _featureChecker = featureChecker;
     _requestProvider = requestProvider;
     _settings = settings;
   }
   return self;
 }
 
-+ (void)enable
-{
-  [FBSDKCrashHandler addObserver:[FBSDKCrashObserver sharedInstance]];
-}
-
-+ (FBSDKCrashObserver *)sharedInstance
++ (instancetype)shared
 {
   static FBSDKCrashObserver *_sharedInstance;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    _sharedInstance = [[self alloc] init];
+  static dispatch_once_t nonce;
+  dispatch_once(&nonce, ^{
+    _sharedInstance = [self new];
   });
   return _sharedInstance;
 }

@@ -14,5 +14,6 @@ target 'beepboop' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
   pod 'BoringSSL-GRPC', '0.0.3'
+  pod 'FSCalendar'
   
 end

@@ -89,7 +89,7 @@ static id<FBSDKURLOpener> _urlOpener;
     [self addSubview:webView];
 
     _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *closeImage = [[[FBSDKCloseIcon alloc] init] imageWithSize:CGSizeMake(29.0, 29.0)];
+    UIImage *closeImage = [[FBSDKCloseIcon new] imageWithSize:CGSizeMake(29.0, 29.0)];
     [_closeButton setImage:closeImage forState:UIControlStateNormal];
     [_closeButton setTitleColor:[UIColor colorWithRed:167.0 / 255.0
                                                 green:184.0 / 255.0
@@ -220,7 +220,7 @@ static id<FBSDKURLOpener> _urlOpener;
     if ([URL.resourceSpecifier hasPrefix:@"//cancel"]) {
       NSInteger errorCode = [FBSDKTypeUtility integerValue:parameters[@"error_code"]];
       if (errorCode) {
-        NSString *errorMessage = [FBSDKTypeUtility stringValue:parameters[@"error_msg"]];
+        NSString *errorMessage = [FBSDKTypeUtility coercedToStringValue:parameters[@"error_msg"]];
         NSError *error = [FBSDKError errorWithCode:errorCode message:errorMessage];
         [self.delegate webDialogView:self didFailWithError:error];
       } else {

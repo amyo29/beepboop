@@ -23,9 +23,9 @@
 #import "FBSDKAccessTokenExpirer.h"
 #import "FBSDKAppEventsConfigurationProtocol.h"
 #import "FBSDKAppEventsConfigurationProviding.h"
+#import "FBSDKCoreKitBasicsImport.h"
 #import "FBSDKDataPersisting.h"
 #import "FBSDKEventLogging.h"
-#import "FBSDKInfoDictionaryProviding.h"
 #import "FBSDKInternalUtility.h"
 
 #define FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(TYPE, PLIST_KEY, PROPERTY_NAME, SETTER, DEFAULT_VALUE, ENABLE_CACHE) \
@@ -84,6 +84,7 @@ static NSString *const FBSDKSettingsAdvertisingTrackingStatus = @"com.facebook.s
 static NSString *const FBSDKSettingsInstallTimestamp = @"com.facebook.sdk:FBSDKSettingsInstallTimestamp";
 static NSString *const FBSDKSettingsSetAdvertiserTrackingEnabledTimestamp = @"com.facebook.sdk:FBSDKSettingsSetAdvertiserTrackingEnabledTimestamp";
 static NSString *const FBSDKSettingsUseCachedValuesForExpensiveMetadata = @"com.facebook.sdk:FBSDKSettingsUseCachedValuesForExpensiveMetadata";
+static NSString *const FBSDKSettingsUseTokenOptimizations = @"com.facebook.sdk.FBSDKSettingsUseTokenOptimizations";
 static BOOL g_disableErrorRecovery;
 static NSString *g_userAgentSuffix;
 static NSString *g_defaultGraphAPIVersion;
@@ -150,7 +151,7 @@ static dispatch_once_t sharedSettingsNonce;
   if (self == [FBSDKSettings class]) {
     // This should be moved to ApplicationDelegate and its initialization
     // should be separated from its storage and notification observing
-    g_accessTokenExpirer = [[FBSDKAccessTokenExpirer alloc] init];
+    g_accessTokenExpirer = [FBSDKAccessTokenExpirer new];
   }
 }
 
@@ -166,7 +167,7 @@ static dispatch_once_t sharedSettingsNonce;
 {
   static id instance;
   dispatch_once(&sharedSettingsNonce, ^{
-    instance = [[self alloc] init];
+    instance = [self new];
   });
   return instance;
 }
@@ -276,7 +277,12 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
 
 + (BOOL)isAutoLogAppEventsEnabled
 {
-  return self.sharedSettings._autoLogAppEventsEnabled.boolValue;
+  return [self.sharedSettings isAutoLogAppEventsEnabled];
+}
+
+- (BOOL)isAutoLogAppEventsEnabled
+{
+  return self._autoLogAppEventsEnabled.boolValue;
 }
 
 + (void)setAutoLogAppEventsEnabled:(BOOL)autoLogAppEventsEnabled
@@ -354,6 +360,11 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
 
 + (BOOL)isSKAdNetworkReportEnabled
 {
+  return self.sharedSettings.isSKAdNetworkReportEnabled;
+}
+
+- (BOOL)isSKAdNetworkReportEnabled
+{
   return [self _SKAdNetworkReportEnabled].boolValue;
 }
 
@@ -364,7 +375,12 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
 
 + (BOOL)shouldLimitEventAndDataUsage
 {
-  NSNumber *storedValue = [self.store objectForKey:FBSDKSettingsLimitEventAndDataUsage];
+  return self.sharedSettings.shouldLimitEventAndDataUsage;
+}
+
+- (BOOL)shouldLimitEventAndDataUsage
+{
+  NSNumber *storedValue = [FBSDKSettings.store objectForKey:FBSDKSettingsLimitEventAndDataUsage];
   if (storedValue == nil) {
     return NO;
   }
@@ -373,7 +389,12 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
 
 + (void)setLimitEventAndDataUsage:(BOOL)limitEventAndDataUsage
 {
-  [self.store setObject:@(limitEventAndDataUsage) forKey:FBSDKSettingsLimitEventAndDataUsage];
+  [self.sharedSettings setLimitEventAndDataUsage:limitEventAndDataUsage];
+}
+
+- (void)setLimitEventAndDataUsage:(BOOL)limitEventAndDataUsage
+{
+  [_store setObject:@(limitEventAndDataUsage) forKey:FBSDKSettingsLimitEventAndDataUsage];
 }
 
 + (BOOL)shouldUseCachedValuesForExpensiveMetadata
@@ -390,6 +411,20 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
   [self.store setObject:@(shouldUseCachedValuesForExpensiveMetadata) forKey:FBSDKSettingsUseCachedValuesForExpensiveMetadata];
 }
 
+- (BOOL)shouldUseTokenOptimizations
+{
+  NSNumber *storedValue = [self.store objectForKey:FBSDKSettingsUseTokenOptimizations];
+  if (storedValue == nil) {
+    return YES;
+  }
+  return storedValue.boolValue;
+}
+
+- (void)setShouldUseTokenOptimizations:(BOOL)shouldUseTokenOptimizations
+{
+  [self.store setObject:@(shouldUseTokenOptimizations) forKey:FBSDKSettingsUseTokenOptimizations];
+}
+
 + (NSSet<FBSDKLoggingBehavior> *)loggingBehaviors
 {
   if (!g_loggingBehaviors) {
@@ -403,6 +438,11 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
     }
   }
   return [g_loggingBehaviors copy];
+}
+
+- (NSSet<FBSDKLoggingBehavior> *)loggingBehaviors
+{
+  return [self.class loggingBehaviors];
 }
 
 + (void)setDataProcessingOptions:(nullable NSArray<NSString *> *)options
@@ -541,7 +581,7 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
                                                  objectForKey:DATA_PROCESSING_OPTIONS
                                                        ofType:NSArray.class];
   for (NSString *option in options) {
-    if ([@"ldu" isEqualToString:[[FBSDKTypeUtility stringValue:option] lowercaseString]]) {
+    if ([@"ldu" isEqualToString:[[FBSDKTypeUtility coercedToStringValue:option] lowercaseString]]) {
       return YES;
     }
   }
@@ -632,8 +672,13 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
 
 + (BOOL)isSetATETimeExceedsInstallTime
 {
-  NSDate *installTimestamp = [self.store objectForKey:FBSDKSettingsInstallTimestamp];
-  NSDate *setATETimestamp = [self.store objectForKey:FBSDKSettingsSetAdvertiserTrackingEnabledTimestamp];
+  return [self.sharedSettings isSetATETimeExceedsInstallTime];
+}
+
+- (BOOL)isSetATETimeExceedsInstallTime
+{
+  NSDate *installTimestamp = [self installTimestamp];
+  NSDate *setATETimestamp = [self advertiserTrackingEnabledTimestamp];
   if (installTimestamp && setATETimestamp) {
     return [setATETimestamp timeIntervalSinceDate:installTimestamp] > 86400;
   }
@@ -642,10 +687,20 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(
 
 + (NSDate *_Nullable)getInstallTimestamp
 {
+  return self.sharedSettings.installTimestamp;
+}
+
+- (NSDate *_Nullable)installTimestamp
+{
   return [self.store objectForKey:FBSDKSettingsInstallTimestamp];
 }
 
 + (NSDate *_Nullable)getSetAdvertiserTrackingEnabledTimestamp
+{
+  return [self.sharedSettings advertiserTrackingEnabledTimestamp];
+}
+
+- (NSDate *_Nullable)advertiserTrackingEnabledTimestamp
 {
   return [self.store objectForKey:FBSDKSettingsSetAdvertiserTrackingEnabledTimestamp];
 }

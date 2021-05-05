@@ -73,6 +73,20 @@ static ASIdentifierManager *_cachedAdvertiserIdentifierManager;
   ];
 }
 
+// Transitional singleton introduced as a way to change the usage semantics
+// from a type-based interface to an instance-based interface.
+// The goal is to move from:
+// ClassWithoutUnderlyingInstance -> ClassRelyingOnUnderlyingInstance -> Instance
++ (instancetype)shared
+{
+  static dispatch_once_t nonce;
+  static id instance;
+  dispatch_once(&nonce, ^{
+    instance = [self new];
+  });
+  return instance;
+}
+
 + (NSMutableDictionary *)activityParametersDictionaryForEvent:(NSString *)eventCategory
                                     shouldAccessAdvertisingID:(BOOL)shouldAccessAdvertisingID
 {
@@ -80,7 +94,7 @@ static ASIdentifierManager *_cachedAdvertiserIdentifierManager;
   [FBSDKTypeUtility dictionary:parameters setObject:eventCategory forKey:@"event"];
 
   if (shouldAccessAdvertisingID) {
-    NSString *advertiserID = [[self class] advertiserID];
+    NSString *advertiserID = [self.shared advertiserID];
     [FBSDKTypeUtility dictionary:parameters setObject:advertiserID forKey:@"advertiser_id"];
   }
 
@@ -128,7 +142,7 @@ static ASIdentifierManager *_cachedAdvertiserIdentifierManager;
 
   dispatch_once(&fetchBundleOnce, ^{
     NSBundle *mainBundle = [NSBundle mainBundle];
-    urlSchemes = [[NSMutableArray alloc] init];
+    urlSchemes = [NSMutableArray new];
     for (NSDictionary<NSString *, id> *fields in [mainBundle objectForInfoDictionaryKey:@"CFBundleURLTypes"]) {
       NSArray<NSString *> *schemesForType = fields[@"CFBundleURLSchemes"];
       if (schemesForType) {
@@ -144,7 +158,7 @@ static ASIdentifierManager *_cachedAdvertiserIdentifierManager;
   return parameters;
 }
 
-+ (NSString *)advertiserID
+- (NSString *)advertiserID
 {
   BOOL shouldUseCachedManagerIfAvailable = [FBSDKSettings shouldUseCachedValuesForExpensiveMetadata];
   id<FBSDKDynamicFrameworkResolving> dynamicFrameworkResolver = FBSDKDynamicFrameworkLoader.shared;
@@ -152,7 +166,7 @@ static ASIdentifierManager *_cachedAdvertiserIdentifierManager;
                                   shouldUseCachedManager:shouldUseCachedManagerIfAvailable];
 }
 
-+ (NSString *)_advertiserIDFromDynamicFrameworkResolver:(id<FBSDKDynamicFrameworkResolving>)dynamicFrameworkResolver
+- (NSString *)_advertiserIDFromDynamicFrameworkResolver:(id<FBSDKDynamicFrameworkResolving>)dynamicFrameworkResolver
                                  shouldUseCachedManager:(BOOL)shouldUseCachedManager
 {
   if (!FBSDKSettings.isAdvertiserIDCollectionEnabled) {
@@ -170,7 +184,7 @@ static ASIdentifierManager *_cachedAdvertiserIdentifierManager;
   return manager.advertisingIdentifier.UUIDString;
 }
 
-+ (ASIdentifierManager *)_asIdentifierManagerWithShouldUseCachedManager:(BOOL)shouldUseCachedManager
+- (ASIdentifierManager *)_asIdentifierManagerWithShouldUseCachedManager:(BOOL)shouldUseCachedManager
                                                dynamicFrameworkResolver:(id<FBSDKDynamicFrameworkResolving>)dynamicFrameworkResolver
 {
   if (shouldUseCachedManager && _cachedAdvertiserIdentifierManager) {
@@ -297,7 +311,7 @@ static ASIdentifierManager *_cachedAdvertiserIdentifierManager;
 
     [mutableSet addCharactersInString:@"- "];
     restOfStringCharacterSet = [mutableSet copy];
-    cachedIdentifiers = [[NSMutableSet alloc] init];
+    cachedIdentifiers = [NSMutableSet new];
   });
 
   @synchronized(self) {
