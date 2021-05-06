@@ -98,7 +98,11 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
-        self.updateAlarmsFirestore()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: Date())
+        
+        let startDate = self.calendar.selectedDate ?? calendar.date(from: components)!
+        self.getAlarmsForDate(date: startDate)
     }
     
     // MARK: - Table View functions
@@ -312,7 +316,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         
     }
     
-    func updateAlarmsFirestore() {
+    func getAlarmsForDate(date: Date) {
         self.alarmList = [AlarmCustom]()
         var alarmUuids = [String]()
         userDocRef.collection("alarmMetadata").getDocuments() { (querySnapshot, err) in
@@ -328,26 +332,10 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                     alarmDocRef.getDocument { (document, error) in
                         if let document = document, document.exists {
                             
-                            var startDate = NSDate.distantPast
-                            var endDate = startDate.addingTimeInterval(86400)
-                            
-//                            print("fscalendar selected date: ", self.calendar.selectedDate)
-//                            guard let start = self.calendar.selectedDate else {
-                                let calendar = Calendar.current
-                                let components = calendar.dateComponents([.year, .month, .day], from: Date())
-                                startDate = calendar.date(from: components)!
-                                endDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
-//                                print("start is nil")
-//                                return
-//                            }
-//                            startDate = start
-                            print("fscalendar selected date: ", self.calendar.selectedDate)
-                            print("Start date: ", startDate)
-                            
-                            
+                            let startDate = date
+                            let endDate = startDate.addingTimeInterval(86400)
                             let range = startDate...endDate
                             
-                            print("alarm doc time: ", document.get("time")!)
                             let alarmDate = (document.get("time")! as AnyObject).dateValue()
                             if range.contains(alarmDate) {
                                 print("The date \(alarmDate) is inside the range \(range)")
@@ -431,47 +419,10 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print("inside calendar didSelect method, selected date is: \(self.calendar.selectedDate)")
-        
-        self.alarmList = [AlarmCustom]()
+        self.alarmList.removeAll()
         self.alarmTableView.reloadData()
-        var alarmUuids = [String]()
-        userDocRef.collection("alarmMetadata").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    alarmUuids.append(document.documentID)
-                }
-                
-                for alarmUuid in alarmUuids {
-                    let alarmDocRef = self.alarmCollectionRef.document(alarmUuid)
-                    alarmDocRef.getDocument { (document, error) in
-                        if let document = document, document.exists {
-                            
-                            var startDate = self.calendar.selectedDate
-                            var endDate = startDate?.addingTimeInterval(86400)
-                            
-                            print("inside calendar didSelect method, fscalendar selected date: ", self.calendar.selectedDate)
-
-                            let range = startDate!...endDate!
-                            
-                            print("alarm doc time: ", document.get("time")!)
-                            let alarmDate = (document.get("time")! as AnyObject).dateValue()
-                            if range.contains(alarmDate) {
-                                print("The date \(alarmDate) is inside the range \(range)")
-                                if let model = AlarmCustom(dictionary: document.data()!) {
-                                    self.alarmList.append(model)
-                                    self.alarmTableView.reloadData()
-                                }
-                            } else {
-                                print("The date \(alarmDate) is outside the range \(range)")
-                            }
-                            
-                        }
-                    }
-                }
-            }
-        }
+        getAlarmsForDate(date: self.calendar.selectedDate ?? date)
+        
     }
     
     func readAlarmAtDate(date: String) {
