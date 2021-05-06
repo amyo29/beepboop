@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 protocol ShareToListUpdater {
     func updateSharedToList(sharedToList: [String])
@@ -41,6 +42,8 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     var delegate: UIViewController!
     var date: Date? = nil
+    var alarmID: String = ""
+    let alarmCollectionRef = Firestore.firestore().collection("alarmData")
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -86,6 +89,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         shareButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         shareButton.titleLabel?.textColor = aqua
         shareButton.setTitleColor(aqua, for: .normal)
+        self.snoozeSwitch.setOn(false, animated: false)
         self.snoozeSwitch.onTintColor = aqua
         self.snoozeSwitch.tintColor = aqua
         self.snoozeSwitch.thumbTintColor = UIColor.white
@@ -95,6 +99,28 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         bottomLine.backgroundColor = UIColor.black.cgColor
         titleTextField.borderStyle = UITextField.BorderStyle.none
         titleTextField.layer.addSublayer(bottomLine)
+    
+        if alarmID != "" {
+            screenTitleLabel.text = "edit alarm"
+            alarmCollectionRef.document(alarmID).getDocument { (alarmDoc, error) in
+                guard let alarmDoc = alarmDoc, alarmDoc.exists else {
+                    print("Could not find alarm \(String(describing: error))")
+                    return
+                }
+                let alarmName = alarmDoc.get("name") as! String
+                self.titleTextField.text = alarmName
+                let recurrence = alarmDoc.get("recurrence") as! String
+                self.repeatButton.setTitle(recurrence, for: .normal)
+                self.recurring = recurrence
+                let time = alarmDoc.get("time") as! Timestamp
+                let myDate = time.dateValue()
+                self.datePicker.date = myDate
+                self.timePicker.date = myDate
+                let sharedList = alarmDoc.get("userList") as! [String]
+                self.sharedToList = sharedList
+                // TODO: set sound and snooze (not in Firestore right now)
+            }
+        }
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -235,7 +261,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     // MARK: - Button actions
     @IBAction func saveButtonPressed(_ sender: Any) {
         // add new alarm
-        
+        let snooze = self.snoozeSwitch.isOn
         if let time = self.timePicker?.date,
            let date = self.datePicker?.date,
            let mergedDate = self.combineDateWithTime(date: date, time: time),
@@ -243,11 +269,16 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
             if self.date != nil,
                let _ = self.delegate as? CalendarViewController {
                 let calendarViewController = self.delegate as! AlarmAdder
-                calendarViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, invitedUsers: self.sharedToList)
+                calendarViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList)
                 self.dismiss(animated: true, completion: nil)
             } else if let _ = self.delegate as? HomeViewController {
                 let homeViewController = self.delegate as! AlarmAdder
-                homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, invitedUsers: self.sharedToList)
+                if alarmID != "" {
+                    homeViewController.updateAlarm(alarmID: alarmID, time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList)
+                } else {
+                    print("snooze value", snooze)
+                    homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList)
+                }
                 self.dismiss(animated: true, completion: nil)
             } else {
                 let alertController = UIAlertController(

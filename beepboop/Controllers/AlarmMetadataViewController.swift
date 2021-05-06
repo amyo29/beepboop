@@ -27,8 +27,10 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var pendingLabel: UILabel!
     @IBOutlet weak var responseTableView: UITableView!
     @IBOutlet weak var responsesLabel: UILabel!
+    @IBOutlet weak var enableToggle: UISwitch!
     
-    var userCollectionRef: CollectionReference!
+    let alarmCollectionRef = Firestore.firestore().collection("alarmData")
+    let userCollectionRef = Firestore.firestore().collection("userData")
     private let responsesTableViewCellIdentifier = "ResponseTableViewCell"
     private var nameList: [Dictionary<String, Any>] = []
     private let acceptIcon = UIImage(named: "AcceptIcon")
@@ -41,12 +43,19 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     var status: StatusMode = .accepted
     
     var alarmID: String = ""
+    var enabled: Bool = true
+    var userID: String = ""
     var time: String = ""
+    var timestampTime: Timestamp = Timestamp()
     var alarmName: String = "iOS Class"
+    var recurring: String = ""
+    var global_snooze: Bool = false
+    var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("in metadata controller")
         self.responseTableView.delegate = self
         self.responseTableView.dataSource = self
         
@@ -55,9 +64,20 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         
         declinedButton.imageView?.alpha = 0.5
         declinedLabel.alpha = 0.5
-        
         pendingButton.imageView?.alpha = 0.5
         pendingLabel.alpha = 0.5
+
+        if userID != "" {
+            let userDocRef = userCollectionRef.document(userID)
+            userDocRef.collection("alarmMetadata").document(alarmID).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    self.enabled = document.get("enabled") as? Bool ?? true
+                    self.enableToggle.setOn(self.enabled, animated: false)
+                }
+            }
+        } else {
+            self.enableToggle.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -143,8 +163,6 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     func updateStatuses() {
         if alarmID != "" {
             print("Finding \(alarmID)")
-            let alarmCollectionRef = Firestore.firestore().collection("alarmData")
-            let userCollectionRef = Firestore.firestore().collection("userData")
             let getResponses = DispatchGroup() // Keeps track of async forloop
             alarmCollectionRef.document(alarmID).getDocument { (alarmDoc, error) in
                 guard let alarmDoc = alarmDoc, alarmDoc.exists else {
@@ -154,7 +172,7 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
                 let responses = alarmDoc.get("userStatus") as! Dictionary<String, String>
                 for (uuid, response) in responses {
                     getResponses.enter()
-                    userCollectionRef.document(uuid).getDocument { (userDoc, error) in
+                    self.userCollectionRef.document(uuid).getDocument { (userDoc, error) in
                         if let userDoc = userDoc, userDoc.exists, let data = userDoc.data() {
                             switch response {
                             case "Accepted":
@@ -177,7 +195,8 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
                     }
                 }
                 getResponses.notify(queue: .main) {
-                    self.time = self.extractTimeFromDate(time: alarmDoc.get("time") as? Timestamp)
+                    self.timestampTime = alarmDoc.get("time") as! Timestamp
+                    self.time = self.extractTimeFromDate(time: self.timestampTime)
                     self.alarmName = alarmDoc.get("name") as! String
                     self.responsesLabel.font = UIFont(name: "JosefinSans-Regular", size: 40)
                     self.nameList = self.acceptedList
@@ -192,8 +211,29 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
                     self.timeLabel.font = UIFont(name: "JosefinSans-Regular", size: 50)
                     self.alarmNameLabel.text = self.alarmName
                     self.alarmNameLabel.font = UIFont(name: "JosefinSans-Regular", size: 35)
+                    self.recurring = alarmDoc.get("recurrence") as! String
                 }
             }
+        }
+    }
+    
+    @IBAction func switchTapped(_ sender: UISwitch) {
+        if userID != "" {
+            let userDocRef = userCollectionRef.document(userID)
+            userDocRef.collection("alarmMetadata").document(alarmID).updateData(["enabled": sender.isOn])
+        }
+        
+        // Enable/Disable notifications
+        if sender.isOn {
+            if self.global_snooze {
+                sender.setOn(false, animated: true)
+                return
+            }
+            let date = timestampTime.dateValue()
+            alarmScheduler.setNotificationWithTimeAndDate(name: alarmName, time: date, recurring: self.recurring, uuidStr: alarmID)
+        } else {
+            let notificationCenter = UNUserNotificationCenter.current()
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [alarmID])
         }
     }
     
@@ -248,6 +288,12 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         self.pendingLabel.text = "Pending (\(self.pendingList.count))"
         self.responseTableView?.reloadData()
     }
+    
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -277,6 +323,4 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
             return "Error when extracting time from Date object"
         }
     }
-
-
 }

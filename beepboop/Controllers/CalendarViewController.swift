@@ -13,7 +13,6 @@ import FirebaseCore
 import CoreData
 
 class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource, AlarmAdder {
-    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var alarmTableView: UITableView!
@@ -35,7 +34,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     var currentUserUid: String?
     var selectedAlarm: String?
-    var snooze: Bool = false
+    var global_snooze: Bool = false
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -91,7 +90,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             let count = try context.count(for: fetchRequest)
             if count > 0 {
                 try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
-                snooze = fetchedResults[0].value(forKey: "snoozeEnabled") as! Bool
+                global_snooze = fetchedResults[0].value(forKey: "snoozeEnabled") as! Bool
             }
         } catch {
             let nserror = error as NSError
@@ -167,7 +166,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         cell.alarmDateLabel?.text = self.extractDate(time: alarm.time)
         cell.alarmDateLabel.font = UIFont(name: "JosefinSans-Regular", size: 15.0)
         cell.alarmImageView?.image = UIImage(named: "icons8-iceberg-50")
-        if snooze {
+        if global_snooze {
             cell.alarmToggleSwitch.setOn(false, animated: false)
         }
         else {
@@ -218,7 +217,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         // Enable/Disable notifications
         let alarm = self.alarmList[index]
         if sender.isOn {
-            if snooze {
+            if global_snooze {
                 sender.setOn(false, animated: true)
                 return
             }
@@ -259,13 +258,13 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     // MARK: - Delegate functions
     
-    func addAlarm(time: Date, name: String, recurrence: String, invitedUsers: [String]) {
-        self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence, invitedUsers: invitedUsers)
+    func addAlarm(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String]) {
+        self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence, snooze: snooze, invitedUsers: invitedUsers)
     }
     
     // MARK: - Firestore functions
     
-    func addAlarmToFirestore(time: Date, name: String, recurrence: String, invitedUsers: [String]) {
+    func addAlarmToFirestore(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String]) {
         guard let currentUserUid = self.currentUserUid else {
             let alertController = UIAlertController(
                 title: "Unknown error",
@@ -289,7 +288,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, uuid: uuid.uuidString, userList: [currentUserUid] + invitedUsers, userStatus: userStatus)
         
         alarmCollectionRef.document(uuid.uuidString).setData(newAlarm.dictionary)
-        userDocRef.collection("alarmMetadata").document(uuid.uuidString).setData(["snooze": false, "enabled": true])
+        userDocRef.collection("alarmMetadata").document(uuid.uuidString).setData(["snooze": snooze, "enabled": !snooze])
         userDocRef.updateData([
             "alarmRequestsSent": FieldValue.arrayUnion([uuid.uuidString])
         ])
@@ -299,11 +298,48 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                 "alarmRequestsReceived": FieldValue.arrayUnion([uuid.uuidString])
             ])
         }
-        if !snooze {
+        if !global_snooze {
             alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, uuidStr: uuid.uuidString)
         }
         self.alarmList.append(newAlarm)
         self.alarmTableView.reloadData()
+    }
+
+    func updateAlarm(alarmID: String, time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String]) {
+        alarmCollectionRef.document(alarmID).updateData([
+            "time": time,
+            "name": name,
+            "recurrence": recurrence,
+            "userList": invitedUsers
+        ])
+        userDocRef.collection("alarmMetadata").document(alarmID).setData(["snooze": snooze, "enabled": !snooze])
+        self.updateAlarmsFirestore()
+    }
+
+    func updateAlarmsFirestore() {
+        self.alarmList = [AlarmCustom]()
+        var alarmUuids = [String]()
+        userDocRef.collection("alarmMetadata").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    alarmUuids.append(document.documentID)
+                }
+                
+                for alarmUuid in alarmUuids {
+                    let docRef = self.alarmCollectionRef.document(alarmUuid)
+                    docRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            if let model = AlarmCustom(dictionary: document.data()!) {
+                                self.alarmList.append(model)
+                                self.alarmTableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func getStatusForUsers(invitedUsers: [String]) -> [String: String] {

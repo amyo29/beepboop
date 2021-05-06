@@ -22,7 +22,8 @@ extension UIColor{
 }
 
 protocol AlarmAdder {
-    func addAlarm(time: Date, name: String, recurrence: String, invitedUsers: [String])
+    func addAlarm(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String])
+    func updateAlarm(alarmID: String, time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String])
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlarmAdder{
@@ -47,12 +48,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var currentUserUid: String?
     var selectedAlarm: String?
-    var snooze: Bool = false
     var darkmode: Bool = false
+    var global_snooze: Bool = false
     
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("view did load!")
         // Do any additional setup after loading the view.
         
         userCollectionRef = Firestore.firestore().collection("userData")
@@ -90,8 +92,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appearance = UITabBarItem.appearance()
         let attributes = [NSAttributedString.Key.font:UIFont(name: "JosefinSans-Regular", size: 16)]
         appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: [])
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,7 +105,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let count = try context.count(for: fetchRequest)
             if count > 0 {
                 try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
-                snooze = fetchedResults[0].value(forKey: "snoozeEnabled") as! Bool
+                global_snooze = fetchedResults[0].value(forKey: "snoozeEnabled") as! Bool
                 darkmode = fetchedResults[0].value(forKey: "darkmodeEnabled") as! Bool
             }
         } catch {
@@ -124,7 +124,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             overrideUserInterfaceStyle = .light
         }
         self.updateAlarmsFirestore()
-        
     }
     
     // load system supported fonts to determine system font labels
@@ -197,7 +196,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.alarmDateLabel?.text = self.extractDate(time: alarm.time)
         cell.alarmDateLabel.font = UIFont(name: "JosefinSans-Regular", size: 15.0)
         cell.alarmImageView?.image = UIImage(named: "icons8-iceberg-50")
-        if snooze {
+        if global_snooze {
             cell.alarmToggleSwitch.setOn(false, animated: false)
         }
         else {
@@ -211,10 +210,31 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    // Remove alarm from table view by swiping to delete
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete notifications
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
+            print("Just Swiped Edit", action)
+            completion(true)
+            self.performSegue(withIdentifier: self.homeToCreateAlarmSegueIdentifier, sender: indexPath)
+        }
+        edit.backgroundColor = UIColor(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 0)
+//        edit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image {
+//            _ in UIImage(named: "EditIcon")?.draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+//        }
+        edit.image = UIImage(named: "EditIcon")
+
+        let responses = UIContextualAction(style: .normal, title: "Responses") { (action, view, completion) in
+            print("Just Swiped Responses", action)
+            self.performSegue(withIdentifier: "HomeToAlarmMetadata", sender: indexPath)
+            completion(true)
+        }
+        responses.backgroundColor = UIColor(red: 0.5725490451, green: 0.2313725501, blue: 0, alpha: 0)
+        responses.image = UIImage(named: "ResponseIcon")
+//        responses.image = UIGraphicsImageRenderer(size: CGSize(width: 90, height: 90)).image {
+//            _ in UIImage(named: "ResponseIcon")?.draw(in: CGRect(x: 0, y: 0, width: 90, height: 90))
+//        }
+
+        let delete = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
+            print("Just Swiped Deleted", action)
             if let uuid = self.alarmList[indexPath.row].uuid,
                let currentUserUid = self.currentUserUid {
                 let notificationCenter = UNUserNotificationCenter.current()
@@ -226,16 +246,27 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     "userStatus": FieldValue.arrayRemove([currentUserUid]),
                     "userList": FieldValue.arrayRemove([currentUserUid])
                 ])
-                
+
 //                self.updateAlarmsFirestore()
                 // TODO: remove alarm data from collection if userStatus is empty
             }
-            
-            alarmList.remove(at: indexPath.row)
+
+            self.alarmList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-//            tableView.reloadData()
+            
+            completion(false)
         }
-    }
+        delete.image = UIImage(named: "DeleteIcon")
+//        delete.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image {
+//            _ in UIImage(named: "DeleteIcon")?.draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+//        }
+        delete.backgroundColor =  UIColor(red: 0.2436070212, green: 0.5393256153, blue: 0.1766586084, alpha: 0)
+
+        let config = UISwipeActionsConfiguration(actions: [delete, responses, edit])
+        config.performsFirstActionWithFullSwipe = false
+
+        return config
+   }
     
     @IBAction func switchTapped(_ sender: UISwitch) {
         let index = sender.tag
@@ -249,7 +280,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Enable/Disable notifications
         let alarm = self.alarmList[index]
         if sender.isOn {
-            if snooze {
+            if global_snooze {
                 sender.setOn(false, animated: true)
                 return
             }
@@ -301,14 +332,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Delegate functions
     
-    func addAlarm(time: Date, name: String, recurrence: String, invitedUsers: [String]) {
-        self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence, invitedUsers: invitedUsers)
+    func addAlarm(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String]) {
+        self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence, snooze: snooze, invitedUsers: invitedUsers)
 //        self.updateAlarmsFirestore()
     }
     
     // MARK: - Firestore functions
     
-    func addAlarmToFirestore(time: Date, name: String, recurrence: String, invitedUsers: [String]) {
+    func addAlarmToFirestore(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String]) {
         guard let currentUserUid = self.currentUserUid else {
             let alertController = UIAlertController(
                 title: "Unknown error",
@@ -332,7 +363,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, uuid: uuid.uuidString, userList: [currentUserUid] + invitedUsers, userStatus: userStatus)
         
         alarmCollectionRef.document(uuid.uuidString).setData(newAlarm.dictionary)
-        userDocRef.collection("alarmMetadata").document(uuid.uuidString).setData(["snooze": false, "enabled": true])
+        userDocRef.collection("alarmMetadata").document(uuid.uuidString).setData(["snooze": snooze, "enabled": !snooze])
         userDocRef.updateData([
             "alarmRequestsSent": FieldValue.arrayUnion([uuid.uuidString])
         ])
@@ -342,11 +373,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 "alarmRequestsReceived": FieldValue.arrayUnion([uuid.uuidString])
             ])
         }
-        if !snooze {
+        if !global_snooze {
             alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, uuidStr: uuid.uuidString)
         }
         self.alarmList.append(newAlarm)
         self.alarmTableView.reloadData()
+    }
+    
+    func updateAlarm(alarmID: String, time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String]) {
+        alarmCollectionRef.document(alarmID).updateData([
+            "time": time,
+            "name": name,
+            "recurrence": recurrence,
+            "userList": invitedUsers
+        ])
+        userDocRef.collection("alarmMetadata").document(alarmID).setData(["snooze": snooze, "enabled": !snooze])
+        self.updateAlarmsFirestore()
     }
     
     func getStatusForUsers(invitedUsers: [String]) -> [String: String] {
@@ -395,15 +437,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "HomeToAlarmMetadata", let destination = segue.destination as? AlarmMetadataViewController {
-            if let opIndex = alarmTableView.indexPathForSelectedRow?.row { // From the table
-                destination.alarmID = self.alarmList[opIndex].uuid!
-            }
-            else if let alarmID = selectedAlarm { // From notifications
+            if let alarmID = selectedAlarm { // From notifications
+                // If we're getting a notification, the alarm must be enabled.
                 destination.alarmID = alarmID
+            } else if let indexPath = sender as? IndexPath {
+                // If we're coming from home table view, the alarm may not be enabled.
+                let uuid = self.alarmList[indexPath.row].uuid!
+                destination.alarmID = uuid
+                destination.userID = currentUserUid!
+                destination.global_snooze = self.global_snooze
             }
         } else if segue.identifier == self.homeToCreateAlarmSegueIdentifier,
            let destination = segue.destination as? CreateAlarmViewController {
             destination.delegate = self
+            
+            if let indexPath = sender as? IndexPath {
+                destination.alarmID = self.alarmList[indexPath.row].uuid!
+            }
         } else if segue.identifier == "HomeToAlarmDisplayIdentifier", let destination = segue.destination as? AlarmDisplayViewController {
             if let alarmID = selectedAlarm { // From notifications
                 destination.alarmID = alarmID
