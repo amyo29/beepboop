@@ -180,31 +180,6 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         }
     }
     
-    // Remove alarm from table view by swiping to delete
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete notifications
-            if let uuid = self.alarmList[indexPath.row].uuid,
-               let currentUserUid = self.currentUserUid {
-                let notificationCenter = UNUserNotificationCenter.current()
-                notificationCenter.removePendingNotificationRequests(withIdentifiers: [uuid])
-                // alert asking for complete removal of alarm and not just user id from alarm (if owner of alarm)
-                // add owner uid for each alarm in create alarm
-                self.userDocRef.collection("alarmMetadata").document(uuid).delete()
-                self.alarmCollectionRef.document(uuid).updateData([
-                    "userStatus": FieldValue.arrayRemove([currentUserUid]),
-                    "userList": FieldValue.arrayRemove([currentUserUid])
-                ])
-                
-                
-                // TODO: remove alarm data from collection if userStatus is empty
-            }
-            
-            alarmList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-    
     @IBAction func switchTapped(_ sender: UISwitch) {
         let index = sender.tag
         guard let uuidStr = self.alarmList[index].uuid else {
@@ -212,7 +187,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             abort()
         }
         
-        self.userDocRef.collection("alarmMetadata").document(uuidStr).updateData(["enabled": sender.isOn])
+        self.userDocRef.collection("alarmMetadata").document(uuidStr).updateData(["enabled": sender.isOn, "snooze": !sender.isOn])
         
         // Enable/Disable notifications
         let alarm = self.alarmList[index]
@@ -253,8 +228,65 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                 cell.transform = CGAffineTransform(translationX: 0, y: 0)
                 cell.alpha = 1
             })
-        
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
+            print("Just Swiped Edit", action)
+            completion(true)
+            self.performSegue(withIdentifier: self.calendarToCreateAlarmSegueIdentifier, sender: indexPath)
+        }
+        edit.backgroundColor = UIColor(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 0)
+//        edit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image {
+//            _ in UIImage(named: "EditIcon")?.draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+//        }
+        edit.image = UIImage(named: "EditIcon")
+
+        let responses = UIContextualAction(style: .normal, title: "Responses") { (action, view, completion) in
+            print("Just Swiped Responses", action)
+            self.performSegue(withIdentifier: "CalendarToAlarmMetadataSegueIdentifier", sender: indexPath)
+            completion(true)
+        }
+        responses.backgroundColor = UIColor(red: 0.5725490451, green: 0.2313725501, blue: 0, alpha: 0)
+        responses.image = UIImage(named: "ResponseIcon")
+//        responses.image = UIGraphicsImageRenderer(size: CGSize(width: 90, height: 90)).image {
+//            _ in UIImage(named: "ResponseIcon")?.draw(in: CGRect(x: 0, y: 0, width: 90, height: 90))
+//        }
+
+        let delete = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
+            print("Just Swiped Deleted", action)
+            if let uuid = self.alarmList[indexPath.row].uuid,
+               let currentUserUid = self.currentUserUid {
+                let notificationCenter = UNUserNotificationCenter.current()
+                notificationCenter.removePendingNotificationRequests(withIdentifiers: [uuid])
+                // alert asking for complete removal of alarm and not just user id from alarm (if owner of alarm)
+                // add owner uid for each alarm in create alarm
+                self.userDocRef.collection("alarmMetadata").document(uuid).delete()
+                self.alarmCollectionRef.document(uuid).updateData([
+                    "userStatus": FieldValue.arrayRemove([currentUserUid]),
+                    "userList": FieldValue.arrayRemove([currentUserUid])
+                ])
+
+//                self.updateAlarmsFirestore()
+                // TODO: remove alarm data from collection if userStatus is empty
+            }
+
+            self.alarmList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            completion(false)
+        }
+        delete.image = UIImage(named: "DeleteIcon")
+//        delete.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image {
+//            _ in UIImage(named: "DeleteIcon")?.draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+//        }
+        delete.backgroundColor =  UIColor(red: 0.2436070212, green: 0.5393256153, blue: 0.1766586084, alpha: 0)
+
+        let config = UISwipeActionsConfiguration(actions: [delete, responses, edit])
+        config.performsFirstActionWithFullSwipe = false
+
+        return config
+   }
     
     // MARK: - Delegate functions
     
@@ -313,33 +345,9 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             "userList": invitedUsers
         ])
         userDocRef.collection("alarmMetadata").document(alarmID).setData(["snooze": snooze, "enabled": !snooze])
-        self.updateAlarmsFirestore()
-    }
-
-    func updateAlarmsFirestore() {
-        self.alarmList = [AlarmCustom]()
-        var alarmUuids = [String]()
-        userDocRef.collection("alarmMetadata").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    alarmUuids.append(document.documentID)
-                }
-                
-                for alarmUuid in alarmUuids {
-                    let docRef = self.alarmCollectionRef.document(alarmUuid)
-                    docRef.getDocument { (document, error) in
-                        if let document = document, document.exists {
-                            if let model = AlarmCustom(dictionary: document.data()!) {
-                                self.alarmList.append(model)
-                                self.alarmTableView.reloadData()
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: Date())
+        self.getAlarmsForDate(date: self.calendar.selectedDate ?? calendar.date(from: components)!)
     }
     
     func getStatusForUsers(invitedUsers: [String]) -> [String: String] {
@@ -448,16 +456,23 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CalendarToAlarmMetadataSegueIdentifier", let destination = segue.destination as? AlarmMetadataViewController {
-            if let opIndex = alarmTableView.indexPathForSelectedRow?.row { // From the table
-                destination.alarmID = self.alarmList[opIndex].uuid!
-            }
-            else if let alarmID = selectedAlarm { // From notifications
+            if let alarmID = selectedAlarm { // From notifications
                 destination.alarmID = alarmID
+            } else if let indexPath = sender as? IndexPath {
+                // If we're coming from home table view, the alarm may not be enabled.
+                let uuid = self.alarmList[indexPath.row].uuid!
+                destination.alarmID = uuid
+                destination.userID = currentUserUid!
+                destination.global_snooze = self.global_snooze
             }
         } else if segue.identifier == self.calendarToCreateAlarmSegueIdentifier,
                   let destination = segue.destination as? CreateAlarmViewController {
             destination.delegate = self
             destination.date = self.calendar.selectedDate ?? Date()
+            
+            if let indexPath = sender as? IndexPath {
+                destination.alarmID = self.alarmList[indexPath.row].uuid!
+            }
         }
     }
     
@@ -520,7 +535,6 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         self.alarmList.removeAll()
         self.alarmTableView.reloadData()
         getAlarmsForDate(date: self.calendar.selectedDate ?? date)
-        
     }
     
     func readAlarmAtDate(date: String) {

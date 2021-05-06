@@ -43,14 +43,37 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     var delegate: UIViewController!
     var date: Date? = nil
     var alarmID: String = ""
+    var currentUserUid: String?
+    
+    var userDocRef: DocumentReference!
     let alarmCollectionRef = Firestore.firestore().collection("alarmData")
+    let userCollectionRef = Firestore.firestore().collection("userData")
+
     
     // MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         soundPickerView.delegate = self
         soundPickerView.dataSource = self
+        
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {
+            let alertController = UIAlertController(
+                title: "Unknown error",
+                message: "Something went wrong, please try again.",
+                preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(
+                                        title: "Ok",
+                                        style: .default,
+                                        handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        self.currentUserUid = currentUserUid
+        self.userDocRef = userCollectionRef.document(currentUserUid)
         
         // Do any additional setup after loading the view.
         if(self.date != nil) {
@@ -89,7 +112,17 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         shareButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         shareButton.titleLabel?.textColor = aqua
         shareButton.setTitleColor(aqua, for: .normal)
-        self.snoozeSwitch.setOn(false, animated: false)
+        
+        if alarmID != "" {
+            userDocRef.collection("alarmMetadata").document(alarmID).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    self.snoozeSwitch.setOn(document.get("snooze") as? Bool ?? false, animated: false)
+                }
+            }
+        } else {
+            self.snoozeSwitch.setOn(false, animated: false)
+        }
+
         self.snoozeSwitch.onTintColor = aqua
         self.snoozeSwitch.tintColor = aqua
         self.snoozeSwitch.thumbTintColor = UIColor.white
@@ -269,7 +302,11 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
             if self.date != nil,
                let _ = self.delegate as? CalendarViewController {
                 let calendarViewController = self.delegate as! AlarmAdder
-                calendarViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList)
+                if alarmID != "" {
+                    calendarViewController.updateAlarm(alarmID: alarmID, time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList)
+                } else {
+                    calendarViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList)
+                }
                 self.dismiss(animated: true, completion: nil)
             } else if let _ = self.delegate as? HomeViewController {
                 let homeViewController = self.delegate as! AlarmAdder

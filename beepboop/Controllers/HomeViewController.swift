@@ -275,7 +275,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             abort()
         }
         
-        self.userDocRef.collection("alarmMetadata").document(uuidStr).updateData(["enabled": sender.isOn])
+        self.userDocRef.collection("alarmMetadata").document(uuidStr).updateData(["enabled": sender.isOn, "snooze": !sender.isOn])
         
         // Enable/Disable notifications
         let alarm = self.alarmList[index]
