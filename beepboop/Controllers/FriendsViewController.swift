@@ -113,17 +113,19 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             if let friendDoc = friendDoc, friendDoc.exists {
                 cell.friendNameLabel?.text = friendDoc.get("name") as? String
                 cell.friendNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
+                
                 let photoURL = friendDoc.get("photoURL")
+                
                 if photoURL == nil {
                     cell.friendImageView?.image = UIImage(named: "EventPic") // Default
-                    return
-                }
-                self.loadData(url: URL(string: photoURL as! String)!) { data, response, error in
-                    guard let data = data, error == nil else {
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        cell.friendImageView?.image = UIImage(data: data)?.circleMasked
+                } else {
+                    self.loadData(url: URL(string: photoURL as! String)!) { data, response, error in
+                        guard let data = data, error == nil else {
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            cell.friendImageView?.image = UIImage(data: data)?.circleMasked
+                        }
                     }
                 }
             }

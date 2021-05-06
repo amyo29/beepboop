@@ -6,15 +6,26 @@
 //
 
 import UIKit
+import FirebaseCore
+import Firebase
 import CoreData
 
+protocol GroupAdder {
+    func addGroup(uuid: UUID, name: String, members: [String], alarms: [String], image: UIImage)
+}
 
-class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GroupAdder {
     @IBOutlet weak var groupTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     
+    var userDocRef: DocumentReference!
+    var userCollectionRef: CollectionReference!
+    var groupCollectionRef: CollectionReference!
+    var currentUserUid: String?
+    
     private var groupsList: [GroupCustom] = []
     private let groupTableViewCellIdentifier = "GroupTableViewCell"
+    private let groupsToCreateGroupsSegueIdentifier = "GroupsToCreateGroups"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +37,33 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         // Do any additional setup after loading the view.
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+        
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {
+            let alertController = UIAlertController(
+                title: "Unknown error",
+                message: "Something went wrong, please try again.",
+                preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(
+                                        title: "Ok",
+                                        style: .default,
+                                        handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        self.currentUserUid = currentUserUid
+        self.userCollectionRef = Firestore.firestore().collection("userData")
+        self.groupCollectionRef = Firestore.firestore().collection("groupData")
+        self.userDocRef = userCollectionRef.document(currentUserUid)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.sendSubviewToBack(self.groupTableView)
+      
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
@@ -57,7 +90,8 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.view.backgroundColor = UIColor(rgb: 0xFEFDEC)
             overrideUserInterfaceStyle = .light
         }
-        self.populateGroupTableWithDummyValues()
+        
+        self.updateGroupsFirestore()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,7 +133,24 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func populateCell(group: GroupCustom, cell: GroupTableViewCell) {
         cell.groupNameLabel?.text = group.name
         cell.groupNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
-        cell.groupImageView?.image = UIImage(named: "GroupPic")
+        if let uuid = group.uuid {
+            groupCollectionRef.document(uuid).getDocument { (groupDoc, error) in
+                if let groupDoc = groupDoc, groupDoc.exists {
+                    if let photoURL = groupDoc.get("photoURL") {
+                        self.loadData(url: URL(string: photoURL as! String)!) { data, response, error in
+                            guard let data = data, error == nil else {
+                                return
+                            }
+                            DispatchQueue.main.async {
+                                cell.groupImageView?.image = UIImage(data: data)?.circleMasked
+                            }
+                        }
+                    } else {
+                        cell.groupImageView?.image = UIImage(named: "GroupPic")
+                    }
+                }
+            }
+        }
         
         // if you do not set `shadowPath` you'll notice laggy scrolling
         // add this in `willDisplay` method
@@ -124,14 +175,45 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.contentView.backgroundColor = cellColours[frequency]
     }
     
-    func populateGroupTableWithDummyValues() {
-        self.groupsList = []
-        self.groupsList.append(GroupCustom(name: "ball is life"))
-        self.groupsList.append(GroupCustom(name: "scotts tots"))
-        self.groupsList.append(GroupCustom(name: "bulko fan club"))
-        self.groupsList.append(GroupCustom(name: "haikyuu watch party"))
-        self.groupTableView?.reloadData()
+    func loadData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
+    
+    func updateGroupsFirestore() {
+        self.groupsList = [GroupCustom]()
+        var groupUuids = [String]()
+        
+        userDocRef.collection("groupMetadata").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    groupUuids.append(document.documentID)
+                }
+
+                for groupUuid in groupUuids {
+                    let docRef = self.groupCollectionRef.document(groupUuid)
+                    docRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            if let model = GroupCustom(dictionary: document.data()!) {
+                                self.groupsList.append(model)
+                                self.groupTableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+//    func populateGroupTableWithDummyValues() {
+//        self.groupsList = []
+//        self.groupsList.append(GroupCustom(name: "ball is life"))
+//        self.groupsList.append(GroupCustom(name: "scotts tots"))
+//        self.groupsList.append(GroupCustom(name: "bulko fan club"))
+//        self.groupsList.append(GroupCustom(name: "haikyuu watch party"))
+//        self.groupTableView?.reloadData()
+//    }
     
 
     @IBAction func groupMetadataButtonPressed(_ sender: Any) {
@@ -173,14 +255,58 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
        
         self.present(alertController, animated: true, completion: nil)
     }
-    /*
+    
+    func addGroup(uuid: UUID, name: String, members: [String], alarms: [String], image: UIImage) {
+        // Make call to firestore, add group to group collection
+        // Add field under each member for group ownership, send notification
+        let groupCollectionRef = Firestore.firestore().collection("groupData")
+        let userCollectionRef = Firestore.firestore().collection("userData")
+        let newGroup = GroupCustom(name: name, members: members, alarms: alarms, uuid: uuid.uuidString)
+        groupCollectionRef.document(uuid.uuidString).setData(newGroup.dictionary)
+        
+        for member in members {
+            userCollectionRef.document(member).collection("groupMetadata").document(uuid.uuidString).setData(["id": uuid.uuidString])
+            
+            // TODO: add notifications for members once group is created
+        }
+        
+        if let optimizedImageData = image.jpegData(compressionQuality: 0.6) {
+            let storageRef = Storage.storage().reference()
+            let imageRef = storageRef.child("groups").child(uuid.uuidString).child("\(uuid.uuidString)-profilePic.jpg")
+            let uploadMetaData = StorageMetadata()
+            uploadMetaData.contentType = "image/jpeg"
+            
+            imageRef.putData(optimizedImageData, metadata: uploadMetaData) { (optimizedImageData, error) in
+                guard let _ = optimizedImageData else {
+                    print("An error occurred while uploading profile pic")
+                    return
+                }
+                
+                imageRef.downloadURL { (url, error) in
+                    guard let downloadURL = url else {
+                        print("An error occurred while downloading profile pic")
+                      return
+                    }
+                    
+                    groupCollectionRef.document(uuid.uuidString).updateData(["photoURL": downloadURL.absoluteString])
+                }
+            }
+        }
+        
+
+        
+    }
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == self.groupsToCreateGroupsSegueIdentifier,
+           let destination = segue.destination as? CreateGroupViewController {
+            destination.delegate = self
+        }
     }
-    */
+    
 
 }

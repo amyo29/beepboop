@@ -124,6 +124,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             overrideUserInterfaceStyle = .light
         }
         self.updateAlarmsFirestore()
+        self.alarmList.sort { $0.time! < $1.time!}
+        self.alarmTableView.reloadData()
     }
     
     // load system supported fonts to determine system font labels
@@ -149,6 +151,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: self.alarmTableViewCellIdentifier, for: indexPath as IndexPath) as! AlarmTableViewCell
         
+        self.alarmList.sort { $0.time! < $1.time!}
+
         let alarm = alarmList[row]
         cell.alarmToggleSwitch?.tag = row
         
@@ -425,6 +429,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
         }
+        
     }
     
     // Increases efficiency of app by only listening to data when view is on screen

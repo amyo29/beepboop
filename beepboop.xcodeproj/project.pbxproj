@@ -88,6 +88,8 @@
 		9A8AE64A260C5E4400181515 /* LoadingScreenRobot.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE648260C5E4400181515 /* LoadingScreenRobot.png */; };
 		9A8AE653260C649200181515 /* LoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE652260C649200181515 /* LoginButton.png */; };
 		9A8AE656260C660600181515 /* SignUpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AE655260C660600181515 /* SignUpButton.png */; };
+		9A9186F0263FCB3C00F986F9 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9186EF263FCB3C00F986F9 /* CreateGroupViewController.swift */; };
+		9A9186F3263FD14500F986F9 /* CreateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A9186F2263FD14400F986F9 /* CreateButton.png */; };
 		9AC2E477263616A7008ECAA7 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2E476263616A7008ECAA7 /* GroupTableViewCell.swift */; };
 		9AC2E47A26361813008ECAA7 /* GroupCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2E47926361813008ECAA7 /* GroupCustom.swift */; };
 		9ADC0E11260E8D80009AD333 /* NavBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADC0E10260E8D80009AD333 /* NavBarBackground.png */; };
@@ -186,6 +188,8 @@
 		9A8AE648260C5E4400181515 /* LoadingScreenRobot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoadingScreenRobot.png; sourceTree = "<group>"; };
 		9A8AE652260C649200181515 /* LoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButton.png; sourceTree = "<group>"; };
 		9A8AE655260C660600181515 /* SignUpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignUpButton.png; sourceTree = "<group>"; };
+		9A9186EF263FCB3C00F986F9 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
+		9A9186F2263FD14400F986F9 /* CreateButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CreateButton.png; sourceTree = "<group>"; };
 		9AC2E476263616A7008ECAA7 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		9AC2E47926361813008ECAA7 /* GroupCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCustom.swift; sourceTree = "<group>"; };
 		9ADC0E10260E8D80009AD333 /* NavBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarBackground.png; sourceTree = "<group>"; };
@@ -330,6 +334,7 @@
 				0040915D2624BE9A0098875B /* NotificationsViewController.swift */,
 				069456B02622DB0800450AC8 /* FriendsViewController.swift */,
 				E893696126372CB3007EEF71 /* AlarmDisplayViewController.swift */,
+				9A9186EF263FCB3C00F986F9 /* CreateGroupViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -356,7 +361,9 @@
 		9A8AE64E260C5ED000181515 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9A9186F2263FD14400F986F9 /* CreateButton.png */,
 				069987472642693E0028DDF0 /* CalendarTabIcon-3x.png */,
+				9A9186F2263FD14400F986F9 /* CreateButton.png */,
 				9A2935D526362B5500866B06 /* NavBarGradient.png */,
 				9AE40D3B2624E89900DB47FB /* SendButton.png */,
 				9A29A04A2623DFBE000A5275 /* AddFriendButton.png */,
@@ -488,6 +495,7 @@
 				9A53F82C2602DB7C00D4711A /* Assets.xcassets in Resources */,
 				0659FB0D2636AF930042DDE1 /* beepboop-icon-pastelbeepboop.png in Resources */,
 				0633D4C0260E6752004B50FB /* JosefinSans-Italic-VariableFont_wght.ttf in Resources */,
+				9A9186F3263FD14500F986F9 /* CreateButton.png in Resources */,
 				069456E12623B67000450AC8 /* AddFriendsIcon.png in Resources */,
 				0633D512260ED9F2004B50FB /* JosefinSans-MediumItalic.ttf in Resources */,
 				0633D50A260ED9E6004B50FB /* JosefinSans-ExtraLight.ttf in Resources */,
@@ -601,6 +609,7 @@
 				9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */,
 				069457112624199F00450AC8 /* CreateAlarmViewController.swift in Sources */,
 				9AC2E477263616A7008ECAA7 /* GroupTableViewCell.swift in Sources */,
+				9A9186F0263FCB3C00F986F9 /* CreateGroupViewController.swift in Sources */,
 				E8E4A43D26256D7500CE4426 /* AlarmMetadataViewController.swift in Sources */,
 				9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */,
 				0040918F262513E70098875B /* AlarmRequestUpdateTableViewCell.swift in Sources */,
