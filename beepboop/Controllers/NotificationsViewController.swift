@@ -214,16 +214,61 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
      Don't allow swiping of requests
      TODO: Need to figure out calculations
      */
-    /*
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    
+    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         let cellId = tableView.cellForRow(at: indexPath)?.reuseIdentifier
-        if editingStyle == .delete && cellId != self.alarmRequestIdentifier && cellId != self.friendRequestIdentifier {
-            // Delete notifications
-            
-            tableView.deleteRows(at: [indexPath], with: .fade)
+        if cellId == self.alarmRequestIdentifier || cellId == self.friendRequestIdentifier {
+            return .none
+        } else {
+            return .delete
         }
     }
-    */
+     
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        if editingStyle == .delete {
+            guard let user = Auth.auth().currentUser else {
+                print("Current user cannot be retrieved currently")
+                return
+            }
+            
+            if segCtrl.selectedSegmentIndex == 0 {
+                // Filter through for alarm update notifications and get corresponding indices
+                let alarmNotifications = self.notifications.filter({$0.description.components(separatedBy: ";").count > 2})
+                let alarmNotificationIndices = self.notifications.indices.filter({self.notifications[$0].description.components(separatedBy: ";").count > 2})
+                
+                // Compute actual index for the notification in the filtered lists and get notification
+                let notification = alarmNotifications[row - self.alarmRequests.count]
+                let notificationIndex = alarmNotificationIndices[row - self.alarmRequests.count]
+                let notificationDescription = notification.description
+                
+                // Remove from firestore user and notifications list
+                self.userRef.document(user.uid).updateData([
+                    "notifications": FieldValue.arrayRemove([notificationDescription])
+                ])
+                self.notifications.remove(at: notificationIndex)
+                self.notifTableView.deleteRows(at: [indexPath], with: .fade)
+            } else {
+                // Filter through for friend update notifications and get corresponding indices
+                let friendNotifications = self.notifications.filter({$0.description.components(separatedBy: ";").count == 2})
+                let friendNotificationIndices = self.notifications.indices.filter({self.notifications[$0].description.components(separatedBy: ";").count == 2})
+                
+                // Compute actual index for the notification in the filtered lists and get notification
+                let notification = friendNotifications[row - self.friendRequests.count]
+                let notificationIndex = friendNotificationIndices[row - self.friendRequests.count]
+                let notificationDescription = notification.description
+                
+                // Remove from firestore user and notifications list
+                self.userRef.document(user.uid).updateData([
+                    "notifications": FieldValue.arrayRemove([notificationDescription])
+                ])
+                self.notifications.remove(at: notificationIndex)
+                self.notifTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+    }
+    
     
     // MARK: - Cell Populating Methods
     
