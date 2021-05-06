@@ -333,7 +333,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                         if let document = document, document.exists {
                             
                             let startDate = date
-                            let endDate = startDate.addingTimeInterval(86400)
+                            let endDate = startDate.addingTimeInterval(86399)
                             let range = startDate...endDate
                             
                             let alarmDate = (document.get("time")! as AnyObject).dateValue()

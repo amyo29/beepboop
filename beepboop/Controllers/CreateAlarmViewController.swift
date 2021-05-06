@@ -196,9 +196,26 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         if self.date != nil {
             let date = self.date!
             let name = self.titleTextField.text!
-//            self.titleLabel.text = "new alarm for \(date)"
-            let calendarViewController = self.delegate as! AlarmAdder
-            calendarViewController.addAlarm(time: date, name: name, recurrence: recurring, invitedUsers: self.sharedToList)
+        
+            if let _ = self.delegate as? CalendarViewController {
+             let calendarViewController = self.delegate as! AlarmAdder
+             calendarViewController.addAlarm(time: date, name: name, recurrence: recurring, invitedUsers: self.sharedToList)
+             self.dismiss(animated: true, completion: nil)
+            } else {
+                let alertController = UIAlertController(
+                    title: "Oops",
+                    message: "We are not sure what went wrong. Please try again?",
+                    preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(
+                                            title: "Ok",
+                                            style: .default,
+                                            handler: nil))
+                
+                self.present(alertController, animated: true, completion: nil)
+                
+            }
+            
         } else {
             if let time = self.timePicker?.date,
                let date = self.datePicker?.date,
