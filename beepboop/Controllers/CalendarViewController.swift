@@ -100,7 +100,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         }
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: Date())
-        
+        // if no date selected, display today's alarms by default
         let startDate = self.calendar.selectedDate ?? calendar.date(from: components)!
         self.getAlarmsForDate(date: startDate)
     }
