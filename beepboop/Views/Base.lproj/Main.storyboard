@@ -177,7 +177,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kx-ur-bHa" userLabel="AddButton">
-                                <rect key="frame" x="320" y="109" width="40" height="40"/>
+                                <rect key="frame" x="320" y="114" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="c0A-Fd-n3c"/>
                                     <constraint firstAttribute="height" constant="40" id="lGg-gx-Oo9"/>
@@ -188,7 +188,11 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yod-9x-kiS">
-                                <rect key="frame" x="146.33333333333334" y="109.00000000000001" width="97.666666666666657" height="39.666666666666671"/>
+                                <rect key="frame" x="95" y="109" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3zh-DE-QrC"/>
+                                    <constraint firstAttribute="width" constant="200" id="FXj-0N-8En"/>
+                                </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="friends">
                                         <attributes>
@@ -214,7 +218,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IUP-LP-lkw">
-                                <rect key="frame" x="10" y="188.66666666666669" width="370" height="655.33333333333326"/>
+                                <rect key="frame" x="10" y="199" width="370" height="645"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
