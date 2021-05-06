@@ -16,6 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "FBSDKNotificationProtocols.h"
 #import "TargetConditionals.h"
 
 #if !TARGET_OS_TV
@@ -66,10 +67,16 @@ static NSDateFormatter *_dateFormatter;
 @implementation FBSDKProfile
 
 static Class<FBSDKAccessTokenProviding> _accessTokenProvider = nil;
+static id<FBSDKNotificationPosting, FBSDKNotificationObserving> _notificationCenter = nil;
 
 + (Class<FBSDKAccessTokenProviding>)accessTokenProvider
 {
   return _accessTokenProvider;
+}
+
++ (id<FBSDKNotificationPosting, FBSDKNotificationObserving>)notificationCenter
+{
+  return _notificationCenter;
 }
 
 - (instancetype)initWithUserID:(FBSDKUserIdentifier *)userID
@@ -226,9 +233,9 @@ static Class<FBSDKAccessTokenProviding> _accessTokenProvider = nil;
     g_currentProfile = profile;
 
     if (shouldPostNotification) {
-      [[NSNotificationCenter defaultCenter] postNotificationName:FBSDKProfileDidChangeNotification
-                                                          object:[self class]
-                                                        userInfo:userInfo];
+      [_notificationCenter postNotificationName:FBSDKProfileDidChangeNotification
+                                         object:[self class]
+                                       userInfo:userInfo];
     }
   }
 }
@@ -241,12 +248,12 @@ static Class<FBSDKAccessTokenProviding> _accessTokenProvider = nil;
 + (void)enableUpdatesOnAccessTokenChange:(BOOL)enable
 {
   if (enable) {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(observeChangeAccessTokenChange:)
-                                                 name:FBSDKAccessTokenDidChangeNotification
-                                               object:nil];
+    [_notificationCenter addObserver:self
+                            selector:@selector(observeChangeAccessTokenChange:)
+                                name:FBSDKAccessTokenDidChangeNotification
+                              object:nil];
   } else {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_notificationCenter removeObserver:self];
   }
 }
 
@@ -375,10 +382,12 @@ static id <FBSDKDataPersisting> _store;
 
 + (void)configureWithStore:(id<FBSDKDataPersisting>)store
        accessTokenProvider:(Class<FBSDKAccessTokenProviding>)accessTokenProvider
+        notificationCenter:(id<FBSDKNotificationPosting, FBSDKNotificationObserving>)notificationCenter
 {
   if (self == [FBSDKProfile class]) {
     _store = store;
     _accessTokenProvider = accessTokenProvider;
+    _notificationCenter = notificationCenter;
   }
 }
 
@@ -490,28 +499,28 @@ static id <FBSDKDataPersisting> _store;
       return;
     }
 
-    NSString *profileID = [FBSDKTypeUtility stringValue:result[@"id"]];
+    NSString *profileID = [FBSDKTypeUtility coercedToStringValue:result[@"id"]];
     if (profileID == nil || profileID.length == 0) {
       return;
     }
 
-    NSString *urlString = [FBSDKTypeUtility stringValue:result[@"link"]];
+    NSString *urlString = [FBSDKTypeUtility coercedToStringValue:result[@"link"]];
     NSURL *linkUrl = [FBSDKTypeUtility URLValue:[NSURL URLWithString:urlString]];
     NSArray<FBSDKUserIdentifier *> *friendIDs = [self friendIDsFromGraphResult:[FBSDKTypeUtility dictionaryValue:result[@"friends"]]];
     FBSDKUserAgeRange *ageRange = [FBSDKUserAgeRange ageRangeFromDictionary:[FBSDKTypeUtility dictionaryValue:result[@"age_range"]]];
 
     [FBSDKProfile.dateFormatter setDateFormat:@"MM/dd/yyyy"];
-    NSDate *birthday = [FBSDKProfile.dateFormatter dateFromString:[FBSDKTypeUtility stringValue:result[@"birthday"]]];
+    NSDate *birthday = [FBSDKProfile.dateFormatter dateFromString:[FBSDKTypeUtility coercedToStringValue:result[@"birthday"]]];
 
     FBSDKProfile *profile = [[FBSDKProfile alloc] initWithUserID:profileID
-                                                       firstName:[FBSDKTypeUtility stringValue:result[@"first_name"]]
-                                                      middleName:[FBSDKTypeUtility stringValue:result[@"middle_name"]]
-                                                        lastName:[FBSDKTypeUtility stringValue:result[@"last_name"]]
-                                                            name:[FBSDKTypeUtility stringValue:result[@"name"]]
+                                                       firstName:[FBSDKTypeUtility coercedToStringValue:result[@"first_name"]]
+                                                      middleName:[FBSDKTypeUtility coercedToStringValue:result[@"middle_name"]]
+                                                        lastName:[FBSDKTypeUtility coercedToStringValue:result[@"last_name"]]
+                                                            name:[FBSDKTypeUtility coercedToStringValue:result[@"name"]]
                                                          linkURL:linkUrl
                                                      refreshDate:[NSDate date]
                                                         imageURL:nil
-                                                           email:[FBSDKTypeUtility stringValue:result[@"email"]]
+                                                           email:[FBSDKTypeUtility coercedToStringValue:result[@"email"]]
                                                        friendIDs:friendIDs
                                                         birthday:birthday
                                                         ageRange:ageRange];
@@ -571,7 +580,7 @@ static id <FBSDKDataPersisting> _store;
 
   for (NSDictionary *rawFriend in rawFriends) {
     if ([FBSDKTypeUtility dictionaryValue:rawFriend]) {
-      FBSDKUserIdentifier *friendID = [FBSDKTypeUtility stringValue:rawFriend[@"id"]];
+      FBSDKUserIdentifier *friendID = [FBSDKTypeUtility coercedToStringValue:rawFriend[@"id"]];
       [FBSDKTypeUtility array:friendIDs addObject:friendID];
     }
   }
@@ -614,6 +623,7 @@ static id <FBSDKDataPersisting> _store;
 {
   _store = nil;
   _accessTokenProvider = nil;
+  _notificationCenter = nil;
 }
 
   #endif

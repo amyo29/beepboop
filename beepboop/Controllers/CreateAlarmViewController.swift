@@ -31,14 +31,16 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var repeatButton: UIButton!
     @IBOutlet weak var snoozeLabel: UILabel!
+    @IBOutlet weak var snoozeSwitch: UISwitch!
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
     private var recurring: String = "Never"
     
     private var sharedToList: [String] = []
     private let createAlarmToShareToFriendsSegueIdentifier = "CreateAlarmToShareToFriends"
-   
+    
     var delegate: UIViewController!
+    var date: Date? = nil
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -46,14 +48,31 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
         soundPickerView.delegate = self
         soundPickerView.dataSource = self
-
+        
         // Do any additional setup after loading the view.
-        screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+        if(self.date != nil) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M/d/yy"
+            let formattedDate = dateFormatter.string(from: self.date ?? Date())
+            self.screenTitleLabel.text = "new alarm for \(formattedDate)"
+            self.screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 32.0)
+            self.datePicker.date = date ?? Date()
+        } else {
+            screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+        }
+        let aqua = UIColor(red: 0.24, green: 0.79, blue: 0.67, alpha: 1.00)
+        let peach = UIColor(red: 0.99, green: 0.62, blue: 0.58, alpha: 1.00)
+        let blue = UIColor(red:31/255, green:207/255, blue:245/255, alpha:1.0) // figma blue colour title
+        
+        datePicker.setValue(aqua, forKeyPath: "textColor")
+        //        datePicker.setValue(true, forKey: "highlightsToday")
+        timePicker.setValue(aqua, forKeyPath: "textColor")
+        //        timePicker.setValue(true, forKey: "highlightsToday")
+        
+        screenTitleLabel.textColor = aqua
         timeLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         titleTextField.font = UIFont(name: "JosefinSans-Regular", size: 25.0)
-//        let aquablue = UIColor(hex: "#00ffff")
-//        titleTextField.textColor = UIColor(red:0/255, green:128/255, blue:255/255, alpha:1.0) // aqua
-//        titleTextField.textColor = UIColor(red:0/255, green:255/255, blue:255/255, alpha:1.0) // turquoise
+        titleTextField.textColor = aqua
         dateLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         repeatLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
@@ -63,7 +82,13 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         titleTextField.textColor = UIColor(red:31/255, green:207/255, blue:245/255, alpha:1.0) // figma blue colour title
 
         repeatButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        repeatButton.setTitleColor(aqua, for: .normal)
         shareButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        shareButton.titleLabel?.textColor = aqua
+        shareButton.setTitleColor(aqua, for: .normal)
+        self.snoozeSwitch.onTintColor = aqua
+        self.snoozeSwitch.tintColor = aqua
+        self.snoozeSwitch.thumbTintColor = UIColor.white
         
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(origin: CGPoint(x: 0, y:titleTextField.frame.height - 1), size: CGSize(width: titleTextField.frame.width, height:  1))
@@ -116,7 +141,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBAction func repeatButtonPressed(_ sender: UIButton) {
         repeatButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         let attributedTitle = sender.attributedTitle(for: .normal)
-            
+        
         
         let alertController = UIAlertController(
             title: "Repeat",
@@ -175,7 +200,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                         attributedTitle?.setValue("Yearly", forKey: "string")
                                         sender.setAttributedTitle(attributedTitle, for: .normal)
                                         self.repeatButton.setTitle( "Yearly" , for: .normal )
-
+                                        
                                         self.recurring = "Yearly"
                                         print( "Yearly")
                                     }))
@@ -190,7 +215,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                         self.recurring = "Never"
                                         print( "Never")
                                     }))
-       
+        
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -209,28 +234,34 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     // MARK: - Button actions
     @IBAction func saveButtonPressed(_ sender: Any) {
-        // add new alarm to core data
+        // add new alarm
+        
         if let time = self.timePicker?.date,
            let date = self.datePicker?.date,
            let mergedDate = self.combineDateWithTime(date: date, time: time),
-           let title = self.titleTextField.text,
-           let _ = self.delegate as? HomeViewController {
-            let homeViewController = self.delegate as! AlarmAdder
-            homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, invitedUsers: self.sharedToList)
-            self.dismiss(animated: true, completion: nil)
-        } else {
-            let alertController = UIAlertController(
-                title: "Oops",
-                message: "We are not sure what went wrong. Please try again?",
-                preferredStyle: .alert)
-            
-            alertController.addAction(UIAlertAction(
-                                        title: "Ok",
-                                        style: .default,
-                                        handler: nil))
-            
-            self.present(alertController, animated: true, completion: nil)
-            
+           let title = self.titleTextField.text {
+            if self.date != nil,
+               let _ = self.delegate as? CalendarViewController {
+                let calendarViewController = self.delegate as! AlarmAdder
+                calendarViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, invitedUsers: self.sharedToList)
+                self.dismiss(animated: true, completion: nil)
+            } else if let _ = self.delegate as? HomeViewController {
+                let homeViewController = self.delegate as! AlarmAdder
+                homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, invitedUsers: self.sharedToList)
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                let alertController = UIAlertController(
+                    title: "Oops",
+                    message: "We are not sure what went wrong. Please try again?",
+                    preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(
+                                            title: "Ok",
+                                            style: .default,
+                                            handler: nil))
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
     }
     
@@ -262,7 +293,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
         let dateSelected = calendar.dateComponents([.year, .month, .day], from: date)
         let timeSelected = calendar.dateComponents([.hour, .minute, .second], from: time)
-
+        
         var mergedComponents = DateComponents()
         mergedComponents.year = dateSelected.year
         mergedComponents.month = dateSelected.month
@@ -270,30 +301,30 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         mergedComponents.hour = timeSelected.hour
         mergedComponents.minute = timeSelected.minute
         mergedComponents.second = timeSelected.second
-
+        
         return calendar.date(from: mergedComponents)
     }
 }
 
 extension UIViewController {
-
+    
     func presentDetail(_ createAlarmViewController: UIViewController) {
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromRight
         self.view.window!.layer.add(transition, forKey: kCATransition)
-
+        
         present(createAlarmViewController, animated: false)
     }
-
+    
     func dismissDetail() {
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromLeft
         self.view.window!.layer.add(transition, forKey: kCATransition)
-
+        
         dismiss(animated: false)
     }
 }

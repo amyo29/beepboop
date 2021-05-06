@@ -15,15 +15,21 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#import "FBSDKFeatureCheckerFactory.h"
 
-#import "FBSDKFeatureManager+FeatureChecking.h"
+#import <Foundation/Foundation.h>
 
-@implementation FBSDKFeatureCheckerFactory
+@class FBSDKAccessToken;
 
-- (Class<FBSDKFeatureChecking>)createFeatureChecker
-{
-  return FBSDKFeatureManager.class;
-}
+NS_ASSUME_NONNULL_BEGIN
+
+NS_SWIFT_NAME(EventProcessing)
+@protocol FBSDKEventProcessing
+
+- (NSString *)processSuggestedEvents:(NSString *)textFeature
+                           denseData:(nullable float *)denseData;
+
+- (void)enable;
 
 @end
+
+NS_ASSUME_NONNULL_END

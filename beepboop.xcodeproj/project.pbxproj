@@ -65,7 +65,11 @@
 		0694570E2624194100450AC8 /* ShareToFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694570D2624194100450AC8 /* ShareToFriendsViewController.swift */; };
 		069457112624199F00450AC8 /* CreateAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069457102624199F00450AC8 /* CreateAlarmViewController.swift */; };
 		0694571426241A7C00450AC8 /* ShareToFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */; };
+		06998745264268290028DDF0 /* CalendarTabIcon-2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06998744264268290028DDF0 /* CalendarTabIcon-2x.png */; };
+		069987482642693F0028DDF0 /* CalendarTabIcon-3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 069987472642693E0028DDF0 /* CalendarTabIcon-3x.png */; };
 		069C638D260F1FD500702623 /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069C638C260F1FD500702623 /* SaveButton.png */; };
+		06E33F882642446200CC85A8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E33F872642446200CC85A8 /* CalendarViewController.swift */; };
+		06E33F8C26425F6F00CC85A8 /* CalendarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06E33F8B26425F6E00CC85A8 /* CalendarIcon.png */; };
 		264B12B050DDA7D4F85FAF9C /* Pods_beepboop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */; };
 		9A2935D626362B5500866B06 /* NavBarGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A2935D526362B5500866B06 /* NavBarGradient.png */; };
 		9A29A04B2623DFBE000A5275 /* AddFriendButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A29A04A2623DFBE000A5275 /* AddFriendButton.png */; };
@@ -157,7 +161,11 @@
 		0694570D2624194100450AC8 /* ShareToFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToFriendsViewController.swift; sourceTree = "<group>"; };
 		069457102624199F00450AC8 /* CreateAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAlarmViewController.swift; sourceTree = "<group>"; };
 		0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		06998744264268290028DDF0 /* CalendarTabIcon-2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarTabIcon-2x.png"; sourceTree = "<group>"; };
+		069987472642693E0028DDF0 /* CalendarTabIcon-3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarTabIcon-3x.png"; sourceTree = "<group>"; };
 		069C638C260F1FD500702623 /* SaveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SaveButton.png; sourceTree = "<group>"; };
+		06E33F872642446200CC85A8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		06E33F8B26425F6E00CC85A8 /* CalendarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarIcon.png; sourceTree = "<group>"; };
 		87F6CE25CB0B8BC778D8B9BF /* Pods-beepboop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.release.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.release.xcconfig"; sourceTree = "<group>"; };
 		9A2935D526362B5500866B06 /* NavBarGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarGradient.png; sourceTree = "<group>"; };
 		9A29A04A2623DFBE000A5275 /* AddFriendButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddFriendButton.png; sourceTree = "<group>"; };
@@ -309,6 +317,7 @@
 		9A8AE64C260C5E5F00181515 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				06E33F872642446200CC85A8 /* CalendarViewController.swift */,
 				0694570D2624194100450AC8 /* ShareToFriendsViewController.swift */,
 				E8E4A43C26256D7500CE4426 /* AlarmMetadataViewController.swift */,
 				069457102624199F00450AC8 /* CreateAlarmViewController.swift */,
@@ -347,6 +356,7 @@
 		9A8AE64E260C5ED000181515 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				069987472642693E0028DDF0 /* CalendarTabIcon-3x.png */,
 				9A2935D526362B5500866B06 /* NavBarGradient.png */,
 				9AE40D3B2624E89900DB47FB /* SendButton.png */,
 				9A29A04A2623DFBE000A5275 /* AddFriendButton.png */,
@@ -359,6 +369,8 @@
 				0633D546260F0115004B50FB /* AddButton-3x.png */,
 				0633D52B260EF710004B50FB /* AlarmsTabIcon-3x.png */,
 				0633D52A260EF710004B50FB /* AlarmTabIcon-1x.png */,
+				06E33F8B26425F6E00CC85A8 /* CalendarIcon.png */,
+				06998744264268290028DDF0 /* CalendarTabIcon-2x.png */,
 				0659FB092636AF930042DDE1 /* beepboop-icon-pastelbeepboop.png */,
 				0659FB082636AF930042DDE1 /* beepboop-icon-solidbg-diagonalbeepboop.png */,
 				0659FB072636AF920042DDE1 /* beepboop-icon-solidbgbeepboop.png */,
@@ -456,6 +468,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06998745264268290028DDF0 /* CalendarTabIcon-2x.png in Resources */,
 				9A53F82F2602DB7C00D4711A /* LaunchScreen.storyboard in Resources */,
 				9AE40D3C2624E89900DB47FB /* SendButton.png in Resources */,
 				0633D538260EF715004B50FB /* GroupsTabIcon-2x.png in Resources */,
@@ -482,6 +495,7 @@
 				0659FAB4263615260042DDE1 /* icons8-alarm-50.png in Resources */,
 				0633D4BE260E674D004B50FB /* JosefinSans-VariableFont_wght.ttf in Resources */,
 				0659FAB7263617A10042DDE1 /* icons8-swamp-100.png in Resources */,
+				069987482642693F0028DDF0 /* CalendarTabIcon-3x.png in Resources */,
 				069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */,
 				0633D500260ED9CA004B50FB /* JosefinSans-Light.ttf in Resources */,
 				0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */,
@@ -496,6 +510,7 @@
 				9A53F8272602DB7A00D4711A /* Main.storyboard in Resources */,
 				0633D531260EF714004B50FB /* SettingsTabIcon-2x.png in Resources */,
 				9A8AE656260C660600181515 /* SignUpButton.png in Resources */,
+				06E33F8C26425F6F00CC85A8 /* CalendarIcon.png in Resources */,
 				0633D504260ED9DE004B50FB /* JosefinSans-LightItalic.ttf in Resources */,
 				0659FB0A2636AF930042DDE1 /* beepboop-icon-solidhead (1).png in Resources */,
 				0633D536260EF715004B50FB /* GroupsTabIcon-1x.png in Resources */,
@@ -590,6 +605,7 @@
 				9A53F8202602DB7A00D4711A /* AppDelegate.swift in Sources */,
 				0040918F262513E70098875B /* AlarmRequestUpdateTableViewCell.swift in Sources */,
 				0040915E2624BE9A0098875B /* NotificationsViewController.swift in Sources */,
+				06E33F882642446200CC85A8 /* CalendarViewController.swift in Sources */,
 				0694570E2624194100450AC8 /* ShareToFriendsViewController.swift in Sources */,
 				063208C126123A8F00C22C0A /* ScheduleAlarm.swift in Sources */,
 				E893696226372CB3007EEF71 /* AlarmDisplayViewController.swift in Sources */,
@@ -762,7 +778,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop;
+				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -782,7 +798,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop;
+				PRODUCT_BUNDLE_IDENTIFIER = cs371l.beepboop1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

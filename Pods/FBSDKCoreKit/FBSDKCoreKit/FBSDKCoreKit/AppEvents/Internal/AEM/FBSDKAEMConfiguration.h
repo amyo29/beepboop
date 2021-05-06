@@ -16,18 +16,37 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "TargetConditionals.h"
 
-#import "FBSDKFeatureChecking.h"
+#if !TARGET_OS_TV
+
+ #import <Foundation/Foundation.h>
+
+ #import "FBSDKAEMRule.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Describes anything that can provide instances of `Feature Manager`
-NS_SWIFT_NAME(FeatureCheckerProviding)
-@protocol FBSDKFeatureCheckerProviding <NSObject>
+@interface FBSDKAEMConfiguration : NSObject <NSCopying, NSSecureCoding>
 
-- (Class<FBSDKFeatureChecking>)createFeatureChecker;
+@property (nonatomic, readonly, assign) NSInteger cutoffTime;
+
+/** The UNIX timestamp of config's valid date and works as a unqiue identifier of the config */
+@property (nonatomic, readonly, assign) NSInteger validFrom;
+
+@property (nonatomic, readonly, copy) NSString *defaultCurrency;
+
+@property (nonatomic, readonly, copy) NSString *configMode;
+
+@property (nonatomic, readonly) NSArray<FBSDKAEMRule *> *conversionValueRules;
+
+@property (nonatomic, readonly) NSSet<NSString *> *eventSet;
+
+@property (nonatomic, readonly) NSSet<NSString *> *currencySet;
+
+- (nullable instancetype)initWithJSON:(nullable NSDictionary<NSString *, id> *)dict;
 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

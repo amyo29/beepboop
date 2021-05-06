@@ -88,7 +88,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // customize tab bar items
         let appearance = UITabBarItem.appearance()
-        let attributes = [NSAttributedString.Key.font:UIFont(name: "JosefinSans-Regular", size: 20)]
+        let attributes = [NSAttributedString.Key.font:UIFont(name: "JosefinSans-Regular", size: 16)]
         appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: [])
         
         

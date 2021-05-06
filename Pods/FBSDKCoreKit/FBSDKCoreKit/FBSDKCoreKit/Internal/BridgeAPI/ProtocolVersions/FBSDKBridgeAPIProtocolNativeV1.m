@@ -24,7 +24,7 @@
 
  #import <UIKit/UIKit.h>
 
- #import "FBSDKApplicationDelegate+Internal.h"
+ #import "FBSDKApplicationLifecycleNotifications.h"
  #import "FBSDKBase64.h"
  #import "FBSDKBridgeAPIRequest.h"
  #import "FBSDKConstants.h"
@@ -138,7 +138,7 @@ static const struct {
   NSString *const host = @"dialog";
   NSString *const path = [@"/" stringByAppendingString:methodName];
 
-  NSMutableDictionary<NSString *, id> *const queryParameters = [[NSMutableDictionary alloc] init];
+  NSMutableDictionary<NSString *, id> *const queryParameters = [NSMutableDictionary new];
   [FBSDKTypeUtility dictionary:queryParameters setObject:methodVersion
                         forKey:FBSDKBridgeAPIProtocolNativeV1OutputKeys.methodVersion];
 
@@ -203,7 +203,7 @@ static const struct {
     return nil;
   }
   NSString *responseActionID = bridgeParameters[FBSDKBridgeAPIProtocolNativeV1BridgeParameterInputKeys.actionID];
-  responseActionID = [FBSDKTypeUtility stringValue:responseActionID];
+  responseActionID = [FBSDKTypeUtility coercedToStringValue:responseActionID];
   if (![responseActionID isEqualToString:actionID]) {
     return nil;
   }
@@ -228,7 +228,7 @@ static const struct {
     return nil;
   }
   if (cancelledRef != NULL) {
-    NSString *completionGesture = [FBSDKTypeUtility stringValue:resultParameters[@"completionGesture"]];
+    NSString *completionGesture = [FBSDKTypeUtility coercedToStringValue:resultParameters[@"completionGesture"]];
     *cancelledRef = [completionGesture isEqualToString:@"cancel"];
   }
   return resultParameters;
@@ -252,7 +252,7 @@ static const struct {
 
 - (NSDictionary *)_bridgeParametersWithActionID:(NSString *)actionID error:(NSError *__autoreleasing *)errorRef
 {
-  NSMutableDictionary *bridgeParameters = [[NSMutableDictionary alloc] init];
+  NSMutableDictionary *bridgeParameters = [NSMutableDictionary new];
   [FBSDKTypeUtility dictionary:bridgeParameters setObject:actionID
                         forKey:FBSDKBridgeAPIProtocolNativeV1BridgeParameterOutputKeys.actionID];
   [FBSDKTypeUtility dictionary:bridgeParameters setObject:[self _appIcon]
@@ -269,7 +269,7 @@ static const struct {
   if (!dictionary) {
     return nil;
   }
-  NSString *domain = [FBSDKTypeUtility stringValue:dictionary[FBSDKBridgeAPIProtocolNativeV1ErrorKeys.domain]]
+  NSString *domain = [FBSDKTypeUtility coercedToStringValue:dictionary[FBSDKBridgeAPIProtocolNativeV1ErrorKeys.domain]]
   ?: FBSDKErrorDomain;
   NSInteger code = [FBSDKTypeUtility integerValue:dictionary[FBSDKBridgeAPIProtocolNativeV1ErrorKeys.code]]
   ?: FBSDKErrorUnknown;
@@ -290,7 +290,7 @@ static const struct {
     }
     if ([invalidObject isKindOfClass:[NSData class]]) {
       NSData *data = (NSData *)invalidObject;
-      NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+      NSMutableDictionary *dictionary = [NSMutableDictionary new];
       if (didAddToPasteboard || !enablePasteboard || !self->_pasteboard || (data.length < self->_dataLengthThreshold)) {
         dictionary[FBSDKBridgeAPIProtocolNativeV1DataKeys.isBase64] = @YES;
         [FBSDKTypeUtility dictionary:dictionary setObject:dataTag forKey:FBSDKBridgeAPIProtocolNativeV1DataKeys.tag];

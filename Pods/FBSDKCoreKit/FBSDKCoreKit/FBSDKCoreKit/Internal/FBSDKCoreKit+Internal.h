@@ -29,6 +29,7 @@
 #if defined FBSDKCOCOAPODS || defined BUCK
 
  #if !TARGET_OS_TV
+  #import "FBSDKAEMReporter.h"
   #import "FBSDKAuthenticationStatusUtility.h"
   #import "FBSDKBridgeAPI.h"
   #import "FBSDKBridgeAPI+Internal.h"
@@ -93,7 +94,6 @@
  #import "FBSDKImageDownloader.h"
  #import "FBSDKInternalUtility.h"
  #import "FBSDKKeychainStore.h"
- #import "FBSDKKeychainStoreViaBundleID.h"
  #import "FBSDKLogger.h"
  #import "FBSDKLogger+Logging.h"
  #import "FBSDKLogging.h"
@@ -118,6 +118,7 @@
 
  #if !TARGET_OS_TV
   #import "../AppEvents/Internal/AAM/FBSDKMetadataIndexer.h"
+  #import "../AppEvents/Internal/AEM/FBSDKAEMReporter.h"
   #import "../AppEvents/Internal/Codeless/FBSDKCodelessIndexer.h"
   #import "../AppEvents/Internal/SKAdNetwork/FBSDKSKAdNetworkReporter.h"
   #import "../AppEvents/Internal/SuggestedEvents/FBSDKSuggestedEventsIndexer.h"
@@ -194,7 +195,6 @@
  #import "ServerConfiguration/FBSDKServerConfigurationManager.h"
  #import "ServerConfiguration/FBSDKServerConfigurationManager+Internal.h"
  #import "TokenCaching/FBSDKKeychainStore.h"
- #import "TokenCaching/FBSDKKeychainStoreViaBundleID.h"
  #import "TokenCaching/FBSDKTokenCache.h"
  #import "TokenCaching/FBSDKTokenCaching.h"
  #import "UI/FBSDKButton+Subclass.h"

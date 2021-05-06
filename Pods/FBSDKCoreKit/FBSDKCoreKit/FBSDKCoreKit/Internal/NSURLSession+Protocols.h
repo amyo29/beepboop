@@ -16,35 +16,14 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKKeychainStoreViaBundleID.h"
+#import <Foundation/Foundation.h>
 
 #import "FBSDKCoreKitBasicsImport.h"
-#import "FBSDKDynamicFrameworkLoader.h"
 
-@implementation FBSDKKeychainStoreViaBundleID
+// MARK: Default Protocol Conformances
 
-- (instancetype)init
-{
-  return [super initWithService:[NSBundle mainBundle].bundleIdentifier accessGroup:nil];
-}
+@interface NSURLSessionDataTask (FBSessionDataTask) <FBSDKSessionDataTask>
+@end
 
-- (instancetype)initWithService:(NSString *)service accessGroup:(NSString *)accessGroup
-{
-  return [self init];
-}
-
-- (NSMutableDictionary *)queryForKey:(NSString *)key
-{
-  NSMutableDictionary *query = [NSMutableDictionary dictionary];
-  [FBSDKTypeUtility dictionary:query setObject:(__bridge id)([FBSDKDynamicFrameworkLoader loadkSecClassGenericPassword]) forKey:(__bridge id)[FBSDKDynamicFrameworkLoader loadkSecClass]];
-  [FBSDKTypeUtility dictionary:query setObject:self.service forKey:(__bridge id)[FBSDKDynamicFrameworkLoader loadkSecAttrService]];
-  [FBSDKTypeUtility dictionary:query setObject:key forKey:(__bridge id)[FBSDKDynamicFrameworkLoader loadkSecAttrGeneric]];
-
-#if !TARGET_OS_SIMULATOR
-  [FBSDKTypeUtility dictionary:query setObject:self.accessGroup forKey:[FBSDKDynamicFrameworkLoader loadkSecAttrAccessGroup]];
-#endif
-
-  return query;
-}
-
+@interface NSURLSession (SessionProviding) <FBSDKSessionProviding>
 @end

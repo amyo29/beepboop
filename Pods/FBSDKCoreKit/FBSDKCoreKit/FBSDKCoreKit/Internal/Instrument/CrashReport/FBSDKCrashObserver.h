@@ -22,20 +22,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol FBSDKFeatureCheckerProviding;
+@protocol FBSDKFeatureChecking;
 @protocol FBSDKGraphRequestProviding;
 @protocol FBSDKSettings;
 
 NS_SWIFT_NAME(CrashObserver)
 @interface FBSDKCrashObserver : NSObject <FBSDKCrashObserving>
 
-+ (void)enable;
+@property (class, nonatomic, readonly) FBSDKCrashObserver *shared;
 
-- (instancetype)initWithFeatureManagerProvider:(id<FBSDKFeatureCheckerProviding>)featureManagerProvider
-                          graphRequestProvider:(id<FBSDKGraphRequestProviding>)requestProvider
-                                      settings:(id<FBSDKSettings>)settings;
-
-- (instancetype)init;
+- (instancetype)initWithFeatureChecker:(id<FBSDKFeatureChecking>)featureChecker
+                  graphRequestProvider:(id<FBSDKGraphRequestProviding>)requestProvider
+                              settings:(id<FBSDKSettings>)settings;
 
 @end
 
