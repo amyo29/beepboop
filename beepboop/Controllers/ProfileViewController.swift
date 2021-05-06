@@ -149,7 +149,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }
         else {
-            profileImage.setBackgroundImage(UIImage.init(named: "EventPic"), for: .normal)
+            profileImage.setBackgroundImage(UIImage.init(named: "ProfilePicDefault"), for: .normal)
         }
     }
     

@@ -1225,7 +1225,7 @@
                                     <constraint firstAttribute="height" constant="150" id="Cxr-mC-fUy"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="100" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" backgroundImage="EventPic"/>
+                                <state key="normal" backgroundImage="ProfilePicDefault"/>
                                 <connections>
                                     <action selector="changeProfileImageButtonPressed:" destination="X2Q-dW-nb0" eventType="touchUpInside" id="pdM-rd-164"/>
                                 </connections>
@@ -2381,6 +2381,7 @@
         <image name="MetadataButton" width="5" height="21"/>
         <image name="NotificationsTabIcon" width="25" height="25"/>
         <image name="PendingEmoji" width="80" height="80"/>
+        <image name="ProfilePicDefault" width="200" height="200"/>
         <image name="SaveButton" width="268" height="71"/>
         <image name="Send Button" width="39" height="39"/>
         <image name="SettingsTabIcon" width="25" height="25"/>
