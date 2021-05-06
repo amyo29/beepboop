@@ -331,17 +331,65 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                     let alarmDocRef = self.alarmCollectionRef.document(alarmUuid)
                     alarmDocRef.getDocument { (document, error) in
                         if let document = document, document.exists {
-                            
                             let startDate = date
                             let endDate = startDate.addingTimeInterval(86399)
                             let range = startDate...endDate
+                            let startDateWeekday = Calendar.current.component(.weekday, from: startDate)
+                            let startDateDay = Calendar.current.component(.day, from: startDate)
+                            let startDateMonth = Calendar.current.component(.month, from: startDate)
+                            
+                            let recurrence = document.get("recurrence")! as! String
                             
                             let alarmDate = (document.get("time")! as AnyObject).dateValue()
+                            let alarmDateWeekday = Calendar.current.component(.weekday, from: alarmDate)
+                            let alarmDateDay = Calendar.current.component(.day, from: alarmDate)
+                            let alarmDateMonth = Calendar.current.component(.month, from: alarmDate)
+
                             if range.contains(alarmDate) {
                                 print("The date \(alarmDate) is inside the range \(range)")
                                 if let model = AlarmCustom(dictionary: document.data()!) {
                                     self.alarmList.append(model)
                                     self.alarmTableView.reloadData()
+                                }
+                            } else if recurrence == "Daily" && startDate >= alarmDate {
+                                print("Alarm set at \(alarmDate) recurs daily.")
+                                if let _ = AlarmCustom(dictionary: document.data()!) {
+                                    var modelData = document.data()!
+                                    modelData["time"] = Timestamp(date: self.combineDateWithTime(date: startDate, time: alarmDate)!)
+                                    if let model = AlarmCustom(dictionary: modelData) {
+                                        self.alarmList.append(model)
+                                        self.alarmTableView.reloadData()
+                                    }
+                                }
+                            } else if recurrence == "Weekly" && startDate >= alarmDate && startDateWeekday == alarmDateWeekday {
+                                print("Both \(alarmDate) and \(startDate) are on the same weekday.")
+                                if let _ = AlarmCustom(dictionary: document.data()!) {
+                                    var modelData = document.data()!
+                                    modelData["time"] = Timestamp(date: self.combineDateWithTime(date: startDate, time: alarmDate)!)
+                                    if let model = AlarmCustom(dictionary: modelData) {
+                                        self.alarmList.append(model)
+                                        self.alarmTableView.reloadData()
+                                    }
+                                }
+                            } else if recurrence == "Monthly" && startDate >= alarmDate && startDateDay == alarmDateDay {
+                                print("Alarm set at \(alarmDate) recurs monthly.")
+                                if let _ = AlarmCustom(dictionary: document.data()!) {
+                                    var modelData = document.data()!
+                                    modelData["time"] = Timestamp(date: self.combineDateWithTime(date: startDate, time: alarmDate)!)
+                                    if let model = AlarmCustom(dictionary: modelData) {
+                                        self.alarmList.append(model)
+                                        self.alarmTableView.reloadData()
+                                    }
+                                }
+                            } else if recurrence == "Yearly" && startDate >= alarmDate && startDateDay == alarmDateDay && startDateMonth == alarmDateMonth {
+                                print("Alarm set at \(alarmDate) recurs yearly.")
+                                if let _ = AlarmCustom(dictionary: document.data()!) {
+                                    var modelData = document.data()!
+                                    modelData["time"] = Timestamp(date: self.combineDateWithTime(date: startDate, time: alarmDate)!)
+                                    if let model = AlarmCustom(dictionary: modelData) {
+                                        self.alarmList.append(model)
+                                        self.alarmTableView.reloadData()
+                                    }
                                 }
                             } else {
                                 print("The date \(alarmDate) is outside the range \(range)")
@@ -409,6 +457,23 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         }
     }
     
+    func combineDateWithTime(date: Date, time: Date) -> Date? {
+        let calendar = Calendar.current
+        
+        let dateSelected = calendar.dateComponents([.year, .month, .day], from: date)
+        let timeSelected = calendar.dateComponents([.hour, .minute, .second], from: time)
+        
+        var mergedComponents = DateComponents()
+        mergedComponents.year = dateSelected.year
+        mergedComponents.month = dateSelected.month
+        mergedComponents.day = dateSelected.day
+        mergedComponents.hour = timeSelected.hour
+        mergedComponents.minute = timeSelected.minute
+        mergedComponents.second = timeSelected.second
+        
+        return calendar.date(from: mergedComponents)
+    }
+    
     @IBAction func unwind( _ seg: UIStoryboardSegue) {
     }
     
@@ -441,10 +506,6 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             }
         }
     }
-    
-    
-    
-    
 }
 
 extension CollectionReference {
