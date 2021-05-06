@@ -35,6 +35,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     var currentUserUid: String?
     var selectedAlarm: String?
     var global_snooze: Bool = false
+    var darkMode: Bool = false
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -91,11 +92,24 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             if count > 0 {
                 try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
                 global_snooze = fetchedResults[0].value(forKey: "snoozeEnabled") as! Bool
+                darkMode = fetchedResults[0].value(forKey: "darkmodeEnabled") as! Bool
             }
         } catch {
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
+        }
+        
+        if darkMode {
+            self.view.backgroundColor = UIColor(rgb: 0x262221)
+            self.calendar.backgroundColor = UIColor(rgb: 0x262221)
+            overrideUserInterfaceStyle = .dark
+
+        }
+        else {
+            self.view.backgroundColor = UIColor(rgb: 0xFEFDEC)
+            self.calendar.backgroundColor = UIColor(rgb: 0xFEFDEC)
+            overrideUserInterfaceStyle = .light
         }
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: Date())

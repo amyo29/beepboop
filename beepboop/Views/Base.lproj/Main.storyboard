@@ -177,7 +177,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kx-ur-bHa" userLabel="AddButton">
-                                <rect key="frame" x="320" y="109" width="40" height="40"/>
+                                <rect key="frame" x="320" y="114" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="c0A-Fd-n3c"/>
                                     <constraint firstAttribute="height" constant="40" id="lGg-gx-Oo9"/>
@@ -188,7 +188,11 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yod-9x-kiS">
-                                <rect key="frame" x="146.33333333333334" y="109.00000000000001" width="97.666666666666657" height="39.666666666666671"/>
+                                <rect key="frame" x="95" y="109" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3zh-DE-QrC"/>
+                                    <constraint firstAttribute="width" constant="200" id="FXj-0N-8En"/>
+                                </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="friends">
                                         <attributes>
@@ -214,7 +218,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IUP-LP-lkw">
-                                <rect key="frame" x="10" y="188.66666666666669" width="370" height="655.33333333333326"/>
+                                <rect key="frame" x="10" y="199" width="370" height="645"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -1199,15 +1203,7 @@
                                     <constraint firstAttribute="height" constant="55" id="asi-lj-ULJ"/>
                                     <constraint firstAttribute="width" constant="270" id="p6V-vA-rdB"/>
                                 </constraints>
-                                <state key="normal" image="FriendsButton">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="friends">
-                                            <attributes>
-                                                <font key="NSFont" size="24" name="SFMono-Medium"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
+                                <state key="normal" image="FriendsButton"/>
                                 <connections>
                                     <segue destination="qkT-gJ-o3M" kind="presentation" identifier="ProfileToFriendsSegueIdentifier" modalPresentationStyle="fullScreen" id="AFC-B6-JT1"/>
                                 </connections>
@@ -1219,14 +1215,7 @@
                                     <constraint firstAttribute="width" constant="270" id="UQW-I5-foH"/>
                                 </constraints>
                                 <state key="normal" image="BlockedButton">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="blocked">
-                                            <attributes>
-                                                <font key="NSFont" size="24" name="SFMono-Medium"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                    <attributedString key="attributedTitle"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KI0-NK-Bie">
@@ -1236,7 +1225,7 @@
                                     <constraint firstAttribute="height" constant="150" id="Cxr-mC-fUy"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="100" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" backgroundImage="EventPic"/>
+                                <state key="normal" backgroundImage="ProfilePicDefault"/>
                                 <connections>
                                     <action selector="changeProfileImageButtonPressed:" destination="X2Q-dW-nb0" eventType="touchUpInside" id="pdM-rd-164"/>
                                 </connections>
@@ -1934,9 +1923,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLZ-a1-mJP">
-                                <rect key="frame" x="33" y="84" width="198" height="60"/>
+                                <rect key="frame" x="33" y="84" width="337" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="198" id="86p-uw-eIh"/>
+                                    <constraint firstAttribute="width" constant="250" id="86p-uw-eIh"/>
                                     <constraint firstAttribute="height" constant="60" id="zAP-1O-Td5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -2062,6 +2051,7 @@
                                                 <constraint firstItem="ky2-Zc-GNE" firstAttribute="leading" secondItem="Hek-cw-IKt" secondAttribute="trailing" constant="30" id="vNw-pi-vW2"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="friendName" destination="ky2-Zc-GNE" id="l9a-4Z-J5k"/>
                                             <outlet property="friendProfileImage" destination="Hek-cw-IKt" id="WDo-No-TxJ"/>
@@ -2128,7 +2118,7 @@
                             <constraint firstItem="CeZ-vd-Arn" firstAttribute="top" secondItem="SWa-dN-iaW" secondAttribute="bottom" constant="29" id="AT5-3X-7Qn"/>
                             <constraint firstItem="CeZ-vd-Arn" firstAttribute="top" secondItem="u1v-Ll-d83" secondAttribute="bottom" constant="10.67" id="Apm-Ec-SjA"/>
                             <constraint firstItem="u1v-Ll-d83" firstAttribute="leading" secondItem="hUm-J4-si3" secondAttribute="leading" constant="9" id="CsP-cX-05q"/>
-                            <constraint firstItem="hUm-J4-si3" firstAttribute="trailing" secondItem="NLZ-a1-mJP" secondAttribute="trailing" constant="159" id="DVC-WM-3Iy"/>
+                            <constraint firstItem="hUm-J4-si3" firstAttribute="trailing" secondItem="NLZ-a1-mJP" secondAttribute="trailing" constant="20" id="DVC-WM-3Iy"/>
                             <constraint firstItem="90g-FF-hRH" firstAttribute="top" secondItem="NLZ-a1-mJP" secondAttribute="bottom" constant="8" symbolic="YES" id="ELd-1b-CcR"/>
                             <constraint firstItem="hUm-J4-si3" firstAttribute="trailing" secondItem="CeZ-vd-Arn" secondAttribute="trailing" constant="16" id="FYV-uF-C0j"/>
                             <constraint firstItem="kJa-Bf-Cfj" firstAttribute="leading" secondItem="SWa-dN-iaW" secondAttribute="trailing" constant="16" id="G5j-Of-DNN"/>
@@ -2374,14 +2364,14 @@
         <image name="AddButton" width="62.5" height="62.5"/>
         <image name="AddFriendsIcon" width="74" height="82"/>
         <image name="AlarmsTabIcon" width="25" height="25"/>
-        <image name="BlockedButton" width="268" height="58"/>
+        <image name="BlockedButton" width="260" height="49"/>
         <image name="CalendarIcon" width="25" height="25"/>
         <image name="Decline Button" width="52" height="52"/>
         <image name="DeclineEmoji" width="100" height="100"/>
         <image name="DeclineIcon" width="96" height="96"/>
         <image name="Ellipsis" width="73" height="24"/>
         <image name="EventPic" width="50" height="49"/>
-        <image name="FriendsButton" width="268" height="58"/>
+        <image name="FriendsButton" width="260" height="50"/>
         <image name="GroupPic" width="50" height="50"/>
         <image name="GroupsTabIcon" width="25" height="25"/>
         <image name="LoadingScreenRobot.png" width="182" height="168"/>
@@ -2391,6 +2381,7 @@
         <image name="MetadataButton" width="5" height="21"/>
         <image name="NotificationsTabIcon" width="25" height="25"/>
         <image name="PendingEmoji" width="80" height="80"/>
+        <image name="ProfilePicDefault" width="200" height="200"/>
         <image name="SaveButton" width="268" height="71"/>
         <image name="Send Button" width="39" height="39"/>
         <image name="SettingsTabIcon" width="25" height="25"/>

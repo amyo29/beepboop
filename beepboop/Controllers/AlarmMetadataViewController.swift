@@ -61,6 +61,8 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         
         self.responseTableView.backgroundColor = UIColor(hex: "FEFDEC")
         self.responseTableView.separatorColor = .clear
+        let aqua = UIColor(red: 0.24, green: 0.79, blue: 0.67, alpha: 1.00)
+        self.enableToggle.onTintColor = aqua
         
         declinedButton.imageView?.alpha = 0.5
         declinedLabel.alpha = 0.5
