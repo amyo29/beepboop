@@ -38,6 +38,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     private let createAlarmToShareToFriendsSegueIdentifier = "CreateAlarmToShareToFriends"
    
     var delegate: UIViewController!
+    var date: Date? = nil
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -47,12 +48,18 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         soundPickerView.dataSource = self
 
         // Do any additional setup after loading the view.
-        screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+        if(self.date != nil) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M/d/yy"
+            let formattedDate = dateFormatter.string(from: self.date ?? Date())
+            self.screenTitleLabel.text = "new alarm for \(formattedDate)"
+            self.screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 32.0)
+            self.datePicker.date = date ?? Date()
+        } else {
+            screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+        }
         timeLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         titleTextField.font = UIFont(name: "JosefinSans-Regular", size: 25.0)
-//        let aquablue = UIColor(hex: "#00ffff")
-//        titleTextField.textColor = UIColor(red:0/255, green:128/255, blue:255/255, alpha:1.0) // aqua
-//        titleTextField.textColor = UIColor(red:0/255, green:255/255, blue:255/255, alpha:1.0) // turquoise
         titleTextField.textColor = UIColor(red:31/255, green:207/255, blue:245/255, alpha:1.0) // figma blue colour title
         dateLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
@@ -167,28 +174,37 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     // MARK: - Button actions
     @IBAction func saveButtonPressed(_ sender: Any) {
-        // add new alarm to core data
-        if let time = self.timePicker?.date,
-           let date = self.datePicker?.date,
-           let mergedDate = self.combineDateWithTime(date: date, time: time),
-           let title = self.titleTextField.text,
-           let _ = self.delegate as? HomeViewController {
-            let homeViewController = self.delegate as! AlarmAdder
-            homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, invitedUsers: self.sharedToList)
-            self.dismiss(animated: true, completion: nil)
+        // add new alarm
+        
+        if self.date != nil {
+            let date = self.date!
+            let name = self.titleTextField.text!
+//            self.titleLabel.text = "new alarm for \(date)"
+            let calendarViewController = self.delegate as! AlarmAdder
+            calendarViewController.addAlarm(time: date, name: name, recurrence: recurring, invitedUsers: self.sharedToList)
         } else {
-            let alertController = UIAlertController(
-                title: "Oops",
-                message: "We are not sure what went wrong. Please try again?",
-                preferredStyle: .alert)
-            
-            alertController.addAction(UIAlertAction(
-                                        title: "Ok",
-                                        style: .default,
-                                        handler: nil))
-            
-            self.present(alertController, animated: true, completion: nil)
-            
+            if let time = self.timePicker?.date,
+               let date = self.datePicker?.date,
+               let mergedDate = self.combineDateWithTime(date: date, time: time),
+               let title = self.titleTextField.text,
+               let _ = self.delegate as? HomeViewController {
+                let homeViewController = self.delegate as! AlarmAdder
+                homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, invitedUsers: self.sharedToList)
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                let alertController = UIAlertController(
+                    title: "Oops",
+                    message: "We are not sure what went wrong. Please try again?",
+                    preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(
+                                            title: "Ok",
+                                            style: .default,
+                                            handler: nil))
+                
+                self.present(alertController, animated: true, completion: nil)
+                
+            }
         }
     }
     

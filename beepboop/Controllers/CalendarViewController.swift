@@ -373,10 +373,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         } else if segue.identifier == self.calendarToCreateAlarmSegueIdentifier,
                   let destination = segue.destination as? CreateAlarmViewController {
             destination.delegate = self
-        } else if segue.identifier == "HomeToAlarmDisplayIdentifier", let destination = segue.destination as? AlarmDisplayViewController {
-            if let alarmID = selectedAlarm { // From notifications
-                destination.alarmID = alarmID
-            }
+            destination.date = self.calendar.selectedDate ?? Date()
         }
     }
     
