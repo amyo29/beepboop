@@ -771,6 +771,7 @@
                         <outlet property="screenTitleLabel" destination="8k6-0A-EX8" id="q64-s8-c36"/>
                         <outlet property="shareButton" destination="bqR-sc-c73" id="pK0-OE-2FA"/>
                         <outlet property="snoozeLabel" destination="lLT-fV-9Y0" id="lzk-z1-fZu"/>
+                        <outlet property="snoozeSwitch" destination="jc4-Qs-oLq" id="Gar-bb-G6D"/>
                         <outlet property="soundLabel" destination="RM6-go-ZSU" id="H4a-Hz-rnu"/>
                         <outlet property="soundPickerView" destination="PgA-3P-YD3" id="KvA-US-ppH"/>
                         <outlet property="timeLabel" destination="xXc-vl-7Hv" id="ELm-bx-gJe"/>

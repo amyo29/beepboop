@@ -30,6 +30,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var repeatButton: UIButton!
     @IBOutlet weak var snoozeLabel: UILabel!
+    @IBOutlet weak var snoozeSwitch: UISwitch!
     
     private let sounds = ["beep", "boop", "chirp", "wake up"]
     private var recurring: String = "Never"
@@ -58,9 +59,19 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         } else {
             screenTitleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
         }
+        let aqua = UIColor(red: 0.24, green: 0.79, blue: 0.67, alpha: 1.00)
+        let peach = UIColor(red: 0.99, green: 0.62, blue: 0.58, alpha: 1.00)
+        let blue = UIColor(red:31/255, green:207/255, blue:245/255, alpha:1.0) // figma blue colour title
+        
+        datePicker.setValue(aqua, forKeyPath: "textColor")
+//        datePicker.setValue(true, forKey: "highlightsToday")
+        timePicker.setValue(aqua, forKeyPath: "textColor")
+//        timePicker.setValue(true, forKey: "highlightsToday")
+        
+        screenTitleLabel.textColor = aqua
         timeLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         titleTextField.font = UIFont(name: "JosefinSans-Regular", size: 25.0)
-        titleTextField.textColor = UIColor(red:31/255, green:207/255, blue:245/255, alpha:1.0) // figma blue colour title
+        titleTextField.textColor = aqua
         dateLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         repeatLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
@@ -68,7 +79,13 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         snoozeLabel.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
         repeatButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
         repeatButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        repeatButton.setTitleColor(aqua, for: .normal)
         shareButton.titleLabel?.font = UIFont(name: "JosefinSans-Regular", size: 30.0)
+        shareButton.titleLabel?.textColor = aqua
+        shareButton.setTitleColor(aqua, for: .normal)
+        self.snoozeSwitch.onTintColor = aqua
+        self.snoozeSwitch.tintColor = aqua
+        self.snoozeSwitch.thumbTintColor = UIColor.white
         
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(origin: CGPoint(x: 0, y:titleTextField.frame.height - 1), size: CGSize(width: titleTextField.frame.width, height:  1))
