@@ -13,7 +13,7 @@ import FirebaseCore
 import CoreData
 
 class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource, AlarmAdder {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var alarmTableView: UITableView!
@@ -21,7 +21,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     var alarmList: [AlarmCustom] = []
     private let alarmTableViewCellIdentifier = "AlarmTableViewCell"
     private let calendarToCreateAlarmSegueIdentifier = "CalendarToCreateAlarmSegueIdentifier"
-
+    
     
     // MARK: - Properties
     var userDocRef: DocumentReference!
@@ -30,9 +30,9 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     var dataListener: ListenerRegistration! // Increases efficiency of app by only listening to data when view is on screen
     
     private var documents: [DocumentSnapshot] = []
-
+    
     var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
-
+    
     var currentUserUid: String?
     var selectedAlarm: String?
     var snooze: Bool = false
@@ -133,7 +133,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         cell.alarmToggleSwitch.onTintColor = beepboopBlue
         cell.alarmToggleSwitch.tintColor = beepboopBlue
         cell.alarmToggleSwitch.thumbTintColor = UIColor.white
-//        cell.alarmToggleSwitch.backgroundColor = UIColor.blue
+        //        cell.alarmToggleSwitch.backgroundColor = UIColor.blue
         cell.alarmToggleSwitch.layer.cornerRadius = 16
     }
     
@@ -193,13 +193,12 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                     "userList": FieldValue.arrayRemove([currentUserUid])
                 ])
                 
-//                self.updateAlarmsFirestore()
+                
                 // TODO: remove alarm data from collection if userStatus is empty
             }
             
             alarmList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-//            tableView.reloadData()
         }
     }
     
@@ -224,7 +223,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                let recurring = alarm.recurrence,
                let uuid = alarm.uuid {
                 alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurring, uuidStr: uuid)
-                }
+            }
         } else {
             if let uuid = alarm.uuid {
                 let notificationCenter = UNUserNotificationCenter.current()
@@ -241,7 +240,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         let rowHeight: CGFloat = 62
         
         /// fades the cell by setting alpha as zero and moves the cell downwards, then animates the cell's alpha and returns it to it's original position based on indexPaths
-//        cell.transform = CGAffineTransform(translationX: 0, y: rowHeight * 1.4)
+        //        cell.transform = CGAffineTransform(translationX: 0, y: rowHeight * 1.4)
         cell.alpha = 0
         UIView.animate(
             withDuration: duration,
@@ -250,7 +249,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             animations: {
                 cell.transform = CGAffineTransform(translationX: 0, y: 0)
                 cell.alpha = 1
-        })
+            })
         
     }
     
@@ -258,7 +257,6 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     func addAlarm(time: Date, name: String, recurrence: String, invitedUsers: [String]) {
         self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence, invitedUsers: invitedUsers)
-//        self.updateAlarmsFirestore()
     }
     
     // MARK: - Firestore functions
@@ -330,11 +328,24 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                     alarmDocRef.getDocument { (document, error) in
                         if let document = document, document.exists {
                             
-                            let calendar = Calendar.current
-                            let components = calendar.dateComponents([.year, .month, .day], from: Date())
-                            let start = calendar.date(from: components)!
-                            let end = calendar.date(byAdding: .day, value: 1, to: start)!
-                            let range = start...end
+                            var startDate = NSDate.distantPast
+                            var endDate = startDate.addingTimeInterval(86400)
+                            
+//                            print("fscalendar selected date: ", self.calendar.selectedDate)
+//                            guard let start = self.calendar.selectedDate else {
+                                let calendar = Calendar.current
+                                let components = calendar.dateComponents([.year, .month, .day], from: Date())
+                                startDate = calendar.date(from: components)!
+                                endDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+//                                print("start is nil")
+//                                return
+//                            }
+//                            startDate = start
+                            print("fscalendar selected date: ", self.calendar.selectedDate)
+                            print("Start date: ", startDate)
+                            
+                            
+                            let range = startDate...endDate
                             
                             print("alarm doc time: ", document.get("time")!)
                             let alarmDate = (document.get("time")! as AnyObject).dateValue()
@@ -372,7 +383,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                 destination.alarmID = alarmID
             }
         } else if segue.identifier == self.calendarToCreateAlarmSegueIdentifier,
-           let destination = segue.destination as? CreateAlarmViewController {
+                  let destination = segue.destination as? CreateAlarmViewController {
             destination.delegate = self
         } else if segue.identifier == "HomeToAlarmDisplayIdentifier", let destination = segue.destination as? AlarmDisplayViewController {
             if let alarmID = selectedAlarm { // From notifications
@@ -416,8 +427,76 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     @IBAction func unwind( _ seg: UIStoryboardSegue) {
     }
     
+    // MARK:- FSCalendarDataSource
     
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        print("inside calendar didSelect method, selected date is: \(self.calendar.selectedDate)")
+        
+        self.alarmList = [AlarmCustom]()
+        self.alarmTableView.reloadData()
+        var alarmUuids = [String]()
+        userDocRef.collection("alarmMetadata").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    alarmUuids.append(document.documentID)
+                }
+                
+                for alarmUuid in alarmUuids {
+                    let alarmDocRef = self.alarmCollectionRef.document(alarmUuid)
+                    alarmDocRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            
+                            var startDate = self.calendar.selectedDate
+                            var endDate = startDate?.addingTimeInterval(86400)
+                            
+                            print("inside calendar didSelect method, fscalendar selected date: ", self.calendar.selectedDate)
 
+                            let range = startDate!...endDate!
+                            
+                            print("alarm doc time: ", document.get("time")!)
+                            let alarmDate = (document.get("time")! as AnyObject).dateValue()
+                            if range.contains(alarmDate) {
+                                print("The date \(alarmDate) is inside the range \(range)")
+                                if let model = AlarmCustom(dictionary: document.data()!) {
+                                    self.alarmList.append(model)
+                                    self.alarmTableView.reloadData()
+                                }
+                            } else {
+                                print("The date \(alarmDate) is outside the range \(range)")
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func readAlarmAtDate(date: String) {
+        //To feed tableview with specific date
+        Firestore.firestore().collection("alarmData").whereField("time", isEqualTo: date).getDocuments { (query, error) in
+            if error != nil {
+                print("Error: \(String(describing: error))")
+            } else {
+                self.alarmList.removeAll()
+                for alarmDoc in query!.documents {
+                    if let model = AlarmCustom(dictionary: alarmDoc.data()) {
+                        self.alarmList.append(model)
+//                        self.alarmTableView.reloadData()
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.alarmTableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    
+    
+    
 }
 
 extension CollectionReference {
