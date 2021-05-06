@@ -10,6 +10,17 @@ import FirebaseCore
 import Firebase
 import CoreData
 
+extension UIColor{
+    convenience init(rgb: UInt) {
+        self.init(
+            red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgb & 0x0000FF) / 255.0,
+            alpha: 1.0
+        )
+    }
+}
+
 protocol AlarmAdder {
     func addAlarm(time: Date, name: String, recurrence: String, invitedUsers: [String])
 }
@@ -37,6 +48,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var currentUserUid: String?
     var selectedAlarm: String?
     var snooze: Bool = false
+    var darkmode: Bool = false
     
     // MARK: - Views
     override func viewDidLoad() {
@@ -78,12 +90,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appearance = UITabBarItem.appearance()
         let attributes = [NSAttributedString.Key.font:UIFont(name: "JosefinSans-Regular", size: 16)]
         appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: [])
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.sendSubviewToBack(self.alarmTableView)
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
@@ -93,13 +106,25 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if count > 0 {
                 try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
                 snooze = fetchedResults[0].value(forKey: "snoozeEnabled") as! Bool
+                darkmode = fetchedResults[0].value(forKey: "darkmodeEnabled") as! Bool
             }
         } catch {
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
+        
+        if darkmode {
+            self.view.backgroundColor = UIColor(rgb: 0x262221)
+            overrideUserInterfaceStyle = .dark
+
+        }
+        else {
+            self.view.backgroundColor = UIColor(rgb: 0xFEFDEC)
+            overrideUserInterfaceStyle = .light
+        }
         self.updateAlarmsFirestore()
+        
     }
     
     // load system supported fonts to determine system font labels
@@ -118,12 +143,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("In tableView count method, count: ", self.alarmList.count)
         return self.alarmList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("In tableView cell render method, count: ", self.alarmList.count)
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: self.alarmTableViewCellIdentifier, for: indexPath as IndexPath) as! AlarmTableViewCell
         
