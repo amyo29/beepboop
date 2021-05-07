@@ -395,6 +395,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         ])
         userDocRef.collection("alarmMetadata").document(alarmID).setData(["snooze": snooze, "enabled": !snooze])
         self.updateAlarmsFirestore()
+        
+        if !global_snooze {
+            alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, sound: sound, uuidStr: alarmID)
+        }
     }
     
     func getStatusForUsers(invitedUsers: [String]) -> [String: String] {
