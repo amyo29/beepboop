@@ -1020,7 +1020,7 @@
                                     <constraint firstAttribute="height" constant="150" id="HpW-rB-5bl"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="100" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" backgroundImage="GroupPic"/>
+                                <state key="normal" backgroundImage="ProfilePicDefault"/>
                                 <connections>
                                     <action selector="changeImageButtonPressed:" destination="pHs-J0-gIN" eventType="touchUpInside" id="Y2r-xM-RIA"/>
                                 </connections>
@@ -2075,7 +2075,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLZ-a1-mJP">
-                                <rect key="frame" x="33" y="84" width="337" height="60"/>
+                                <rect key="frame" x="33" y="84" width="392" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="86p-uw-eIh"/>
                                     <constraint firstAttribute="height" constant="60" id="zAP-1O-Td5"/>
@@ -2534,7 +2534,7 @@
         <image name="MetadataButton" width="5" height="21"/>
         <image name="NotificationsTabIcon" width="25" height="25"/>
         <image name="PendingEmoji" width="80" height="80"/>
-        <image name="ProfilePicDefault" width="200" height="200"/>
+        <image name="ProfilePicDefault" width="133.33332824707031" height="133.33332824707031"/>
         <image name="SaveButton" width="268" height="71"/>
         <image name="Send Button" width="39" height="39"/>
         <image name="SettingsTabIcon" width="25" height="25"/>

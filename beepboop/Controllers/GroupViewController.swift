@@ -146,7 +146,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             }
                         }
                     } else {
-                        cell.groupImageView?.image = UIImage(named: "GroupPic")
+                        cell.groupImageView?.image = UIImage(named: "ProfilePicDefault")
                     }
                 }
             }
