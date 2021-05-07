@@ -8,22 +8,18 @@ Please run the application on an iPhone 12 simulator.
 
 ### Overall Contributions
 
-| Features       | Description                               | Release Planned | Actual Release | Deviations | Work Distribution |
-|----------------|-------------------------------------------|-----------------|----------------|------------|-------------------|
-| Loading Screen | Screen that displays when app first loads | Alpha           | Alpha          | N/A        | <Fill in>         |
-| Login/Sign Up  | Login through email or FB/Google Auth     | Alpha           | Alpha          | N/A        | Alvin (50%) Sanja |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
-|                |                                           |                 |                |            |                   |
+| Features           | Description                                                                          | Release Planned | Actual Release | Deviations | Work Distribution         |
+|--------------------|--------------------------------------------------------------------------------------|-----------------|----------------|------------|---------------------------|
+| Loading Screen     | Screen that displays when app first loads                                            | Alpha           | Alpha          | N/A        |                           |
+| Login/Sign Up      | Login through email or FB/Google Auth                                                | Alpha           | Alpha          | N/A        | Alvin (50%) Sanjana (50%) |
+| Alarms             | Allowing users to create functional alarms that can be optionally shared to friends  | Alpha           | Alpha - Final  |            |                           |
+| Alarm Metadata     | A screen displaying alarm details and user status                                    | Alpha           | Beta           |            |                           |
+| Friends            | Social feature to enable individual sharing of alarms                                | Beta            | Beta           |            |                           |
+| Groups             | Social feature to enable sharing of alarm to specified group of people               | Final           | Final          |            |                           |
+| Calendar           | Displays calendar to show alarms scheduled on a specific day                         | Final           | Final          |            |                           |
+| Profile            | Display user specific settings and data                                              | Beta            | Beta           |            |                           |
+| Alarm Popup        | A screen that displays for a triggered alarm once the  alarm notification is clicked | Beta            | Final          |            |                           |
+| User Notifications | A screen displaying updates and changes related to  alarms, friends, and groups      | Beta            | Beta - Final   |            |                           |
 
 ## BETA
 
