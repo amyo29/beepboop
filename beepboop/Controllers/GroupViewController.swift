@@ -12,6 +12,7 @@ import CoreData
 
 protocol GroupAdder {
     func addGroup(uuid: UUID, name: String, members: [String], alarms: [String], image: UIImage)
+    func addAlarm(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String], groupID: String)
 }
 
 class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GroupAdder {
@@ -19,6 +20,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var titleLabel: UILabel!
     
     var userDocRef: DocumentReference!
+    var alarmCollectionRef: CollectionReference!
     var userCollectionRef: CollectionReference!
     var groupCollectionRef: CollectionReference!
     var currentUserUid: String?
@@ -56,6 +58,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.currentUserUid = currentUserUid
         self.userCollectionRef = Firestore.firestore().collection("userData")
+        self.alarmCollectionRef = Firestore.firestore().collection("alarmData")
         self.groupCollectionRef = Firestore.firestore().collection("groupData")
         self.userDocRef = userCollectionRef.document(currentUserUid)
     }
@@ -130,6 +133,64 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         })
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
+            print("Just Swiped Edit", action)
+            completion(true)
+            self.performSegue(withIdentifier: "GroupsToCreateAlarmIdentifier", sender: indexPath)
+        }
+        edit.backgroundColor = UIColor(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 0)
+//        edit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image {
+//            _ in UIImage(named: "EditIcon")?.draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+//        }
+        edit.image = UIImage(named: "AddIcon")
+
+        let responses = UIContextualAction(style: .normal, title: "Responses") { (action, view, completion) in
+            print("Just Swiped Responses", action)
+//            self.performSegue(withIdentifier: "CalendarToAlarmMetadataSegueIdentifier", sender: indexPath)
+            completion(true)
+        }
+        responses.backgroundColor = UIColor(red: 0.5725490451, green: 0.2313725501, blue: 0, alpha: 0)
+        responses.image = UIImage(named: "InfoIcon")
+//        responses.image = UIGraphicsImageRenderer(size: CGSize(width: 90, height: 90)).image {
+//            _ in UIImage(named: "ResponseIcon")?.draw(in: CGRect(x: 0, y: 0, width: 90, height: 90))
+//        }
+
+        let delete = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
+            print("Just Swiped Deleted", action)
+//            if let uuid = self.alarmList[indexPath.row].uuid,
+//               let currentUserUid = self.currentUserUid {
+//                let notificationCenter = UNUserNotificationCenter.current()
+//                notificationCenter.removePendingNotificationRequests(withIdentifiers: [uuid])
+//                // alert asking for complete removal of alarm and not just user id from alarm (if owner of alarm)
+//                // add owner uid for each alarm in create alarm
+//                self.userDocRef.collection("alarmMetadata").document(uuid).delete()
+//                self.alarmCollectionRef.document(uuid).updateData([
+//                    "userStatus": FieldValue.arrayRemove([currentUserUid]),
+//                    "userList": FieldValue.arrayRemove([currentUserUid])
+//                ])
+//
+////                self.updateAlarmsFirestore()
+//                // TODO: remove alarm data from collection if userStatus is empty
+//            }
+//
+//            self.alarmList.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            completion(false)
+        }
+        delete.image = UIImage(named: "ExitIcon")
+//        delete.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image {
+//            _ in UIImage(named: "DeleteIcon")?.draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+//        }
+        delete.backgroundColor =  UIColor(red: 0.2436070212, green: 0.5393256153, blue: 0.1766586084, alpha: 0)
+
+        let config = UISwipeActionsConfiguration(actions: [delete, responses, edit])
+        config.performsFirstActionWithFullSwipe = false
+
+        return config
+   }
+    
     func populateCell(group: GroupCustom, cell: GroupTableViewCell) {
         cell.groupNameLabel?.text = group.name
         cell.groupNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
@@ -198,8 +259,9 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             if let model = GroupCustom(dictionary: document.data()!) {
                                 self.groupsList.append(model)
                                 self.groupTableView.reloadData()
+                            } else {
                             }
-                        }
+                        } 
                     }
                 }
             }
@@ -292,11 +354,55 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
             }
         }
-        
-
-        
     }
     
+    // MARK: - Delegate functions
+    
+    func addAlarm(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String], groupID: String) {
+        self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence, snooze: snooze, invitedUsers: invitedUsers, groupID: groupID)
+    }
+    
+    // MARK: - Firestore functions
+    
+    func addAlarmToFirestore(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String], groupID: String) {
+        let userStatus = self.getStatusForUsers(invitedUsers: invitedUsers)
+        let uuid = UUID()
+        let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, uuid: uuid.uuidString, userList: invitedUsers, userStatus: userStatus)
+        alarmCollectionRef.document(uuid.uuidString).setData(newAlarm.dictionary)
+        
+        for userUid in invitedUsers {
+            let tempUserDocRef = userCollectionRef.document(userUid)
+            tempUserDocRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    tempUserDocRef.collection("alarmMetadata").document(uuid.uuidString).setData(["snooze": snooze, "enabled": !snooze])
+                } else {
+                    print("Document does not exist")
+                }
+            }
+        }
+        
+        // Add alarm to Group Collection in Firestore
+        let groupDocRef = groupCollectionRef.document(groupID)
+        groupDocRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                guard let existingAlarms = document.get("alarms") as? [String] else {
+                    print("unable to get existing alarms from groupDoc in GroupViewController when creating a new alarm")
+                    return
+                }
+                groupDocRef.updateData(["alarms": [uuid.uuidString] + existingAlarms])
+            }
+        }
+    }
+    
+    func getStatusForUsers(invitedUsers: [String]) -> [String: String] {
+        var userStatuses = [String: String]()
+        userStatuses[self.currentUserUid!] = "Accepted"
+        for user in invitedUsers {
+            userStatuses[user] = "Pending"
+        }
+        return userStatuses
+        
+    }
     
     // MARK: - Navigation
 
@@ -305,8 +411,12 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if segue.identifier == self.groupsToCreateGroupsSegueIdentifier,
            let destination = segue.destination as? CreateGroupViewController {
             destination.delegate = self
+        } else if segue.identifier == "GroupsToCreateAlarmIdentifier", let destination = segue.destination as? CreateAlarmViewController, let indexPath = sender as? IndexPath {
+            destination.delegate = self
+            destination.groupAlarm = true
+            destination.groupList = self.groupsList[indexPath.row].members!
+            destination.groupID = self.groupsList[indexPath.row].uuid!
+            print("destination.groupList value", destination.groupList)
         }
     }
-    
-
 }

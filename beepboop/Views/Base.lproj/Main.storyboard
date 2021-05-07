@@ -1278,6 +1278,9 @@
                     <connections>
                         <outlet property="groupTableView" destination="ZfQ-xo-xZF" id="2Vf-PA-v31"/>
                         <outlet property="titleLabel" destination="EfR-US-sbH" id="EyW-cr-TYF"/>
+                        <segue destination="i0J-ZC-Eri" kind="popoverPresentation" identifier="GroupsToCreateAlarmIdentifier" popoverAnchorView="EfR-US-sbH" id="I1I-SD-nqS">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L4e-Uv-NrB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2506,7 +2509,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="4tg-0U-4gB"/>
         <segue reference="xLC-PS-IuX"/>
-        <segue reference="2OL-Fb-6o1"/>
+        <segue reference="I1I-SD-nqS"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Accept Button" width="50" height="50"/>

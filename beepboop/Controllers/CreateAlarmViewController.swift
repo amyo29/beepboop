@@ -46,6 +46,10 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     var alarmID: String = ""
     var currentUserUid: String?
     
+    var groupAlarm: Bool = false
+    var groupList: [String] = []
+    var groupID: String = ""
+    
     var userDocRef: DocumentReference!
     let alarmCollectionRef = Firestore.firestore().collection("alarmData")
     let userCollectionRef = Firestore.firestore().collection("userData")
@@ -158,6 +162,11 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                 self.sharedToList = sharedList
                 // TODO: set sound and snooze (not in Firestore right now)
             }
+        }
+        
+        if self.groupAlarm {
+            self.shareButton.isHidden = true
+            self.sharedToList = groupList
         }
     }
         
@@ -326,6 +335,10 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                     print("self.delegate as? HomeVC, sound: ", self.soundSelected)
                     homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, sound: self.soundSelected, snooze: snooze, invitedUsers: self.sharedToList)
                 }
+                self.dismiss(animated: true, completion: nil)
+            } else if let _ = self.delegate as? GroupViewController {
+                let groupViewController = self.delegate as! GroupAdder
+                groupViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList, groupID: self.groupID)
                 self.dismiss(animated: true, completion: nil)
             } else {
                 let alertController = UIAlertController(

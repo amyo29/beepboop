@@ -203,8 +203,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func updateSettings(_sender: Any) {
-        
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
@@ -240,12 +238,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         if snoozeSwitch.isOn {
             let notificationCenter = UNUserNotificationCenter.current()
             notificationCenter.removeAllPendingNotificationRequests()
+            if let user = Auth.auth().currentUser {
+                let userDoc = Firestore.firestore().collection("userData").document(user.uid)
+                let alarms = Firestore.firestore().collection("alarmData")
+                userDoc.updateData(["snoozeEnabled" : true])
+            }
         }
         else {
             let alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
             if let user = Auth.auth().currentUser {
                 let userDoc = Firestore.firestore().collection("userData").document(user.uid)
                 let alarms = Firestore.firestore().collection("alarmData")
+                userDoc.updateData(["snoozeEnabled" : false])
                 userDoc.collection("alarmMetadata").getDocuments { (querySnapshot, err) in
                     if let err = err {
                         print("Error getting documents from metadata \(err)")
