@@ -44,7 +44,7 @@ enum RepeatInterval: String {
 
 class ScheduleAlarm : ScheduleAlarmDelegate {
     
-    func setNotificationWithTimeAndDate(name: String, time: Date, recurring: String, uuidStr: String) {
+    func setNotificationWithTimeAndDate(name: String, time: Date, recurring: String, sound: String, uuidStr: String) {
         guard let repeatInterval = RepeatInterval(rawValue: recurring) else {
             print("Recurring value cannot be mapped")
             abort()
@@ -55,7 +55,10 @@ class ScheduleAlarm : ScheduleAlarmDelegate {
         let content = UNMutableNotificationContent()
         content.title = name
         content.body = "Repeats \(recurring) at \(timeDisplay)"
-        content.sound = .default
+//        content.sound = .default
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "beepboop-" + sound + ".mp3"))
+//        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "beepboop-morning2.mp3")) // "beepboop-"+ sound + ".mp3
+//      content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "beepboop-fantasy.mp3"))
         
         // Create the trigger as a repeating event.
         let trigger = UNCalendarNotificationTrigger(

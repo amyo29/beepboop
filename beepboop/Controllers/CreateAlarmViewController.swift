@@ -34,8 +34,9 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var snoozeLabel: UILabel!
     @IBOutlet weak var snoozeSwitch: UISwitch!
     
-    private let sounds = ["beep", "boop", "chirp", "wake up"]
+    private let sounds = ["beep", "boop", "birdsong", "nice alarm clock", "cheerful", "dramatic", "chopin's waterfall", "fur elise", "funny robot", "transformers", "attention", "toy toy toy", "ahaha", "i got a friend", "dancing android", "droid", "happy bday", "xmas carol"]
     private var recurring: String = "Never"
+    private var soundSelected: String = "beep"
     
     private var sharedToList: [String] = []
     private let createAlarmToShareToFriendsSegueIdentifier = "CreateAlarmToShareToFriends"
@@ -145,6 +146,10 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                 let recurrence = alarmDoc.get("recurrence") as! String
                 self.repeatButton.setTitle(recurrence, for: .normal)
                 self.recurring = recurrence
+                let sound = alarmDoc.get("sound") as! String
+                self.soundSelected = sound
+                self.soundPickerView.selectRow(self.sounds.firstIndex(of: self.soundSelected) ?? 0, inComponent: 0, animated: false)
+                self.pickerView(self.soundPickerView, didSelectRow: self.sounds.firstIndex(of: self.soundSelected) ?? 0, inComponent: 0)
                 let time = alarmDoc.get("time") as! Timestamp
                 let myDate = time.dateValue()
                 self.datePicker.date = myDate
@@ -291,6 +296,10 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
         return sounds[row]
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.soundSelected = sounds[row] as String
+     }
+    
     // MARK: - Button actions
     @IBAction func saveButtonPressed(_ sender: Any) {
         // add new alarm
@@ -303,18 +312,19 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                let _ = self.delegate as? CalendarViewController {
                 let calendarViewController = self.delegate as! AlarmAdder
                 if alarmID != "" {
-                    calendarViewController.updateAlarm(alarmID: alarmID, time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList)
+                    calendarViewController.updateAlarm(alarmID: alarmID, time: mergedDate, name: title, recurrence: recurring, sound: self.soundSelected, snooze: snooze, invitedUsers: self.sharedToList)
                 } else {
-                    calendarViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList)
+                    calendarViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, sound: self.soundSelected, snooze: snooze, invitedUsers: self.sharedToList)
                 }
                 self.dismiss(animated: true, completion: nil)
             } else if let _ = self.delegate as? HomeViewController {
                 let homeViewController = self.delegate as! AlarmAdder
                 if alarmID != "" {
-                    homeViewController.updateAlarm(alarmID: alarmID, time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList)
+                    homeViewController.updateAlarm(alarmID: alarmID, time: mergedDate, name: title, recurrence: recurring, sound: self.soundSelected, snooze: snooze, invitedUsers: self.sharedToList)
                 } else {
                     print("snooze value", snooze)
-                    homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList)
+                    print("self.delegate as? HomeVC, sound: ", self.soundSelected)
+                    homeViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, sound: self.soundSelected, snooze: snooze, invitedUsers: self.sharedToList)
                 }
                 self.dismiss(animated: true, completion: nil)
             } else {

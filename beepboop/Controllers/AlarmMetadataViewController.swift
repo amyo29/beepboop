@@ -49,6 +49,7 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     var timestampTime: Timestamp = Timestamp()
     var alarmName: String = "iOS Class"
     var recurring: String = ""
+    var sound: String = ""
     var global_snooze: Bool = false
     var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
     
@@ -214,6 +215,7 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
                     self.alarmNameLabel.text = self.alarmName
                     self.alarmNameLabel.font = UIFont(name: "JosefinSans-Regular", size: 35)
                     self.recurring = alarmDoc.get("recurrence") as! String
+                    self.sound = alarmDoc.get("sound") as! String
                 }
             }
         }
@@ -232,7 +234,7 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
                 return
             }
             let date = timestampTime.dateValue()
-            alarmScheduler.setNotificationWithTimeAndDate(name: alarmName, time: date, recurring: self.recurring, uuidStr: alarmID)
+            alarmScheduler.setNotificationWithTimeAndDate(name: alarmName, time: date, recurring: self.recurring, sound: self.sound, uuidStr: alarmID)
         } else {
             let notificationCenter = UNUserNotificationCenter.current()
             notificationCenter.removePendingNotificationRequests(withIdentifiers: [alarmID])

@@ -67,6 +67,24 @@
 		0694571426241A7C00450AC8 /* ShareToFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */; };
 		06998745264268290028DDF0 /* CalendarTabIcon-2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06998744264268290028DDF0 /* CalendarTabIcon-2x.png */; };
 		069987482642693F0028DDF0 /* CalendarTabIcon-3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 069987472642693E0028DDF0 /* CalendarTabIcon-3x.png */; };
+		069987812644B2F90028DDF0 /* beepboop-birdsong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0699877E2644B2F70028DDF0 /* beepboop-birdsong.mp3 */; };
+		069987822644B2F90028DDF0 /* beepboop-nice alarm clock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0699877F2644B2F90028DDF0 /* beepboop-nice alarm clock.mp3 */; };
+		069987882644FDE00028DDF0 /* beepboop-dramatic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987872644FDE00028DDF0 /* beepboop-dramatic.mp3 */; };
+		0699878B2644FEAF0028DDF0 /* beepboop-attention.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0699878A2644FEAF0028DDF0 /* beepboop-attention.mp3 */; };
+		0699878E2644FF1C0028DDF0 /* beepboop-toy toy toy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0699878D2644FF1C0028DDF0 /* beepboop-toy toy toy.mp3 */; };
+		069987912644FF9D0028DDF0 /* beepboop-dancing android.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987902644FF9D0028DDF0 /* beepboop-dancing android.mp3 */; };
+		069987942644FFB90028DDF0 /* beepboop-ahaha.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987932644FFB90028DDF0 /* beepboop-ahaha.mp3 */; };
+		069987972644FFD20028DDF0 /* beepboop-cheerful.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987962644FFD20028DDF0 /* beepboop-cheerful.mp3 */; };
+		0699879B2645000B0028DDF0 /* beepboop-i got a friend.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0699879A2645000B0028DDF0 /* beepboop-i got a friend.mp3 */; };
+		0699879E264500B10028DDF0 /* beepboop-chopin's waterfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0699879D264500B10028DDF0 /* beepboop-chopin's waterfall.mp3 */; };
+		069987A12645018A0028DDF0 /* beepboop-beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987A02645018A0028DDF0 /* beepboop-beep.mp3 */; };
+		069987A5264502030028DDF0 /* beepboop-transformers.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987A4264502030028DDF0 /* beepboop-transformers.mp3 */; };
+		069987A82645022A0028DDF0 /* beepboop-droid.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987A72645022A0028DDF0 /* beepboop-droid.mp3 */; };
+		069987AB2645024C0028DDF0 /* beepboop-boop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987AA2645024C0028DDF0 /* beepboop-boop.mp3 */; };
+		069987AF2645029A0028DDF0 /* beepboop-happy bday.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987AE2645029A0028DDF0 /* beepboop-happy bday.mp3 */; };
+		069987B2264502DA0028DDF0 /* beepboop-xmas carol.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987B1264502DA0028DDF0 /* beepboop-xmas carol.mp3 */; };
+		069987B6264503070028DDF0 /* beepboop-fur elise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987B5264503070028DDF0 /* beepboop-fur elise.mp3 */; };
+		069987BA264504460028DDF0 /* beepboop-funny robot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987B9264504460028DDF0 /* beepboop-funny robot.mp3 */; };
 		069C638D260F1FD500702623 /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069C638C260F1FD500702623 /* SaveButton.png */; };
 		06E33F882642446200CC85A8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E33F872642446200CC85A8 /* CalendarViewController.swift */; };
 		06E33F8C26425F6F00CC85A8 /* CalendarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06E33F8B26425F6E00CC85A8 /* CalendarIcon.png */; };
@@ -165,6 +183,24 @@
 		0694571326241A7C00450AC8 /* ShareToFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		06998744264268290028DDF0 /* CalendarTabIcon-2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarTabIcon-2x.png"; sourceTree = "<group>"; };
 		069987472642693E0028DDF0 /* CalendarTabIcon-3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarTabIcon-3x.png"; sourceTree = "<group>"; };
+		0699877E2644B2F70028DDF0 /* beepboop-birdsong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-birdsong.mp3"; sourceTree = "<group>"; };
+		0699877F2644B2F90028DDF0 /* beepboop-nice alarm clock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-nice alarm clock.mp3"; sourceTree = "<group>"; };
+		069987872644FDE00028DDF0 /* beepboop-dramatic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-dramatic.mp3"; sourceTree = "<group>"; };
+		0699878A2644FEAF0028DDF0 /* beepboop-attention.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-attention.mp3"; sourceTree = "<group>"; };
+		0699878D2644FF1C0028DDF0 /* beepboop-toy toy toy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-toy toy toy.mp3"; sourceTree = "<group>"; };
+		069987902644FF9D0028DDF0 /* beepboop-dancing android.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-dancing android.mp3"; sourceTree = "<group>"; };
+		069987932644FFB90028DDF0 /* beepboop-ahaha.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-ahaha.mp3"; sourceTree = "<group>"; };
+		069987962644FFD20028DDF0 /* beepboop-cheerful.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-cheerful.mp3"; sourceTree = "<group>"; };
+		0699879A2645000B0028DDF0 /* beepboop-i got a friend.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-i got a friend.mp3"; sourceTree = "<group>"; };
+		0699879D264500B10028DDF0 /* beepboop-chopin's waterfall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-chopin's waterfall.mp3"; sourceTree = "<group>"; };
+		069987A02645018A0028DDF0 /* beepboop-beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-beep.mp3"; sourceTree = "<group>"; };
+		069987A4264502030028DDF0 /* beepboop-transformers.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-transformers.mp3"; sourceTree = "<group>"; };
+		069987A72645022A0028DDF0 /* beepboop-droid.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-droid.mp3"; sourceTree = "<group>"; };
+		069987AA2645024C0028DDF0 /* beepboop-boop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-boop.mp3"; sourceTree = "<group>"; };
+		069987AE2645029A0028DDF0 /* beepboop-happy bday.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-happy bday.mp3"; sourceTree = "<group>"; };
+		069987B1264502DA0028DDF0 /* beepboop-xmas carol.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-xmas carol.mp3"; sourceTree = "<group>"; };
+		069987B5264503070028DDF0 /* beepboop-fur elise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-fur elise.mp3"; sourceTree = "<group>"; };
+		069987B9264504460028DDF0 /* beepboop-funny robot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-funny robot.mp3"; sourceTree = "<group>"; };
 		069C638C260F1FD500702623 /* SaveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SaveButton.png; sourceTree = "<group>"; };
 		06E33F872642446200CC85A8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		06E33F8B26425F6E00CC85A8 /* CalendarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarIcon.png; sourceTree = "<group>"; };
@@ -361,7 +397,6 @@
 		9A8AE64E260C5ED000181515 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				9A9186F2263FD14400F986F9 /* CreateButton.png */,
 				069987472642693E0028DDF0 /* CalendarTabIcon-3x.png */,
 				9A9186F2263FD14400F986F9 /* CreateButton.png */,
 				9A2935D526362B5500866B06 /* NavBarGradient.png */,
@@ -409,6 +444,24 @@
 		9A8AE64F260C5EFE00181515 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				0699877E2644B2F70028DDF0 /* beepboop-birdsong.mp3 */,
+				069987A02645018A0028DDF0 /* beepboop-beep.mp3 */,
+				069987AA2645024C0028DDF0 /* beepboop-boop.mp3 */,
+				069987A72645022A0028DDF0 /* beepboop-droid.mp3 */,
+				069987B9264504460028DDF0 /* beepboop-funny robot.mp3 */,
+				069987B1264502DA0028DDF0 /* beepboop-xmas carol.mp3 */,
+				069987B5264503070028DDF0 /* beepboop-fur elise.mp3 */,
+				069987AE2645029A0028DDF0 /* beepboop-happy bday.mp3 */,
+				069987A4264502030028DDF0 /* beepboop-transformers.mp3 */,
+				0699877F2644B2F90028DDF0 /* beepboop-nice alarm clock.mp3 */,
+				069987872644FDE00028DDF0 /* beepboop-dramatic.mp3 */,
+				0699878A2644FEAF0028DDF0 /* beepboop-attention.mp3 */,
+				0699878D2644FF1C0028DDF0 /* beepboop-toy toy toy.mp3 */,
+				069987902644FF9D0028DDF0 /* beepboop-dancing android.mp3 */,
+				069987932644FFB90028DDF0 /* beepboop-ahaha.mp3 */,
+				069987962644FFD20028DDF0 /* beepboop-cheerful.mp3 */,
+				0699879A2645000B0028DDF0 /* beepboop-i got a friend.mp3 */,
+				0699879D264500B10028DDF0 /* beepboop-chopin's waterfall.mp3 */,
 				9A53F8302602DB7C00D4711A /* Info.plist */,
 				9A6F19BB260A7E77005D4E21 /* GoogleService-Info.plist */,
 			);
@@ -475,29 +528,40 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069987822644B2F90028DDF0 /* beepboop-nice alarm clock.mp3 in Resources */,
+				069987AB2645024C0028DDF0 /* beepboop-boop.mp3 in Resources */,
 				06998745264268290028DDF0 /* CalendarTabIcon-2x.png in Resources */,
 				9A53F82F2602DB7C00D4711A /* LaunchScreen.storyboard in Resources */,
 				9AE40D3C2624E89900DB47FB /* SendButton.png in Resources */,
 				0633D538260EF715004B50FB /* GroupsTabIcon-2x.png in Resources */,
+				069987B2264502DA0028DDF0 /* beepboop-xmas carol.mp3 in Resources */,
+				0699878E2644FF1C0028DDF0 /* beepboop-toy toy toy.mp3 in Resources */,
 				0633D547260F0115004B50FB /* AddButton-1x.png in Resources */,
 				0659FB0C2636AF930042DDE1 /* beepboop-icon-solidbg-diagonalbeepboop.png in Resources */,
+				069987A5264502030028DDF0 /* beepboop-transformers.mp3 in Resources */,
 				0633D534260EF715004B50FB /* AlarmsTabIcon-3x.png in Resources */,
 				0633D549260F0115004B50FB /* AddButton-3x.png in Resources */,
+				069987AF2645029A0028DDF0 /* beepboop-happy bday.mp3 in Resources */,
 				0633D506260ED9E2004B50FB /* JosefinSans-Bold.ttf in Resources */,
 				0633D50E260ED9EB004B50FB /* JosefinSans-Italic.ttf in Resources */,
 				9A29A04B2623DFBE000A5275 /* AddFriendButton.png in Resources */,
 				9A8AE653260C649200181515 /* LoginButton.png in Resources */,
 				9A8AE649260C5E4400181515 /* BeepBoopTitle.png in Resources */,
 				0633D548260F0115004B50FB /* AddButton-2x.png in Resources */,
+				069987912644FF9D0028DDF0 /* beepboop-dancing android.mp3 in Resources */,
 				0633D537260EF715004B50FB /* SettingsTabIcon-1x.png in Resources */,
 				0633D4A6260D9612004B50FB /* ProfileTabIcon.png in Resources */,
+				069987A12645018A0028DDF0 /* beepboop-beep.mp3 in Resources */,
 				0633D4AF260D9E37004B50FB /* NotificationAlert.png in Resources */,
 				9A53F82C2602DB7C00D4711A /* Assets.xcassets in Resources */,
+				069987B6264503070028DDF0 /* beepboop-fur elise.mp3 in Resources */,
 				0659FB0D2636AF930042DDE1 /* beepboop-icon-pastelbeepboop.png in Resources */,
+				069987942644FFB90028DDF0 /* beepboop-ahaha.mp3 in Resources */,
 				0633D4C0260E6752004B50FB /* JosefinSans-Italic-VariableFont_wght.ttf in Resources */,
 				9A9186F3263FD14500F986F9 /* CreateButton.png in Resources */,
 				069456E12623B67000450AC8 /* AddFriendsIcon.png in Resources */,
 				0633D512260ED9F2004B50FB /* JosefinSans-MediumItalic.ttf in Resources */,
+				069987BA264504460028DDF0 /* beepboop-funny robot.mp3 in Resources */,
 				0633D50A260ED9E6004B50FB /* JosefinSans-ExtraLight.ttf in Resources */,
 				9ADC0E11260E8D80009AD333 /* NavBarBackground.png in Resources */,
 				0659FAB4263615260042DDE1 /* icons8-alarm-50.png in Resources */,
@@ -505,6 +569,7 @@
 				0659FAB7263617A10042DDE1 /* icons8-swamp-100.png in Resources */,
 				069987482642693F0028DDF0 /* CalendarTabIcon-3x.png in Resources */,
 				069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */,
+				069987A82645022A0028DDF0 /* beepboop-droid.mp3 in Resources */,
 				0633D500260ED9CA004B50FB /* JosefinSans-Light.ttf in Resources */,
 				0633D4AA260D9622004B50FB /* HomeTabIcon.png in Resources */,
 				0633D50C260ED9E9004B50FB /* JosefinSans-ExtraLightItalic.ttf in Resources */,
@@ -520,7 +585,12 @@
 				9A8AE656260C660600181515 /* SignUpButton.png in Resources */,
 				06E33F8C26425F6F00CC85A8 /* CalendarIcon.png in Resources */,
 				0633D504260ED9DE004B50FB /* JosefinSans-LightItalic.ttf in Resources */,
+				069987972644FFD20028DDF0 /* beepboop-cheerful.mp3 in Resources */,
+				0699879E264500B10028DDF0 /* beepboop-chopin's waterfall.mp3 in Resources */,
 				0659FB0A2636AF930042DDE1 /* beepboop-icon-solidhead (1).png in Resources */,
+				0699878B2644FEAF0028DDF0 /* beepboop-attention.mp3 in Resources */,
+				069987882644FDE00028DDF0 /* beepboop-dramatic.mp3 in Resources */,
+				0699879B2645000B0028DDF0 /* beepboop-i got a friend.mp3 in Resources */,
 				0633D536260EF715004B50FB /* GroupsTabIcon-1x.png in Resources */,
 				0633D532260EF715004B50FB /* SettingsTabIcon-3x.png in Resources */,
 				0633D4D8260E7864004B50FB /* EventPic.png in Resources */,
@@ -529,6 +599,7 @@
 				0633D539260EF715004B50FB /* AlarmsTabIcon-2x.png in Resources */,
 				0633D4B6260DA2CB004B50FB /* CustomFont-JosefinSansLight.ttf in Resources */,
 				9A6F19BC260A7E77005D4E21 /* GoogleService-Info.plist in Resources */,
+				069987812644B2F90028DDF0 /* beepboop-birdsong.mp3 in Resources */,
 				9A8AE64A260C5E4400181515 /* LoadingScreenRobot.png in Resources */,
 				0633D533260EF715004B50FB /* AlarmTabIcon-1x.png in Resources */,
 				0633D535260EF715004B50FB /* GroupsTabIcon-3x.png in Resources */,

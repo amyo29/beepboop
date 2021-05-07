@@ -261,8 +261,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                                         if let alarm = alarm, alarm.exists {
                                             if let name = alarm.get("name") as? String,
                                                let recurring = alarm.get("recurrence") as? String,
+                                               let sound = alarm.get("sound") as? String,
                                                let time = alarm.get("time") as? Timestamp {
-                                                alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time.dateValue(), recurring: recurring, uuidStr: document.documentID)
+                                                alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time.dateValue(), recurring: recurring, sound: sound, uuidStr: document.documentID)
                                             }
                                         }
                                     }

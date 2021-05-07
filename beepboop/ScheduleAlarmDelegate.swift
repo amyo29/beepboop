@@ -9,5 +9,5 @@ import Foundation
 import UIKit
 
 protocol ScheduleAlarmDelegate {
-    func setNotificationWithTimeAndDate(name: String, time: Date, recurring: String, uuidStr: String)
+    func setNotificationWithTimeAndDate(name: String, time: Date, recurring: String, sound: String, uuidStr: String)
 }
