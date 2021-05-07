@@ -69,14 +69,12 @@ class AlarmDisplayViewController: UIViewController {
     }
     
     @IBAction func acceptAlarmOnClick(_ sender: Any) {
-        performSegue(withIdentifier: "alarmToHome", sender: self)
-    }
-    
-    @IBAction func declineAlarmOnClick(_ sender: Any) {
+        updateAlarmResponse(awake: true)
         performSegue(withIdentifier: "alarmToHome", sender: self)
     }
     
     @IBAction func snoozeAlarmOnClick(_ sender: Any) {
+        updateAlarmResponse(awake: false)
         performSegue(withIdentifier: "alarmToHome", sender: self)
     }
     
@@ -89,6 +87,26 @@ class AlarmDisplayViewController: UIViewController {
             // TODO: modify alarm metadata screen to accept either alarmID or userStatus
             destination.alarmID = alarmID
         } 
+    }
+    
+    func updateAlarmResponse(awake: Bool) {
+        guard let user = Auth.auth().currentUser else {
+            print("Current user cannot be retrieved currently")
+            return
+        }
+        if alarmID != "" {
+            let alarmCollectionRef = Firestore.firestore().collection("alarmData")
+            alarmCollectionRef.document(alarmID).updateData([
+                "userStatus.\(user.uid)": (awake ? "Awake" : "Snooze")
+            ]) { err in
+                if let err = err {
+                    print("Error updating alarm userStatus: \(err)")
+                }
+                else {
+                    print("Successfully updated alarm userStatus")
+                }
+            }
+        }
     }
     
     func extractTimeFromDate(time: Timestamp?) -> String {

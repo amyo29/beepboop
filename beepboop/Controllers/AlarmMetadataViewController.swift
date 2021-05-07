@@ -19,12 +19,12 @@ enum StatusMode {
 class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var alarmNameLabel: UILabel!
-    @IBOutlet weak var acceptedButton: UIButton!
-    @IBOutlet weak var acceptedLabel: UILabel!
-    @IBOutlet weak var declinedButton: UIButton!
-    @IBOutlet weak var declinedLabel: UILabel!
-    @IBOutlet weak var pendingButton: UIButton!
-    @IBOutlet weak var pendingLabel: UILabel!
+    @IBOutlet weak var awakeButton: UIButton!
+    @IBOutlet weak var awakeLabel: UILabel!
+    @IBOutlet weak var snoozeButton: UIButton!
+    @IBOutlet weak var snoozelabel: UILabel!
+    @IBOutlet weak var userButton: UIButton!
+    @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var responseTableView: UITableView!
     @IBOutlet weak var responsesLabel: UILabel!
     @IBOutlet weak var enableToggle: UISwitch!
@@ -36,9 +36,9 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     private let acceptIcon = UIImage(named: "AcceptIcon")
     private let declinedIcon = UIImage(named: "DeclineIcon")
     private var curIcon = UIImage(named: "AcceptIcon")
-    var acceptedList: [Dictionary<String, Any>] = []
-    var declinedList: [Dictionary<String, Any>] = []
-    var pendingList: [Dictionary<String, Any>] = []
+    var awakeList: [Dictionary<String, Any>] = []
+    var snoozeList: [Dictionary<String, Any>] = []
+    var userList: [Dictionary<String, Any>] = []
     
     var status: StatusMode = .accepted
     
@@ -65,10 +65,10 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         let aqua = UIColor(red: 0.24, green: 0.79, blue: 0.67, alpha: 1.00)
         self.enableToggle.onTintColor = aqua
         
-        declinedButton.imageView?.alpha = 0.5
-        declinedLabel.alpha = 0.5
-        pendingButton.imageView?.alpha = 0.5
-        pendingLabel.alpha = 0.5
+        snoozeButton.imageView?.alpha = 0.5
+        snoozelabel.alpha = 0.5
+        userButton.imageView?.alpha = 0.5
+        userLabel.alpha = 0.5
 
         if userID != "" {
             let userDocRef = userCollectionRef.document(userID)
@@ -177,16 +177,12 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
                     getResponses.enter()
                     self.userCollectionRef.document(uuid).getDocument { (userDoc, error) in
                         if let userDoc = userDoc, userDoc.exists, let data = userDoc.data() {
+                            self.userList.append(data)
                             switch response {
-                            case "Accepted":
-                                self.acceptedList.append(data)
-                                break
-                            case "Denied":
-                                self.declinedList.append(data)
-                                break
-                            case "Pending":
-                                self.pendingList.append(data)
-                                break
+                            case "Awake":
+                                self.awakeList.append(data)
+                            case "Snooze":
+                                self.snoozeList.append(data)
                             default:
                                 print("Response value invalid: \(response)")
                             }
@@ -202,13 +198,13 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
                     self.time = self.extractTimeFromDate(time: self.timestampTime)
                     self.alarmName = alarmDoc.get("name") as! String
                     self.responsesLabel.font = UIFont(name: "JosefinSans-Regular", size: 40)
-                    self.nameList = self.acceptedList
-                    self.acceptedLabel.text = "Confirmed (\(self.acceptedList.count))"
-                    self.acceptedLabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
-                    self.declinedLabel.text = "Declined (\(self.declinedList.count))"
-                    self.declinedLabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
-                    self.pendingLabel.text = "Pending (\(self.pendingList.count))"
-                    self.pendingLabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
+                    self.nameList = self.awakeList
+                    self.awakeLabel.text = "Awake (\(self.awakeList.count))"
+                    self.awakeLabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
+                    self.snoozelabel.text = "Snoozing (\(self.snoozeList.count))"
+                    self.snoozelabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
+                    self.userLabel.text = "Users (\(self.userList.count))"
+                    self.userLabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
                     self.responseTableView.reloadData()
                     self.timeLabel.text = self.time
                     self.timeLabel.font = UIFont(name: "JosefinSans-Regular", size: 50)
@@ -242,54 +238,54 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func onAcceptedEmojiPressed(_ sender: Any) {
-        acceptedButton.imageView?.alpha = 1.0
-        acceptedLabel.alpha = 1.0
+        awakeButton.imageView?.alpha = 1.0
+        awakeLabel.alpha = 1.0
 
-        declinedButton.imageView?.alpha = 0.5
-        declinedLabel.alpha = 0.5
+        snoozeButton.imageView?.alpha = 0.5
+        snoozelabel.alpha = 0.5
         
-        pendingButton.imageView?.alpha = 0.5
-        pendingLabel.alpha = 0.5
+        userButton.imageView?.alpha = 0.5
+        userLabel.alpha = 0.5
         
         curIcon = acceptIcon
-        nameList = acceptedList
+        nameList = awakeList
         status = .accepted
-        self.acceptedLabel.text = "Confirmed (\(self.acceptedList.count))"
+        self.awakeLabel.text = "Awake (\(self.awakeList.count))"
         self.responseTableView?.reloadData()
     }
     
     @IBAction func onDeclinedEmojiPressed(_ sender: Any) {
-        declinedButton.imageView?.alpha = 1.0
-        declinedLabel.alpha = 1.0
+        snoozeButton.imageView?.alpha = 1.0
+        snoozelabel.alpha = 1.0
         
-        acceptedButton.imageView?.alpha = 0.5
-        acceptedLabel.alpha = 0.5
+        awakeButton.imageView?.alpha = 0.5
+        awakeLabel.alpha = 0.5
         
-        pendingButton.imageView?.alpha = 0.5
-        pendingLabel.alpha = 0.5
+        userButton.imageView?.alpha = 0.5
+        userLabel.alpha = 0.5
         
         curIcon = declinedIcon
-        nameList = declinedList
+        nameList = snoozeList
         status = .declined
-        self.declinedLabel.text = "Declined (\(self.declinedList.count))"
+        self.snoozelabel.text = "Snoozing (\(self.snoozeList.count))"
         self.responseTableView?.reloadData()
     }
     
     @IBAction func onPendingEmojiPressed(_ sender: Any) {
-        pendingButton.imageView?.alpha = 1.0
-        pendingLabel.alpha = 1.0
+        userButton.imageView?.alpha = 1.0
+        userLabel.alpha = 1.0
         
-        declinedButton.imageView?.alpha = 0.5
-        declinedLabel.alpha = 0.5
+        awakeButton.imageView?.alpha = 0.5
+        awakeLabel.alpha = 0.5
         
-        acceptedButton.imageView?.alpha = 0.5
-        acceptedLabel.alpha = 0.5
+        snoozeButton.imageView?.alpha = 0.5
+        snoozelabel.alpha = 0.5
         
 //        curIcon = UIImage(named: "NotificationAlert")
         curIcon = nil
-        nameList = pendingList
+        nameList = userList
         status = .pending
-        self.pendingLabel.text = "Pending (\(self.pendingList.count))"
+        self.userLabel.text = "Users (\(self.userList.count))"
         self.responseTableView?.reloadData()
     }
     

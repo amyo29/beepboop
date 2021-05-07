@@ -394,11 +394,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             let notification = Notifications.alarmUpdate(self.currentUserName, alarmDoc.get("name") as! String, accepted).description
             // Add current user to alarm's uid list
             if accepted {
-                self.alarmRef.document(requestUID).updateData(["userList": FieldValue.arrayUnion([user.uid]), "userStatus.\(user.uid)": "Accepted"])
+                self.alarmRef.document(requestUID).updateData(["userList": FieldValue.arrayUnion([user.uid]), "userStatus.\(user.uid)": "Pending"])
                 self.userRef.document(user.uid).collection("alarmMetadata").document(requestUID).setData(["enabled": true, "snooze": false])
-            }
-            else {
-                self.alarmRef.document(requestUID).updateData(["userStatus.\(user.uid)": "Denied"])
             }
             
             // Remove alarm from sender's alarmRequestsSent list and add to notifications
