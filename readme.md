@@ -1,5 +1,30 @@
 # README
 
+## Final
+
+### Running the application
+
+Please run the application on an iPhone 12 simulator. 
+
+### Overall Contributions
+
+| Features       | Description                               | Release Planned | Actual Release | Deviations | Work Distribution |
+|----------------|-------------------------------------------|-----------------|----------------|------------|-------------------|
+| Loading Screen | Screen that displays when app first loads | Alpha           | Alpha          | N/A        | <Fill in>         |
+| Login/Sign Up  | Login through email or FB/Google Auth     | Alpha           | Alpha          | N/A        | Alvin (50%) Sanja |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+|                |                                           |                 |                |            |                   |
+
 ## BETA
 
 ### Running the application
