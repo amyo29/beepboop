@@ -237,16 +237,6 @@
                                                         <constraint firstAttribute="height" constant="39" id="a4R-ux-ErG"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22e-Rh-yDM" userLabel="Metadata Button">
-                                                    <rect key="frame" x="320" y="26.666666666666671" width="20" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="7jt-gR-E0W"/>
-                                                    </constraints>
-                                                    <state key="normal" image="MetadataButton"/>
-                                                    <connections>
-                                                        <action selector="friendMetadataButtonPressed:" destination="qkT-gJ-o3M" eventType="touchUpInside" id="Yse-1V-DbN"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gS-pN-0Vb" userLabel="Friend Name Label">
                                                     <rect key="frame" x="77" y="14" width="223" height="47"/>
                                                     <constraints>
@@ -271,17 +261,13 @@
                                                 <constraint firstItem="1gS-pN-0Vb" firstAttribute="centerY" secondItem="8dI-7w-SSr" secondAttribute="centerY" id="Kio-79-FJ8"/>
                                                 <constraint firstItem="1gS-pN-0Vb" firstAttribute="leading" secondItem="RPv-Ct-pWx" secondAttribute="trailing" constant="17" id="QS5-bX-Mco"/>
                                                 <constraint firstItem="RPv-Ct-pWx" firstAttribute="top" secondItem="8dI-7w-SSr" secondAttribute="topMargin" constant="7" id="UMr-V9-etc"/>
-                                                <constraint firstAttribute="trailing" secondItem="22e-Rh-yDM" secondAttribute="trailing" constant="30" id="bqB-qk-Zak"/>
                                                 <constraint firstItem="RPv-Ct-pWx" firstAttribute="centerY" secondItem="8dI-7w-SSr" secondAttribute="centerY" id="btO-k6-w5T"/>
-                                                <constraint firstItem="22e-Rh-yDM" firstAttribute="leading" secondItem="1gS-pN-0Vb" secondAttribute="trailing" constant="20" id="gn5-kc-a8E"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="RPv-Ct-pWx" secondAttribute="bottom" constant="7" id="sFp-Rs-DeH"/>
-                                                <constraint firstItem="22e-Rh-yDM" firstAttribute="centerY" secondItem="8dI-7w-SSr" secondAttribute="centerY" id="xaL-ys-gqT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="friendImageView" destination="RPv-Ct-pWx" id="wGe-B1-gCs"/>
-                                            <outlet property="friendMetadataButton" destination="22e-Rh-yDM" id="pS3-lJ-gwy"/>
                                             <outlet property="friendNameLabel" destination="1gS-pN-0Vb" id="w5Z-yv-7LC"/>
                                         </connections>
                                     </tableViewCell>

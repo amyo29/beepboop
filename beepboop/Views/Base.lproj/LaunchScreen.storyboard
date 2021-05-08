@@ -48,7 +48,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LoadingScreenRobotHead" width="91" height="84"/>
-        <image name="Title" width="180.5" height="53"/>
+        <image name="LoadingScreenRobotHead" width="182" height="168"/>
+        <image name="Title" width="361" height="106"/>
     </resources>
 </document>

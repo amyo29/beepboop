@@ -111,16 +111,28 @@ class GroupMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
         var fetchedResults: [NSManagedObject]
+        var darkmode = false
         do {
             let count = try context.count(for: fetchRequest)
             if count > 0 {
                 try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
                 global_snooze = fetchedResults[0].value(forKey: "snoozeEnabled") as! Bool
+                darkmode = fetchedResults[0].value(forKey: "darkmodeEnabled") as! Bool
+
             }
         } catch {
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
+        }
+        
+        if darkmode {
+            self.view.backgroundColor = UIColor(rgb: 0x262221)
+            overrideUserInterfaceStyle = .dark
+        }
+        else {
+            self.view.backgroundColor = UIColor(rgb: 0xFEFDEC)
+            overrideUserInterfaceStyle = .light
         }
     }
     
