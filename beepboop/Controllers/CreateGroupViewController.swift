@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseCore
 import Firebase
+import CoreData
 
 class CreateGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -69,6 +70,38 @@ class CreateGroupViewController: UIViewController, UITableViewDelegate, UITableV
         self.updateFriendsFirestore()
 //        self.friendsList.sort {$0.name! < $1.name! }
         self.friendsTableView.reloadData()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        var fetchedResults: [NSManagedObject]
+        var darkmode = false
+        var textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
+        do {
+            let count = try context.count(for: fetchRequest)
+            if count > 0 {
+                try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
+                darkmode = fetchedResults[0].value(forKey: "darkmodeEnabled") as! Bool
+            }
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+
+        if darkmode {
+            self.view.backgroundColor = UIColor(rgb: 0x262221)
+            overrideUserInterfaceStyle = .dark
+            textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
+
+        }
+        else {
+            self.view.backgroundColor = UIColor(rgb: 0xFEFDEC)
+            overrideUserInterfaceStyle = .light
+            textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+        }
+        
+        groupNameTextField.textColor = textColor
     }
     
     func mapFriendsToUserStruct(friendUuids: [String]) {
