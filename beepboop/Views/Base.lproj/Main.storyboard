@@ -1198,7 +1198,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6A-1d-Akn" userLabel="Group Name Label">
-                                                    <rect key="frame" x="77" y="14" width="223" height="47"/>
+                                                    <rect key="frame" x="77" y="14" width="53" height="47"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Name">
                                                             <attributes>
@@ -1210,25 +1210,12 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqW-Xq-ktE" userLabel="Metadata Button">
-                                                    <rect key="frame" x="320" y="26.666666666666671" width="20" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="WBi-up-aKz"/>
-                                                    </constraints>
-                                                    <state key="normal" image="MetadataButton"/>
-                                                    <connections>
-                                                        <action selector="groupMetadataButtonPressed:" destination="T9O-Aj-NH4" eventType="touchUpInside" id="JbB-og-Ihb"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="mqW-Xq-ktE" firstAttribute="centerY" secondItem="myJ-3p-Jng" secondAttribute="centerY" id="3Gc-Pv-6VF"/>
                                                 <constraint firstItem="onT-JT-fwJ" firstAttribute="leading" secondItem="myJ-3p-Jng" secondAttribute="leading" constant="10" id="DPW-UD-Bcp"/>
                                                 <constraint firstItem="onT-JT-fwJ" firstAttribute="centerY" secondItem="myJ-3p-Jng" secondAttribute="centerY" id="Hrh-Kc-KeJ"/>
                                                 <constraint firstItem="N6A-1d-Akn" firstAttribute="top" secondItem="myJ-3p-Jng" secondAttribute="top" constant="14" id="RiJ-lf-SQ5"/>
-                                                <constraint firstItem="mqW-Xq-ktE" firstAttribute="leading" secondItem="N6A-1d-Akn" secondAttribute="trailing" constant="20" id="cnN-6j-YXg"/>
                                                 <constraint firstAttribute="bottom" secondItem="N6A-1d-Akn" secondAttribute="bottom" constant="14" id="jCI-0b-pas"/>
-                                                <constraint firstAttribute="trailing" secondItem="mqW-Xq-ktE" secondAttribute="trailing" constant="30" id="p0b-WH-DJz"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="onT-JT-fwJ" secondAttribute="bottom" constant="7" id="rtv-8b-ZxP"/>
                                                 <constraint firstItem="onT-JT-fwJ" firstAttribute="top" secondItem="myJ-3p-Jng" secondAttribute="topMargin" constant="7" id="ulJ-gX-vFS"/>
                                                 <constraint firstItem="N6A-1d-Akn" firstAttribute="leading" secondItem="onT-JT-fwJ" secondAttribute="trailing" constant="17" id="zOG-Qr-IPZ"/>
@@ -1237,7 +1224,6 @@
                                         <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="groupImageView" destination="onT-JT-fwJ" id="ry6-ye-LtP"/>
-                                            <outlet property="groupMetadataButton" destination="mqW-Xq-ktE" id="hfq-hx-NdA"/>
                                             <outlet property="groupNameLabel" destination="N6A-1d-Akn" id="sMK-lC-PIQ"/>
                                         </connections>
                                     </tableViewCell>
@@ -2763,11 +2749,10 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="3Ti-96-h34"/>
-        <segue reference="xLC-PS-IuX"/>
         <segue reference="Pex-yV-eTb"/>
         <segue reference="4tg-0U-4gB"/>
         <segue reference="xLC-PS-IuX"/>
-        <segue reference="2OL-Fb-6o1"/>
+        <segue reference="I1I-SD-nqS"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Accept Button" width="50" height="50"/>

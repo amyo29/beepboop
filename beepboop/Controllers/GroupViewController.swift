@@ -167,40 +167,38 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         metadata.backgroundColor = UIColor(red: 0.5725490451, green: 0.2313725501, blue: 0, alpha: 0)
         metadata.image = UIImage(named: "InfoIcon")
-//        responses.image = UIGraphicsImageRenderer(size: CGSize(width: 90, height: 90)).image {
-//            _ in UIImage(named: "ResponseIcon")?.draw(in: CGRect(x: 0, y: 0, width: 90, height: 90))
-//        }
 
-        let delete = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
-            print("Just Swiped Deleted", action)
-//            if let uuid = self.alarmList[indexPath.row].uuid,
-//               let currentUserUid = self.currentUserUid {
-//                let notificationCenter = UNUserNotificationCenter.current()
-//                notificationCenter.removePendingNotificationRequests(withIdentifiers: [uuid])
-//                // alert asking for complete removal of alarm and not just user id from alarm (if owner of alarm)
-//                // add owner uid for each alarm in create alarm
-//                self.userDocRef.collection("alarmMetadata").document(uuid).delete()
-//                self.alarmCollectionRef.document(uuid).updateData([
-//                    "userStatus": FieldValue.arrayRemove([currentUserUid]),
-//                    "userList": FieldValue.arrayRemove([currentUserUid])
-//                ])
-//
-////                self.updateAlarmsFirestore()
-//                // TODO: remove alarm data from collection if userStatus is empty
-//            }
-//
-//            self.alarmList.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
+        let leave = UIContextualAction(style: .normal, title: "Leave") { (action, view, completion) in
+            print("Just Swiped Leave", action)
+            let group = self.groupsList[indexPath.row]
+            for alarmId in group.alarms ?? [] {
+                // remove current user uid from alarm's user list
+                // TODO: add check to see if currentUserUid was the last user in the user list.
+                self.alarmCollectionRef.document(alarmId).updateData([
+                    "userStatus": FieldValue.arrayRemove([self.currentUserUid!]),
+                    "userList": FieldValue.arrayRemove([self.currentUserUid!])
+                ])
+                // remove alarm from alarm metadata in user data
+                self.userDocRef.collection("alarmMetadata").document(alarmId).delete()
+                // remove alarm from group metadata in user data
+                self.userDocRef.collection("groupMetadata").document(group.uuid!).delete()
+                // remove pending notification requests
+                let notificationCenter = UNUserNotificationCenter.current()
+                notificationCenter.removePendingNotificationRequests(withIdentifiers: [alarmId])
+                // remove user id from group data
+                self.groupCollectionRef.document(group.uuid!).updateData([
+                    "members": FieldValue.arrayRemove([self.currentUserUid!])
+                ])
+            }
+            self.groupsList.remove(at: indexPath.row)
+            self.groupTableView.deleteRows(at: [indexPath], with: .fade)
             
             completion(false)
         }
-        delete.image = UIImage(named: "ExitIcon")
-//        delete.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image {
-//            _ in UIImage(named: "DeleteIcon")?.draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
-//        }
-        delete.backgroundColor =  UIColor(red: 0.2436070212, green: 0.5393256153, blue: 0.1766586084, alpha: 0)
+        leave.image = UIImage(named: "ExitIcon")
+        leave.backgroundColor =  UIColor(red: 0.2436070212, green: 0.5393256153, blue: 0.1766586084, alpha: 0)
 
-        let config = UISwipeActionsConfiguration(actions: [delete, metadata, add])
+        let config = UISwipeActionsConfiguration(actions: [leave, metadata, add])
         config.performsFirstActionWithFullSwipe = false
 
         return config
@@ -212,7 +210,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if let uuid = group.uuid {
             groupCollectionRef.document(uuid).getDocument { (groupDoc, error) in
                 if let groupDoc = groupDoc, groupDoc.exists {
-                    if let photoURL = groupDoc.get("photoURL") {
+                    if let photoURL = groupDoc.get("photoURL"), groupDoc.get("photoURL") != nil, groupDoc.get("photoURL") as! String != "" {
                         self.loadData(url: URL(string: photoURL as! String)!) { data, response, error in
                             guard let data = data, error == nil else {
                                 return
@@ -291,47 +289,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        self.groupsList.append(GroupCustom(name: "haikyuu watch party"))
 //        self.groupTableView?.reloadData()
 //    }
-    
 
-    @IBAction func groupMetadataButtonPressed(_ sender: Any) {
-        let alertController = UIAlertController(
-            title: "Edit settings for this friend",
-            message: "Select action for this friend",
-            preferredStyle: .actionSheet)
-        
-        alertController.addAction(UIAlertAction(
-                                    title: "Remove",
-                                    style: .destructive,
-                                    handler: { (action) -> Void in
-                                        
-                                        print( "Remove friend from friends list and table view")
-                                    }))
-        
-        alertController.addAction(UIAlertAction(
-                                    title: "Block",
-                                    style: .default,
-                                    handler: { (action) -> Void in
-                                        
-                                        print( "Block this user")
-                                    }))
-        
-        alertController.addAction(UIAlertAction(
-                                    title: "Edit",
-                                    style: .default,
-                                    handler: { (action) -> Void in
-                                       
-                                        print( "Edit friend")
-                                    }))
-        
-        alertController.addAction(UIAlertAction(
-                                    title: "Cancel",
-                                    style: .cancel,
-                                    handler: { (action) -> Void in
-                                    }))
-        
-       
-        self.present(alertController, animated: true, completion: nil)
-    }
     
     func addGroup(uuid: UUID, name: String, members: [String], alarms: [String], image: UIImage) {
         // Make call to firestore, add group to group collection

@@ -11,8 +11,6 @@ class GroupTableViewCell: UITableViewCell {
 
     @IBOutlet weak var groupNameLabel: UILabel!
     @IBOutlet weak var groupImageView: UIImageView!
-    @IBOutlet weak var groupMetadataButton: UIButton!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
