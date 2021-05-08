@@ -126,6 +126,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.updateAlarmsFirestore()
         self.alarmList.sort { $0.time! < $1.time!}
         self.alarmTableView.reloadData()
+        
+        for alarm in self.alarmList {
+            alarmScheduler.setNotificationWithTimeAndDate(name: alarm.name!, time: alarm.time!, recurring: alarm.recurrence!, sound: alarm.sound!, uuidStr: alarm.uuid!)
+        }
     }
     
     // load system supported fonts to determine system font labels
