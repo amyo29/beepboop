@@ -14,13 +14,15 @@ struct GroupCustom {
     var members: [String]?
     var alarms: [String]?
     var uuid: String?
+    var photoURL: String?
     
     var dictionary: [String: Any] {
         return  [
             "name": self.name ?? "",
             "members": self.members ?? [],
             "alarms": self.alarms ?? [],
-            "uuid": self.uuid ?? ""
+            "uuid": self.uuid ?? "",
+            "photoURL": self.photoURL ?? "",
         ]
     }
 }
@@ -30,10 +32,11 @@ extension GroupCustom {
         guard let name = dictionary["name"] as? String,
               let members = dictionary["members"] as? [String],
               let alarms = dictionary["alarms"] as? [String],
-              let uuid = dictionary["uuid"] as? String
+              let uuid = dictionary["uuid"] as? String,
+              let photoURL = dictionary["photoURL"] as? String
         else { return nil }
         
-        self.init(name: name, members: members, alarms: alarms, uuid: uuid)
+        self.init(name: name, members: members, alarms: alarms, uuid: uuid, photoURL: photoURL)
     }
 }
 

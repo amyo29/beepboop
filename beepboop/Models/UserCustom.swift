@@ -24,6 +24,7 @@ struct UserCustom {
 //    var notifications: [[String: Any]]?
 
     var notifications: [String]?
+    var photoURL: String?
     
     
     var dictionary: [String: Any] {
@@ -38,7 +39,8 @@ struct UserCustom {
             "friendsList": self.friendsList ?? [],
             "alarmRequestsReceived": self.alarmRequestsReceived ?? [],
             "alarmRequestsSent": self.alarmRequestsSent ?? [],
-            "notifications": self.notifications ?? []
+            "notifications": self.notifications ?? [],
+            "photoURL": self.photoURL ?? ""
         ]
     }
 }
@@ -57,7 +59,8 @@ extension UserCustom {
               let alarmRequestsReceived = dictionary["alarmRequestsReceived"] as? [String],
               let alarmRequestsSent = dictionary["alarmRequestsSent"] as? [String],
 //              let notifications = dictionary["notifications"] as? [[String: Any]]
-              let notifications = dictionary["notifications"] as? [String]
+              let notifications = dictionary["notifications"] as? [String],
+              let photoURL = dictionary["photoURL"] as? String?
         else { return nil }
         
         self.init(userEmail: userEmail,
@@ -70,7 +73,8 @@ extension UserCustom {
                   friendsList: friendsList,
                   alarmRequestsReceived: alarmRequestsReceived,
                   alarmRequestsSent: alarmRequestsSent,
-                  notifications: notifications
+                  notifications: notifications,
+                  photoURL: photoURL
         )
     }
 }

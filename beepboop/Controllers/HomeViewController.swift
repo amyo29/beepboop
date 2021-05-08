@@ -378,7 +378,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 "alarmRequestsReceived": FieldValue.arrayUnion([uuid.uuidString])
             ])
         }
-        if !global_snooze {
+        if !global_snooze && !snooze {
             alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, sound: sound, uuidStr: uuid.uuidString)
         }
         self.alarmList.append(newAlarm)

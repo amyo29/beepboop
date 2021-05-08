@@ -115,6 +115,7 @@
 		9AC2E47A26361813008ECAA7 /* GroupCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2E47926361813008ECAA7 /* GroupCustom.swift */; };
 		9ADC0E11260E8D80009AD333 /* NavBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ADC0E10260E8D80009AD333 /* NavBarBackground.png */; };
 		9AE40D3C2624E89900DB47FB /* SendButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AE40D3B2624E89900DB47FB /* SendButton.png */; };
+		E871E8932645CAA90063872D /* GroupMetadataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E871E8922645CAA90063872D /* GroupMetadataViewController.swift */; };
 		E893696226372CB3007EEF71 /* AlarmDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E893696126372CB3007EEF71 /* AlarmDisplayViewController.swift */; };
 		E8BC5F1C2626672900AE496D /* ResponsesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC5F1B2626672900AE496D /* ResponsesTableViewCell.swift */; };
 		E8E4A43D26256D7500CE4426 /* AlarmMetadataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E4A43C26256D7500CE4426 /* AlarmMetadataViewController.swift */; };
@@ -238,6 +239,7 @@
 		9AE40D3B2624E89900DB47FB /* SendButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SendButton.png; sourceTree = "<group>"; };
 		9D052F14A3B950A3364393A7 /* Pods-beepboop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beepboop.debug.xcconfig"; path = "Target Support Files/Pods-beepboop/Pods-beepboop.debug.xcconfig"; sourceTree = "<group>"; };
 		C651D31FBEFBA4A52DF8FD1F /* Pods_beepboop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_beepboop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E871E8922645CAA90063872D /* GroupMetadataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMetadataViewController.swift; sourceTree = "<group>"; };
 		E893696126372CB3007EEF71 /* AlarmDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDisplayViewController.swift; sourceTree = "<group>"; };
 		E8BC5F1B2626672900AE496D /* ResponsesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsesTableViewCell.swift; sourceTree = "<group>"; };
 		E8E4A43C26256D7500CE4426 /* AlarmMetadataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmMetadataViewController.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				0694570D2624194100450AC8 /* ShareToFriendsViewController.swift */,
 				E8E4A43C26256D7500CE4426 /* AlarmMetadataViewController.swift */,
 				069457102624199F00450AC8 /* CreateAlarmViewController.swift */,
+				E871E8922645CAA90063872D /* GroupMetadataViewController.swift */,
 				9A29A04D2623E6DD000A5275 /* AddFriendsViewController.swift */,
 				0633D49D260D902C004B50FB /* GroupViewController.swift */,
 				9A7F3C0D260A9DF600EEFE41 /* LoginViewController.swift */,
@@ -688,6 +691,7 @@
 				069456B12622DB0800450AC8 /* FriendsViewController.swift in Sources */,
 				9A53F8242602DB7A00D4711A /* HomeViewController.swift in Sources */,
 				069456B42622DD7D00450AC8 /* FriendsTableViewCell.swift in Sources */,
+				E871E8932645CAA90063872D /* GroupMetadataViewController.swift in Sources */,
 				06945660261F984D00450AC8 /* AlarmCustom.swift in Sources */,
 				9A53F82A2602DB7A00D4711A /* beepboop.xcdatamodeld in Sources */,
 				069457112624199F00450AC8 /* CreateAlarmViewController.swift in Sources */,

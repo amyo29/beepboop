@@ -12,7 +12,7 @@ import CoreData
 
 protocol GroupAdder {
     func addGroup(uuid: UUID, name: String, members: [String], alarms: [String], image: UIImage)
-    func addAlarm(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String], groupID: String)
+    func addAlarm(time: Date, name: String, recurrence: String, sound: String, snooze: Bool, invitedUsers: [String], groupID: String)
 }
 
 class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GroupAdder {
@@ -24,6 +24,8 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var userCollectionRef: CollectionReference!
     var groupCollectionRef: CollectionReference!
     var currentUserUid: String?
+    var alarmScheduler: ScheduleAlarmDelegate = ScheduleAlarm()
+    var global_snooze: Bool = false
     
     private var groupsList: [GroupCustom] = []
     private let groupTableViewCellIdentifier = "GroupTableViewCell"
@@ -39,6 +41,22 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         // Do any additional setup after loading the view.
         titleLabel.font = UIFont(name: "JosefinSans-Regular", size: 40.0)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        var fetchedResults: [NSManagedObject]
+        do {
+            let count = try context.count(for: fetchRequest)
+            if count > 0 {
+                try fetchedResults = context.fetch(fetchRequest) as! [NSManagedObject]
+                global_snooze = fetchedResults[0].value(forKey: "snoozeEnabled") as! Bool
+            }
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
         
         guard let currentUserUid = Auth.auth().currentUser?.uid else {
             let alertController = UIAlertController(
@@ -134,24 +152,21 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
-            print("Just Swiped Edit", action)
+        let add = UIContextualAction(style: .normal, title: "Add") { (action, view, completion) in
+            print("Just Swiped Add", action)
             completion(true)
             self.performSegue(withIdentifier: "GroupsToCreateAlarmIdentifier", sender: indexPath)
         }
-        edit.backgroundColor = UIColor(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 0)
-//        edit.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image {
-//            _ in UIImage(named: "EditIcon")?.draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
-//        }
-        edit.image = UIImage(named: "AddIcon")
+        add.backgroundColor = UIColor(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 0)
+        add.image = UIImage(named: "AddIcon")
 
-        let responses = UIContextualAction(style: .normal, title: "Responses") { (action, view, completion) in
-            print("Just Swiped Responses", action)
-//            self.performSegue(withIdentifier: "CalendarToAlarmMetadataSegueIdentifier", sender: indexPath)
+        let metadata = UIContextualAction(style: .normal, title: "Responses") { (action, view, completion) in
+            print("Just Swiped metadata", action)
+            self.performSegue(withIdentifier: "GrouptoMetadataIdentifier", sender: indexPath)
             completion(true)
         }
-        responses.backgroundColor = UIColor(red: 0.5725490451, green: 0.2313725501, blue: 0, alpha: 0)
-        responses.image = UIImage(named: "InfoIcon")
+        metadata.backgroundColor = UIColor(red: 0.5725490451, green: 0.2313725501, blue: 0, alpha: 0)
+        metadata.image = UIImage(named: "InfoIcon")
 //        responses.image = UIGraphicsImageRenderer(size: CGSize(width: 90, height: 90)).image {
 //            _ in UIImage(named: "ResponseIcon")?.draw(in: CGRect(x: 0, y: 0, width: 90, height: 90))
 //        }
@@ -185,7 +200,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        }
         delete.backgroundColor =  UIColor(red: 0.2436070212, green: 0.5393256153, blue: 0.1766586084, alpha: 0)
 
-        let config = UISwipeActionsConfiguration(actions: [delete, responses, edit])
+        let config = UISwipeActionsConfiguration(actions: [delete, metadata, add])
         config.performsFirstActionWithFullSwipe = false
 
         return config
@@ -358,13 +373,13 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // MARK: - Delegate functions
     
-    func addAlarm(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String], groupID: String) {
-        self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence, snooze: snooze, invitedUsers: invitedUsers, groupID: groupID)
+    func addAlarm(time: Date, name: String, recurrence: String, sound: String, snooze: Bool, invitedUsers: [String], groupID: String) {
+        self.addAlarmToFirestore(time: time, name: name, recurrence: recurrence, sound: sound, snooze: snooze, invitedUsers: invitedUsers, groupID: groupID)
     }
     
     // MARK: - Firestore functions
     
-    func addAlarmToFirestore(time: Date, name: String, recurrence: String, snooze: Bool, invitedUsers: [String], groupID: String) {
+    func addAlarmToFirestore(time: Date, name: String, recurrence: String, sound: String, snooze: Bool, invitedUsers: [String], groupID: String) {
         let userStatus = self.getStatusForUsers(invitedUsers: invitedUsers)
         let uuid = UUID()
         let newAlarm = AlarmCustom(name: name, time: time, recurrence: recurrence, uuid: uuid.uuidString, userList: invitedUsers, userStatus: userStatus)
@@ -392,6 +407,10 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 groupDocRef.updateData(["alarms": [uuid.uuidString] + existingAlarms])
             }
         }
+        
+        if !global_snooze && !snooze {
+            alarmScheduler.setNotificationWithTimeAndDate(name: name, time: time, recurring: recurrence, sound: sound, uuidStr: uuid.uuidString)
+        }
     }
     
     func getStatusForUsers(invitedUsers: [String]) -> [String: String] {
@@ -417,6 +436,9 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             destination.groupList = self.groupsList[indexPath.row].members!
             destination.groupID = self.groupsList[indexPath.row].uuid!
             print("destination.groupList value", destination.groupList)
+        } else if segue.identifier == "GrouptoMetadataIdentifier", let destination = segue.destination as? GroupMetadataViewController, let indexPath = sender as? IndexPath {
+            destination.delegate = self
+            destination.group = self.groupsList[indexPath.row]
         }
     }
 }

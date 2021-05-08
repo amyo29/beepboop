@@ -338,7 +338,7 @@ class CreateAlarmViewController: UIViewController, UIPickerViewDelegate, UIPicke
                 self.dismiss(animated: true, completion: nil)
             } else if let _ = self.delegate as? GroupViewController {
                 let groupViewController = self.delegate as! GroupAdder
-                groupViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, snooze: snooze, invitedUsers: self.sharedToList, groupID: self.groupID)
+                groupViewController.addAlarm(time: mergedDate, name: title, recurrence: recurring, sound: self.soundSelected, snooze: snooze, invitedUsers: self.sharedToList, groupID: self.groupID)
                 self.dismiss(animated: true, completion: nil)
             } else {
                 let alertController = UIAlertController(
