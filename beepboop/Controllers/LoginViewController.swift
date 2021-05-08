@@ -139,6 +139,9 @@ class LoginViewController: UIViewController, LoginButtonDelegate  {
            print(error.localizedDescription)
            return
          }
+        if AccessToken.current == nil {
+            return
+        }
         let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
         Auth.auth().signIn(with: credential) { (authResult, error) in
           if let error = error {
