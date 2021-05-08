@@ -6,10 +6,12 @@
       "scale" : "1x"
     },
     {
+      "filename" : "SignUpButton2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "SignUpButton3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

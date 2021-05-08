@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "beepbooptitle.png",
+      "filename" : "BeepBoopTitle.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Title2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Title3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
