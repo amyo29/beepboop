@@ -20,11 +20,11 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var alarmNameLabel: UILabel!
     @IBOutlet weak var awakeButton: UIButton!
-    @IBOutlet weak var awakeLabel: UILabel!
+    @IBOutlet weak var awakeLabel: UILabel! // Confirmed (Awake) #FBB500
     @IBOutlet weak var snoozeButton: UIButton!
-    @IBOutlet weak var snoozelabel: UILabel!
+    @IBOutlet weak var snoozelabel: UILabel! // Snoozing #00A66C
     @IBOutlet weak var userButton: UIButton!
-    @IBOutlet weak var userLabel: UILabel!
+    @IBOutlet weak var userLabel: UILabel! // Members red: #DB4437 pink: #F82A68
     @IBOutlet weak var responseTableView: UITableView!
     @IBOutlet weak var responsesLabel: UILabel!
     @IBOutlet weak var enableToggle: UISwitch!
@@ -148,11 +148,12 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         
         switch status {
         case .accepted:
-            cell.contentView.backgroundColor = UIColor(red: 0.58, green: 0.92, blue: 0.78, alpha: 1.00) // hex: #95EBC8, pastel green
-        case .declined:
-            cell.contentView.backgroundColor = UIColor(red: 1.00, green: 0.70, blue: 0.70, alpha: 1.00) // hex: #FFB3B3, rose
-        case .pending:
             cell.contentView.backgroundColor = UIColor(red: 0.98, green: 1.00, blue: 0.69, alpha: 1.00) // hex: #F9FFAF, soft yellow
+        case .declined:
+            cell.contentView.backgroundColor = UIColor(red: 0.58, green: 0.92, blue: 0.78, alpha: 1.00) // hex: #95EBC8, pastel green
+            
+        case .pending:
+            cell.contentView.backgroundColor = UIColor(red: 1.00, green: 0.70, blue: 0.70, alpha: 1.00) // hex: #FFB3B3, rose
         }
         
         return cell
@@ -203,7 +204,7 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
                     self.awakeLabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
                     self.snoozelabel.text = "Snoozing (\(self.snoozeList.count))"
                     self.snoozelabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
-                    self.userLabel.text = "Users (\(self.userList.count))"
+                    self.userLabel.text = "Members (\(self.userList.count))"
                     self.userLabel.font = UIFont(name: "JosefinSans-Regular", size: 17)
                     self.responseTableView.reloadData()
                     self.timeLabel.text = self.time
@@ -285,7 +286,7 @@ class AlarmMetadataViewController: UIViewController, UITableViewDelegate, UITabl
         curIcon = nil
         nameList = userList
         status = .pending
-        self.userLabel.text = "Users (\(self.userList.count))"
+        self.userLabel.text = "Members (\(self.userList.count))"
         self.responseTableView?.reloadData()
     }
     

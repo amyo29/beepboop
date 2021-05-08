@@ -77,8 +77,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Do any additional setup after loading the view.
         snoozeLabel.font = UIFont(name: "JosefinSans-Regular", size: 24.0)
         let forestGreen = UIColor(red: 0.26, green: 0.39, blue: 0.34, alpha: 1.00)
-        let aqua = UIColor(red: 0.24, green: 0.79, blue: 0.67, alpha: 1.00)
-        let peach = UIColor(red: 0.99, green: 0.62, blue: 0.58, alpha: 1.00)
+        let aqua = UIColor(red: 0.24, green: 0.79, blue: 0.67, alpha: 1.00) // hex: #3DC9AC
+        let peach = UIColor(red: 0.99, green: 0.62, blue: 0.58, alpha: 1.00) // similar pinkish color hex: #FC8E96
         let orange = UIColor(red: 0.96, green: 0.58, blue: 0.12, alpha: 1.00)
         snoozeLabel.textColor = orange
         darkModeLabel.textColor = aqua

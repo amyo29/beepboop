@@ -85,6 +85,9 @@
 		069987B2264502DA0028DDF0 /* beepboop-xmas carol.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987B1264502DA0028DDF0 /* beepboop-xmas carol.mp3 */; };
 		069987B6264503070028DDF0 /* beepboop-fur elise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987B5264503070028DDF0 /* beepboop-fur elise.mp3 */; };
 		069987BA264504460028DDF0 /* beepboop-funny robot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069987B9264504460028DDF0 /* beepboop-funny robot.mp3 */; };
+		069987CB264606230028DDF0 /* ConfirmedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 069987CA264606220028DDF0 /* ConfirmedIcon.png */; };
+		069987CE264606310028DDF0 /* SnoozingIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 069987CC264606300028DDF0 /* SnoozingIcon.png */; };
+		069987D0264606360028DDF0 /* MembersIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 069987CF264606350028DDF0 /* MembersIcon.png */; };
 		069C638D260F1FD500702623 /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 069C638C260F1FD500702623 /* SaveButton.png */; };
 		06E33F882642446200CC85A8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E33F872642446200CC85A8 /* CalendarViewController.swift */; };
 		06E33F8C26425F6F00CC85A8 /* CalendarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06E33F8B26425F6E00CC85A8 /* CalendarIcon.png */; };
@@ -201,6 +204,9 @@
 		069987B1264502DA0028DDF0 /* beepboop-xmas carol.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-xmas carol.mp3"; sourceTree = "<group>"; };
 		069987B5264503070028DDF0 /* beepboop-fur elise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-fur elise.mp3"; sourceTree = "<group>"; };
 		069987B9264504460028DDF0 /* beepboop-funny robot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beepboop-funny robot.mp3"; sourceTree = "<group>"; };
+		069987CA264606220028DDF0 /* ConfirmedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfirmedIcon.png; sourceTree = "<group>"; };
+		069987CC264606300028DDF0 /* SnoozingIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnoozingIcon.png; sourceTree = "<group>"; };
+		069987CF264606350028DDF0 /* MembersIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MembersIcon.png; sourceTree = "<group>"; };
 		069C638C260F1FD500702623 /* SaveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SaveButton.png; sourceTree = "<group>"; };
 		06E33F872642446200CC85A8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		06E33F8B26425F6E00CC85A8 /* CalendarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarIcon.png; sourceTree = "<group>"; };
@@ -433,6 +439,9 @@
 				0633D4A8260D961F004B50FB /* HomeTabIcon.png */,
 				0633D4A5260D9612004B50FB /* ProfileTabIcon.png */,
 				0659FACD2636985A0042DDE1 /* beepboop_icon.png */,
+				069987CA264606220028DDF0 /* ConfirmedIcon.png */,
+				069987CC264606300028DDF0 /* SnoozingIcon.png */,
+				069987CF264606350028DDF0 /* MembersIcon.png */,
 				9A8AE655260C660600181515 /* SignUpButton.png */,
 				9A8AE652260C649200181515 /* LoginButton.png */,
 				9A8AE647260C5E4400181515 /* BeepBoopTitle.png */,
@@ -544,6 +553,7 @@
 				069987AF2645029A0028DDF0 /* beepboop-happy bday.mp3 in Resources */,
 				0633D506260ED9E2004B50FB /* JosefinSans-Bold.ttf in Resources */,
 				0633D50E260ED9EB004B50FB /* JosefinSans-Italic.ttf in Resources */,
+				069987D0264606360028DDF0 /* MembersIcon.png in Resources */,
 				9A29A04B2623DFBE000A5275 /* AddFriendButton.png in Resources */,
 				9A8AE653260C649200181515 /* LoginButton.png in Resources */,
 				9A8AE649260C5E4400181515 /* BeepBoopTitle.png in Resources */,
@@ -567,6 +577,7 @@
 				0659FAB4263615260042DDE1 /* icons8-alarm-50.png in Resources */,
 				0633D4BE260E674D004B50FB /* JosefinSans-VariableFont_wght.ttf in Resources */,
 				0659FAB7263617A10042DDE1 /* icons8-swamp-100.png in Resources */,
+				069987CE264606310028DDF0 /* SnoozingIcon.png in Resources */,
 				069987482642693F0028DDF0 /* CalendarTabIcon-3x.png in Resources */,
 				069456AE2622D7DE00450AC8 /* VectormetadataButton.png in Resources */,
 				069987A82645022A0028DDF0 /* beepboop-droid.mp3 in Resources */,
@@ -590,6 +601,7 @@
 				0659FB0A2636AF930042DDE1 /* beepboop-icon-solidhead (1).png in Resources */,
 				0699878B2644FEAF0028DDF0 /* beepboop-attention.mp3 in Resources */,
 				069987882644FDE00028DDF0 /* beepboop-dramatic.mp3 in Resources */,
+				069987CB264606230028DDF0 /* ConfirmedIcon.png in Resources */,
 				0699879B2645000B0028DDF0 /* beepboop-i got a friend.mp3 in Resources */,
 				0633D536260EF715004B50FB /* GroupsTabIcon-1x.png in Resources */,
 				0633D532260EF715004B50FB /* SettingsTabIcon-3x.png in Resources */,
