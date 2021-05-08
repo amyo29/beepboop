@@ -1,5 +1,10 @@
 # README
 
+Group number: 9
+Team members: Sanjana Kapoor, Alvin Lo, Amy Ouyang, Evan Peng
+Name of project: beepboop
+Dependencies: Xcode 12.4, Swift 5
+
 ## Final
 
 ### Running the application
