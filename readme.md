@@ -4,7 +4,18 @@
 
 ### Running the application
 
-Please run the application on an iPhone 12 simulator. 
+Please open the file beepboop.xcworkspace (as opposed to the file beepboop.xcodeproj), and run the application on an iPhone 12 simulator. 
+
+### Note about Custom Alarm Ringtone
+
+As of XCode 8.0+, notification sound duration is as follows:
+
+When phone is unlocked and app is running in the background, sound plays once for 6 seconds then is cut off.
+When phone is locked, sound plays for full duration (Apple has 30 seconds max limit).
+In any case, the sound will stop once user clicks on the notification, swipes on the banner, adjusts volume/presses top right button on phone, or swipes down from the top to display Notification Center.
+To configure the notification sound (alarm ringtone) to play for its full duration, one method is to go to the phone Settings > Notifications > beepboop and then set "Banner Style" to "Persistent". Note that the default Banner style setting is "Temporary", which plays notification sounds for a max duration of 6 seconds).
+See https://developer.apple.com/forums/thread/66925 for more information.
+
 
 ### Overall Contributions
 
