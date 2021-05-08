@@ -190,44 +190,46 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         })
     }
     
-    @IBAction func friendMetadataButtonPressed(_ sender: Any) {
-        let alertController = UIAlertController(
-            title: "Edit settings for this friend",
-            message: "Select action for this friend",
-            preferredStyle: .actionSheet)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        let delete = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
+            print("Just Swiped Deleted", action)
+            let alertController =  UIAlertController(title: "Are you sure?", message: "This will only remove your friend from your friends list. Any shared alarms and groups will not be deleted.", preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Yes", style: .default) { _ in
+                self.deleteFriendFirestore(row: indexPath.row)
+                self.friendsList.remove(at: indexPath.row)
+                self.friendsTableView.deleteRows(at: [indexPath], with: .fade)
+            })
+            alertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+            self.present(alertController, animated: true)
+            
+            completion(false)
+        }
         
-        alertController.addAction(UIAlertAction(
-                                    title: "Remove",
-                                    style: .destructive,
-                                    handler: { (action) -> Void in
-                                        
-                                        print( "Remove friend from friends list and table view")
-                                    }))
-        
-        alertController.addAction(UIAlertAction(
-                                    title: "Block",
-                                    style: .default,
-                                    handler: { (action) -> Void in
-                                        
-                                        print( "Block this user")
-                                    }))
-        
-        alertController.addAction(UIAlertAction(
-                                    title: "Edit",
-                                    style: .default,
-                                    handler: { (action) -> Void in
-                                       
-                                        print( "Edit friend")
-                                    }))
-        
-        alertController.addAction(UIAlertAction(
-                                    title: "Cancel",
-                                    style: .cancel,
-                                    handler: { (action) -> Void in
-                                    }))
-        
-       
-        self.present(alertController, animated: true, completion: nil)
+        delete.image = UIImage(named: "DeleteIcon")
+
+        delete.backgroundColor =  UIColor(red: 0.2436070212, green: 0.5393256153, blue: 0.1766586084, alpha: 0)
+
+        let config = UISwipeActionsConfiguration(actions: [delete])
+        config.performsFirstActionWithFullSwipe = false
+
+        return config
+    }
+    
+    func deleteFriendFirestore(row: Int) {
+        let friendUuid = self.friendsList[row]
+        if let currentUserUid = self.currentUserUid {
+            self.userDocRef.updateData([
+                "friendsList": FieldValue.arrayRemove([friendUuid])
+            ])
+            
+            self.userCollectionRef.document(friendUuid).updateData([
+                "friendsList": FieldValue.arrayRemove([currentUserUid])
+            ])
+            print("successfully removed friend \(friendUuid) from \(currentUserUid)")
+        }
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
