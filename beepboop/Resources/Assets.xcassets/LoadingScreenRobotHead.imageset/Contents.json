@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "LoadingScreenRobotLoadingScreenRobot.png",
+      "filename" : "LoadingScreenRobot.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "LoadingScreenRobotHead2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "LoadingScreenRobotHead3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
