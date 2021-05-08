@@ -66,11 +66,13 @@ class CreateGroupViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewWillAppear(animated)
         
         self.sharedToList = []
-        self.friendsList = [UserCustom]()
         self.updateFriendsFirestore()
+//        self.friendsList.sort {$0.name! < $1.name! }
+        self.friendsTableView.reloadData()
     }
     
     func mapFriendsToUserStruct(friendUuids: [String]) {
+        self.friendsList = [UserCustom]()
         for friendUuid in friendUuids {
             let docRef = self.userCollectionRef.document(friendUuid)
             docRef.getDocument { (document, error) in
@@ -78,6 +80,7 @@ class CreateGroupViewController: UIViewController, UITableViewDelegate, UITableV
                    let data = document.data() {
                     if let model = UserCustom(dictionary: data) {
                         self.friendsList.append(model)
+//                        self.friendsList.sort {$0.name! > $1.name! }
                         self.friendsTableView.reloadData()
                     }
                 }
@@ -105,10 +108,9 @@ class CreateGroupViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("In tableView cell render method, count: ", self.friendsList.count)
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: self.shareToFriendsTableViewCellIdentifier, for: indexPath as IndexPath) as! ShareToFriendsTableViewCell
-        self.friendsList.sort {$0.name! < $1.name! }
+//        self.friendsList.sort {$0.name! < $1.name! }
         let friend = row
         cell.shareButton.tag = row
         populateCell(friend: friend, cell: cell)
@@ -117,27 +119,27 @@ class CreateGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     func populateCell(friend: Int, cell: ShareToFriendsTableViewCell) {
         print("in populateCell, friend=\(friend)")
-        
         cell.friendNameLabel?.text = self.friendsList[friend].name
         cell.friendNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
         userCollectionRef.document(self.friendUuidList[friend]).getDocument { (friendDoc, error) in
             if let friendDoc = friendDoc, friendDoc.exists {
+                cell.friendNameLabel?.text = friendDoc.get("name") as? String
+                cell.friendNameLabel?.font = UIFont(name: "JosefinSans-Regular", size: 20.0)
+                
                 let photoURL = friendDoc.get("photoURL")
+                
                 if photoURL == nil {
                     cell.friendImageView?.image = UIImage(named: "EventPic") // Default
-                    return
-                }
-                self.loadData(url: URL(string: photoURL as! String)!) { data, response, error in
-                    guard let data = data, error == nil else {
-                        return
+                } else {
+                    self.loadData(url: URL(string: photoURL as! String)!) { data, response, error in
+                        guard let data = data, error == nil else {
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            cell.friendImageView?.image = UIImage(data: data)?.circleMasked
+                        }
                     }
-                    DispatchQueue.main.async {
-                        cell.friendImageView?.image = UIImage(data: data)?.circleMasked
-                    }
                 }
-            }
-            else {
-                cell.friendImageView?.image = UIImage(named: "EventPic") // Default
             }
         }
     }
@@ -149,7 +151,7 @@ class CreateGroupViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func shareButtonPressed(_ sender: UIButton) {
         let alertController = UIAlertController(
             title: "Sent",
-            message: "You shared this alarm",
+            message: "You added this user to the group.",
             preferredStyle: .actionSheet)
         
         alertController.addAction(UIAlertAction(
