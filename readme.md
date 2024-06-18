@@ -11,6 +11,8 @@ Dependencies: Xcode 12.4, Swift 5
 ## Screenshots
 
 (UI/UX custom designs by Amy Ouyang)
+[Figma prototype](https://www.figma.com/proto/72SCUh9hFjrbaJasoGpCEZ/app-design-mockup?node-id=47-12&t=L1d3G5G8MXBKSQCk-1)
+[Figma dev mode](https://www.figma.com/design/72SCUh9hFjrbaJasoGpCEZ/app-design-mockup?m=dev&node-id=47-12&t=L1d3G5G8MXBKSQCk-1)
 
 ### Login / Signup Screen
 <img src="https://github.com/amyo29/beepboop/assets/48844169/c6b3e482-63dc-4645-8ea0-86db8b514388" alt="drawing" width="500"/>
