@@ -1,15 +1,19 @@
 # README
 
+Team members: Amy Ouyang, Evan Peng, Sanjana Kapoor, Alvin Lo
+
 Group number: 9
-Team members: Sanjana Kapoor, Alvin Lo, Amy Ouyang, Evan Peng
+
 Name of project: beepboop
+
 Dependencies: Xcode 12.4, Swift 5
+
 
 ## Final
 
 ### Running the application
 
-Please open the file beepboop.xcworkspace (as opposed to the file beepboop.xcodeproj), and run the application on an iPhone 12 simulator. 
+Please open the file beepboop.xcworkspace (as opposed to the file beepboop.xcodeproj) in XCode, and run the application on an iPhone 12 simulator. 
 
 ### Note about Custom Alarm Ringtone
 
