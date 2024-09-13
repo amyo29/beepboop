@@ -1,6 +1,6 @@
 # README
 
-"beepboop" is a custom social alarm clock iOS mobile app. Original app idea and design by Amy Ouyang.
+"beepboop" is a custom social alarm clock iOS mobile app. Customize your alarms to fun, unique sounds, and have alarms shared with others! Share alarms with friends reminding them of an event going on today, make sure they don't miss a deadline or appointment, or remind your grandparent to take their medicine. 
 
 Developers: Amy Ouyang, Evan Peng, Sanjana Kapoor, Alvin Lo
 
