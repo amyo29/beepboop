@@ -1,10 +1,9 @@
 # README
 
-Team members: Amy Ouyang, Evan Peng, Sanjana Kapoor, Alvin Lo
+"beepboop" is a custom social alarm clock iOS mobile app. Original app idea and design by Amy Ouyang.
 
-Group number: 9
-
-Name of project: beepboop
+Developers: Amy Ouyang, Evan Peng, Sanjana Kapoor, Alvin Lo
+UI/UX Designer: Amy Ouyang
 
 Dependencies: Xcode 12.4, Swift 5
 
@@ -124,6 +123,10 @@ See https://developer.apple.com/forums/thread/66925 for more information.
 | Alarm Popup        | A screen that displays for a triggered alarm once the  alarm notification is clicked | Beta            | Final          | Changed from Snooze/accept/decline buttons to snooze and accept only. Snooze is not functional.                     | Sanjana (50%) Evan (50%)            |
 | User Notifications | A screen displaying updates and changes related to  alarms, friends, and groups      | Beta            | Beta - Final   | Remote notifications implementation changed to local notifications | Evan (80%) Alvin (20%)              |
 
+Group number: 9
+
+Name of project: beepboop
+
 ## BETA
 
 ### Running the application
@@ -131,6 +134,26 @@ See https://developer.apple.com/forums/thread/66925 for more information.
 Please run the application on an iPhone 12 simulator. 
 
 ### Contributions
+
+#### Amy Ouyang (Release 40%, Overall 40%)
+- Setup Firestore and migrated alarm data storage from Core Data to Firebase Firestore
+- Configured Firestore backend integration and database
+- Added functionality for automatic and immediate adding, retrieving, deleting, and modifying alarms in Firestore in real-time
+- Added functionality for storing alarms in Firestore
+- Added functionality for retrieving alarms in Firestore
+- Added functionality for alarm recurrence 
+- Add Friends screen UI and functionality
+- Share Friends screen UI and functionality
+- Majority of UI work on Home and Alarm Creation screens
+- Home screen (table view and tab bar) UI and logic
+- Logic for Alarm Creation view controller
+- Logic for populating UI with data from CoreData and user input
+- Logic for extracting time/date to display on alarm table view cells
+- Logic for adding and deleting alarms on Home screen
+- Logic for turning alarms on/off through a switch
+- Logic for enabling/disabling Alarm notifications
+- Logic for allowing notifications through user permissions
+- Importing and setting custom fonts
 
 #### Sanjana Kapoor (Release 20%, Overall 20%)
 -  Created Alarm Popup Screen
@@ -159,25 +182,6 @@ Please run the application on an iPhone 12 simulator.
 - Login and Sign Up with email logic
 - Firebase setup and related logic
 
-#### Amy Ouyang (Release 40%, Overall 40%)
-- Setup Firestore and migrated alarm data storage from Core Data to Firebase Firestore
-- Configured Firestore backend integration and database
-- Added functionality for automatic and immediate adding, retrieving, deleting, and modifying alarms in Firestore in real-time
-- Added functionality for storing alarms in Firestore
-- Added functionality for retrieving alarms in Firestore
-- Added functionality for alarm recurrence 
-- Add Friends screen UI and functionality
-- Share Friends screen UI and functionality
-- Majority of UI work on Home and Alarm Creation screens
-- Home screen (table view and tab bar) UI and logic
-- Logic for Alarm Creation view controller
-- Logic for populating UI with data from CoreData and user input
-- Logic for extracting time/date to display on alarm table view cells
-- Logic for adding and deleting alarms on Home screen
-- Logic for turning alarms on/off through a switch
-- Logic for enabling/disabling Alarm notifications
-- Logic for allowing notifications through user permissions
-- Importing and setting custom fonts
 
 #### Evan Peng (Release 10%, Overall 10%)
 - Logic for Notifications Screen
